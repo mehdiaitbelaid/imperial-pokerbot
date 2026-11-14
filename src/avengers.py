@@ -373,6 +373,7 @@ BET_SIZES = (0.5, 0.8, 1.1, 1.6)                # (0.18 and 0.33 tested: no gain
 # less when opponents still act (they bet and we often have to fold).
 CHECK_CLOSE, CHECK_OPEN, CHECK_OPEN_RIVER = 0.90, 0.90, 1.00
 RAISE_SMALL = True       # raise bets under 40% of the pot when the bettor's folds pay for it
+KEEP_WHALE_IN = True     # exact-size isolation of limpers that follow the starter kit's calling rule
 WIDE_CALLS = False      # defend the big blind and flat in position more widely
 
 
@@ -815,6 +816,10 @@ class Agent:
             if can_raise and all_lf:
                 k = 0 if rel == 2 else (1 if rel == 1 else d + 2)     # players still to act
                 if k <= 2 or (k == 3 and lvl <= 6) or lvl <= 5:
+                    if KEEP_WHALE_IN:
+                        # A kit bot calls when it costs 2 big blinds or less and folds anything
+                        # else, then gives up to the first real bet: let it put 2 more in.
+                        return self._raise_to(state, cur + 2 * bb)
                     return self._raise_to(state, bb * (3.5 + limpers - 1))
             if can_raise and all_sus and lvl <= 5:
                 return self._raise_to(state, bb * (3.5 + limpers - 1))
@@ -891,6 +896,16 @@ class Agent:
                 return self._raise_to(state, R * mult + R * callers)
             # bluff 3-bet the openers who give up to 3-bets
             f3 = S.r_f3()
+            squeezer = False
+            for i in range(1, n):
+                t = (me + i) % n
+                if t == last_raiser:
+                    break
+                T = st[t]
+                if not state["folded"][t] and T.r4_o >= 6 and T.r_4bet() >= 0.15:
+                    squeezer = True
+            if squeezer:
+                f3 = 0.0                    # value 3-bets only: someone behind keeps re-raising
             if can_raise and callers == 0 and R > 4.5 * bb and R <= 16 * bb and S.f3_o >= 4:
                 # risk 2.3 R to win R plus the blinds: needs this many folds, plus a margin
                 need_f = 2.3 * R / (3.3 * R + 1.5 * bb) + 0.10
@@ -1356,6 +1371,8 @@ class Agent:
             cands = [mybet + x * pot for x in BET_SIZES]
             if probe:
                 cands.insert(0, mybet + 45)
+                if KEEP_WHALE_IN and len(live) == 1:
+                    cands.insert(0, mybet + 40)       # he calls 2 big blinds with anything: pure value
             if nofold and eq >= 0.52:
                 cands.append(hi)
             for tgt in cands:
