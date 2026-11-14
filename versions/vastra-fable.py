@@ -420,12 +420,17 @@ def quick_equity(hole, board, nopp, widths=None):
     base = (0.15, 0.35, 0.50, 0.70, 0.88)[cat]
     score = ev(hole + board)
     kind = score >> 20
-    if len(board) == 5 and score == ev(board):
-        base = max(base, 0.45)       # we play the board: a chop at worst against most hands
-    elif kind >= 6:
-        base = max(base, 0.92)       # full house or better that our cards improve
-    elif kind >= 4:
-        base = max(base, 0.85)
+    bscore = ev(board)
+    if kind >= 4:
+        if kind > bscore >> 20:
+            # our cards make the category: full house or better, straight or flush
+            base = max(base, 0.92 if kind >= 6 else 0.85)
+        elif score == bscore:
+            base = 0.40              # we play the board: a chop at best
+        else:
+            # the board makes the category and our cards only add a kicker or a
+            # higher card, so strength follows our best hole card
+            base = 0.25 + 0.6 * max(hole[0] >> 2, hole[1] >> 2) / 12.0
     if cat in (2, 3) and has_draw(hole[0], hole[1], bi):
         base += 0.08
     return base ** (1.0 + 0.6 * (max(1, nopp) - 1))
@@ -860,8 +865,9 @@ class Agent:
 
     def _eq(self, ctx, opps, key, commit=False):
         hit = self.cache.get(key)
-        if hit is not None:
-            return hit
+        # a stack committing decision never reuses an equity that came from the fallback
+        if hit is not None and (hit[1] or not commit):
+            return hit[0]
         hole, board = ctx["hole"], ctx["board"]
         b = self._budget(self._hand_no)
         if commit and b < MC_COMMIT and self.used < COMMIT_BANK:
@@ -871,9 +877,10 @@ class Agent:
             eq, n = equity(hole, board, opps, ctx["t0"] + b, self.rng, RANGE_BLUR if board else 0.0)
             if n < 12:
                 eq = None
+        mc = eq is not None
         if eq is None:
             eq = quick_equity(hole, board, len(opps), [o[0] for o in opps])
-        self.cache[key] = eq
+        self.cache[key] = (eq, mc)
         return eq
 
     # ------------------------------------------------------------ preflop
