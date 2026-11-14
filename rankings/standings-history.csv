@@ -1,0 +1,141 @@
+fetched_at,phase,board,rank,name,bb100,chips,hands,rounds,timeouts,errors,version,ranked
+2026-11-14T13:38:37Z,practice,practice,1,Chinese people can fly,97.47,233917,12000,12,88,0,4,True
+2026-11-14T13:38:37Z,practice,practice,2,Gherkers,95.75,248960,13000,13,140,0,6,True
+2026-11-14T13:38:37Z,practice,practice,3,GamesGone,81.69,179713,11000,11,40,0,2,True
+2026-11-14T13:38:37Z,practice,practice,4,Vlad,76.68,46008,3000,3,14,0,1,True
+2026-11-14T13:38:37Z,practice,practice,5,Equity Engine,73.5,191093,13000,13,36,0,5,True
+2026-11-14T13:38:37Z,practice,practice,6,Resonance Qt,73.01,29205,2000,2,14,0,1,True
+2026-11-14T13:38:37Z,practice,practice,7,Kojack,64.66,116390,9000,9,34,0,2,True
+2026-11-14T13:38:37Z,practice,practice,8,SARS,60.95,48763,4000,4,5,0,2,True
+2026-11-14T13:38:37Z,practice,practice,9,Jump Street,50.86,20346,2000,2,7,0,1,True
+2026-11-14T13:38:37Z,practice,practice,10,Astra La Vista,49.98,129947,13000,13,61,0,4,True
+2026-11-14T13:38:37Z,practice,practice,11,The Market Makers,47.43,94861,10000,10,47,0,5,True
+2026-11-14T13:38:37Z,practice,practice,12,WBot,45.35,36283,4000,4,15,0,2,True
+2026-11-14T13:38:37Z,practice,practice,13,Claudebot,44.8,71673,8000,8,38,0,1,True
+2026-11-14T13:38:37Z,practice,practice,14,aydine,34.58,20745,3000,3,7,0,1,True
+2026-11-14T13:38:37Z,practice,practice,15,ND,28.7,34444,6000,6,61,0,1,True
+2026-11-14T13:38:37Z,practice,practice,16,Attention Is All In,27.09,70426,13000,13,50,0,2,True
+2026-11-14T13:38:37Z,practice,practice,17,matcha mille crêpes cake,26.1,57429,11000,11,612,0,5,True
+2026-11-14T13:38:37Z,practice,practice,18,YSL_TWIZZY,18.29,25599,7000,7,24,0,1,True
+2026-11-14T13:38:37Z,practice,practice,19,kaiserbot,16.54,3307,1000,1,8,0,1,True
+2026-11-14T13:38:37Z,practice,practice,20,gamblerlove,11.63,4651,2000,2,4,0,2,True
+2026-11-14T13:38:37Z,practice,practice,21,Mohil'sPokerBot,-20.96,-8383,2000,2,14,0,1,True
+2026-11-14T13:38:37Z,practice,practice,22,Lehman Brothers,-60.95,-60951,5000,5,27,0,2,True
+2026-11-14T13:38:37Z,practice,practice,23,Phil AIvey,-88.81,-230918,13000,13,55,0,2,True
+2026-11-14T13:38:37Z,practice,practice,24,FisherMen,-107.75,-280153,13000,13,60,0,2,True
+2026-11-14T13:38:37Z,practice,practice,25,Joca,-261.63,-627906,12000,12,58,0,1,True
+2026-11-14T13:38:37Z,practice,practice,26,bigRoddy,-569.31,-455449,4000,4,10,0,1,True
+2026-11-14T13:45:38Z,practice,practice,1,Chinese people can fly,112.34,292072,13000,13,91,0,5,True
+2026-11-14T13:45:38Z,practice,practice,2,Gherkers,90.54,253522,14000,14,146,0,7,True
+2026-11-14T13:45:38Z,practice,practice,3,GamesGone,71.55,171728,12000,12,45,0,2,True
+2026-11-14T13:45:38Z,practice,practice,4,Equity Engine,71.36,199819,14000,14,37,0,5,True
+2026-11-14T13:45:38Z,practice,practice,5,Vlad,67.03,53625,4000,4,21,0,1,True
+2026-11-14T13:45:38Z,practice,practice,6,Kojack,60.77,121532,10000,10,36,0,3,True
+2026-11-14T13:45:38Z,practice,practice,7,aydine,57.12,45693,4000,4,10,0,1,True
+2026-11-14T13:45:38Z,practice,practice,8,The Market Makers,51.95,114297,11000,11,49,0,6,True
+2026-11-14T13:45:38Z,practice,practice,9,SARS,51.59,51587,5000,5,9,0,3,True
+2026-11-14T13:45:38Z,practice,practice,10,Astra La Vista,47.97,134328,14000,14,66,0,4,True
+2026-11-14T13:45:38Z,practice,practice,11,Claudebot,42.75,76944,9000,9,43,0,1,True
+2026-11-14T13:45:38Z,practice,practice,12,Jump Street,37.97,22781,3000,3,18,0,2,True
+2026-11-14T13:45:38Z,practice,practice,13,Attention Is All In,34.9,97732,14000,14,57,0,2,True
+2026-11-14T13:45:38Z,practice,practice,14,WBot,29.38,29375,5000,5,23,0,2,True
+2026-11-14T13:45:38Z,practice,practice,15,matcha mille crêpes cake,28.87,69298,12000,12,613,0,5,True
+2026-11-14T13:45:38Z,practice,practice,16,Resonance Qt,27.93,16757,3000,3,22,0,1,True
+2026-11-14T13:45:38Z,practice,practice,17,gamblerlove,25.28,15170,3000,3,5,0,2,True
+2026-11-14T13:45:38Z,practice,practice,18,ND,24.72,34611,7000,7,66,0,1,True
+2026-11-14T13:45:38Z,practice,practice,19,YSL_TWIZZY,24.32,38917,8000,8,27,0,2,True
+2026-11-14T13:45:38Z,practice,practice,20,Mohil'sPokerBot,5.04,3024,3000,3,20,0,1,True
+2026-11-14T13:45:38Z,practice,practice,21,kaiserbot,0.83,331,2000,2,14,0,1,True
+2026-11-14T13:45:38Z,practice,practice,22,Phil AIvey,-62.2,-174152,14000,14,59,0,3,True
+2026-11-14T13:45:38Z,practice,practice,23,FisherMen,-104.47,-292505,14000,14,61,0,2,True
+2026-11-14T13:45:38Z,practice,practice,24,Lehman Brothers,-126.2,-151436,6000,6,33,0,2,True
+2026-11-14T13:45:38Z,practice,practice,25,Joca,-277.7,-722027,13000,13,67,0,1,True
+2026-11-14T13:45:38Z,practice,practice,26,bigRoddy,-503.02,-503023,5000,5,11,0,1,True
+2026-11-14T13:50:47Z,practice,practice,1,Chinese people can fly,109.07,305385,14000,14,92,0,5,True
+2026-11-14T13:50:47Z,practice,practice,2,Gherkers,88.1,264303,15000,15,146,0,7,True
+2026-11-14T13:50:47Z,practice,practice,3,aydine,80.21,80207,5000,5,13,0,1,True
+2026-11-14T13:50:47Z,practice,practice,4,GamesGone,73.3,190586,13000,13,47,0,2,True
+2026-11-14T13:50:47Z,practice,practice,5,Equity Engine,72.54,217605,15000,15,38,0,5,True
+2026-11-14T13:50:47Z,practice,practice,6,SARS,64.24,77090,6000,6,10,0,3,True
+2026-11-14T13:50:47Z,practice,practice,7,Jump Street,60.22,48179,4000,4,29,0,2,True
+2026-11-14T13:50:47Z,practice,practice,8,Vlad,60.02,60023,5000,5,23,0,1,True
+2026-11-14T13:50:47Z,practice,practice,9,Kojack,58.98,129751,11000,11,37,0,3,True
+2026-11-14T13:50:47Z,practice,practice,10,Astra La Vista,49.62,148855,15000,15,67,0,4,True
+2026-11-14T13:50:47Z,practice,practice,11,The Market Makers,42.38,101711,12000,12,53,0,6,True
+2026-11-14T13:50:47Z,practice,practice,12,Claudebot,40.98,81961,10000,10,43,0,1,True
+2026-11-14T13:50:47Z,practice,practice,13,ND,39.76,63618,8000,8,74,0,1,True
+2026-11-14T13:50:47Z,practice,practice,14,SmartBGerBot,33.24,6649,1000,1,0,0,1,True
+2026-11-14T13:50:47Z,practice,practice,15,Attention Is All In,31.73,95188,15000,15,59,0,2,True
+2026-11-14T13:50:47Z,practice,practice,16,YSL_TWIZZY,26.16,47092,9000,9,29,0,2,True
+2026-11-14T13:50:47Z,practice,practice,17,Resonance Qt,25.97,20774,4000,4,25,0,2,True
+2026-11-14T13:50:47Z,practice,practice,18,matcha mille crêpes cake,23.8,61888,13000,13,614,0,6,True
+2026-11-14T13:50:47Z,practice,practice,19,WBot,21.72,26061,6000,6,24,0,3,True
+2026-11-14T13:50:47Z,practice,practice,20,kaiserbot,16.43,9857,3000,3,25,0,1,True
+2026-11-14T13:50:47Z,practice,practice,21,gamblerlove,6.64,5309,4000,4,6,0,2,True
+2026-11-14T13:50:47Z,practice,practice,22,Mohil'sPokerBot,5.79,4635,4000,4,23,0,1,True
+2026-11-14T13:50:47Z,practice,practice,23,Phil AIvey,-50.95,-152856,15000,15,61,0,3,True
+2026-11-14T13:50:47Z,practice,practice,24,FisherMen,-114.39,-343156,15000,15,61,0,2,True
+2026-11-14T13:50:47Z,practice,practice,25,Lehman Brothers,-180.77,-253083,7000,7,36,0,2,True
+2026-11-14T13:50:47Z,practice,practice,26,Joca,-267.23,-748242,14000,14,68,0,1,True
+2026-11-14T13:50:47Z,practice,practice,27,bigRoddy,-457.82,-549390,6000,6,17,0,1,True
+2026-11-14T13:55:17Z,practice,practice,1,Chinese people can fly,99.46,298367,15000,15,103,0,6,True
+2026-11-14T13:55:17Z,practice,practice,2,Gherkers,89.55,286559,16000,16,154,0,7,True
+2026-11-14T13:55:17Z,practice,practice,3,Jump Street,79.86,79863,5000,5,33,0,4,True
+2026-11-14T13:55:17Z,practice,practice,4,aydine,68.58,82295,6000,6,16,0,1,True
+2026-11-14T13:55:17Z,practice,practice,5,GamesGone,67.04,187702,14000,14,48,0,2,True
+2026-11-14T13:55:17Z,practice,practice,6,Equity Engine,61.7,197437,16000,16,42,0,6,True
+2026-11-14T13:55:17Z,practice,practice,7,Red,60.38,12075,1000,1,4,0,1,True
+2026-11-14T13:55:17Z,practice,practice,8,Resonance Qt,58.39,58393,5000,5,30,0,2,True
+2026-11-14T13:55:17Z,practice,practice,9,Vlad,55.67,66803,6000,6,28,0,1,True
+2026-11-14T13:55:17Z,practice,practice,10,Astra La Vista,54.62,174792,16000,16,68,0,4,True
+2026-11-14T13:55:17Z,practice,practice,11,Claudebot,54.44,119771,11000,11,45,0,1,True
+2026-11-14T13:55:17Z,practice,practice,12,SARS,53.44,74814,7000,7,14,0,4,True
+2026-11-14T13:55:17Z,practice,practice,13,Kojack,51.59,123822,12000,12,42,0,3,True
+2026-11-14T13:55:17Z,practice,practice,14,The Market Makers,43.35,112714,13000,13,62,0,7,True
+2026-11-14T13:55:17Z,practice,practice,15,SmartBGerBot,41.63,16652,2000,2,5,0,1,True
+2026-11-14T13:55:17Z,practice,practice,16,Attention Is All In,32.26,103246,16000,16,60,0,2,True
+2026-11-14T13:55:17Z,practice,practice,17,YSL_TWIZZY,28.81,57611,10000,10,33,0,2,True
+2026-11-14T13:55:17Z,practice,practice,18,kaiserbot,26.75,21402,4000,4,30,0,1,True
+2026-11-14T13:55:17Z,practice,practice,19,matcha mille crêpes cake,25.6,71689,14000,14,620,0,7,True
+2026-11-14T13:55:17Z,practice,practice,20,ND,25.24,45440,9000,9,88,0,1,True
+2026-11-14T13:55:17Z,practice,practice,21,WBot,23.18,32459,7000,7,31,0,3,True
+2026-11-14T13:55:17Z,practice,practice,22,Mohil'sPokerBot,17.66,17663,5000,5,41,0,1,True
+2026-11-14T13:55:17Z,practice,practice,23,gamblerlove,-0.65,-647,5000,5,8,0,2,True
+2026-11-14T13:55:17Z,practice,practice,24,Phil AIvey,-30.37,-97171,16000,16,64,0,3,True
+2026-11-14T13:55:17Z,practice,practice,25,Peanut Cookies,-33.41,-6681,1000,1,4,0,1,True
+2026-11-14T13:55:17Z,practice,practice,26,FisherMen,-110.21,-352663,16000,16,65,0,2,True
+2026-11-14T13:55:17Z,practice,practice,27,Lehman Brothers,-186.27,-298040,8000,8,44,0,2,True
+2026-11-14T13:55:17Z,practice,practice,28,Joca,-272.74,-818220,15000,15,72,0,1,True
+2026-11-14T13:55:17Z,practice,practice,29,bigRoddy,-477.25,-668147,7000,7,19,0,1,True
+2026-11-14T14:00:29Z,break,practice,1,Durahim 1453,130.18,26036,1000,1,16,0,1,True
+2026-11-14T14:00:29Z,break,practice,2,Chinese people can fly,100.8,322572,16000,16,114,0,7,True
+2026-11-14T14:00:29Z,break,practice,3,Gherkers,90.0,305983,17000,17,156,0,7,True
+2026-11-14T14:00:29Z,break,practice,4,Red,71.59,28635,2000,2,10,0,1,True
+2026-11-14T14:00:29Z,break,practice,5,Jump Street,68.79,82552,6000,6,36,0,5,True
+2026-11-14T14:00:29Z,break,practice,6,aydine,64.89,90840,7000,7,21,0,1,True
+2026-11-14T14:00:29Z,break,practice,7,Equity Engine,63.14,214664,17000,17,44,0,6,True
+2026-11-14T14:00:29Z,break,practice,8,GamesGone,62.94,188835,15000,15,57,0,2,True
+2026-11-14T14:00:29Z,break,practice,9,Kojack,59.34,154279,13000,13,48,0,3,True
+2026-11-14T14:00:29Z,break,practice,10,Resonance Qt,53.18,63815,6000,6,31,0,2,True
+2026-11-14T14:00:29Z,break,practice,11,Astra La Vista,52.91,179899,17000,17,71,0,4,True
+2026-11-14T14:00:29Z,break,practice,12,Claudebot,52.34,125612,12000,12,46,0,1,True
+2026-11-14T14:00:29Z,break,practice,13,SARS,52.08,83332,8000,8,17,0,4,True
+2026-11-14T14:00:29Z,break,practice,14,The Market Makers,50.72,142011,14000,14,66,0,7,True
+2026-11-14T14:00:29Z,break,practice,15,Vlad,45.3,63423,7000,7,29,0,1,True
+2026-11-14T14:00:29Z,break,practice,16,SmartBGerBot,36.21,21724,3000,3,8,0,2,True
+2026-11-14T14:00:29Z,break,practice,17,Attention Is All In,33.98,115523,17000,17,65,0,2,True
+2026-11-14T14:00:29Z,break,practice,18,matcha mille crêpes cake,29.8,89387,15000,15,666,0,8,True
+2026-11-14T14:00:29Z,break,practice,19,YSL_TWIZZY,29.36,64598,11000,11,36,0,2,True
+2026-11-14T14:00:29Z,break,practice,20,kaiserbot,28.58,28578,5000,5,38,0,1,True
+2026-11-14T14:00:29Z,break,practice,21,Mohil'sPokerBot,21.6,25917,6000,6,42,0,1,True
+2026-11-14T14:00:29Z,break,practice,22,ND,17.67,35349,10000,10,91,0,1,True
+2026-11-14T14:00:29Z,break,practice,23,test,12.16,2432,1000,1,2,0,1,True
+2026-11-14T14:00:29Z,break,practice,24,gamblerlove,3.95,4740,6000,6,10,0,3,True
+2026-11-14T14:00:29Z,break,practice,25,WBot,1.45,2315,8000,8,33,0,4,True
+2026-11-14T14:00:29Z,break,practice,26,Phil AIvey,-28.35,-96404,17000,17,67,0,3,True
+2026-11-14T14:00:29Z,break,practice,27,Peanut Cookies,-58.33,-23331,2000,2,8,0,1,True
+2026-11-14T14:00:29Z,break,practice,28,AAST,-68.53,-13706,1000,1,3,0,1,True
+2026-11-14T14:00:29Z,break,practice,29,FisherMen,-110.27,-374909,17000,17,67,0,2,True
+2026-11-14T14:00:29Z,break,practice,30,Lehman Brothers,-231.46,-416635,9000,9,50,0,2,True
+2026-11-14T14:00:29Z,break,practice,31,Joca,-274.58,-878662,16000,16,76,0,1,True
+2026-11-14T14:00:29Z,break,practice,32,bigRoddy,-412.13,-659404,8000,8,21,0,3,True
