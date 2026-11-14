@@ -74,11 +74,11 @@ MIN_HANDS_CLASSIFY = 25
 # Time control (seconds). The round bank is 10 s; we aim well under it.
 # Live timeouts scale with think time per round (server stalls land while we
 # compute), so we think little: Monte Carlo only where the decision is costly.
-ROUND_TARGET = 0.2         # compute time per round the Monte Carlo budget is spread over
+ROUND_TARGET = 0.35        # compute time per round the Monte Carlo budget is spread over
 MC_MAX = 0.0003            # max Monte Carlo time per decision
 MC_MIN = 0.0001            # below this budget use the cheap estimate
-MC_POT_BB = 10             # postflop, nobody bet: Monte Carlo only in pots of at least this many bb
-MC_BET_FRAC = 0.33         # facing a bet: Monte Carlo only for bets of at least this pot share
+MC_POT_BB = 0              # postflop, nobody bet: Monte Carlo in pots of at least this many bb (0: always; gating cost 216 bb/100 against stations)
+MC_BET_FRAC = 0.0          # facing a bet: Monte Carlo only for bets of at least this pot share
 MC_BET_BB = 5              # or at least this many bb
 MC_TRIALS_MAX = 600
 MC_COMMIT = 0.0003         # Monte Carlo time kept for stack committing decisions when the budget is spent
