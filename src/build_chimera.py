@@ -7,6 +7,7 @@ modified. Both keep learning from every hand; preflop decisions go to PRE, the r
 import base64, sys, zlib
 
 pre, post, out = sys.argv[1:4]
+veto = int(sys.argv[sys.argv.index("--veto") + 1]) if "--veto" in sys.argv else 0   # chips; 0 = no veto
 def pack(path):
     raw = open(path, "rb").read()
     b = base64.b64encode(zlib.compress(raw, 9)).decode()
@@ -33,10 +34,20 @@ exec(compile(zlib.decompress(base64.b64decode(_POST_SRC)), "post", "exec"), _POS
 del _PRE_SRC, _POST_SRC
 
 
+# The preflop bot also has a full postflop engine, calibrated on real showdowns. When the
+# postflop partner wants to call this many chips or more and that engine would fold, we fold:
+# on the real rounds such calls won about one time in seven.
+VETO_MIN = %d
+
+
 class Agent:
     def __init__(self):
         self.pre = _PRE["Agent"]()
         self.post = _POST["Agent"]()
+        try:
+            self.pre._budget = lambda st: 0.0008      # short simulation when asked for a second opinion
+        except Exception:
+            pass
 
     def on_table_start(self, info):
         for a in (self.pre, self.post):
@@ -63,6 +74,12 @@ class Agent:
         except Exception:
             out = None
         a = out.get("action") if isinstance(out, dict) else None
+        if a == "call" and VETO_MIN and state.get("street") != "preflop" and (state.get("to_call") or 0) >= VETO_MIN:
+            try:
+                if self.pre.act(state).get("action") == "fold":
+                    a = "fold"
+            except Exception:
+                pass
         if a == "raise" and "raise" in legal:
             return out
         if a == "call" and "call" in legal:
@@ -72,6 +89,6 @@ class Agent:
         if a == "fold" and "check" not in legal:
             return {"action": "fold"}
         return {"action": "check"} if "check" in legal else {"action": "fold"}
-''' % (pre.split("/")[-1], post.split("/")[-1], pack(pre), pack(post))
+''' % (pre.split("/")[-1], post.split("/")[-1], pack(pre), pack(post), veto)
 open(out, "w").write(src)
 print("wrote", out, len(src.encode()), "bytes")

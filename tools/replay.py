@@ -15,7 +15,7 @@ START, BB = 2000, 20
 tot = {"decisions": 0, "pre_mismatch": 0, "post_mismatch": 0}
 for f in sys.argv[2:]:
     d = json.load(open(f)); n = len(d["players"]); me = d["seat"]; A = M.Agent()
-    A.on_table_start({"seat": me, "num_players": n, "hands": 1000})
+    A.on_table_start({"seat": me, "num_players": n, "hands": 1000, "starting_stack": START, "big_blind": BB, "small_blind": 10})
     susp = []; dec = 0; by_street = {}
     for h in d["hands"]:
         hist = []; street = "preflop"; board = []; posted = 0
@@ -61,7 +61,12 @@ for f in sys.argv[2:]:
                 elif a == "fold":
                     folded[s] = True
         shown = {k: v for k, v in h["hole"].items() if k in (h.get("showdown") or {})}
-        A._learn({"history": hist, "board": h["board"], "shown": shown, "stacks": [0] * n})
+        summary = {"type": "hand_end", "hand_number": h["n"], "history": hist, "board": h["board"], "shown": shown,
+                   "winners": [], "stacks": [START] * n}
+        if hasattr(A, "_learn"):
+            A._learn(summary)
+        else:
+            A.on_hand_end(summary)      # chimera builds: both halves learn
     rd = d.get("round", {})
     print("%s: %d decisions %s | platform says %s timeouts, think %ss | replay finds %d passive plays the bot would not make" % (
         os.path.basename(f), dec, by_street, rd.get("timeouts"), rd.get("think_s"), len(susp)))
