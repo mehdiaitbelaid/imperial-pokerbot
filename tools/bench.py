@@ -30,7 +30,11 @@ from engine.players import SubprocessPlayer  # noqa: E402
 
 BIG_BLIND = 20
 # Fields that always seat these bots before drawing the rest from the pool.
-FIXED = {"tight": ["sparring/maniac.py"]}
+# "field" is the main accept or reject field: field_like models the live
+# practice tables (a model of the field, not the field), plus one maniac and
+# one station as the live tables have.
+FIXED = {"tight": ["sparring/maniac.py"],
+         "field": ["sparring/maniac.py", "sparring/calling_station_plus.py"]}
 # Behaviour bands a release candidate should sit in (from docs/x-findings.md).
 VPIP_BAND = (0.22, 0.35)
 PFR_BAND = (0.17, 0.27)
@@ -44,6 +48,7 @@ def fields():
     sp = lambda name: os.path.join(HERE, "sparring", name + ".py")  # noqa: E731
     ex = lambda name: os.path.join(HERE, "examples", name + ".py")  # noqa: E731
     return {
+        "field": [sp("field_like")],
         "tight": [sp("nit"), sp("tag_basic"), sp("pot_odds_bot"), ex("tight_aggressive"), sp("tag_basic")],
         "house": _glob("examples/*.py"),
         "mixed": _glob("sparring/*.py") + _glob("examples/*.py"),
