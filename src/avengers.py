@@ -365,7 +365,8 @@ RED_FLOP, RED_TURN = (0.19, 0.09, 0.03), (0.11, 0.06, 0.03)
 BACKDOOR = 0.035        # flop only: runner-runner and pairing chances not counted as outs
 ONE_PAIR_VS_POT, ONE_PAIR_VS_RAISE = 0.0, 0.0     # flop/turn: no change from v14 (real data inconclusive)
 ONE_PAIR_VS_POT_RIVER = 0.22   # field: callers of a pot-size river bet with one pair win about 1 in 4
-ONE_PAIR_VS_RAISE_RIVER = 0.30 # field river raises shown down were two pair or better 56 times in 63
+ONE_PAIR_VS_RAISE_RIVER = 0.30
+ONE_PAIR_VS_OVERBET = 0.0      # extra equity one pair or less needs against a bet or raise of 1.5 pots or more # field river raises shown down were two pair or better 56 times in 63
 THIN_VALUE = 0.55        # from this equity a third-of-pot bet becomes an option
 NOTHING_VS_BET = 0.05    # no pair and no draw against half a pot or more: lost on the real rounds
 BET_SIZES = (0.5, 0.8, 1.1, 1.6)                # (0.18 and 0.33 tested: no gain in simulation)
@@ -1451,7 +1452,10 @@ class Agent:
             for s in live:
                 if bets[s] == cur:
                     big_weak = self.st[s].r_bigweak()
-            if raised_us:
+            if xb >= 1.5:
+                # overbets of 1.5 pots or more: one pair or less won 7 of 20 on the real rounds
+                margin += ONE_PAIR_VS_OVERBET
+            elif raised_us:
                 if bettor_air < 0.30:
                     margin += ONE_PAIR_VS_RAISE_RIVER if river else ONE_PAIR_VS_RAISE
             elif xb >= 0.9:
