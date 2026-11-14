@@ -18,14 +18,20 @@ def main():
     ap.add_argument("--rounds", type=int, default=40)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--par", type=int, default=10)
+    ap.add_argument("--ms", type=float, default=60.0, help="per-decision limit; 60 = relaxed (strategy only), small = also punishes slow decisions")
     a = ap.parse_args()
     seeds = [a.seed * 1000 + r for r in range(a.rounds)]
     tables = [random.Random(s).sample(a.pool, 7) for s in seeds]
-    jobs = [([b] + t, s, 1000, False, 60.0) for b in a.focus for t, s in zip(tables, seeds)]
+    jobs = [([b] + t, s, 1000, False, a.ms) for b in a.focus for t, s in zip(tables, seeds)]
     with Pool(a.par) as p:
         res = p.map(play, jobs, chunksize=1)
     k = 100.0 / 20 / 1000
     val = {b: [res[i * a.rounds + r]["chips"][0] * k for r in range(a.rounds)] for i, b in enumerate(a.focus)}
+    tos = {b: sum(res[i * a.rounds + r]["stats"][0][0] for r in range(a.rounds)) for i, b in enumerate(a.focus)}
+    thk = {b: sum(res[i * a.rounds + r]["stats"][0][2] for r in range(a.rounds)) / a.rounds for i, b in enumerate(a.focus)}
+    print("limit %.1f ms per decision | timeouts over all rounds and thinking seconds per round:" % a.ms)
+    for b in a.focus:
+        print("  %-22s timeouts %4d   think %.2f s/round" % (b, tos[b], thk[b]))
     whale = [any("starter" in x for x in t) for t in tables]
     groups = (("ALL TABLES", [True] * a.rounds), ("with a starter-kit whale", whale), ("no whale", [not w for w in whale]))
     for name, mask in groups:
