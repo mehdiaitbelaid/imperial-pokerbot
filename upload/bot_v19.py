@@ -363,7 +363,7 @@ BANK_GUARD = 6.0         # stop simulating if the round's thinking time gets thi
 OUT_FLOP, OUT_TURN = 0.038, 0.020
 RED_FLOP, RED_TURN = (0.19, 0.09, 0.03), (0.11, 0.06, 0.03)
 BACKDOOR = 0.035        # flop only: runner-runner and pairing chances not counted as outs
-ONE_PAIR_VS_POT, ONE_PAIR_VS_RAISE = 0.08, 0.06   # extra equity one pair needs against a pot-size bet / a raise
+ONE_PAIR_VS_POT, ONE_PAIR_VS_RAISE = 0.0, 0.0     # flop/turn: no change from v14 (real data inconclusive)
 ONE_PAIR_VS_POT_RIVER = 0.22   # field: callers of a pot-size river bet with one pair win about 1 in 4
 ONE_PAIR_VS_RAISE_RIVER = 0.30 # field river raises shown down were two pair or better 56 times in 63
 THIN_VALUE = 0.55        # from this equity a third-of-pot bet becomes an option
@@ -1458,8 +1458,8 @@ class Agent:
                 # pot-size bets: fold one pair unless this seat has shown weak big bets
                 if big_weak < 0.45:
                     margin += ONE_PAIR_VS_POT_RIVER if river else ONE_PAIR_VS_POT
-            elif mycat == 0 and not mydraw and xb >= 0.5 and bettor_air < 0.30:
-                margin += NOTHING_VS_BET
+            elif river and mycat == 0 and xb >= 0.5 and bettor_air < 0.30:
+                margin += NOTHING_VS_BET          # no pair on the river: field data 7 won of 27
         if not river and c < mystack:
             margin += 0.03
             if mydraw and c <= 0.25 * mystack:
