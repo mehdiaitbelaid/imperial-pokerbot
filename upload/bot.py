@@ -104,6 +104,15 @@ for _m in range(1 << 13):
             DRAW4[_m] = True
             break
 
+# Open-ended: four consecutive ranks with room on both sides.
+DRAW8 = [False] * (1 << 13)
+for _m in range(1 << 13):
+    _mm = (_m << 1) | ((_m >> 12) & 1)
+    for _lo in range(1, 10):
+        if (_mm >> _lo) & 15 == 15:
+            DRAW8[_m] = True
+            break
+
 CP = [PRIMES[c >> 2] for c in range(52)]
 CARD = {RANKS[r] + SUITS[s]: r * 4 + s for r in range(13) for s in range(4)}
 DRAWB = 1 << 20          # ranking bonus for a draw: one hand category
@@ -226,7 +235,8 @@ for _c in _SH_TOP + _rest:
 class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
-                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb")
+                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "hot_f", "hot_chk", "r4_o", "r4",
+                 "sr_o", "sr_f", "bb_sd", "bb_weak")
 
     def __init__(self):
         for k in self.__slots__:
@@ -237,6 +247,11 @@ class St:
     def limp_folder(self):
         """Limps, then gives up every time someone raises."""
         return self.lf_o >= 3 and self.lf_f >= 0.9 * self.lf_o
+
+    def exact_starter(self):
+        """A starter-kit bot that also plays the kit's way after the flop: with its raising
+        hands it has never checked and never folded."""
+        return self.hot_f == 0 and self.hot_chk == 0 and self.starter()
 
     def limp_suspect(self):
         """Limps so often that it is worth raising him to find out."""
@@ -274,6 +289,19 @@ class St:
     def r_cb(self):
         """How often he bets the flop after raising preflop (field: about 70%)."""
         return (self.cb + 0.70 * 6) / (self.cb_o + 6)
+
+    def r_smallraise(self, river):
+        """How often he gives up when his own small bet (under 40% of the pot) is raised.
+        Field: 71% on the flop, 72% on the turn, 63% on the river."""
+        return (self.sr_f + 5 * (0.63 if river else 0.70)) / (self.sr_o + 5)
+
+    def r_bigweak(self):
+        """Share of his pot-size bets that showed one pair or less at showdown (field: about 30%)."""
+        return (self.bb_weak + 0.30 * 4) / (self.bb_sd + 4)
+
+    def r_4bet(self):
+        """How often he raises again when two raises are already in (field: rarely)."""
+        return (self.r4 + 0.03 * 12) / (self.r4_o + 12)
 
     def r_bx(self):
         """His usual bet size, in pots."""
@@ -321,6 +349,31 @@ FOLD_LIMPED = (0.55, 0.86)                         # flop of an unraised pot
 # A bet tells how strong its author is only relative to his own habit: (value share, bluff
 # weight) multipliers for a bet smaller than usual, usual, bigger than usual.
 SIZE_MULT = ((1.7, 3.5), (1.35, 2.2), (0.5, 0.35))
+# Field: folds to a bet of 20% of the pot or less are 16% / 8% / 28% on flop / turn / river against
+# 54% / 45% / 52% for a normal bet; for 20-40% of the pot they are 26% / 24% / 31%.
+TINY_FOLD = (0.30, 0.18, 0.54)
+SMALL_FOLD = (0.48, 0.53, 0.60)
+# Direct equity before the river: chance per out to improve, and the share of our lead an
+# opponent takes back by the river (one pair or less, two pair to trips, straight or better).
+USE_MC = True
+MC_MAX = 400
+MC_BIG = 0.0009          # seconds from the start of the decision allowed for the short simulation
+BIG_CALL, BIG_POT = 300, 800   # chips: what makes a decision big enough to simulate
+BANK_GUARD = 6.0         # stop simulating if the round's thinking time gets this high
+OUT_FLOP, OUT_TURN = 0.038, 0.020
+RED_FLOP, RED_TURN = (0.19, 0.09, 0.03), (0.11, 0.06, 0.03)
+BACKDOOR = 0.035        # flop only: runner-runner and pairing chances not counted as outs
+ONE_PAIR_VS_POT, ONE_PAIR_VS_RAISE = 0.0, 0.0     # flop/turn: no change from v14 (real data inconclusive)
+ONE_PAIR_VS_POT_RIVER = 0.22   # field: callers of a pot-size river bet with one pair win about 1 in 4
+ONE_PAIR_VS_RAISE_RIVER = 0.30 # field river raises shown down were two pair or better 56 times in 63
+THIN_VALUE = 0.55        # from this equity a third-of-pot bet becomes an option
+NOTHING_VS_BET = 0.05    # no pair and no draw against half a pot or more: lost on the real rounds
+BET_SIZES = (0.5, 0.8, 1.1, 1.6)                # (0.18 and 0.33 tested: no gain in simulation)
+# Share of our equity we keep when we check: nearly all when the check closes the action, much
+# less when opponents still act (they bet and we often have to fold).
+CHECK_CLOSE, CHECK_OPEN, CHECK_OPEN_RIVER = 0.90, 0.90, 1.00
+RAISE_SMALL = True       # raise bets under 40% of the pot when the bettor's folds pay for it
+KEEP_WHALE_IN = True     # exact-size isolation of limpers that follow the starter kit's calling rule
 WIDE_CALLS = False      # defend the big blind and flat in position more widely
 
 
@@ -346,8 +399,10 @@ def fold_prob(S, cat, si, multi, limped, x, is_raise):
     if prior > 0.95:
         prior = 0.95
     p = (S.ff[cat] + 5 * prior) / (S.fo[cat] + 5)
-    if x < 0.35:
-        p *= 0.6
+    if x <= 0.22:
+        p *= TINY_FOLD[si]
+    elif x < 0.38:
+        p *= SMALL_FOLD[si]
     elif x < 0.7:
         p *= 0.93
     elif x <= 1.1:
@@ -374,6 +429,9 @@ class Agent:
         self.hands_seen = 0
         self.errors = 0
         self.cap = 200
+        self.mc_n = 0
+        self.small_raise = False
+        self.last_cat = 9
 
     def on_table_start(self, info):
         self.total_hands = info.get("hands", 1000) or 1000
@@ -411,8 +469,12 @@ class Agent:
         last_raise = False
         limped = set()
         lf_seen = set()
+        r4_seen = set()
         steal = False          # a late-position open with nobody else in yet
         others_in = 0
+        first_bet = None       # (seat, size in pots) of the first bet of the current street
+        small_raised = -1      # seat whose small bet has just been raised
+        big_bettors = set()    # seats that made a bet of 0.9 pot or more this hand
         agg_by = {}            # street -> seat that made its last bet or raise
         callers_by = {}        # street -> seats that called on it
         checked = set()        # seats that checked on the current street
@@ -430,6 +492,8 @@ class Agent:
                 bets = {}
                 cur = 0
                 checked = set()
+                first_bet = None
+                small_raised = -1
             if a == "small_blind" or a == "big_blind":
                 bets[s] = amt
                 if amt > cur:
@@ -439,6 +503,11 @@ class Agent:
             S = st[s]
             mine = bets.get(s, 0)
             if street == "preflop":
+                if raises >= 2 and s not in r4_seen:
+                    r4_seen.add(s)
+                    S.r4_o += 1
+                    if a == "raise":
+                        S.r4 += 1
                 if s in limped and cur - mine > 40 and s not in lf_seen:
                     lf_seen.add(s)
                     S.lf_o += 1
@@ -480,6 +549,16 @@ class Agent:
                 elif a == "call":
                     vp.add(s)
             else:
+                if s == small_raised:
+                    small_raised = -1
+                    S.sr_o += 1
+                    if a == "fold":
+                        S.sr_f += 1
+                if s in pr:
+                    if a == "fold":
+                        S.hot_f += 1
+                    elif a == "check":
+                        S.hot_chk += 1
                 if cur > mine:
                     S.fb_o += 1
                     if a == "fold":
@@ -513,6 +592,13 @@ class Agent:
                 if street != "preflop":
                     last_raise = cur > 0
                     last_x = (amt - cur) / float(pot + cur - mine) if cur > 0 else amt / float(pot or 1)
+                    if cur == 0:
+                        first_bet = (s, last_x)
+                        if last_x >= 0.9:
+                            big_bettors.add(s)
+                    elif first_bet is not None and first_bet[1] < 0.4 and s != first_bet[0]:
+                        small_raised = first_bet[0]
+                        first_bet = None
                 pot += amt - mine
                 bets[s] = amt
                 cur = amt
@@ -545,6 +631,13 @@ class Agent:
                 for c in board:
                     bp *= CP[c]
                 bcat = RANK[bp] >> 20
+                for k, cards in shown.items():
+                    if int(k) in big_bettors:
+                        S = st[int(k)]
+                        S.bb_sd += 1
+                        c7 = RANK[bp * CP[CARD[cards[0]]] * CP[CARD[cards[1]]]] >> 20
+                        if c7 <= 1 and not self._flushy(board, cards):
+                            S.bb_weak += 1
                 for k, cards in shown.items():
                     s = int(k)
                     if s not in agg_post:
@@ -603,6 +696,8 @@ class Agent:
         return CHECK if "check" in legal else FOLD
 
     def _act(self, state, t0):
+        self.small_raise = False
+        self.last_cat = 9
         hc = state["hole_cards"]
         hole = (CARD[hc[0]], CARD[hc[1]])
         if state["street"] == "preflop":
@@ -721,6 +816,10 @@ class Agent:
             if can_raise and all_lf:
                 k = 0 if rel == 2 else (1 if rel == 1 else d + 2)     # players still to act
                 if k <= 2 or (k == 3 and lvl <= 6) or lvl <= 5:
+                    if KEEP_WHALE_IN:
+                        # A kit bot calls when it costs 2 big blinds or less and folds anything
+                        # else, then gives up to the first real bet: let it put 2 more in.
+                        return self._raise_to(state, cur + 2 * bb)
                     return self._raise_to(state, bb * (3.5 + limpers - 1))
             if can_raise and all_sus and lvl <= 5:
                 return self._raise_to(state, bb * (3.5 + limpers - 1))
@@ -758,7 +857,7 @@ class Agent:
                     return {"action": "all_in"}
                 return self._raise_to(state, R * 3.0 + R * callers)
             # see a flop cheaply: he will keep betting the same range on any board
-            if to_call <= 5 * bb and (callers == 0 or lvl <= 5):
+            if to_call <= 5 * bb and ((callers == 0 and S.exact_starter()) or lvl <= 4):
                 return call_or_check()
             return fold_or_check()
         # all-in or close to it: call when our equity against his shoving range pays
@@ -782,7 +881,7 @@ class Agent:
         elif raises == 2:
             f = 0.02 if tb < 0.02 else (0.6 if tb > 0.6 else tb)
         else:
-            f = max(0.015, tb * 0.4, shv)
+            f = max(0.015, tb * 0.4, shv, S.r_4bet() if S.r4_o >= 6 else 0.0)
         e = req(cls, f)
         pos_me = (me - button - 1) % n
         pos_r = (last_raiser - button - 1) % n
@@ -797,6 +896,21 @@ class Agent:
                 return self._raise_to(state, R * mult + R * callers)
             # bluff 3-bet the openers who give up to 3-bets
             f3 = S.r_f3()
+            squeezer = False
+            for i in range(1, n):
+                t = (me + i) % n
+                if t == last_raiser:
+                    break
+                T = st[t]
+                if not state["folded"][t] and T.r4_o >= 6 and T.r_4bet() >= 0.15:
+                    squeezer = True
+            if squeezer:
+                f3 = 0.0                    # value 3-bets only: someone behind keeps re-raising
+            if can_raise and callers == 0 and R > 4.5 * bb and R <= 16 * bb and S.f3_o >= 4:
+                # risk 2.3 R to win R plus the blinds: needs this many folds, plus a margin
+                need_f = 2.3 * R / (3.3 * R + 1.5 * bb) + 0.10
+                if f3 >= need_f and lvl <= 5:
+                    return self._raise_to(state, R * 2.3)
             if can_raise and callers == 0 and R <= 4.5 * bb:
                 n3 = S.f3_o
                 if n3 >= 3 and f3 >= 0.78:
@@ -943,8 +1057,9 @@ class Agent:
         S = self.st[s]
         pfr, pfi, pcall, agg, rais, called, lastx = L[:7]
         lo = 0.0
-        plain = S.starter()
-        if plain:
+        kit = S.starter()
+        plain = kit and S.exact_starter()
+        if kit:
             hi = 1.0
         elif pfr[s]:
             i = pfi[s]
@@ -963,8 +1078,8 @@ class Agent:
             hi = 1.0
         i0 = int(lo * NC)
         i1 = max(i0 + 12, int(hi * NC))
-        if plain:
-            src = STARTER_S if (pfr[s] or agg[s]) else STARTER_W
+        if kit:
+            src = STARTER_S if (pfr[s] or (plain and agg[s])) else STARTER_W
         else:
             src = COMBOS[i0:i1]
         cap = self.cap
@@ -990,16 +1105,17 @@ class Agent:
                     f = FLUSH[m]
                     if f > v:
                         v = f
+            raw = v
             if drawok and v < TWO_PAIR:
                 c4 = sc[sa] + 2 if sa == sb else max(sc[sa], sc[sb]) + 1
                 if c4 == 4 or (not d4b and DRAW4[bmask | (1 << (a >> 2)) | (1 << (b >> 2))]):
                     v += DRAWB
             if v >= thr:
                 nge += 1
-            out.append((v, a, b))
+            out.append((v, a, b, raw))
         N = len(out)
         if not N:
-            return [(0, a, b) for a, b in COMBOS[:60] if a not in dead and b not in dead], None, 0.0, 0.5
+            return [(0, a, b, 0) for a, b in COMBOS[:60] if a not in dead and b not in dead], None, 0.0, 0.5
         if plain or not (agg[s] or called[s]):
             return out, None, 0.0, nge / float(N)
         out.sort(reverse=True)
@@ -1107,38 +1223,91 @@ class Agent:
         dead = set(board)
         dead.add(h0)
         dead.add(h1)
+        hit = red = 0.0
+        if not river:
+            mycat0 = myv >> 20
+            outs = 0.0
+            if mycat0 < 4:
+                c4 = sc[s0] + 2 if s0 == s1 else max(sc[s0], sc[s1]) + 1
+                if c4 == 4:
+                    outs += 9.0
+                m2 = bmask | (1 << (h0 >> 2)) | (1 << (h1 >> 2))
+                if not d4b:
+                    if DRAW8[m2]:
+                        outs += 8.0 if c4 != 4 else 6.0
+                    elif DRAW4[m2]:
+                        outs += 4.0 if c4 != 4 else 3.0
+            if mycat0 == 0:
+                top = 0
+                for x in board:
+                    if (x >> 2) > top:
+                        top = x >> 2
+                outs += 1.8 * (((h0 >> 2) > top) + ((h1 >> 2) > top))
+            elif mycat0 == 1:
+                outs += 2.0 if (h0 >> 2) == (h1 >> 2) else 4.0
+            elif mycat0 <= 3:
+                outs += 4.0
+            hit = outs * OUT_FLOP + BACKDOOR if nb == 3 else outs * OUT_TURN
+            if hit > 0.6:
+                hit = 0.6
+            red = (RED_FLOP if nb == 3 else RED_TURN)[0 if mycat0 <= 1 else (1 if mycat0 <= 3 else 2)]
 
         k = len(live)
-        self.cap = 200 if k <= 2 else (130 if k == 3 else 90)     # keep multiway decisions fast
+        self.cap = 200 if k <= 2 else (130 if k == 3 else 90)
         tiers = [self._tier(s, L, dead, bp, fs, scf, smf, sc, bmask, d4b, nb, thr) for s in live]
-        if river:
-            eq = 1.0
-            for strong, weak, keep, _sf in tiers:
-                w = 0.0
-                for t in strong:
-                    v = t[0]
+        # Share of each opponent's range we beat right now (index 3 is the raw score).
+        eq = 1.0
+        for strong, weak, keep, _sf in tiers:
+            w = 0.0
+            for t in strong:
+                v = t[3]
+                if myv > v:
+                    w += 1.0
+                elif myv == v:
+                    w += 0.5
+            tot = float(len(strong))
+            if weak:
+                ww = 0.0
+                for t in weak:
+                    v = t[3]
                     if myv > v:
-                        w += 1.0
+                        ww += 1.0
                     elif myv == v:
-                        w += 0.5
-                tot = float(len(strong))
-                if weak:
-                    ww = 0.0
-                    for t in weak:
-                        v = t[0]
-                        if myv > v:
-                            ww += 1.0
-                        elif myv == v:
-                            ww += 0.5
-                    w += keep * ww
-                    tot += keep * len(weak)
-                eq *= w / tot if tot > 0 else 0.5
-        else:
-            eq = self._mc(h0, h1, board, dead, tiers, t0 + self._budget(state), bp, sc, sm)
+                        ww += 0.5
+                w += keep * ww
+                tot += keep * len(weak)
+            ah = w / tot if tot > 0 else 0.5
+            if not river:
+                ah = ah * (1.0 - red) + (1.0 - ah) * hit
+            eq *= ah
+        if not river:
+            if USE_MC:
+                eq = self._mc(h0, h1, board, dead, tiers, t0 + self._budget(state), bp, sc, sm, MC_MAX)
+            elif MC_BIG:
+                # Big decisions only: a short simulation, averaged with the direct estimate.
+                big = c >= BIG_CALL or pot >= BIG_POT
+                if not big:
+                    for s in live:
+                        if (L[0][s] or L[3][s]) and self.st[s].exact_starter():
+                            big = True
+                            break
+                if big and self.used < BANK_GUARD:
+                    mc = self._mc(h0, h1, board, dead, tiers, t0 + MC_BIG, bp, sc, sm, 240)
+                    w = self.mc_n / (self.mc_n + 90.0)
+                    eq = eq * (1.0 - w) + mc * w
+        self.last_eq = eq
 
         # Very strong made hands are never folded on a board that is not scary:
         # paying off sometimes costs less than being pushed off a set.
         mycat = myv >> 20
+        self.last_cat = mycat
+        if mycat == 2 and paired and (h0 >> 2) != (h1 >> 2):
+            pb = 0
+            for x in board:
+                if (x >> 2) == (h0 >> 2) or (x >> 2) == (h1 >> 2):
+                    pb += 1
+            if pb < 2:
+                self.last_cat = 1          # the board's pair plus one of ours plays like one pair
         if mycat >= 3 and not (mycat == 3 and trips_board):
             scary = (scf >= 4 and mycat < 5) or (d4b and mycat < 4)
             if not scary:
@@ -1160,7 +1329,10 @@ class Agent:
                 ov = None
                 hot = L[0][s] or L[3][s]            # raised preflop or bet postflop this hand
                 if S.starter():
-                    ov = 0.0 if hot else 0.97
+                    if not hot:
+                        ov = 0.97
+                    elif S.exact_starter():
+                        ov = 0.0
                 elif S.limp_folder() and L[2][s] == 1 and not hot:
                     ov = 0.85
                 if ov is not None:
@@ -1183,10 +1355,24 @@ class Agent:
             if not can_raise:
                 return CHECK
             best = None
-            best_ev = eq * pot * (1.0 if river else 0.9) + 0.03 * pot
-            cands = [mybet + x * pot for x in (0.5, 0.8, 1.1, 1.6)]
+            acted_now = set()
+            for hh in state["history"]:
+                if hh["street"] == street:
+                    acted_now.add(hh["seat"])
+            closing = True                 # nobody can bet after our check
+            for s in live:
+                if stacks[s] > 0 and s not in acted_now:
+                    closing = False
+            if closing:
+                keep_eq = 1.0 if river else CHECK_CLOSE
+            else:
+                keep_eq = CHECK_OPEN_RIVER if river else CHECK_OPEN
+            best_ev = eq * pot * keep_eq + 0.03 * pot
+            cands = [mybet + x * pot for x in BET_SIZES]
             if probe:
                 cands.insert(0, mybet + 45)
+                if KEEP_WHALE_IN and len(live) == 1:
+                    cands.insert(0, mybet + 40)       # he calls 2 big blinds with anything: pure value
             if nofold and eq >= 0.52:
                 cands.append(hi)
             for tgt in cands:
@@ -1220,6 +1406,20 @@ class Agent:
             if bets[s] < cur and stacks[s] > 0:
                 behind += 1
         ev_call = eq * (pot + c) - c
+        # A small bet is a weak bet here: its author gives up to a raise about 7 times in 10.
+        if RAISE_SMALL and can_raise and hi is not None and len(live) == 1 and behind == 0 and not allin and not nofold:
+            v = live[0]
+            xb0 = L[6][v]
+            if 0 < xb0 < 0.4 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
+                r_to = max(lo, 3 * cur)
+                if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
+                    pfr_ = self.st[v].r_smallraise(river)
+                    a_ = r_to - mybet
+                    eqc_ = max(floor * eq, (eq - pfr_) / (1.0 - pfr_)) if pfr_ < 0.999 else eq
+                    ev_r = pfr_ * pot + (1.0 - pfr_) * (eqc_ * (pot + a_ + (r_to - cur)) - a_)
+                    if ev_r > max(ev_call, 0.0) + 0.05 * pot:
+                        self.small_raise = True
+                        return {"action": "raise", "amount": int(r_to)}
         if can_raise and eq >= (0.52 if nofold else 0.62) and hi is not None:
             r_to = hi if nofold else cur + 0.9 * (pot + c)
             if r_to >= 0.62 * hi:
@@ -1238,6 +1438,28 @@ class Agent:
             if eqc >= 0.5 and ev_raise > ev_call + 0.02 * pot:
                 return {"action": "raise", "amount": int(r_to)}
         margin = 0.03 * behind
+        if mycat <= 1 and c > 0:
+            bettor_air = 0.0
+            xb = 0.0
+            raised_us = False
+            for s in live:
+                if bets[s] == cur:
+                    bettor_air = self.st[s].r_air()
+                    xb = L[6][s]
+                    raised_us = L[4][s] > 0
+            big_weak = 0.30
+            for s in live:
+                if bets[s] == cur:
+                    big_weak = self.st[s].r_bigweak()
+            if raised_us:
+                if bettor_air < 0.30:
+                    margin += ONE_PAIR_VS_RAISE_RIVER if river else ONE_PAIR_VS_RAISE
+            elif xb >= 0.9:
+                # pot-size bets: fold one pair unless this seat has shown weak big bets
+                if big_weak < 0.45:
+                    margin += ONE_PAIR_VS_POT_RIVER if river else ONE_PAIR_VS_POT
+            elif river and mycat == 0 and xb >= 0.5 and bettor_air < 0.30:
+                margin += NOTHING_VS_BET          # no pair on the river: field data 7 won of 27
         if not river and c < mystack:
             margin += 0.03
             if mydraw and c <= 0.25 * mystack:
@@ -1252,7 +1474,7 @@ class Agent:
         b = left / (hands_left * 0.45)
         return 0.0003 if b < 0.0003 else (0.0016 if b > 0.0016 else b)
 
-    def _mc(self, h0, h1, board, dead, tiers, t_end, bp0, sc0, sm0):
+    def _mc(self, h0, h1, board, dead, tiers, t_end, bp0, sc0, sm0, maxn=400):
         rnd = self.rng.random
         deck = [x for x in range(52) if x not in dead]
         Ld = len(deck)
@@ -1270,7 +1492,7 @@ class Agent:
             plans.append((strong, ls, weak, lw, pw))
         wins = 0.0
         n = 0
-        while n < 400:
+        while n < maxn:
             if (n & 7) == 7 and n >= 23 and _now() > t_end:
                 break
             used = set(dead)
@@ -1363,6 +1585,7 @@ class Agent:
                         ties += 1
             if best:
                 wins += 1.0 / (ties + 1)
+        self.mc_n = n
         return wins / n if n else 0.5
 
 
