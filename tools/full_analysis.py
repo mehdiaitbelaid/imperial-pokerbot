@@ -1,7 +1,7 @@
 """Full round analysis: results, all-in luck, positions, preflop spots, calls vs bet size, opponents.
     HANDS=hands python3 tools/full_analysis.py   (hand files from the team API; never commit them or the token)"""
 import json,glob,collections,random,importlib.util,sys,statistics as S
-spec=importlib.util.spec_from_file_location("ev","__import__('os').path.join(__import__('os').path.dirname(__import__('os').path.dirname(__import__('os').path.abspath(__file__))),'upload','bot_v14.py')");M=importlib.util.module_from_spec(spec);spec.loader.exec_module(M)
+spec=importlib.util.spec_from_file_location("ev",__import__('os').path.join(__import__('os').path.dirname(__import__('os').path.dirname(__import__('os').path.abspath(__file__))),'upload','bot_v14.py'));M=importlib.util.module_from_spec(spec);spec.loader.exec_module(M)
 CARD,CP,RANK,FLUSH=M.CARD,M.CP,M.RANK,M.FLUSH
 def score(cards):
     p=1;sc=[0]*4;sm=[0]*4
