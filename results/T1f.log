@@ -1,0 +1,36 @@
+[T1f] round 1/30 6s  v18.py -1  v18f.py +27
+[T1f] round 2/30 10s  v18.py -15  v18f.py +7
+[T1f] round 3/30 14s  v18.py -5  v18f.py -12
+[T1f] round 4/30 17s  v18.py +61  v18f.py +29
+[T1f] round 5/30 21s  v18.py +89  v18f.py +114
+[T1f] round 6/30 25s  v18.py +17  v18f.py +48
+[T1f] round 7/30 29s  v18.py +52  v18f.py +44
+[T1f] round 8/30 33s  v18.py -10  v18f.py -11
+[T1f] round 9/30 37s  v18.py +54  v18f.py +92
+[T1f] round 10/30 41s  v18.py +9  v18f.py +5
+[T1f] round 11/30 44s  v18.py -7  v18f.py +3
+[T1f] round 12/30 48s  v18.py +2  v18f.py +65
+[T1f] round 13/30 52s  v18.py -22  v18f.py +4
+[T1f] round 14/30 56s  v18.py -25  v18f.py -2
+[T1f] round 15/30 60s  v18.py -3  v18f.py -13
+[T1f] round 16/30 63s  v18.py +57  v18f.py +50
+[T1f] round 17/30 68s  v18.py -27  v18f.py -8
+[T1f] round 18/30 71s  v18.py +86  v18f.py +78
+[T1f] round 19/30 75s  v18.py -28  v18f.py -22
+[T1f] round 20/30 79s  v18.py +55  v18f.py +27
+[T1f] round 21/30 83s  v18.py -35  v18f.py -25
+[T1f] round 22/30 86s  v18.py +9  v18f.py +5
+[T1f] round 23/30 90s  v18.py +33  v18f.py +69
+[T1f] round 24/30 95s  v18.py +87  v18f.py +61
+[T1f] round 25/30 99s  v18.py +9  v18f.py +10
+[T1f] round 26/30 103s  v18.py +21  v18f.py +62
+[T1f] round 27/30 106s  v18.py +27  v18f.py +37
+[T1f] round 28/30 110s  v18.py +15  v18f.py +41
+[T1f] round 29/30 114s  v18.py +57  v18f.py +75
+[T1f] round 30/30 118s  v18.py +5  v18f.py +16
+
+== T1f: 30 rounds x 1000 hands vs ['c_gherkers', 'c_attentionisa', 'c_wbot', 'c_kojack', 'c_equityengine', 'c_durahim1453']
+candidate                bb/100     se   to  err  bank   s/rd
+v18.py                    +18.9    6.6    0    0     0   0.58
+v18f.py                   +29.3    6.7    0    0     0   0.39
+paired: v18.py minus v18f.py = -10.4 +/- 4.0 bb/100 (t=-2.6)

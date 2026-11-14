@@ -1,0 +1,38 @@
+[T1v19] round 1/30 6s  v18.py +85  v19.py +63  v18r.py +86
+[T1v19] round 2/30 12s  v18.py +59  v19.py +19  v18r.py +37
+[T1v19] round 3/30 17s  v18.py -47  v19.py +20  v18r.py -17
+[T1v19] round 4/30 24s  v18.py +7  v19.py -16  v18r.py -0
+[T1v19] round 5/30 30s  v18.py +19  v19.py +8  v18r.py +11
+[T1v19] round 6/30 36s  v18.py +8  v19.py +9  v18r.py +20
+[T1v19] round 7/30 42s  v18.py +86  v19.py +89  v18r.py +103
+[T1v19] round 8/30 48s  v18.py +25  v19.py +18  v18r.py +21
+[T1v19] round 9/30 54s  v18.py -4  v19.py +5  v18r.py +11
+[T1v19] round 10/30 60s  v18.py +54  v19.py +3  v18r.py +16
+[T1v19] round 11/30 67s  v18.py +8  v19.py +47  v18r.py +22
+[T1v19] round 12/30 72s  v18.py +84  v19.py +89  v18r.py +74
+[T1v19] round 13/30 78s  v18.py +1  v19.py -26  v18r.py +8
+[T1v19] round 14/30 84s  v18.py +99  v19.py +77  v18r.py +74
+[T1v19] round 15/30 91s  v18.py +19  v19.py +22  v18r.py +2
+[T1v19] round 16/30 97s  v18.py +111  v19.py +49  v18r.py +99
+[T1v19] round 17/30 102s  v18.py -26  v19.py -34  v18r.py +1
+[T1v19] round 18/30 108s  v18.py +64  v19.py +80  v18r.py +89
+[T1v19] round 19/30 114s  v18.py +63  v19.py +23  v18r.py +52
+[T1v19] round 20/30 120s  v18.py -22  v19.py -43  v18r.py -18
+[T1v19] round 21/30 126s  v18.py +35  v19.py +47  v18r.py +37
+[T1v19] round 22/30 132s  v18.py +39  v19.py +46  v18r.py +51
+[T1v19] round 23/30 138s  v18.py +20  v19.py +31  v18r.py +17
+[T1v19] round 24/30 144s  v18.py +32  v19.py +35  v18r.py +43
+[T1v19] round 25/30 149s  v18.py +37  v19.py +30  v18r.py +31
+[T1v19] round 26/30 155s  v18.py +77  v19.py +55  v18r.py +49
+[T1v19] round 27/30 161s  v18.py +57  v19.py +41  v18r.py +60
+[T1v19] round 28/30 167s  v18.py -40  v19.py -40  v18r.py -43
+[T1v19] round 29/30 173s  v18.py +25  v19.py +19  v18r.py -1
+[T1v19] round 30/30 179s  v18.py +20  v19.py +9  v18r.py -9
+
+== T1v19: 30 rounds x 1000 hands vs ['c_gherkers', 'c_attentionisa', 'c_wbot', 'c_kojack', 'c_equityengine', 'c_durahim1453']
+candidate                bb/100     se   to  err  bank   s/rd
+v18.py                    +33.1    7.4    0    0     0   0.43
+v19.py                    +25.8    6.5    0    0     0   0.44
+v18r.py                   +30.8    6.7    0    0     0   0.29
+paired: v18.py minus v19.py = +7.3 +/- 4.6 bb/100 (t=1.6)
+paired: v18.py minus v18r.py = +2.3 +/- 3.2 bb/100 (t=0.7)

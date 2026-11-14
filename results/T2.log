@@ -1,0 +1,44 @@
+[T2_whale] round 1/30 13s  v18.py +104  av14_live.py +112  av16.py +115  av14f.py +130  mehdi_v3new.py -42  vastra_r4.py +84
+[T2_whale] round 2/30 25s  v18.py +33  av14_live.py -20  av16.py +16  av14f.py -6  mehdi_v3new.py +6  vastra_r4.py +31
+[T2_whale] round 3/30 38s  v18.py +218  av14_live.py +100  av16.py +190  av14f.py +127  mehdi_v3new.py +108  vastra_r4.py +140
+[T2_whale] round 4/30 51s  v18.py -36  av14_live.py -37  av16.py -49  av14f.py -33  mehdi_v3new.py -60  vastra_r4.py -54
+[T2_whale] round 5/30 63s  v18.py +118  av14_live.py +96  av16.py +69  av14f.py +97  mehdi_v3new.py +63  vastra_r4.py +76
+[T2_whale] round 6/30 75s  v18.py +52  av14_live.py +5  av16.py +23  av14f.py +21  mehdi_v3new.py +63  vastra_r4.py +0
+[T2_whale] round 7/30 88s  v18.py +22  av14_live.py +69  av16.py +52  av14f.py +54  mehdi_v3new.py +73  vastra_r4.py +18
+[T2_whale] round 8/30 99s  v18.py +151  av14_live.py +107  av16.py +95  av14f.py +82  mehdi_v3new.py +82  vastra_r4.py +183
+[T2_whale] round 9/30 111s  v18.py +180  av14_live.py +158  av16.py +165  av14f.py +175  mehdi_v3new.py +133  vastra_r4.py +195
+[T2_whale] round 10/30 123s  v18.py +69  av14_live.py +32  av16.py +76  av14f.py -21  mehdi_v3new.py +66  vastra_r4.py +78
+[T2_whale] round 11/30 134s  v18.py +156  av14_live.py +142  av16.py +146  av14f.py +140  mehdi_v3new.py +102  vastra_r4.py +162
+[T2_whale] round 12/30 145s  v18.py +102  av14_live.py +50  av16.py +95  av14f.py +5  mehdi_v3new.py +58  vastra_r4.py +69
+[T2_whale] round 13/30 156s  v18.py +144  av14_live.py +116  av16.py +84  av14f.py +80  mehdi_v3new.py +96  vastra_r4.py +134
+[T2_whale] round 14/30 167s  v18.py +79  av14_live.py +56  av16.py +69  av14f.py +22  mehdi_v3new.py +23  vastra_r4.py +6
+[T2_whale] round 15/30 179s  v18.py +24  av14_live.py +44  av16.py -15  av14f.py +14  mehdi_v3new.py -6  vastra_r4.py -3
+[T2_whale] round 16/30 190s  v18.py +127  av14_live.py +98  av16.py +139  av14f.py +88  mehdi_v3new.py +114  vastra_r4.py +41
+[T2_whale] round 17/30 202s  v18.py +210  av14_live.py +179  av16.py +217  av14f.py +178  mehdi_v3new.py +158  vastra_r4.py +220
+[T2_whale] round 18/30 215s  v18.py +27  av14_live.py -1  av16.py +57  av14f.py +13  mehdi_v3new.py -4  vastra_r4.py -39
+[T2_whale] round 19/30 226s  v18.py +179  av14_live.py +183  av16.py +146  av14f.py +168  mehdi_v3new.py +206  vastra_r4.py +210
+[T2_whale] round 20/30 239s  v18.py +67  av14_live.py +39  av16.py +32  av14f.py +77  mehdi_v3new.py +36  vastra_r4.py -13
+[T2_whale] round 21/30 251s  v18.py +66  av14_live.py +69  av16.py +78  av14f.py +72  mehdi_v3new.py +101  vastra_r4.py +162
+[T2_whale] round 22/30 265s  v18.py +44  av14_live.py -13  av16.py +36  av14f.py -33  mehdi_v3new.py +68  vastra_r4.py +82
+[T2_whale] round 23/30 277s  v18.py +156  av14_live.py +94  av16.py +159  av14f.py +89  mehdi_v3new.py +71  vastra_r4.py +45
+[T2_whale] round 24/30 289s  v18.py +105  av14_live.py +66  av16.py +96  av14f.py +99  mehdi_v3new.py -27  vastra_r4.py +26
+[T2_whale] round 25/30 301s  v18.py +84  av14_live.py +2  av16.py +45  av14f.py +17  mehdi_v3new.py +121  vastra_r4.py +25
+[T2_whale] round 26/30 314s  v18.py +47  av14_live.py -29  av16.py +18  av14f.py -2  mehdi_v3new.py -27  vastra_r4.py +56
+[T2_whale] round 27/30 325s  v18.py +96  av14_live.py +87  av16.py +78  av14f.py +108  mehdi_v3new.py +103  vastra_r4.py +46
+[T2_whale] round 28/30 341s  v18.py +266  av14_live.py +151  av16.py +153  av14f.py +169  mehdi_v3new.py +134  vastra_r4.py +172
+[T2_whale] round 29/30 359s  v18.py +43  av14_live.py +39  av16.py +67  av14f.py +36  mehdi_v3new.py +42  vastra_r4.py +104
+[T2_whale] round 30/30 376s  v18.py +143  av14_live.py +116  av16.py +106  av14f.py +102  mehdi_v3new.py +40  vastra_r4.py +18
+
+== T2_whale: 30 rounds x 1000 hands vs ['c_gherkers', 'c_attentionisa', 'c_vlad', 'c_matchamillec', 'c_ailin', 'ediz_like']
+candidate                bb/100     se   to  err  bank   s/rd
+v18.py                   +102.5   12.5    0    0     0   0.51
+av14_live.py              +70.4   11.2    0    0     0   0.58
+av16.py                   +85.3   11.1    0    0     0   0.29
+av14f.py                  +69.0   11.7    0    0     0   0.38
+mehdi_v3new.py            +63.4   11.3    0    0     0   0.35
+vastra_r4.py              +75.9   13.9    0    0     0   0.42
+paired: v18.py minus av14_live.py = +32.1 +/- 6.6 bb/100 (t=4.9)
+paired: v18.py minus av16.py = +17.2 +/- 5.5 bb/100 (t=3.1)
+paired: v18.py minus av14f.py = +33.5 +/- 6.8 bb/100 (t=4.9)
+paired: v18.py minus mehdi_v3new.py = +39.1 +/- 9.6 bb/100 (t=4.1)
+paired: v18.py minus vastra_r4.py = +26.6 +/- 9.7 bb/100 (t=2.8)

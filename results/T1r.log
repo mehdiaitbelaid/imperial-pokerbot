@@ -1,0 +1,38 @@
+[T1r] round 1/30 6s  v18.py +80  v18f.py +30  v18r.py +28
+[T1r] round 2/30 12s  v18.py -9  v18f.py -15  v18r.py -0
+[T1r] round 3/30 18s  v18.py +35  v18f.py +71  v18r.py +50
+[T1r] round 4/30 25s  v18.py +35  v18f.py +18  v18r.py +33
+[T1r] round 5/30 30s  v18.py -10  v18f.py +4  v18r.py -12
+[T1r] round 6/30 36s  v18.py +19  v18f.py +37  v18r.py +16
+[T1r] round 7/30 41s  v18.py +36  v18f.py +23  v18r.py +52
+[T1r] round 8/30 46s  v18.py +56  v18f.py +47  v18r.py +37
+[T1r] round 9/30 52s  v18.py +55  v18f.py +36  v18r.py +41
+[T1r] round 10/30 58s  v18.py -7  v18f.py +14  v18r.py +2
+[T1r] round 11/30 64s  v18.py +15  v18f.py +33  v18r.py -6
+[T1r] round 12/30 70s  v18.py +16  v18f.py +10  v18r.py +24
+[T1r] round 13/30 76s  v18.py -24  v18f.py -47  v18r.py -63
+[T1r] round 14/30 82s  v18.py -17  v18f.py -44  v18r.py -10
+[T1r] round 15/30 88s  v18.py -28  v18f.py +18  v18r.py -8
+[T1r] round 16/30 94s  v18.py -4  v18f.py -20  v18r.py -18
+[T1r] round 17/30 101s  v18.py +9  v18f.py -8  v18r.py -35
+[T1r] round 18/30 106s  v18.py +27  v18f.py +78  v18r.py +39
+[T1r] round 19/30 112s  v18.py -91  v18f.py -66  v18r.py -60
+[T1r] round 20/30 118s  v18.py +21  v18f.py -11  v18r.py +33
+[T1r] round 21/30 124s  v18.py +42  v18f.py +41  v18r.py +32
+[T1r] round 22/30 130s  v18.py +20  v18f.py +11  v18r.py +16
+[T1r] round 23/30 136s  v18.py -55  v18f.py -19  v18r.py -18
+[T1r] round 24/30 142s  v18.py +19  v18f.py -5  v18r.py +9
+[T1r] round 25/30 148s  v18.py +55  v18f.py +40  v18r.py +30
+[T1r] round 26/30 154s  v18.py +81  v18f.py +59  v18r.py +91
+[T1r] round 27/30 161s  v18.py +8  v18f.py +24  v18r.py +23
+[T1r] round 28/30 166s  v18.py -51  v18f.py -3  v18r.py -53
+[T1r] round 29/30 172s  v18.py +45  v18f.py +31  v18r.py +48
+[T1r] round 30/30 178s  v18.py +49  v18f.py +63  v18r.py +19
+
+== T1r: 30 rounds x 1000 hands vs ['c_gherkers', 'c_attentionisa', 'c_wbot', 'c_kojack', 'c_equityengine', 'c_durahim1453']
+candidate                bb/100     se   to  err  bank   s/rd
+v18.py                    +14.3    7.1    0    0     0   0.45
+v18f.py                   +15.1    6.3    0    0     0   0.31
+v18r.py                   +11.3    6.4    0    0     0   0.37
+paired: v18.py minus v18f.py = -0.8 +/- 4.8 bb/100 (t=-0.2)
+paired: v18.py minus v18r.py = +2.9 +/- 3.8 bb/100 (t=0.8)

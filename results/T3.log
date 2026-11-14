@@ -1,0 +1,34 @@
+[T3_weak] round 1/24 11s  v18.py +70  av14_live.py +75  av16.py +36  mehdi_v3new.py +65
+[T3_weak] round 2/24 20s  v18.py +109  av14_live.py +39  av16.py +29  mehdi_v3new.py +80
+[T3_weak] round 3/24 27s  v18.py -19  av14_live.py -4  av16.py +4  mehdi_v3new.py +6
+[T3_weak] round 4/24 34s  v18.py +55  av14_live.py +66  av16.py -6  mehdi_v3new.py +51
+[T3_weak] round 5/24 41s  v18.py +32  av14_live.py +31  av16.py +14  mehdi_v3new.py +39
+[T3_weak] round 6/24 49s  v18.py -4  av14_live.py -7  av16.py -23  mehdi_v3new.py -44
+[T3_weak] round 7/24 56s  v18.py +57  av14_live.py +76  av16.py +48  mehdi_v3new.py +103
+[T3_weak] round 8/24 63s  v18.py -19  av14_live.py -0  av16.py -8  mehdi_v3new.py +27
+[T3_weak] round 9/24 70s  v18.py +67  av14_live.py +50  av16.py +60  mehdi_v3new.py +64
+[T3_weak] round 10/24 77s  v18.py +67  av14_live.py +68  av16.py +79  mehdi_v3new.py +76
+[T3_weak] round 11/24 84s  v18.py +106  av14_live.py +63  av16.py +60  mehdi_v3new.py +131
+[T3_weak] round 12/24 91s  v18.py +26  av14_live.py -5  av16.py -7  mehdi_v3new.py +53
+[T3_weak] round 13/24 99s  v18.py +76  av14_live.py +61  av16.py +88  mehdi_v3new.py +66
+[T3_weak] round 14/24 105s  v18.py +76  av14_live.py -2  av16.py +53  mehdi_v3new.py +62
+[T3_weak] round 15/24 113s  v18.py +51  av14_live.py +61  av16.py +28  mehdi_v3new.py +17
+[T3_weak] round 16/24 120s  v18.py +74  av14_live.py +40  av16.py +24  mehdi_v3new.py +38
+[T3_weak] round 17/24 128s  v18.py +100  av14_live.py +60  av16.py +35  mehdi_v3new.py +27
+[T3_weak] round 18/24 135s  v18.py +66  av14_live.py +1  av16.py +40  mehdi_v3new.py +47
+[T3_weak] round 19/24 145s  v18.py +31  av14_live.py +9  av16.py +39  mehdi_v3new.py +28
+[T3_weak] round 20/24 153s  v18.py +56  av14_live.py +28  av16.py +18  mehdi_v3new.py +24
+[T3_weak] round 21/24 160s  v18.py +42  av14_live.py +27  av16.py +38  mehdi_v3new.py -3
+[T3_weak] round 22/24 168s  v18.py +46  av14_live.py +24  av16.py +16  mehdi_v3new.py +107
+[T3_weak] round 23/24 175s  v18.py +109  av14_live.py +103  av16.py +100  mehdi_v3new.py +101
+[T3_weak] round 24/24 182s  v18.py +94  av14_live.py +95  av16.py +78  mehdi_v3new.py +46
+
+== T3_weak: 24 rounds x 1000 hands vs ['c_ysltwizzy', 'c_joca', 'c_red', 'c_gamesgone', 'c_themarketmak', 'c_pokbot']
+candidate                bb/100     se   to  err  bank   s/rd
+v18.py                    +57.2    7.4    0    0     0   0.51
+av14_live.py              +40.0    6.8    0    0     0   0.48
+av16.py                   +35.1    6.5    0    0     0   0.26
+mehdi_v3new.py            +50.3    8.0    0    0     0   0.34
+paired: v18.py minus av14_live.py = +17.2 +/- 5.7 bb/100 (t=3.0)
+paired: v18.py minus av16.py = +22.0 +/- 5.4 bb/100 (t=4.1)
+paired: v18.py minus mehdi_v3new.py = +6.8 +/- 6.8 bb/100 (t=1.0)
