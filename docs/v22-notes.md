@@ -1,8 +1,8 @@
 # V22 candidate: notes for the team
 
-Status, Sat 14 Nov 22:05 UK time: **candidate, not live.** The live bot is V21 (`upload/bot_v21.py`, SHA-256 `60320d2a…`). Riad approves every upload.
+Status, Sat 14 Nov 23:00 UK time: **candidate, tested, not live.** The live bot is V21 (`upload/bot_v21.py`, SHA-256 `60320d2a…`). Riad approves every upload.
 
-- File to upload if we go: `upload/bot_v22.py` (same as `bots/v22.py`), about 82 KB, stdlib only.
+- File to upload if we go: `upload/bot_v22.py` (same as `bots/v22.py`), 84 KB, stdlib only.
 - Built for Sunday's bucket table (Table D). Opponent profiles: `docs/table-d-dossier.md`.
 
 ## What V22 adds to V21
@@ -36,7 +36,25 @@ Replay of our 52 counted Saturday rounds, V22 against V21 (`tools/sizelearn_eval
 
 - Most of the gain is an estimate. It assumes these opponents fold tomorrow as they did on Saturday; the live counters switch a rule off when a seat stops folding.
 - **The fingerprints are wrong for other tables:** 22% of other teams' seats get a label (Attention Is All In as CPF or ANTON, FisherMen as ANTON, pokermon and kaiserbot as WBOT). For the final, set `FINGERPRINTS = False` and `MANIAC_RULES = False`, or re-target them, and upload before 12:00.
-- A played-out test on a simulated Table D (replicas of the seven, in `tabled/`) is still running.
+- The simulated Table D below tests the mechanism, not the size of the gain: the replicas copy each team's frequencies and size tells but are weaker than the real bots (V21 wins +55 bb/100 there, while the real WBot beat us).
+
+## Played-out test on a simulated Table D
+
+`tabled/` holds replicas of the seven opponents, calibrated on their real Saturday hands (fold to 3-bet, bet sizes by hand strength, folds when raised, by size; most figures within a few points of the real ones, see `tabled/measure.py`). Same seat and same cards for both builds:
+
+| Comparison | Paired hands | Result, bb/100 |
+|---|---|---|
+| V22 against V21 | 200,000 | **+9.3 ± 3.0** (V22 +64.5, V21 +55.2) |
+| V22 without the any-two 3-bets | 150,000 | -4.9 ± 3.4 |
+| V22 without the maniac rules | 150,000 | -4.6 ± 3.6 |
+| V22 without fingerprints and maniac rules | 150,000 | -4.4 ± 3.6 |
+| V22 without size learning | 150,000 | -4.2 ± 3.6 |
+
+Every part helps and none hurts. To re-run:
+
+```
+python3 tools/selfplay.py bots/v22.py tabled/anker.py tabled/cpf.py tabled/wbot.py tabled/gg.py tabled/poke.py tabled/anton.py tabled/ysl.py --vs bots/v21.py --rounds 200 --par 9
+```
 
 ## How to re-run the checks
 
