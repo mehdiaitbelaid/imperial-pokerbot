@@ -118,7 +118,9 @@ RAISED_FOLD_PO = 0.30      # 8c fold one pair to a raise of our bet when pot odd
 # From docs/live-diagnosis.md (counted rounds r001 to r004)
 COMMIT_BB = 30             # a call that takes our total in the hand past this is a commitment
 COMMIT_EQ_OK = 0.75       # unless our equity against their range is at least this (board made nuts, quads)
-COMMIT_SEAT_BET = 0.50     # one pair commits only against seats betting turn and river more than this
+COMMIT_MIN_SD = 8          # the commit fold needs this many showdowns after the seat's turn or river bets
+COMMIT_MAX_BLUFF = 0.10    # and a share of air among them under this
+COMMIT_SEAT_BET = 0.50     # top pair still commits against seats betting turn and river more than this
 RIVER_BIG = 0.60           # river bets over this pot share: bluff catch only against
 RIVER_SEAT_BET = 0.45      # seats betting the river more than this, or that showed a bluff
 RIVER_VALUE_FRAC = 0.70    # heads up river, checked to: bet top pair good kicker or better
@@ -1016,6 +1018,12 @@ class Agent:
         c = s["p"].get("blf") if s else None
         return bool(c and c[1])
 
+    def _honest(self, seat):
+        """Enough showdowns after its turn or river bets, and almost none of them air."""
+        s = self.stats.get(seat)
+        c = s["p"].get("blf") if s else None
+        return bool(c and c[0] >= COMMIT_MIN_SD and c[1] < COMMIT_MAX_BLUFF * c[0])
+
     def _good_top(self, hole, bi):
         """Top pair with a ten or better kicker, an overpair, or better."""
         cat = cat_of(hole[0], hole[1], bi)
@@ -1574,15 +1582,14 @@ class Agent:
         # with a hole card, or top pair against a seat that bets turn and river a lot
         committed = self.start_stack - my_stack + call_amt
         aggr = [s for s in live if ctx["line"].get(s) in ("bet", "raise")]
-        # stations and seats that raise us a lot are exempt: against them the big pot is
-        # usually one we built as the favourite (the rule cost 122 bb/100 on the stations bench)
-        if (committed > COMMIT_BB * ctx["bb"] and mycat < 4 and not maniac_in
-                and not any(self._no_bluff(s) for s in aggr)):
-            ok = False
-            if mycat == 3:
-                ok = any(self._sh(s, "trb") > COMMIT_SEAT_BET or self._bluffs_shown(s) for s in live
-                         if s in ctx["line"] and ctx["line"][s] in ("bet", "raise"))
-            if not ok and eq < COMMIT_EQ_OK:
+        # One pair commit calls made money over 9,000 live hands (n=59), so the fold only
+        # applies against seats measured to show almost no bluffs after betting turn or river.
+        # Stations and seats that raise us stay exempt: against them the big pot is usually
+        # one we built as the favourite (the guard cost 111 to 122 bb/100 on the stations bench).
+        if (committed > COMMIT_BB * ctx["bb"] and mycat < 4 and not maniac_in and aggr
+                and all(self._honest(s) and not self._no_bluff(s) for s in aggr)):
+            top_ok = mycat == 3 and any(self._sh(s, "trb") > COMMIT_SEAT_BET for s in aggr)
+            if not top_ok and eq < COMMIT_EQ_OK:
                 self._tag("fold_commit", ctx)
                 return {"action": "fold"}
         if street == "river" and v is not None and mycat <= 3 and eq < raise_thr:
