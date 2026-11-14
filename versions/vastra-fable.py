@@ -72,10 +72,16 @@ BARREL_DECAY = 0.7         # air and weak pair weights shrink by this per extra 
 MIN_HANDS_CLASSIFY = 25
 
 # Time control (seconds). The round bank is 10 s; we aim well under it.
-ROUND_TARGET = 1.3         # total think time we allow ourselves per round
-MC_MAX = 0.0009            # max Monte Carlo time per decision
+# Live timeouts scale with think time per round (server stalls land while we
+# compute), so we think little: Monte Carlo only where the decision is costly.
+ROUND_TARGET = 0.2         # compute time per round the Monte Carlo budget is spread over
+MC_MAX = 0.0003            # max Monte Carlo time per decision
+MC_MIN = 0.0001            # below this budget use the cheap estimate
+MC_POT_BB = 10             # postflop, nobody bet: Monte Carlo only in pots of at least this many bb
+MC_BET_FRAC = 0.33         # facing a bet: Monte Carlo only for bets of at least this pot share
+MC_BET_BB = 5              # or at least this many bb
 MC_TRIALS_MAX = 600
-MC_COMMIT = 0.0006         # Monte Carlo time kept for stack committing decisions when the budget is spent
+MC_COMMIT = 0.0003         # Monte Carlo time kept for stack committing decisions when the budget is spent
 COMMIT_BANK = 5.0          # but only while total think time this round is under this
 TRANSPORT_EST = 0.0002     # transport cost per decision we do not see but the bank does
 # ========================================================================
@@ -459,6 +465,7 @@ class Agent:
         self.stats = {}
         self.types = {}
         self.used = 0.0
+        self.think = 0.0       # compute time only; used also counts an estimate of transport
         self.start_stack = 2000
         self.bb = 20
         self.cache = {}
@@ -493,7 +500,9 @@ class Agent:
             out = self._legalise(out, state)
         except Exception:
             out = {"action": "fold"}
-        self.used += time.perf_counter() - t0 + TRANSPORT_EST
+        dt = time.perf_counter() - t0
+        self.think += dt
+        self.used += dt + TRANSPORT_EST
         return out
 
     # ------------------------------------------------------- safety net
@@ -857,13 +866,13 @@ class Agent:
         return min(1.0, r)
 
     def _budget(self, hand_no):
-        left = ROUND_TARGET - self.used
-        if left <= 0.3:
+        left = ROUND_TARGET - self.think
+        if left <= 0.0:
             return 0.0
         hands_left = max(60, 1001 - (hand_no or 1))
         return max(0.0, min(MC_MAX, 1.6 * left / hands_left))
 
-    def _eq(self, ctx, opps, key, commit=False):
+    def _eq(self, ctx, opps, key, commit=False, mc=True):
         hit = self.cache.get(key)
         # a stack committing decision never reuses an equity that came from the fallback
         if hit is not None and (hit[1] or not commit):
@@ -872,8 +881,10 @@ class Agent:
         b = self._budget(self._hand_no)
         if commit and b < MC_COMMIT and self.used < COMMIT_BANK:
             b = MC_COMMIT
+        if not mc and not commit:
+            b = 0.0
         eq = None
-        if b > 0.0002 and opps:
+        if b >= MC_MIN and opps:
             eq, n = equity(hole, board, opps, ctx["t0"] + b, self.rng, RANGE_BLUR if board else 0.0)
             if n < 12:
                 eq = None
@@ -1096,7 +1107,13 @@ class Agent:
             opps = sorted(opps, key=lambda o: o[0])[:5]
         key = (street, tuple((round(o[0], 3), tuple(o[1]) if o[1] else None) for o in opps))
         commit = to_call >= 0.35 * ctx["my_stack"] or any(ctx["allin"].get(s) for s in live)
-        eq = self._eq(ctx, opps, key, commit)
+        bbv = ctx["bb"]
+        if to_call > 0:
+            mc = to_call >= MC_BET_FRAC * (pot - to_call) or to_call >= MC_BET_BB * bbv
+        else:
+            mc = pot >= MC_POT_BB * bbv
+        key = key + (mc,)
+        eq = self._eq(ctx, opps, key, commit, mc)
         nopp = len(live)
         k = min(3, nopp)
         types = [self._type(s) for s in live]
