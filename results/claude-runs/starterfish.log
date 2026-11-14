@@ -1,0 +1,40 @@
+[starterfish] round 1/30 8s  mehdi_v1.py +184  vastra_up.py +177  avengers_up.py +262  mehdi_v3.py +137
+[starterfish] round 2/30 15s  mehdi_v1.py +66  vastra_up.py +86  avengers_up.py +76  mehdi_v3.py +53
+[starterfish] round 3/30 23s  mehdi_v1.py +314  vastra_up.py +267  avengers_up.py +376  mehdi_v3.py +248
+[starterfish] round 4/30 30s  mehdi_v1.py +177  vastra_up.py +154  avengers_up.py +193  mehdi_v3.py +195
+[starterfish] round 5/30 38s  mehdi_v1.py +98  vastra_up.py +150  avengers_up.py +242  mehdi_v3.py +142
+[starterfish] round 6/30 47s  mehdi_v1.py +194  vastra_up.py +172  avengers_up.py +370  mehdi_v3.py +178
+[starterfish] round 7/30 55s  mehdi_v1.py +189  vastra_up.py +211  avengers_up.py +433  mehdi_v3.py +230
+[starterfish] round 8/30 63s  mehdi_v1.py +149  vastra_up.py +81  avengers_up.py +397  mehdi_v3.py +100
+[starterfish] round 9/30 71s  mehdi_v1.py +53  vastra_up.py +110  avengers_up.py +209  mehdi_v3.py +166
+[starterfish] round 10/30 78s  mehdi_v1.py +137  vastra_up.py +119  avengers_up.py +57  mehdi_v3.py +94
+[starterfish] round 11/30 85s  mehdi_v1.py +273  vastra_up.py +172  avengers_up.py +414  mehdi_v3.py +148
+[starterfish] round 12/30 93s  mehdi_v1.py +159  vastra_up.py +139  avengers_up.py +227  mehdi_v3.py +152
+[starterfish] round 13/30 100s  mehdi_v1.py +92  vastra_up.py +53  avengers_up.py +152  mehdi_v3.py +91
+[starterfish] round 14/30 108s  mehdi_v1.py +144  vastra_up.py +122  avengers_up.py +186  mehdi_v3.py +113
+[starterfish] round 15/30 115s  mehdi_v1.py +140  vastra_up.py +140  avengers_up.py +113  mehdi_v3.py +133
+[starterfish] round 16/30 122s  mehdi_v1.py +111  vastra_up.py +89  avengers_up.py +104  mehdi_v3.py +77
+[starterfish] round 17/30 130s  mehdi_v1.py +200  vastra_up.py +158  avengers_up.py +161  mehdi_v3.py +181
+[starterfish] round 18/30 137s  mehdi_v1.py +129  vastra_up.py +34  avengers_up.py +199  mehdi_v3.py +49
+[starterfish] round 19/30 145s  mehdi_v1.py +25  vastra_up.py +32  avengers_up.py -40  mehdi_v3.py +43
+[starterfish] round 20/30 152s  mehdi_v1.py +205  vastra_up.py +203  avengers_up.py +379  mehdi_v3.py +170
+[starterfish] round 21/30 159s  mehdi_v1.py +7  vastra_up.py +65  avengers_up.py +234  mehdi_v3.py +37
+[starterfish] round 22/30 167s  mehdi_v1.py +143  vastra_up.py +97  avengers_up.py +241  mehdi_v3.py +73
+[starterfish] round 23/30 174s  mehdi_v1.py +202  vastra_up.py +222  avengers_up.py +222  mehdi_v3.py +277
+[starterfish] round 24/30 182s  mehdi_v1.py +53  vastra_up.py +29  avengers_up.py +259  mehdi_v3.py +49
+[starterfish] round 25/30 189s  mehdi_v1.py +85  vastra_up.py +84  avengers_up.py +164  mehdi_v3.py +71
+[starterfish] round 26/30 197s  mehdi_v1.py +147  vastra_up.py +59  avengers_up.py +104  mehdi_v3.py +71
+[starterfish] round 27/30 205s  mehdi_v1.py +195  vastra_up.py +154  avengers_up.py +255  mehdi_v3.py +163
+[starterfish] round 28/30 212s  mehdi_v1.py +176  vastra_up.py +150  avengers_up.py +341  mehdi_v3.py +189
+[starterfish] round 29/30 220s  mehdi_v1.py +149  vastra_up.py +90  avengers_up.py +108  mehdi_v3.py +109
+[starterfish] round 30/30 228s  mehdi_v1.py +206  vastra_up.py +136  avengers_up.py +320  mehdi_v3.py +147
+
+== starterfish: 30 rounds x 1000 hands vs ['rep_claudebot', 'rep_equity', 'rep_gherkers', 'rep_astra', 'rep_jumpstreet', 'starter']
+candidate                bb/100     se   to  err  bank   s/rd
+mehdi_v1.py              +146.8   12.5    0    0     0   1.05
+vastra_up.py             +125.1   10.9    0    0     0   0.61
+avengers_up.py           +225.2   21.3    0    0     0   0.47
+mehdi_v3.py              +129.4   11.6    0    0     0   0.54
+paired: mehdi_v1.py minus vastra_up.py = +21.6 +/- 7.6 bb/100 (t=2.8)
+paired: mehdi_v1.py minus avengers_up.py = -78.4 +/- 17.2 bb/100 (t=-4.6)
+paired: mehdi_v1.py minus mehdi_v3.py = +17.3 +/- 8.9 bb/100 (t=1.9)

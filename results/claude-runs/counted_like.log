@@ -1,0 +1,40 @@
+[counted_like] round 1/30 7s  av14f.py +226  av14.py +219  vastra_r3.py +195  mehdi_v3.py +229
+[counted_like] round 2/30 14s  av14f.py +204  av14.py +196  vastra_r3.py +92  mehdi_v3.py +76
+[counted_like] round 3/30 21s  av14f.py +126  av14.py +132  vastra_r3.py +161  mehdi_v3.py +160
+[counted_like] round 4/30 28s  av14f.py +291  av14.py +255  vastra_r3.py +92  mehdi_v3.py +138
+[counted_like] round 5/30 35s  av14f.py +142  av14.py +149  vastra_r3.py +61  mehdi_v3.py +78
+[counted_like] round 6/30 41s  av14f.py +347  av14.py +379  vastra_r3.py +151  mehdi_v3.py +149
+[counted_like] round 7/30 48s  av14f.py +147  av14.py +96  vastra_r3.py +89  mehdi_v3.py +107
+[counted_like] round 8/30 55s  av14f.py +53  av14.py +60  vastra_r3.py +64  mehdi_v3.py +100
+[counted_like] round 9/30 61s  av14f.py +282  av14.py +312  vastra_r3.py +180  mehdi_v3.py +154
+[counted_like] round 10/30 68s  av14f.py +342  av14.py +348  vastra_r3.py +240  mehdi_v3.py +193
+[counted_like] round 11/30 75s  av14f.py +416  av14.py +464  vastra_r3.py +194  mehdi_v3.py +225
+[counted_like] round 12/30 82s  av14f.py +337  av14.py +304  vastra_r3.py +230  mehdi_v3.py +211
+[counted_like] round 13/30 89s  av14f.py +367  av14.py +330  vastra_r3.py -18  mehdi_v3.py +22
+[counted_like] round 14/30 96s  av14f.py +261  av14.py +276  vastra_r3.py +10  mehdi_v3.py -3
+[counted_like] round 15/30 102s  av14f.py +264  av14.py +252  vastra_r3.py +173  mehdi_v3.py +219
+[counted_like] round 16/30 109s  av14f.py +376  av14.py +327  vastra_r3.py +126  mehdi_v3.py +148
+[counted_like] round 17/30 115s  av14f.py +110  av14.py +101  vastra_r3.py +97  mehdi_v3.py +107
+[counted_like] round 18/30 122s  av14f.py +87  av14.py +125  vastra_r3.py +151  mehdi_v3.py +83
+[counted_like] round 19/30 129s  av14f.py +164  av14.py +207  vastra_r3.py +143  mehdi_v3.py +165
+[counted_like] round 20/30 136s  av14f.py +406  av14.py +349  vastra_r3.py +152  mehdi_v3.py +189
+[counted_like] round 21/30 143s  av14f.py +290  av14.py +280  vastra_r3.py +182  mehdi_v3.py +118
+[counted_like] round 22/30 149s  av14f.py +292  av14.py +274  vastra_r3.py +53  mehdi_v3.py +73
+[counted_like] round 23/30 157s  av14f.py +164  av14.py +198  vastra_r3.py +63  mehdi_v3.py +52
+[counted_like] round 24/30 164s  av14f.py +264  av14.py +279  vastra_r3.py +163  mehdi_v3.py +121
+[counted_like] round 25/30 170s  av14f.py +399  av14.py +376  vastra_r3.py +111  mehdi_v3.py +111
+[counted_like] round 26/30 177s  av14f.py +154  av14.py +158  vastra_r3.py +42  mehdi_v3.py +42
+[counted_like] round 27/30 184s  av14f.py +129  av14.py +170  vastra_r3.py +13  mehdi_v3.py +13
+[counted_like] round 28/30 191s  av14f.py +354  av14.py +333  vastra_r3.py +307  mehdi_v3.py +232
+[counted_like] round 29/30 198s  av14f.py +195  av14.py +137  vastra_r3.py +197  mehdi_v3.py +183
+[counted_like] round 30/30 204s  av14f.py +156  av14.py +178  vastra_r3.py -20  mehdi_v3.py +12
+
+== counted_like: 30 rounds x 1000 hands vs ['rep_attention', 'rep_matcha', 'rep_equity', 'rep_gherkers', 'jump', 'starter']
+candidate                bb/100     se   to  err  bank   s/rd
+av14f.py                 +244.8   19.2    0    0     0   0.33
+av14.py                  +242.0   18.2    0    0     0   0.51
+vastra_r3.py             +123.1   14.4    0    0     0   0.24
+mehdi_v3.py              +123.6   12.7    0    0     0   0.55
+paired: av14f.py minus av14.py = +2.8 +/- 5.7 bb/100 (t=0.5)
+paired: av14f.py minus vastra_r3.py = +121.7 +/- 19.2 bb/100 (t=6.3)
+paired: av14f.py minus mehdi_v3.py = +121.3 +/- 18.0 bb/100 (t=6.7)

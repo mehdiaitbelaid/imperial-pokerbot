@@ -1,0 +1,42 @@
+[realistic] round 1/30 9s  mehdi_v1.py +154  vastra_up.py +174  avengers_up.py +135  mehdi_v3.py +203  vastra_repo.py +161
+[realistic] round 2/30 18s  mehdi_v1.py +72  vastra_up.py +105  avengers_up.py +127  mehdi_v3.py +88  vastra_repo.py +56
+[realistic] round 3/30 26s  mehdi_v1.py +3  vastra_up.py +56  avengers_up.py +76  mehdi_v3.py +27  vastra_repo.py +36
+[realistic] round 4/30 35s  mehdi_v1.py +131  vastra_up.py +97  avengers_up.py +197  mehdi_v3.py +118  vastra_repo.py +110
+[realistic] round 5/30 44s  mehdi_v1.py +113  vastra_up.py +137  avengers_up.py +105  mehdi_v3.py +134  vastra_repo.py +155
+[realistic] round 6/30 52s  mehdi_v1.py +176  vastra_up.py +188  avengers_up.py +173  mehdi_v3.py +142  vastra_repo.py +143
+[realistic] round 7/30 61s  mehdi_v1.py +258  vastra_up.py +257  avengers_up.py +247  mehdi_v3.py +274  vastra_repo.py +285
+[realistic] round 8/30 70s  mehdi_v1.py +58  vastra_up.py +102  avengers_up.py +128  mehdi_v3.py +115  vastra_repo.py +91
+[realistic] round 9/30 78s  mehdi_v1.py +72  vastra_up.py +30  avengers_up.py +60  mehdi_v3.py +4  vastra_repo.py +43
+[realistic] round 10/30 87s  mehdi_v1.py +138  vastra_up.py +150  avengers_up.py +105  mehdi_v3.py +164  vastra_repo.py +202
+[realistic] round 11/30 96s  mehdi_v1.py +170  vastra_up.py +204  avengers_up.py +189  mehdi_v3.py +163  vastra_repo.py +130
+[realistic] round 12/30 105s  mehdi_v1.py +124  vastra_up.py +94  avengers_up.py +102  mehdi_v3.py +59  vastra_repo.py +90
+[realistic] round 13/30 114s  mehdi_v1.py +74  vastra_up.py +83  avengers_up.py +104  mehdi_v3.py +66  vastra_repo.py +87
+[realistic] round 14/30 123s  mehdi_v1.py +115  vastra_up.py +107  avengers_up.py +211  mehdi_v3.py +144  vastra_repo.py +99
+[realistic] round 15/30 131s  mehdi_v1.py +104  vastra_up.py +96  avengers_up.py +133  mehdi_v3.py +118  vastra_repo.py +97
+[realistic] round 16/30 140s  mehdi_v1.py +67  vastra_up.py +69  avengers_up.py +112  mehdi_v3.py +94  vastra_repo.py +92
+[realistic] round 17/30 148s  mehdi_v1.py +253  vastra_up.py +223  avengers_up.py +286  mehdi_v3.py +200  vastra_repo.py +280
+[realistic] round 18/30 157s  mehdi_v1.py +97  vastra_up.py +75  avengers_up.py +92  mehdi_v3.py +68  vastra_repo.py +44
+[realistic] round 19/30 166s  mehdi_v1.py +108  vastra_up.py +114  avengers_up.py +57  mehdi_v3.py +105  vastra_repo.py +106
+[realistic] round 20/30 175s  mehdi_v1.py +185  vastra_up.py +184  avengers_up.py +175  mehdi_v3.py +151  vastra_repo.py +187
+[realistic] round 21/30 184s  mehdi_v1.py +157  vastra_up.py +185  avengers_up.py +195  mehdi_v3.py +144  vastra_repo.py +218
+[realistic] round 22/30 193s  mehdi_v1.py +120  vastra_up.py +127  avengers_up.py +154  mehdi_v3.py +148  vastra_repo.py +136
+[realistic] round 23/30 202s  mehdi_v1.py +150  vastra_up.py +137  avengers_up.py +78  mehdi_v3.py +87  vastra_repo.py +132
+[realistic] round 24/30 211s  mehdi_v1.py +119  vastra_up.py +139  avengers_up.py +82  mehdi_v3.py +166  vastra_repo.py +175
+[realistic] round 25/30 221s  mehdi_v1.py +84  vastra_up.py +115  avengers_up.py +159  mehdi_v3.py +174  vastra_repo.py +179
+[realistic] round 26/30 229s  mehdi_v1.py +39  vastra_up.py +59  avengers_up.py +30  mehdi_v3.py +67  vastra_repo.py +87
+[realistic] round 27/30 238s  mehdi_v1.py +128  vastra_up.py +134  avengers_up.py +70  mehdi_v3.py +102  vastra_repo.py +132
+[realistic] round 28/30 246s  mehdi_v1.py +86  vastra_up.py +89  avengers_up.py +207  mehdi_v3.py +29  vastra_repo.py +45
+[realistic] round 29/30 255s  mehdi_v1.py +166  vastra_up.py +97  avengers_up.py +135  mehdi_v3.py +97  vastra_repo.py +146
+[realistic] round 30/30 264s  mehdi_v1.py +148  vastra_up.py +194  avengers_up.py +202  mehdi_v3.py +174  vastra_repo.py +213
+
+== realistic: 30 rounds x 1000 hands vs ['rep_claudebot', 'rep_equity', 'rep_gherkers', 'rep_astra', 'rep_jumpstreet', 'rep_joca']
+candidate                bb/100     se   to  err  bank   s/rd
+mehdi_v1.py              +122.3   10.2    1    0     0   1.00
+vastra_up.py             +127.4    9.8    0    0     0   0.56
+avengers_up.py           +137.5   11.1    0    0     0   0.40
+mehdi_v3.py              +120.8   10.7    0    0     0   0.54
+vastra_repo.py           +131.9   11.9    0    0     0   0.52
+paired: mehdi_v1.py minus vastra_up.py = -5.1 +/- 5.1 bb/100 (t=-1.0)
+paired: mehdi_v1.py minus avengers_up.py = -15.2 +/- 8.8 bb/100 (t=-1.7)
+paired: mehdi_v1.py minus mehdi_v3.py = +1.5 +/- 7.6 bb/100 (t=0.2)
+paired: mehdi_v1.py minus vastra_repo.py = -9.6 +/- 6.9 bb/100 (t=-1.4)

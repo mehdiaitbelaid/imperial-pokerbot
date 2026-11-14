@@ -1,0 +1,40 @@
+[solid2] round 1/30 9s  av14f.py +82  av13.py +56  vastra_r3.py +101  mehdi_v3.py +77
+[solid2] round 2/30 19s  av14f.py +83  av13.py +84  vastra_r3.py +58  mehdi_v3.py +57
+[solid2] round 3/30 28s  av14f.py +62  av13.py +88  vastra_r3.py +34  mehdi_v3.py +22
+[solid2] round 4/30 37s  av14f.py +36  av13.py +56  vastra_r3.py +10  mehdi_v3.py +62
+[solid2] round 5/30 47s  av14f.py +159  av13.py +138  vastra_r3.py +113  mehdi_v3.py +124
+[solid2] round 6/30 56s  av14f.py +62  av13.py +112  vastra_r3.py +67  mehdi_v3.py +79
+[solid2] round 7/30 66s  av14f.py +116  av13.py +85  vastra_r3.py +64  mehdi_v3.py +87
+[solid2] round 8/30 75s  av14f.py +146  av13.py +122  vastra_r3.py +117  mehdi_v3.py +85
+[solid2] round 9/30 85s  av14f.py +94  av13.py +87  vastra_r3.py +102  mehdi_v3.py +79
+[solid2] round 10/30 95s  av14f.py +81  av13.py +108  vastra_r3.py +65  mehdi_v3.py +94
+[solid2] round 11/30 105s  av14f.py +59  av13.py +60  vastra_r3.py +62  mehdi_v3.py +88
+[solid2] round 12/30 115s  av14f.py +125  av13.py +98  vastra_r3.py +50  mehdi_v3.py +64
+[solid2] round 13/30 125s  av14f.py +82  av13.py +87  vastra_r3.py +54  mehdi_v3.py +91
+[solid2] round 14/30 135s  av14f.py +131  av13.py +131  vastra_r3.py +170  mehdi_v3.py +123
+[solid2] round 15/30 145s  av14f.py +208  av13.py +226  vastra_r3.py +160  mehdi_v3.py +145
+[solid2] round 16/30 154s  av14f.py +96  av13.py +67  vastra_r3.py +113  mehdi_v3.py +100
+[solid2] round 17/30 164s  av14f.py +128  av13.py +147  vastra_r3.py +164  mehdi_v3.py +167
+[solid2] round 18/30 174s  av14f.py +57  av13.py +66  vastra_r3.py +81  mehdi_v3.py +140
+[solid2] round 19/30 184s  av14f.py +121  av13.py +89  vastra_r3.py +114  mehdi_v3.py +113
+[solid2] round 20/30 193s  av14f.py +155  av13.py +145  vastra_r3.py +118  mehdi_v3.py +112
+[solid2] round 21/30 203s  av14f.py +107  av13.py +61  vastra_r3.py +98  mehdi_v3.py +137
+[solid2] round 22/30 212s  av14f.py +102  av13.py +61  vastra_r3.py +41  mehdi_v3.py +50
+[solid2] round 23/30 222s  av14f.py +81  av13.py +22  vastra_r3.py +47  mehdi_v3.py +15
+[solid2] round 24/30 233s  av14f.py +108  av13.py +88  vastra_r3.py +73  mehdi_v3.py +106
+[solid2] round 25/30 242s  av14f.py +170  av13.py +153  vastra_r3.py +112  mehdi_v3.py +143
+[solid2] round 26/30 252s  av14f.py +100  av13.py +114  vastra_r3.py +95  mehdi_v3.py +95
+[solid2] round 27/30 263s  av14f.py +133  av13.py +98  vastra_r3.py +71  mehdi_v3.py +41
+[solid2] round 28/30 273s  av14f.py +99  av13.py +66  vastra_r3.py +90  mehdi_v3.py +100
+[solid2] round 29/30 284s  av14f.py +132  av13.py +128  vastra_r3.py +106  mehdi_v3.py +114
+[solid2] round 30/30 294s  av14f.py +149  av13.py +185  vastra_r3.py +111  mehdi_v3.py +156
+
+== solid2: 30 rounds x 1000 hands vs ['rep_attention', 'rep_matcha', 'rep_equity', 'rep_gherkers', 'jump', 'rep_wbot']
+candidate                bb/100     se   to  err  bank   s/rd
+av14f.py                 +108.7    7.0    0    0     0   0.38
+av13.py                  +100.9    7.8    0    0     0   0.52
+vastra_r3.py              +88.7    7.0    0    0     0   0.34
+mehdi_v3.py               +95.5    6.9    0    0     0   0.55
+paired: av14f.py minus av13.py = +7.8 +/- 4.8 bb/100 (t=1.6)
+paired: av14f.py minus vastra_r3.py = +20.1 +/- 5.4 bb/100 (t=3.7)
+paired: av14f.py minus mehdi_v3.py = +13.3 +/- 6.8 bb/100 (t=1.9)

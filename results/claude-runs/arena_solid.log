@@ -1,0 +1,48 @@
+round 1 done 3s
+round 2 done 7s
+round 3 done 10s
+round 4 done 14s
+round 5 done 17s
+round 6 done 21s
+round 7 done 25s
+round 8 done 29s
+round 9 done 33s
+round 10 done 37s
+round 11 done 41s
+round 12 done 45s
+round 13 done 49s
+round 14 done 53s
+round 15 done 56s
+round 16 done 60s
+round 17 done 63s
+round 18 done 68s
+round 19 done 72s
+round 20 done 76s
+round 21 done 80s
+round 22 done 83s
+round 23 done 87s
+round 24 done 91s
+round 25 done 95s
+round 26 done 99s
+round 27 done 102s
+round 28 done 106s
+round 29 done 110s
+round 30 done 114s
+round 31 done 118s
+round 32 done 122s
+round 33 done 125s
+round 34 done 129s
+round 35 done 132s
+round 36 done 136s
+round 37 done 140s
+round 38 done 144s
+round 39 done 148s
+round 40 done 151s
+bot                          bb/100      se    to   err  bank   s/rd
+bots/avengers_up.py           +28.0     5.2     1     0     0   0.49
+bots/vastra_up.py             +15.8     4.8     0     0     0   0.55
+bots/mehdi_v3.py              +13.2     6.0     0     0     0   0.59
+bots/mehdi_v1.py               -4.5     5.5     1     0     0   0.89
+field/attn.py                  -4.6     4.7     1     0     0   0.28
+field/gherk.py                -23.9     7.5     0     0     0   0.28
+field/claudeb.py              -24.1     6.1     1     0     0   0.26

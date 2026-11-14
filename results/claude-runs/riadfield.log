@@ -1,0 +1,40 @@
+[riadfield] round 1/30 7s  mehdi_v1.py -11  vastra_up.py +111  avengers_up.py +76  mehdi_v3.py +66
+[riadfield] round 2/30 15s  mehdi_v1.py -16  vastra_up.py -38  avengers_up.py -75  mehdi_v3.py -47
+[riadfield] round 3/30 22s  mehdi_v1.py -77  vastra_up.py +9  avengers_up.py +105  mehdi_v3.py +2
+[riadfield] round 4/30 29s  mehdi_v1.py +31  vastra_up.py +65  avengers_up.py +14  mehdi_v3.py +66
+[riadfield] round 5/30 36s  mehdi_v1.py +89  vastra_up.py +82  avengers_up.py +90  mehdi_v3.py +61
+[riadfield] round 6/30 43s  mehdi_v1.py -6  vastra_up.py -2  avengers_up.py +38  mehdi_v3.py -15
+[riadfield] round 7/30 50s  mehdi_v1.py +17  vastra_up.py +85  avengers_up.py -32  mehdi_v3.py +92
+[riadfield] round 8/30 57s  mehdi_v1.py +83  vastra_up.py +138  avengers_up.py +82  mehdi_v3.py +88
+[riadfield] round 9/30 64s  mehdi_v1.py +43  vastra_up.py +48  avengers_up.py +48  mehdi_v3.py +50
+[riadfield] round 10/30 71s  mehdi_v1.py -2  vastra_up.py +6  avengers_up.py +36  mehdi_v3.py -40
+[riadfield] round 11/30 78s  mehdi_v1.py -2  vastra_up.py +24  avengers_up.py +56  mehdi_v3.py +25
+[riadfield] round 12/30 85s  mehdi_v1.py +16  vastra_up.py +25  avengers_up.py -3  mehdi_v3.py +0
+[riadfield] round 13/30 92s  mehdi_v1.py +83  vastra_up.py +127  avengers_up.py -9  mehdi_v3.py +163
+[riadfield] round 14/30 100s  mehdi_v1.py +0  vastra_up.py -6  avengers_up.py +22  mehdi_v3.py -4
+[riadfield] round 15/30 107s  mehdi_v1.py +18  vastra_up.py +79  avengers_up.py +70  mehdi_v3.py +95
+[riadfield] round 16/30 114s  mehdi_v1.py -35  vastra_up.py +24  avengers_up.py +65  mehdi_v3.py +39
+[riadfield] round 17/30 121s  mehdi_v1.py +86  vastra_up.py +188  avengers_up.py +104  mehdi_v3.py +110
+[riadfield] round 18/30 128s  mehdi_v1.py -17  vastra_up.py -3  avengers_up.py -12  mehdi_v3.py +25
+[riadfield] round 19/30 135s  mehdi_v1.py +127  vastra_up.py +96  avengers_up.py +83  mehdi_v3.py +62
+[riadfield] round 20/30 143s  mehdi_v1.py +36  vastra_up.py +85  avengers_up.py +98  mehdi_v3.py +65
+[riadfield] round 21/30 150s  mehdi_v1.py +34  vastra_up.py -30  avengers_up.py +33  mehdi_v3.py +102
+[riadfield] round 22/30 157s  mehdi_v1.py -13  vastra_up.py -5  avengers_up.py +5  mehdi_v3.py +26
+[riadfield] round 23/30 165s  mehdi_v1.py +52  vastra_up.py +69  avengers_up.py +80  mehdi_v3.py +73
+[riadfield] round 24/30 172s  mehdi_v1.py +37  vastra_up.py -8  avengers_up.py +11  mehdi_v3.py -5
+[riadfield] round 25/30 179s  mehdi_v1.py +124  vastra_up.py +82  avengers_up.py +78  mehdi_v3.py +91
+[riadfield] round 26/30 188s  mehdi_v1.py +12  vastra_up.py -17  avengers_up.py +64  mehdi_v3.py -22
+[riadfield] round 27/30 200s  mehdi_v1.py +40  vastra_up.py +48  avengers_up.py +21  mehdi_v3.py +101
+[riadfield] round 28/30 211s  mehdi_v1.py -13  vastra_up.py +85  avengers_up.py +25  mehdi_v3.py +57
+[riadfield] round 29/30 222s  mehdi_v1.py +26  vastra_up.py +10  avengers_up.py +11  mehdi_v3.py +65
+[riadfield] round 30/30 233s  mehdi_v1.py +68  vastra_up.py +200  avengers_up.py +81  mehdi_v3.py +161
+
+== riadfield: 30 rounds x 1000 hands vs ['claudeb', 'gherk', 'jump', 'attn', 'vlad', 'fisher']
+candidate                bb/100     se   to  err  bank   s/rd
+mehdi_v1.py               +27.7    8.5    1    0     0   0.99
+vastra_up.py              +52.6   11.2    0    0     0   0.58
+avengers_up.py            +42.1    8.0    0    0     0   0.45
+mehdi_v3.py               +51.8    9.7    0    0     0   0.61
+paired: mehdi_v1.py minus vastra_up.py = -24.9 +/- 9.2 bb/100 (t=-2.7)
+paired: mehdi_v1.py minus avengers_up.py = -14.4 +/- 9.8 bb/100 (t=-1.5)
+paired: mehdi_v1.py minus mehdi_v3.py = -24.0 +/- 8.3 bb/100 (t=-2.9)

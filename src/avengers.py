@@ -1109,7 +1109,7 @@ class Agent:
         dead.add(h1)
 
         k = len(live)
-        self.cap = 200 if k <= 2 else (130 if k == 3 else 90)     # keep multiway decisions fast
+        self.cap = 120 if k <= 2 else (90 if k == 3 else 60)     # keep multiway decisions fast
         tiers = [self._tier(s, L, dead, bp, fs, scf, smf, sc, bmask, d4b, nb, thr) for s in live]
         if river:
             eq = 1.0
@@ -1250,7 +1250,7 @@ class Agent:
         left = 8.0 - self.used
         hands_left = max(1, self.total_hands - state.get("hand_number", 1) + 1)
         b = left / (hands_left * 0.45)
-        return 0.0003 if b < 0.0003 else (0.0016 if b > 0.0016 else b)
+        return 0.0002 if b < 0.0002 else (0.00045 if b > 0.00045 else b)
 
     def _mc(self, h0, h1, board, dead, tiers, t_end, bp0, sc0, sm0):
         rnd = self.rng.random
@@ -1271,7 +1271,7 @@ class Agent:
         wins = 0.0
         n = 0
         while n < 400:
-            if (n & 7) == 7 and n >= 23 and _now() > t_end:
+            if (n & 3) == 3 and n >= 15 and _now() > t_end:
                 break
             used = set(dead)
             opp = []

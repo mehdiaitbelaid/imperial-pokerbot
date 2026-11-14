@@ -1,0 +1,42 @@
+[fishy] round 1/30 11s  mehdi_v1.py +305  vastra_up.py +165  avengers_up.py +305  mehdi_v3.py +165  vastra_repo.py +233
+[fishy] round 2/30 21s  mehdi_v1.py +302  vastra_up.py +300  avengers_up.py +235  mehdi_v3.py +271  vastra_repo.py +271
+[fishy] round 3/30 31s  mehdi_v1.py +247  vastra_up.py +260  avengers_up.py +343  mehdi_v3.py +237  vastra_repo.py +300
+[fishy] round 4/30 42s  mehdi_v1.py +141  vastra_up.py +231  avengers_up.py +75  mehdi_v3.py +260  vastra_repo.py +236
+[fishy] round 5/30 52s  mehdi_v1.py +220  vastra_up.py +327  avengers_up.py +268  mehdi_v3.py +306  vastra_repo.py +300
+[fishy] round 6/30 63s  mehdi_v1.py +427  vastra_up.py +351  avengers_up.py +355  mehdi_v3.py +333  vastra_repo.py +356
+[fishy] round 7/30 73s  mehdi_v1.py +207  vastra_up.py +307  avengers_up.py +88  mehdi_v3.py +295  vastra_repo.py +190
+[fishy] round 8/30 84s  mehdi_v1.py +293  vastra_up.py +237  avengers_up.py +247  mehdi_v3.py +310  vastra_repo.py +186
+[fishy] round 9/30 95s  mehdi_v1.py +225  vastra_up.py +207  avengers_up.py +290  mehdi_v3.py +274  vastra_repo.py +168
+[fishy] round 10/30 105s  mehdi_v1.py +250  vastra_up.py +260  avengers_up.py +279  mehdi_v3.py +239  vastra_repo.py +257
+[fishy] round 11/30 116s  mehdi_v1.py +106  vastra_up.py +99  avengers_up.py +276  mehdi_v3.py +144  vastra_repo.py +119
+[fishy] round 12/30 127s  mehdi_v1.py +291  vastra_up.py +250  avengers_up.py +254  mehdi_v3.py +228  vastra_repo.py +267
+[fishy] round 13/30 137s  mehdi_v1.py +128  vastra_up.py +244  avengers_up.py +242  mehdi_v3.py +187  vastra_repo.py +265
+[fishy] round 14/30 147s  mehdi_v1.py +246  vastra_up.py +330  avengers_up.py +124  mehdi_v3.py +246  vastra_repo.py +286
+[fishy] round 15/30 158s  mehdi_v1.py +300  vastra_up.py +259  avengers_up.py +280  mehdi_v3.py +255  vastra_repo.py +226
+[fishy] round 16/30 168s  mehdi_v1.py +312  vastra_up.py +189  avengers_up.py +327  mehdi_v3.py +203  vastra_repo.py +240
+[fishy] round 17/30 179s  mehdi_v1.py +281  vastra_up.py +259  avengers_up.py +294  mehdi_v3.py +215  vastra_repo.py +257
+[fishy] round 18/30 189s  mehdi_v1.py +296  vastra_up.py +354  avengers_up.py +302  mehdi_v3.py +324  vastra_repo.py +263
+[fishy] round 19/30 200s  mehdi_v1.py +130  vastra_up.py +204  avengers_up.py +101  mehdi_v3.py +148  vastra_repo.py +159
+[fishy] round 20/30 210s  mehdi_v1.py +222  vastra_up.py +226  avengers_up.py +231  mehdi_v3.py +190  vastra_repo.py +234
+[fishy] round 21/30 221s  mehdi_v1.py +230  vastra_up.py +181  avengers_up.py +228  mehdi_v3.py +243  vastra_repo.py +222
+[fishy] round 22/30 232s  mehdi_v1.py +154  vastra_up.py +217  avengers_up.py +286  mehdi_v3.py +240  vastra_repo.py +218
+[fishy] round 23/30 243s  mehdi_v1.py +216  vastra_up.py +252  avengers_up.py +165  mehdi_v3.py +212  vastra_repo.py +246
+[fishy] round 24/30 254s  mehdi_v1.py +280  vastra_up.py +226  avengers_up.py +293  mehdi_v3.py +314  vastra_repo.py +347
+[fishy] round 25/30 264s  mehdi_v1.py +266  vastra_up.py +275  avengers_up.py +168  mehdi_v3.py +186  vastra_repo.py +243
+[fishy] round 26/30 280s  mehdi_v1.py +87  vastra_up.py +111  avengers_up.py +163  mehdi_v3.py +149  vastra_repo.py +92
+[fishy] round 27/30 291s  mehdi_v1.py +200  vastra_up.py +239  avengers_up.py +187  mehdi_v3.py +207  vastra_repo.py +233
+[fishy] round 28/30 302s  mehdi_v1.py +338  vastra_up.py +348  avengers_up.py +390  mehdi_v3.py +374  vastra_repo.py +333
+[fishy] round 29/30 313s  mehdi_v1.py +397  vastra_up.py +411  avengers_up.py +346  mehdi_v3.py +378  vastra_repo.py +356
+[fishy] round 30/30 324s  mehdi_v1.py +187  vastra_up.py +195  avengers_up.py +275  mehdi_v3.py +168  vastra_repo.py +246
+
+== fishy: 30 rounds x 1000 hands vs ['rep_claudebot', 'rep_equity', 'rep_astra', 'rep_bigroddy', 'rep_joca', 'rep_fishermen']
+candidate                bb/100     se   to  err  bank   s/rd
+mehdi_v1.py              +242.8   14.7    0    0     0   1.16
+vastra_up.py             +250.4   12.8    0    0     0   0.67
+avengers_up.py           +247.3   14.9    0    0     0   0.54
+mehdi_v3.py              +243.4   11.8    0    0     0   0.70
+vastra_repo.py           +245.0   11.4    0    0     0   0.65
+paired: mehdi_v1.py minus vastra_up.py = -7.6 +/- 11.7 bb/100 (t=-0.7)
+paired: mehdi_v1.py minus avengers_up.py = -4.5 +/- 13.3 bb/100 (t=-0.3)
+paired: mehdi_v1.py minus mehdi_v3.py = -0.7 +/- 11.3 bb/100 (t=-0.1)
+paired: mehdi_v1.py minus vastra_repo.py = -2.2 +/- 10.5 bb/100 (t=-0.2)
