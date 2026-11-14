@@ -226,13 +226,13 @@ for _c in _SH_TOP + _rest:
 class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
-                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok")
+                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb")
 
     def __init__(self):
         for k in self.__slots__:
             setattr(self, k, 0)
-        self.fo = [0, 0, 0]     # faced a bet of 35%+ of the pot on flop / turn / river
-        self.ff = [0, 0, 0]     # ... and folded
+        self.fo = [0, 0, 0, 0, 0]   # faced a bet of 35%+ of the pot, by line (see line_cat)
+        self.ff = [0, 0, 0, 0, 0]   # ... and folded
 
     def limp_folder(self):
         """Limps, then gives up every time someone raises."""
@@ -271,6 +271,14 @@ class St:
     def r_fold(self):
         return (self.fb_f + 0.48 * 8) / (self.fb_o + 8)
 
+    def r_cb(self):
+        """How often he bets the flop after raising preflop (field: about 70%)."""
+        return (self.cb + 0.70 * 6) / (self.cb_o + 6)
+
+    def r_bx(self):
+        """His usual bet size, in pots."""
+        return (self.bx_s + 0.65 * 4) / (self.bx_n + 4)
+
     def r_bet(self):
         return (self.bet + 0.40 * 10) / (self.bet_o + 10)
 
@@ -281,36 +289,74 @@ class St:
         return min(0.6, 1.3 * (self.sd_air + 0.14 * 6) / (self.sd_agg + 6))
 
 
-FOLD_PRIOR = (0.55, 0.42, 0.52)     # field: folds to a bet on flop / turn / river
-# Field: a bet under 80% of the pot comes from a wider, weaker range than a big one.
-SMALL_VF, SMALL_KEEP, BIG_VF, BIG_KEEP = 1.6, 3.2, 0.5, 0.35
+_PREV = {"flop": "preflop", "turn": "flop", "river": "turn"}
 
 
-def fold_prob(S, sf, x, nb, is_raise):
-    """Probability that the opponent with stats S folds to a bet of x pots (or
-    to a raise) on a board of nb cards. Measured frequencies: his own on this
-    street, shrunk towards the field average scaled by how much he folds overall."""
+def line_cat(s, street, agg_by, callers_by, checked):
+    """Where seat s stands when someone bets on `street`:
+    0 led into (he made the last raise or bet of the previous street and has not checked),
+    1 gave up (same, but he checked), 2 called a bet on the previous street,
+    3 the previous street was checked through, 4 anything else (a preflop caller on the flop)."""
+    prev = _PREV.get(street)
+    if s == agg_by.get(prev, -1):
+        return 1 if s in checked else 0
+    if street != "flop":
+        if s in callers_by.get(prev, ()):
+            return 2
+        if prev not in agg_by:
+            return 3
+    return 4
+
+
+# Field, measured on the practice hands: how often a player folds to the first bet of a
+# street, by line, as (heads-up, multiway) for flop / turn / river.
+FOLD_CAT = (
+    ((0.29, 0.33), (0.17, 0.25), (0.21, 0.25)),   # 0 led into
+    ((0.70, 0.75), (0.71, 0.75), (0.70, 0.75)),   # 1 gave up
+    ((0.45, 0.60), (0.33, 0.55), (0.39, 0.55)),   # 2 called the previous street
+    ((0.55, 0.80), (0.58, 0.79), (0.64, 0.88)),   # 3 previous street checked through
+    ((0.57, 0.69), (0.45, 0.60), (0.50, 0.60)),   # 4 other
+)
+FOLD_LIMPED = (0.55, 0.86)                         # flop of an unraised pot
+# A bet tells how strong its author is only relative to his own habit: (value share, bluff
+# weight) multipliers for a bet smaller than usual, usual, bigger than usual.
+SIZE_MULT = ((1.7, 3.5), (1.35, 2.2), (0.5, 0.35))
+WIDE_CALLS = False      # defend the big blind and flat in position more widely
+
+
+def size_class(S, x):
+    m = S.r_bx()
+    if x >= 0.8 and x >= 1.3 * m:
+        return 2
+    return 0 if x <= 0.8 * m else 1
+
+
+def fold_prob(S, cat, si, multi, limped, x, is_raise):
+    """Probability that the opponent with stats S folds to a bet of x pots (or to a raise):
+    his own measured frequency in this line, shrunk towards the field's, scaled by how
+    much he folds overall."""
     if is_raise:
         p = (S.rf + 6 * 0.28) / (S.ro + 6)
         if x < 0.4:
             p *= 0.35
         return 0.02 if p < 0.02 else (0.9 if p > 0.9 else p)
-    si = nb - 3
     k = S.r_fold() / 0.48
     k = 0.5 if k < 0.5 else (1.7 if k > 1.7 else k)
-    prior = FOLD_PRIOR[si] * k
+    prior = (FOLD_LIMPED[multi] if (limped and si == 0 and cat == 4) else FOLD_CAT[cat][si][multi]) * k
     if prior > 0.95:
         prior = 0.95
-    p = (S.ff[si] + 5 * prior) / (S.fo[si] + 5)
+    p = (S.ff[cat] + 5 * prior) / (S.fo[cat] + 5)
     if x < 0.35:
-        p *= 0.5
-    elif x > 2.5:
-        p *= 1.3
-    elif x > 1.5:
-        p *= 0.85
-    elif x >= 0.8 and si:
+        p *= 0.6
+    elif x < 0.7:
+        p *= 0.93
+    elif x <= 1.1:
         p *= 1.15
-    return 0.02 if p < 0.02 else (0.92 if p > 0.92 else p)
+    elif x <= 2.5:
+        p *= 1.2
+    else:
+        p *= 1.3
+    return 0.02 if p < 0.02 else (0.93 if p > 0.93 else p)
 
 
 CHECK = {"action": "check"}
@@ -367,6 +413,9 @@ class Agent:
         lf_seen = set()
         steal = False          # a late-position open with nobody else in yet
         others_in = 0
+        agg_by = {}            # street -> seat that made its last bet or raise
+        callers_by = {}        # street -> seats that called on it
+        checked = set()        # seats that checked on the current street
         for h in hist:
             s = h["seat"]
             a = h["action"]
@@ -380,6 +429,7 @@ class Agent:
                 street = h["street"]
                 bets = {}
                 cur = 0
+                checked = set()
             if a == "small_blind" or a == "big_blind":
                 bets[s] = amt
                 if amt > cur:
@@ -441,14 +491,22 @@ class Agent:
                         if a == "fold":
                             S.rf += 1
                     elif last_x >= 0.35:
-                        si = 0 if street == "flop" else (1 if street == "turn" else 2)
-                        S.fo[si] += 1
+                        c = line_cat(s, street, agg_by, callers_by, checked)
+                        S.fo[c] += 1
                         if a == "fold":
-                            S.ff[si] += 1
+                            S.ff[c] += 1
                 else:
                     S.bet_o += 1
+                    if street == "flop" and s == agg_by.get("preflop", -1) and s not in checked:
+                        S.cb_o += 1
+                        if a == "raise":
+                            S.cb += 1
                     if a == "raise":
                         S.bet += 1
+                        S.bx_n += 1
+                        S.bx_s += amt / float(pot or 1)
+                    elif a == "check":
+                        checked.add(s)
                 if a == "raise":
                     agg_post.add(s)
             if a == "raise":
@@ -458,9 +516,11 @@ class Agent:
                 pot += amt - mine
                 bets[s] = amt
                 cur = amt
+                agg_by[street] = s
             elif a == "call":
                 pot += amt
                 bets[s] = mine + amt
+                callers_by.setdefault(street, set()).add(s)
         for s in range(n):
             S = st[s]
             S.hands += 1
@@ -761,8 +821,14 @@ class Agent:
                 return CALL
             if loose and e >= 0.5 and price <= 6 and (ip or rel == 2):
                 return CALL
+            if WIDE_CALLS:
+                # in position against a late open: the hands that flop well
+                if ip and rel != 1 and late and price <= 3.2 and callers <= 1 and (lvl <= 3 or (suited and lvl <= 5)):
+                    return CALL
             if rel == 2:
                 if price <= 1.5 and lvl <= 5:
+                    return CALL
+                if WIDE_CALLS and price <= 2.5 and callers <= 1 and lvl <= (5 if late else 4):
                     return CALL
                 if price <= 2.5 and (lvl <= 2 or cls in BB_OFF or (suited and lvl <= 4)):
                     return CALL
@@ -819,6 +885,9 @@ class Agent:
         curbet = 0
         pot = 0
         front = [0] * n    # chips in front of each seat this street
+        agg_by = {}
+        callers_by = {}
+        checked = set()
         for h in hist:
             a = h["action"]
             s = h["seat"]
@@ -827,6 +896,7 @@ class Agent:
                 cur_st = stt
                 curbet = 0
                 front = [0] * n
+                checked = set()
             if a == "raise":
                 amt = h["amount"]
                 if stt == "preflop":
@@ -843,6 +913,7 @@ class Agent:
                 pot += amt - front[s]
                 front[s] = amt
                 curbet = amt
+                agg_by[stt] = s
             elif a == "call":
                 amt = h["amount"]
                 if stt == "preflop":
@@ -851,20 +922,26 @@ class Agent:
                     called[s] += 1
                 pot += amt
                 front[s] += amt
+                callers_by.setdefault(stt, set()).add(s)
+            elif a == "check":
+                checked.add(s)
             elif a == "small_blind" or a == "big_blind":
                 amt = h["amount"]
                 pot += amt
                 front[s] = amt
                 if amt > curbet:
                     curbet = amt
-        return pfr, pfi, pcall, agg, rais, called, lastx
+        if cur_st != street:
+            checked = set()
+        cat = [line_cat(i, street, agg_by, callers_by, checked) for i in range(n)]
+        return pfr, pfi, pcall, agg, rais, called, lastx, cat, raises == 0
 
     def _tier(self, s, L, dead, bp, fs, scf, smf, sc, bmask, d4b, nb, thr):
         """Seat s's range on this board as (strong, weak, keep, sfrac): lists of
         (score, a, b); a weak combo is `keep` times as likely as a strong one;
         sfrac is the share of the range holding top pair or better, or a draw."""
         S = self.st[s]
-        pfr, pfi, pcall, agg, rais, called, lastx = L
+        pfr, pfi, pcall, agg, rais, called, lastx = L[:7]
         lo = 0.0
         plain = S.starter()
         if plain:
@@ -932,17 +1009,14 @@ class Agent:
                 vf = max(0.04, S.r_raise() * 1.2)
                 keep = max(0.02, min(0.5, air * 0.5))
             else:
-                b = S.r_bet()
+                b = S.r_cb() if (pfr[s] and pfi[s] == max(pfi)) else S.r_bet()
                 vf = b * (1.0 - air)
                 keep = max(0.03, min(0.6, b * air / max(0.05, 1.0 - vf)))
                 # measured at the river; applied at half strength earlier
                 h = 1.0 if nb == 5 else 0.5
-                if lastx[s] >= 0.8:
-                    vf *= 1.0 + (BIG_VF - 1.0) * h
-                    keep *= 1.0 + (BIG_KEEP - 1.0) * h
-                else:
-                    vf *= 1.0 + (SMALL_VF - 1.0) * h
-                    keep *= 1.0 + (SMALL_KEEP - 1.0) * h
+                mv, mk = SIZE_MULT[size_class(S, lastx[s])]
+                vf *= 1.0 + (mv - 1.0) * h
+                keep *= 1.0 + (mk - 1.0) * h
             vf *= 0.8 ** (agg[s] - 1)
             if nb == 5:
                 keep *= 0.8
@@ -1095,10 +1169,13 @@ class Agent:
                     else:
                         nofold = True
                 # ranges built by re-raising preflop fold half as often
-                opp.append((S, t[3], 0.5 if pfi[s] >= 2 else 1.0, ov))
+                opp.append((S, L[7][s], 0.5 if pfi[s] >= 2 else 1.0, ov))
             else:
                 allin = True
         floor = 0.0 if river else (0.6 if nb == 3 else 0.5)
+        si = nb - 3
+        multi = 1 if len(live) >= 2 else 0
+        limped = L[8]
         lo = state["min_raise_to"]
         hi = state["max_raise_to"]
 
@@ -1120,9 +1197,9 @@ class Agent:
                 size = tgt - mybet
                 xx = size / float(pot)
                 pf_all = 0.0 if allin else 1.0
-                for S, sf, w, ov in opp:
+                for S, cat, w, ov in opp:
                     if ov is None:
-                        pf_all *= fold_prob(S, sf, xx, nb, False) * w
+                        pf_all *= fold_prob(S, cat, si, multi, limped, xx, False) * w
                     else:
                         pf_all *= ov if size > 40 else 0.0
                 cfa = 1.0 - pf_all
@@ -1153,8 +1230,8 @@ class Agent:
             add = r_to - cur
             pf_all = 0.0 if allin else 1.0
             xr = add / float(pot + c)
-            for S, sf, w, ov in opp:
-                pf_all *= (fold_prob(S, sf, xr, nb, True) * w) if ov is None else ov
+            for S, cat, w, ov in opp:
+                pf_all *= (fold_prob(S, cat, si, multi, limped, xr, True) * w) if ov is None else ov
             cfa = 1.0 - pf_all
             eqc = max(floor * eq, (eq - pf_all) / cfa) if cfa > 1e-9 else eq
             ev_raise = pf_all * pot + cfa * (eqc * (pot + a + add) - a)

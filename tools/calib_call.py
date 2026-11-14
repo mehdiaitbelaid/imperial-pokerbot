@@ -55,7 +55,8 @@ for f in files:
                             if (c & 3) == fs: m |= 1 << (c >> 2)
                         v2 = max(v2, M.FLUSH[m])
                     won = 1.0 if myv > v2 else 0.5 if myv == v2 else 0.0
-                    for key in ((kind, bucket(p)), (kind, "all"), (kind + (" big" if x >= 0.8 else " small"), "all")):
+                    cls = ("smaller than usual", "usual size", "bigger than usual")[M.size_class(A.st[bettor], x)]
+                    for key in ((kind, bucket(p)), (kind, "all"), (kind + ": " + cls if kind == "bet" else kind, "all")):
                         r = B[key]; r[0] += 1; r[1] += p; r[2] += won
                 hist.append({"seat": s, "street": street, "action": a, "amount": amt})
                 if a == "raise":
@@ -66,9 +67,9 @@ for f in files:
                     pot += amt; bets[s] += amt
         A._learn({"history": hist, "board": h["board"], "shown": {str(k): v for k, v in shown.items()}, "stacks": [0] * n})
 print("River, caller's equity against the bettor's modelled range vs what happened")
-print("%-12s %-14s %5s %10s %8s" % ("facing", "predicted", "n", "predicted", "actual"))
+print("%-26s %-14s %5s %10s %8s" % ("facing", "predicted", "n", "predicted", "actual"))
 names = ["0-17%", "17-33%", "33-50%", "50-67%", "67-83%", "83-100%"]
 for key in sorted(B, key=lambda k: (k[0], str(k[1]))):
     r = B[key]
     if r[0] >= 8:
-        print("%-12s %-14s %5d %9.0f%% %7.0f%%" % (key[0], names[key[1]] if key[1] != "all" else "all", r[0], 100 * r[1] / r[0], 100 * r[2] / r[0]))
+        print("%-26s %-14s %5d %9.0f%% %7.0f%%" % (key[0], names[key[1]] if key[1] != "all" else "all", r[0], 100 * r[1] / r[0], 100 * r[2] / r[0]))

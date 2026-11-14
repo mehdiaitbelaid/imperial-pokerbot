@@ -48,7 +48,8 @@ for f in files:
                             continue
                         t = A._tier(j, L, dead, bp, fs, scf, smf, sc, bmask, d4b, len(board), thr)
                         sf = t[3]
-                        preds[j] = (M.fold_prob(A.st[j], sf, x, len(board), not first), sf)
+                        multi = 1 if (n - len(folded)) > 2 else 0
+                        preds[j] = (M.fold_prob(A.st[j], L[7][j], len(board) - 3, multi, L[8], x, not first), sf)
                     pending = ((street, bucket(x), "bet" if first else "raise"), preds)
                 hist.append({"seat": s, "street": street, "action": a, "amount": amt})
                 if a == "raise":
