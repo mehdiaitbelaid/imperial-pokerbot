@@ -34,6 +34,8 @@ POS_NAMES = {0: "BTN", 1: "SB", 2: "BB"}
 def pos_name(rel, n):
     if rel in POS_NAMES:
         return POS_NAMES[rel]
+    if rel == 3:
+        return "UTG"
     from_end = n - rel
     return {1: "CO", 2: "HJ", 3: "MP"}.get(from_end, "UTG+%d" % (rel - 3) if rel > 3 else "UTG")
 
