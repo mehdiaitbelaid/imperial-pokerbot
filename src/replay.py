@@ -4,12 +4,12 @@ Also: what did opponents hold when they raised over a bet postflop (showdown han
 import json,sys,importlib.util,collections,random
 bot_path=sys.argv[1];files=sys.argv[2:]
 sys.path.insert(0,"/home/claude/imperial-pokerbot")
-from engine.cards import evaluate as EV
+from engine.cards import evaluate as EV, to_int as TI
 spec=importlib.util.spec_from_file_location("cand",bot_path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 R="23456789TJQKA"
 def klass(hole,board):
     """4 monster(2pair both cards/set/straight+), 3 overpair or top pair K+ kicker, 2 other pair, 1 draw, 0 air"""
-    hc=[m.card_int(c) for c in hole];bd=[m.card_int(c) for c in board]
+    hc=[TI(c) for c in hole];bd=[TI(c) for c in board]
     cat=EV(hc+bd)[0] if len(bd)>=3 else 0
     hr=[c>>2 for c in hc];br=[c>>2 for c in bd]
     bpairs=len(br)-len(set(br))
@@ -32,7 +32,7 @@ def klass(hole,board):
 DET=[];FOLD=collections.defaultdict(list);UNF=collections.Counter();raise_show=collections.Counter();bet_show=collections.Counter()
 for f in files:
     d=json.load(open(f));P=d['players'];me=d['seat'];n=len(P)
-    ag=m.Agent();ag.on_table_start({"seat":me,"num_players":n,"hands":1000,"starting_stack":2000,"big_blind":20,"small_blind":10})
+    ag=m.Agent();getattr(ag,"on_table_start",lambda i:None)({"seat":me,"num_players":n,"hands":1000,"starting_stack":2000,"big_blind":20,"small_blind":10})
     diffs=[];saved=0
     for h in d['hands']:
         stacks=[2000]*n;bets=[0]*n;folded=[False]*n;contrib=[0]*n;hist=[];board=[];street='preflop';cur=0;min_inc=20
@@ -73,7 +73,7 @@ for f in files:
             elif a=='fold': folded[s]=True
             hist.append({"seat":s,"street":street,"action":a,"amount":amt})
         shown={k:v for k,v in h['hole'].items() if h.get('showdown') and k in h['showdown']}
-        ag.on_hand_end({"hand_number":h['n'],"board":h['board'],"shown":shown,"winners":[],"stacks":[],"history":hist})
+        getattr(ag,"on_hand_end",lambda i:None)({"hand_number":h['n'],"board":h['board'],"shown":shown,"winners":[],"stacks":[],"history":hist})
         if hand_div and h['results'][me]<=-400: diffs.append((h['results'][me],h['n'],''.join(my_hole),''.join(h['board']),hand_div))
     print("\n==",d['ref'],"big losses (<=-400) where candidate plays differently: %d"%len(diffs))
     tot=sum(1 for h in d['hands'] if h['results'][me]<=-400)
