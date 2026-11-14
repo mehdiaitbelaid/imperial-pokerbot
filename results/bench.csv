@@ -14,3 +14,7 @@ timestamp,commit,bot,field,rounds,tables,hands,betting,raise_cap,bb100,se,ci95_l
 2026-11-14 14:10:34,834b5cc+dirty,versions/v0_starter.py,tight,20,40,1000,no_limit,0,557.19,28.54,501.25,613.12,0,0,0,0.19,1.7,108,bot.py;versions/v0_starter.py,0.690,0.322
 2026-11-14 14:40:16,51dd518+dirty,versions/vastra-fable.py,tight,12,24,1000,no_limit,0,398.17,29.95,336.47,459.86,0,0,0,0.60,4.5,545755297,versions/vastra-fable.py;versions/v2.py,0.231,0.184
 2026-11-14 14:40:16,51dd518+dirty,versions/v2.py,tight,12,24,1000,no_limit,0,425.67,28.44,367.07,484.26,0,0,0,0.60,8.7,545755297,versions/vastra-fable.py;versions/v2.py,0.229,0.183
+2026-11-14 14:43:08,486a6b4+dirty,bot.py,field,20,40,1000,no_limit,0,523.49,20.83,482.67,564.31,0,0,0,0.53,1.3,527603527,bot.py;versions/v2.py,0.241,0.196
+2026-11-14 14:43:08,486a6b4+dirty,versions/v2.py,field,20,40,1000,no_limit,0,539.78,20.08,500.42,579.13,0,0,0,0.53,1.6,527603527,bot.py;versions/v2.py,0.241,0.196
+2026-11-14 14:43:28,486a6b4+dirty,bot.py,fieldonly,20,40,1000,no_limit,0,31.44,6.10,19.47,43.40,0,0,0,0.42,2.0,833283508,bot.py;versions/v2.py,0.195,0.137
+2026-11-14 14:43:28,486a6b4+dirty,versions/v2.py,fieldonly,20,40,1000,no_limit,0,23.82,6.31,11.45,36.18,0,0,0,0.41,2.2,833283508,bot.py;versions/v2.py,0.187,0.128

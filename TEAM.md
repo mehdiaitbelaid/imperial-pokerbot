@@ -28,6 +28,8 @@ Compare two versions at the same tables. Each seed is played twice with the two 
 
     python3 tools/bench.py bot.py versions/v2.py --field tight --seats 0 --rounds 20
 
+The accept or reject field for pressure changes is `field`: seats of `sparring/field_like.py` plus one maniac and one station. field_like is a model of the live practice field, not the field: its fold rates per spot come from `tools/fold_analysis.py` and are fitted with `tools/calibrate_field.py`. `fieldonly` drops the maniac and station, so heads up spots come up often enough to measure single rules. `tools/rule_accounting.py` counts the bets each named rule in `bot.py` makes and the chips they realise.
+
 Other flags: `--betting pot_limit` or `fixed_limit`, `--raise-cap 3`, `--seed 42` for repeatable tables, `--hands 300` for a quick look, `--jobs N` for parallel tables. Jobs default to a third of the cores and are capped at half, because more parallel tables cause timeouts that are the laptop's fault, not the bot's. The output also shows our VPIP and PFR and flags them when they leave the bands 22 to 35% and 17 to 27%. Every run is appended to `results/bench.csv` with the commit hash, so commit that file with your work and the team builds up one record.
 
 Fuzz the bot with random states, which must report 0 illegal replies:

@@ -49,6 +49,7 @@ def fields():
     ex = lambda name: os.path.join(HERE, "examples", name + ".py")  # noqa: E731
     return {
         "field": [sp("field_like")],
+        "fieldonly": [sp("field_like")],
         "tight": [sp("nit"), sp("tag_basic"), sp("pot_odds_bot"), ex("tight_aggressive"), sp("tag_basic")],
         "house": _glob("examples/*.py"),
         "mixed": _glob("sparring/*.py") + _glob("examples/*.py"),
