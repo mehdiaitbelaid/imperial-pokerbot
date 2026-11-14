@@ -15,6 +15,8 @@ import random
 import time
 
 DEBUG = False
+BIG_CALL = 300          # chips to call from which a decision counts as big
+BIG_BUDGET = 0.0035    # seconds of simulation for a big decision (about 400 samples on the server)
 _now = time.perf_counter
 
 # ----------------------------------------------------------------- evaluator
@@ -1134,7 +1136,11 @@ class Agent:
                     tot += keep * len(weak)
                 eq *= w / tot if tot > 0 else 0.5
         else:
-            eq = self._mc(h0, h1, board, dead, tiers, t0 + self._budget(state), bp, sc, sm)
+            # Big calls get a fixed time to simulate: the tournament server is 4-5 times slower
+            # than a laptop, so a short budget gives few samples and noisy big decisions.
+            # This is the only change from v14 (same decisions when samples are plentiful).
+            budget = BIG_BUDGET if c >= BIG_CALL else self._budget(state)
+            eq = self._mc(h0, h1, board, dead, tiers, t0 + budget, bp, sc, sm)
 
         # Very strong made hands are never folded on a board that is not scary:
         # paying off sometimes costs less than being pushed off a set.
