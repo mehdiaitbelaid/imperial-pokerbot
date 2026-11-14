@@ -17,8 +17,8 @@ import time
 # Hand strength is a percentile q: 0.0 is AA, 1.0 is the worst hand.
 # Open raise thresholds keyed by how many players still act behind us
 # preflop (7 = UTG at 8 max, 2 = button, 1 = small blind).
-OPEN_Q = {7: 0.10, 6: 0.12, 5: 0.14, 4: 0.17, 3: 0.22, 2: 0.38, 1: 0.32, 0: 0.0}
-OPEN_BB = 3.0              # open size in big blinds
+OPEN_Q = {7: 0.11, 6: 0.13, 5: 0.15, 4: 0.20, 3: 0.27, 2: 0.45, 1: 0.36, 0: 0.0}  # widened for the tight live field (our live VPIP 0.18)
+OPEN_BB = 2.5              # open size in big blinds; the field folds as often to 2.5 as to 3 (0.76 vs 0.79)
 OPEN_BTN_BB = 2.5          # button and small blind open size
 OPEN_LIMPER_BB = 1.0       # added per limper when isolating
 OPEN_LOOSE_BB = 1.0        # added when the players behind call too much
@@ -30,7 +30,7 @@ STEAL_ALL_FOLD = (0.65, 0.60, 0.50, 0.42)  # if P(all behind fold) >= a open top
 LOOSE_VPIP = 0.45          # players behind looser than this on average: open wider for value
 LOOSE_OPEN_Q = 0.28        # open threshold at LOOSE_VPIP, rising 0.3 per unit of extra looseness
 SPAMMER_OPEN_CAP = 0.22    # with an all in spammer behind only open hands that can call a shove
-THREEBET_Q = 0.035         # always 3 bet for value under this
+THREEBET_Q = 0.07          # always 3 bet for value under this (live winners 3-bet 11 to 26%, we were at 3%)
 THREEBET_VS_WIDE = 0.40    # also 3 bet hands in the top share of a wide opener's range
 CALL_RAISE_BASE = 0.85     # call a raise with q under raiser_range * this (scaled by size)
 BB_DEFEND_BONUS = 0.10     # extra q the big blind defends against small raises
@@ -75,10 +75,15 @@ PRESS = {
     "limp_mw": (True, 0.75, "lmw", 0.50, (0, 1)),      # 4b multiway limped pot checked to us, field 0.66 n=89
 }
 # stat: (prior, N0) from the beta binomial fit in the playbook
-SPOT_PRIOR = {"cb": (0.55, 12), "bar": (0.33, 42), "stab": (0.70, 12), "xt": (0.50, 15),
+SPOT_PRIOR = {"trb": (0.40, 10), "rvb": (0.30, 10), "fbo": (0.55, 10),
+              "cb": (0.55, 12), "bar": (0.33, 42), "stab": (0.70, 12), "xt": (0.50, 15),
               "xtr": (0.62, 15), "rv": (0.48, 10), "stl": (0.71, 20), "o3b": (0.46, 2),
               "o3bc": (0.25, 2), "o3b4": (0.28, 2), "any": (0.51, 25), "rus": (0.13, 10),
               "lmw": (0.66, 10)}
+LATE_OPEN = {2: 0.50, 3: 0.32}     # button and cutoff open this wide when those behind fold enough
+LATE_STEAL_P = {2: 0.45, 3: 0.35}  # P(all behind fold): blinds by their shrunk fold to steals, others by VPIP
+HONEST_AIR = 0.35          # big turn and river bets from non maniacs: weight on air in their range
+HONEST_WEAK = 0.5          # and on weak pairs (field shows air or draws 0.17 there, n=337)
 SB_STEAL = True            # 5 small blind steal with any hand when folded to us
 SB_STEAL_BB = 2.5
 SB_STEAL_ON = 0.65         # big blind shrunk fold to steals needed to start
@@ -101,7 +106,7 @@ CALLER_BARREL_FOLD = 0.35  # 8a seat's shrunk fold to turn barrels under this ma
 VALUE_CALLER_CUT = 0.04    # turn and river value threshold drop against callers
 VALUE_CALLER_FRAC = 0.75   # and the size
 TB_VALUE = True            # 8b wider, larger value 3-bets against seats that call 3-bets
-TB_VALUE_Q = 0.06
+TB_VALUE_Q = 0.09
 TB_VALUE_CALL = 0.30       # opener shrunk call of 3-bets at least this
 TB_VALUE_4BET_MAX = 0.20   # and 4-bets at most this
 TB_VALUE_MIN_N = 4
@@ -109,6 +114,22 @@ TB_VALUE_MULT = 0.6        # added to the 3-bet size multiplier
 FOURBET_CONT_Q = 0.03      # continue against a 4-bet only under this unless the seat is wild with showdowns
 RAISE_FRAC = 1.0           # 8c value raise size, pot share after calling
 RAISED_FOLD_PO = 0.30      # 8c fold one pair to a raise of our bet when pot odds are worse than this
+
+# From docs/live-diagnosis.md (counted rounds r001 to r004)
+COMMIT_BB = 30             # a call that takes our total in the hand past this is a commitment
+COMMIT_EQ_OK = 0.75       # unless our equity against their range is at least this (board made nuts, quads)
+COMMIT_SEAT_BET = 0.50     # one pair commits only against seats betting turn and river more than this
+RIVER_BIG = 0.60           # river bets over this pot share: bluff catch only against
+RIVER_SEAT_BET = 0.45      # seats betting the river more than this, or that showed a bluff
+RIVER_VALUE_FRAC = 0.70    # heads up river, checked to: bet top pair good kicker or better
+RIVER_BLUFF_FOLD = 0.45    # and air against seats folding to river bets more than this
+FLOP_DEFEND_FRAC = 0.75    # one flop bet up to this size: continue pairs, draws, overcards with a backdoor
+FLOP_ACE_HIGH_SEAT = 0.65  # add ace high against seats that bet the flop more often than this
+EARLY_SETS = False         # off: cost 63 bb/100 on tight (30 seeds), neutral on fieldonly; live evidence n=69
+EARLY_OPEN = frozenset(["AA", "KK", "QQ", "JJ", "TT", "99", "88", "77", "AKs", "AQs", "AJs",
+                        "AKo", "AQo", "KQs"])                       # UTG to MP
+HJ_OPEN = EARLY_OPEN | frozenset(["66", "55", "ATs", "KJs", "QJs"])
+PREMIUM_Q = 0.05           # an exception during a decision still continues with these preflop
 
 # Opponent model
 PRIOR_N = 10              # pseudo hands used to smooth every stat
@@ -122,10 +143,16 @@ BARREL_DECAY = 0.7         # air and weak pair weights shrink by this per extra 
 MIN_HANDS_CLASSIFY = 25
 
 # Time control (seconds). The round bank is 10 s; we aim well under it.
-ROUND_TARGET = 1.3         # total think time we allow ourselves per round
-MC_MAX = 0.0009            # max Monte Carlo time per decision
+# Live timeouts scale with think time per round (server stalls land while we
+# compute), so we think little: Monte Carlo only where the decision is costly.
+ROUND_TARGET = 0.2         # compute time per round the Monte Carlo budget is spread over
+MC_MAX = 0.0003            # max Monte Carlo time per decision
+MC_MIN = 0.0001            # below this budget use the cheap estimate
+MC_POT_BB = 10             # postflop, nobody bet: Monte Carlo only in pots of at least this many bb
+MC_BET_FRAC = 0.33         # facing a bet: Monte Carlo only for bets of at least this pot share
+MC_BET_BB = 5              # or at least this many bb
 MC_TRIALS_MAX = 600
-MC_COMMIT = 0.0006         # Monte Carlo time kept for stack committing decisions when the budget is spent
+MC_COMMIT = 0.0003         # Monte Carlo time kept for stack committing decisions when the budget is spent
 COMMIT_BANK = 5.0          # but only while total think time this round is under this
 TRANSPORT_EST = 0.0002     # transport cost per decision we do not see but the bank does
 # ========================================================================
@@ -509,6 +536,7 @@ class Agent:
         self.stats = {}
         self.types = {}
         self.used = 0.0
+        self.think = 0.0       # compute time only; used also counts an estimate of transport
         self.start_stack = 2000
         self.bb = 20
         self.cache = {}
@@ -535,7 +563,7 @@ class Agent:
         except Exception:
             pass
         try:
-            self._learn_press(summary.get("history") or [])
+            self._learn_press(summary.get("history") or [], summary)
             self._settle(summary)
         except Exception:
             pass
@@ -554,11 +582,19 @@ class Agent:
             out = self._decide(state, t0)
         except Exception:
             out = None
+            try:
+                h = state.get("hole_cards") or []
+                if state.get("street") == "preflop" and PCT[CARD[h[0]] * 52 + CARD[h[1]]] <= PREMIUM_Q:
+                    out = {"action": "call"}
+            except Exception:
+                pass
         try:
             out = self._legalise(out, state)
         except Exception:
             out = {"action": "fold"}
-        self.used += time.perf_counter() - t0 + TRANSPORT_EST
+        dt = time.perf_counter() - t0
+        self.think += dt
+        self.used += dt + TRANSPORT_EST
         return out
 
     # ------------------------------------------------------- safety net
@@ -832,7 +868,7 @@ class Agent:
         if out:
             c[out] += 1
 
-    def _learn_press(self, hist):
+    def _learn_press(self, hist, sm=None):
         """Responses to pressure, per seat: first response to the first bet of a
         street in the playbook spots, blinds against steals, openers against 3-bets."""
         n = self.n or 8
@@ -848,6 +884,7 @@ class Agent:
         fb = {}
         chk = {}
         bettor = None
+        tr_bettors = set()
         for h in hist:
             seat, act, stt = h.get("seat"), h.get("action"), h.get("street")
             if seat is None:
@@ -898,6 +935,18 @@ class Agent:
                 elif act == "call" and nraise == 0:
                     limps += 1
                 continue
+            if stt != "preflop":
+                if stt not in fb and act in ("check", "raise"):
+                    # a chance to bet: who bets the flop, turn and river, and how often
+                    b = 1 if act == "raise" else 0
+                    if stt == "flop":
+                        self._obs(seat, "fbo", b)
+                    else:
+                        self._obs(seat, "trb", b)
+                        if stt == "river":
+                            self._obs(seat, "rvb", b)
+                if act == "raise" and stt != "flop":
+                    tr_bettors.add(seat)
             if act == "check":
                 if stt not in fb:
                     chk.setdefault(stt, set()).add(seat)
@@ -933,6 +982,18 @@ class Agent:
                 elif others:
                     for x in others:
                         pend[x] = "any_only"
+        if sm and tr_bettors:
+            board = sm.get("board") or []
+            shown = sm.get("shown") or {}
+            if len(board) == 5:
+                bi = board_info([CARD[c] for c in board])
+                for k, cards in shown.items():
+                    try:
+                        seat = int(k)
+                        if seat in tr_bettors and seat != me:
+                            self._obs(seat, "blf", 1 if cat_of(CARD[cards[0]], CARD[cards[1]], bi) == 0 else 0)
+                    except Exception:
+                        pass
 
     def _nobs(self, seat, key):
         s = self.stats.get(seat)
@@ -949,6 +1010,24 @@ class Agent:
         if not c:
             return p
         return (p * n0 + c[idx]) / (n0 + c[0])
+
+    def _bluffs_shown(self, seat):
+        s = self.stats.get(seat)
+        c = s["p"].get("blf") if s else None
+        return bool(c and c[1])
+
+    def _good_top(self, hole, bi):
+        """Top pair with a ten or better kicker, an overpair, or better."""
+        cat = cat_of(hole[0], hole[1], bi)
+        if cat == 4:
+            return True
+        if cat != 3:
+            return False
+        r1, r2 = hole[0] >> 2, hole[1] >> 2
+        if r1 == r2:
+            return True
+        kick = r2 if r1 == bi[2] else r1
+        return kick >= 8
 
     def _no_bluff(self, seat):
         t = self._type(seat)
@@ -1101,13 +1180,13 @@ class Agent:
         return min(1.0, r)
 
     def _budget(self, hand_no):
-        left = ROUND_TARGET - self.used
-        if left <= 0.3:
+        left = ROUND_TARGET - self.think
+        if left <= 0.0:
             return 0.0
         hands_left = max(60, 1001 - (hand_no or 1))
         return max(0.0, min(MC_MAX, 1.6 * left / hands_left))
 
-    def _eq(self, ctx, opps, key, commit=False):
+    def _eq(self, ctx, opps, key, commit=False, mc=True):
         hit = self.cache.get(key)
         # a stack committing decision never reuses an equity that came from the fallback
         if hit is not None and (hit[1] or not commit):
@@ -1116,8 +1195,10 @@ class Agent:
         b = self._budget(self._hand_no)
         if commit and b < MC_COMMIT and self.used < COMMIT_BANK:
             b = MC_COMMIT
+        if not mc and not commit:
+            b = 0.0
         eq = None
-        if b > 0.0002 and opps:
+        if b >= MC_MIN and opps:
             eq, n = equity(hole, board, opps, ctx["t0"] + b, self.rng, RANGE_BLUR if board else 0.0)
             if n < 12:
                 eq = None
@@ -1200,6 +1281,20 @@ class Agent:
                     thr = max(thr, b)
                 elif p_fold >= c:
                     thr = max(thr, d)
+            if behind and not limpers and nbehind in LATE_OPEN and not fixed:
+                # late position steals against tight blinds, measured per seat
+                sbs, bbs = (button + 1) % n, (button + 2) % n
+                p_all = 1.0
+                for s in behind:
+                    if s in (sbs, bbs):
+                        p_all *= self._sh(s, "stl")
+                    else:
+                        p_all *= 1.0 - self._rate(s, "vpip", "h", "vpip")
+                    if self._no_bluff(s) or self._type(s) in ("maniac", "spammer"):
+                        p_all = 0.0
+                if p_all >= LATE_STEAL_P[nbehind] and q > thr and q <= LATE_OPEN[nbehind]:
+                    thr = LATE_OPEN[nbehind]
+                    self._tag("late_open", ctx)
             if any(t == "spammer" for t in types_behind):
                 thr = min(thr, SPAMMER_OPEN_CAP)
             if is_sb and not limpers and nbehind == 1 and SB_STEAL and not fixed:
@@ -1216,6 +1311,9 @@ class Agent:
                     if q > thr:
                         self._tag("sb_steal", ctx)
                     return self._raise_to(ctx, SB_STEAL_BB * bb)
+            if EARLY_SETS and nbehind >= 4 and not is_bb and not fixed and thr < LOOSE_OPEN_Q:
+                # early and middle position: only the hands that earned live (docs/live-diagnosis.md)
+                thr = 1.0 if cls in (EARLY_OPEN if nbehind >= 5 else HJ_OPEN) else 0.0
             if q <= thr:
                 size = OPEN_BTN_BB if rel in (0, 1) else OPEN_BB
                 size += OPEN_LIMPER_BB * len(limpers)
@@ -1350,6 +1448,9 @@ class Agent:
             if pot and vb >= 0.5 * pot:
                 w[0] *= 0.7
                 w[2] *= 0.7
+            if pot and ctx["street"] != "flop" and vb >= BIG_BET_FRAC / (1.0 + BIG_BET_FRAC) * pot:
+                w[0] *= HONEST_AIR
+                w[2] *= HONEST_WEAK
             extra = len(ctx["barrels"].get(seat, ())) - 1
             if extra > 0:
                 f = BARREL_DECAY ** extra
@@ -1377,7 +1478,13 @@ class Agent:
             opps = sorted(opps, key=lambda o: o[0])[:5]
         key = (street, tuple((round(o[0], 3), tuple(o[1]) if o[1] else None) for o in opps))
         commit = to_call >= 0.35 * ctx["my_stack"] or any(ctx["allin"].get(s) for s in live)
-        eq = self._eq(ctx, opps, key, commit)
+        bbv = ctx["bb"]
+        if to_call > 0:
+            mc = to_call >= MC_BET_FRAC * (pot - to_call) or to_call >= MC_BET_BB * bbv
+        else:
+            mc = pot >= MC_POT_BB * bbv
+        key = key + (mc,)
+        eq = self._eq(ctx, opps, key, commit, mc)
         nopp = len(live)
         k = min(3, nopp)
         types = [self._type(s) for s in live]
@@ -1415,6 +1522,14 @@ class Agent:
                     frac = max(frac, VALUE_CALLER_FRAC)
                     self._tag("v8a_value", ctx)
                 return self._bet(ctx, frac * pot)
+            if v is not None and street == "river" and ctx["can_raise"]:
+                if self._good_top(hole, bi) and self._type(v) != "nit" or mycat == 4:
+                    self._tag("river_value", ctx)
+                    return self._bet(ctx, RIVER_VALUE_FRAC * pot)
+                if (mycat == 0 and not self._no_bluff(v) and self._nobs(v, "rv") + self._nobs(v, "xtr") >= 5
+                        and self._rate(v, "frv", "frv_opp", "frv") > RIVER_BLUFF_FOLD):
+                    self._tag("river_bluff", ctx)
+                    return self._bet(ctx, RIVER_VALUE_FRAC * pot)
             if rule is not None and mycat in PRESS[rule][4] and ctx["can_raise"]:
                 self._tag(rule, ctx)
                 if rule == "limp_mw":
@@ -1455,6 +1570,34 @@ class Agent:
         vt = self._type(v) if v is not None else None
         wild = vt in ("maniac", "spammer")
         raise_thr = RAISE_EQ[k]
+        # stop paying off: a call that commits more than COMMIT_BB needs two pair or better
+        # with a hole card, or top pair against a seat that bets turn and river a lot
+        committed = self.start_stack - my_stack + call_amt
+        if committed > COMMIT_BB * ctx["bb"] and mycat < 4 and not maniac_in:
+            ok = False
+            if mycat == 3:
+                ok = any(self._sh(s, "trb") > COMMIT_SEAT_BET or self._bluffs_shown(s) for s in live
+                         if s in ctx["line"] and ctx["line"][s] in ("bet", "raise"))
+            if not ok and eq < COMMIT_EQ_OK:
+                self._tag("fold_commit", ctx)
+                return {"action": "fold"}
+        if street == "river" and v is not None and mycat <= 3 and eq < raise_thr:
+            if frac_faced > RIVER_BIG:
+                if not (self._sh(v, "rvb") > RIVER_SEAT_BET or self._bluffs_shown(v) or wild):
+                    self._tag("fold_river_big", ctx)
+                    return {"action": "fold"}
+            elif mycat >= 2:
+                return {"action": "call"}
+        if street == "flop" and v is not None and frac_faced <= FLOP_DEFEND_FRAC and ctx["fb"].get("flop") == v \
+                and len(ctx["barrels"].get(v, ())) <= 1 and ctx["line"].get(v) == "bet" and eq < raise_thr:
+            r1, r2 = hole[0] >> 2, hole[1] >> 2
+            over = r1 > bi[2] and r2 > bi[2]
+            back = (hole[0] & 3) == (hole[1] & 3) and bi[1][hole[0] & 3] >= 1
+            ace = max(r1, r2) == 12 and self._sh(v, "fbo") > FLOP_ACE_HIGH_SEAT
+            if mycat >= 2 or draw or (over and back) or ace:
+                if eq < need:
+                    self._tag("flop_defend", ctx)
+                return {"action": "call"}
         # 8c: a raise of our bet from a non maniac seat is value; fold one pair without a draw
         we_bet = street in ctx["barrels"].get(me, ())
         if we_bet and not maniac_in and mycat in (2, 3) and not draw and po > RAISED_FOLD_PO and eq < raise_thr:
