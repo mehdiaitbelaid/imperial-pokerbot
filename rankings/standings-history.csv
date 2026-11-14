@@ -570,3 +570,44 @@ fetched_at,phase,board,rank,name,bb100,chips,hands,rounds,timeouts,errors,versio
 2026-11-14T15:55:16Z,saturday,saturday,39,AIl IN,-41.55,-91407,11000,11,45,0,2,False
 2026-11-14T15:55:16Z,saturday,saturday,40,Anton,-64.18,-141202,11000,11,72,0,3,False
 2026-11-14T15:55:16Z,saturday,saturday,41,ediz_slow,-328.6,-722930,11000,11,42,0,2,False
+2026-11-14T16:00:19Z,saturday,saturday,1,Attention Is All In,54.46,130702,12000,12,26,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,2,Gherkers,54.38,130519,12000,12,53,0,15,True
+2026-11-14T16:00:19Z,saturday,saturday,3,Equity Engine,39.13,93911,12000,12,24,0,9,True
+2026-11-14T16:00:19Z,saturday,saturday,4,AAST,37.39,89746,12000,12,18,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,5,ND,31.16,74778,12000,12,57,0,1,True
+2026-11-14T16:00:19Z,saturday,saturday,6,The Market Makers,30.02,72055,12000,12,38,0,8,True
+2026-11-14T16:00:19Z,saturday,saturday,7,Resonance Qt,29.27,70240,12000,12,27,0,7,True
+2026-11-14T16:00:19Z,saturday,saturday,8,Phil AIvey,28.39,68130,12000,12,33,0,5,True
+2026-11-14T16:00:19Z,saturday,saturday,9,Red,26.45,63484,12000,12,48,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,10,Mohil'sPokerBot,25.63,61509,12000,12,35,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,11,Astra La Vista,23.71,56895,12000,12,14,0,8,True
+2026-11-14T16:00:19Z,saturday,saturday,12,Kojack,23.61,56658,12000,12,27,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,13,gamblerlove,21.67,52016,12000,12,19,0,5,True
+2026-11-14T16:00:19Z,saturday,saturday,14,aydine,21.13,50721,12000,12,33,0,1,True
+2026-11-14T16:00:19Z,saturday,saturday,15,pokermon,19.79,47489,12000,12,23,0,1,True
+2026-11-14T16:00:19Z,saturday,saturday,16,Lehman Brothers,16.94,40654,12000,12,33,0,10,True
+2026-11-14T16:00:19Z,saturday,saturday,17,bigRoddy,16.5,39593,12000,12,20,0,6,True
+2026-11-14T16:00:19Z,saturday,saturday,18,WBot,14.31,34346,12000,12,33,0,5,True
+2026-11-14T16:00:19Z,saturday,saturday,19,kaiserbot,13.29,31889,12000,12,41,0,5,True
+2026-11-14T16:00:19Z,saturday,saturday,20,Durahim 1453,12.8,30722,12000,12,81,0,10,True
+2026-11-14T16:00:19Z,saturday,saturday,21,Jump Street,8.52,20444,12000,12,41,0,10,True
+2026-11-14T16:00:19Z,saturday,saturday,22,Chinese people can fly,7.83,18784,12000,12,48,0,10,True
+2026-11-14T16:00:19Z,saturday,saturday,23,matcha mille crêpes cake,4.56,10944,12000,12,85,0,17,True
+2026-11-14T16:00:19Z,saturday,saturday,24,SmartBGerBot,1.01,2430,12000,12,22,0,6,True
+2026-11-14T16:00:19Z,saturday,saturday,25,Claudebot,-1.17,-2808,12000,12,37,0,1,True
+2026-11-14T16:00:19Z,saturday,saturday,26,test,-7.37,-17686,12000,12,12,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,27,GamesGone,-9.04,-21696,12000,12,36,0,5,True
+2026-11-14T16:00:19Z,saturday,saturday,28,Poké Bot,-12.2,-29283,12000,12,42,0,6,True
+2026-11-14T16:00:19Z,saturday,saturday,29,FisherMen,-16.52,-39651,12000,12,33,0,8,True
+2026-11-14T16:00:19Z,saturday,saturday,30,Vlad,-17.3,-41529,12000,12,18,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,31,Peanut Cookies,-20.69,-49652,12000,12,21,0,4,True
+2026-11-14T16:00:19Z,saturday,saturday,32,SARS,-25.19,-60445,12000,12,31,0,9,True
+2026-11-14T16:00:19Z,saturday,saturday,33,YSL_TWIZZY,-26.75,-64208,12000,12,39,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,34,Joca,-32.54,-78100,12000,12,43,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,35,AIl IN,-35.75,-85805,12000,12,45,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,36,Anton,-56.97,-136738,12000,12,72,0,3,True
+2026-11-14T16:00:19Z,saturday,saturday,37,ediz_slow,-312.99,-751176,12000,12,42,0,2,True
+2026-11-14T16:00:19Z,saturday,saturday,38,Anker Batteries,16.67,36675,11000,11,27,0,3,False
+2026-11-14T16:00:19Z,saturday,saturday,39,Poke,10.87,6523,3000,3,2,0,1,False
+2026-11-14T16:00:19Z,saturday,saturday,40,munchlax,-3.66,-2930,4000,4,1,0,2,False
+2026-11-14T16:00:19Z,saturday,saturday,41,supernut,-5.08,-10150,10000,10,9,0,1,False
