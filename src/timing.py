@@ -1,6 +1,6 @@
 """Measure per-decision time of a bot in-process across a real 8-seat round."""
 import os,sys,time,importlib.util,random
-ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));sys.path.insert(0,ROOT)
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));sys.path.insert(0,ROOT);sys.path.insert(0,os.path.join(ROOT,"sparring"))
 from engine import FixedHandsTable
 from engine.players import LocalPlayer
 def load(p):

@@ -148,7 +148,7 @@ NC = len(COMBOS)
 # ------------------------------------------------------------ opponent stats
 class Stats:
     __slots__ = ("hands", "vpip", "pfr", "pf_raise_opps", "ftb_faced", "ftb_fold",
-                 "pf_agg", "pf_pass", "agg_sd", "agg_sd_bluff", "allin")
+                 "pf_agg", "pf_pass", "agg_sd", "agg_sd_bluff", "allin", "big")
 
     def __init__(self):
         self.hands = 0
@@ -162,6 +162,7 @@ class Stats:
         self.agg_sd = 0
         self.agg_sd_bluff = 0
         self.allin = 0
+        self.big = [0, 0, 0, 0]   # shown hands behind big bets: monster, top pair+, weak pair, air
 
     def r_vpip(self):
         return (self.vpip + 0.24 * 12) / (self.hands + 12)
@@ -191,6 +192,69 @@ def _connects(a, b, branks, bsuit, bmask):
     if DRAW4[bmask | (1 << ra) | (1 << rb)] and not DRAW4[bmask]:
         return True
     return False
+
+
+def hand_class(hole, board):
+    """4 monster (two pair with both cards, set, trips, straight, flush+), 3 overpair or
+    top pair with Q+ kicker, 2 any other pair, 1 draw, 0 nothing."""
+    h0, h1 = hole[0] >> 2, hole[1] >> 2
+    cnt = [0] * 13
+    sc = [0, 0, 0, 0]
+    mask = 0
+    bmax = 0
+    for c in board:
+        r = c >> 2
+        cnt[r] += 1
+        sc[c & 3] += 1
+        mask |= 1 << r
+        if r > bmax:
+            bmax = r
+    s0, s1 = hole[0] & 3, hole[1] & 3
+    f0 = sc[s0] + (2 if s0 == s1 else 1)
+    f1 = sc[s1] + (2 if s0 == s1 else 1)
+    if f0 >= 5 or f1 >= 5:
+        return 4
+    full = mask | (1 << h0) | (1 << h1)
+    if _straight_high(full) >= 0 and _straight_high(mask) < 0:
+        return 4
+    if h0 == h1:
+        if cnt[h0]:
+            return 4
+        return 3 if h0 > bmax else 2
+    c0, c1 = cnt[h0], cnt[h1]
+    if c0 >= 2 or c1 >= 2 or (c0 and c1):
+        return 4
+    if c0 or c1:
+        pr, kick = (h0, h1) if c0 else (h1, h0)
+        return 3 if (pr == bmax and kick >= 10) else 2
+    if len(board) < 5:
+        if f0 >= 4 or f1 >= 4:
+            return 1
+        if DRAW4[full] and not DRAW4[mask]:
+            return 1
+    return 0
+
+
+BIG_PRIOR_RERAISE = (4.9, 1.1, 1.9, 0.1)   # field data: big re-raises are 61% monsters, 0% air
+BIG_PRIOR_BET = (3.4, 1.0, 3.4, 0.3)
+LOOSE_PRIOR_RERAISE = (1.0, 0.5, 4.5, 1.5)  # loose bots (VPIP > 38%): big raises were mostly weak pairs or air
+LOOSE_PRIOR_BET = (0.8, 0.5, 4.0, 2.2)
+
+
+def has_draw(hole, board):
+    if len(board) >= 5:
+        return False
+    sc = [0, 0, 0, 0]
+    mask = 0
+    for c in board:
+        sc[c & 3] += 1
+        mask |= 1 << (c >> 2)
+    s0, s1 = hole[0] & 3, hole[1] & 3
+    if sc[s0] + (2 if s0 == s1 else 1) >= 4 or sc[s1] + (2 if s0 == s1 else 1) >= 4:
+        return True
+    full = mask | (1 << (hole[0] >> 2)) | (1 << (hole[1] >> 2))
+    return DRAW4[full] and not DRAW4[mask]
+BIG_CHIPS = 240
 
 
 def _strong(a, b, branks, bsuit, bmask, bpaired, bmax):
@@ -247,6 +311,7 @@ class Agent:
         cur = 0
         pf_raised = False
         vp, pr, agg_post = set(), set(), set()
+        big_at = {}
         for h in hist:
             s, a, amt = h["seat"], h["action"], h.get("amount") or 0
             if h["street"] != street:
@@ -274,6 +339,8 @@ class Agent:
                 if a == "raise":
                     st.pf_agg += 1
                     agg_post.add(s)
+                    if amt >= BIG_CHIPS:
+                        big_at[s] = {"flop": 3, "turn": 4, "river": 5}.get(street, 5)
                 elif a in ("check", "call"):
                     st.pf_pass += 1
             if a == "raise":
@@ -292,6 +359,12 @@ class Agent:
                 st.pfr += 1
         shown = summary.get("shown") or {}
         board = [card_int(c) for c in summary.get("board") or []]
+        for k, cards in shown.items():
+            s = int(k)
+            nb = big_at.get(s)
+            if nb and len(board) >= nb and s != self.seat:
+                c = hand_class([card_int(x) for x in cards], board[:nb])
+                self._st(s).big[(0, 1, 2, 3, 3)[4 - c]] += 1
         if len(board) == 5:
             branks = set(c >> 2 for c in board)
             for k, cards in shown.items():
@@ -366,13 +439,18 @@ class Agent:
             return rng, None, 0.0
         branks, bsuit, bmask, bpaired, bmax = bctx
         strong, weak = [], []
+        maniac = st.r_agg() > 0.5 or vpip > 0.55
+        if maniac:
+            post_reraise = False
         test = _strong if post_reraise else _connects
         for ab in rng:
             if test(ab[0], ab[1], branks, bsuit, bmask) if test is _connects else test(ab[0], ab[1], branks, bsuit, bmask, bpaired, bmax):
                 strong.append(ab)
             else:
                 weak.append(ab)
-        if post_reraise:
+        if maniac:
+            keep = max(0.45, st.r_bluff())
+        elif post_reraise:
             keep = st.r_bluff() * 0.5
         elif post_agg:
             keep = st.r_bluff() * (0.6 if post_agg_this and street != "flop" else 1.0)
@@ -401,7 +479,7 @@ class Agent:
             else:
                 pw = 0.0
             plans.append((strong, len(strong), weak, len(weak) if weak else 0, pw))
-        t_end = min(time.perf_counter() + budget, getattr(self, "t0", time.perf_counter()) + 0.0019)
+        t_end = min(time.perf_counter() + budget, getattr(self, "t0", time.perf_counter()) + 0.0016)
         wins = 0.0
         n = 0
         while True:
@@ -503,7 +581,7 @@ class Agent:
         left = 8.0 - self.used
         hands_left = max(1, self.total_hands - hand_no + 1) if hasattr(self, "total_hands") else 500
         b = left / (hands_left * 0.9)
-        b = max(0.0005, min(0.0017, b))
+        b = max(0.0005, min(0.0015, b))
         # absolute: thinking ends b after act() started, whatever range building cost
         return max(0.0002, b - (time.perf_counter() - self.t0))
 
@@ -555,7 +633,7 @@ class Agent:
 
         ranges = [self._range_for(s, hist, board, bctx) for s in live]
         eq, _ = self.equity(hole, board, ranges, budget)
-        return self._postflop(state, eq, live, hist, bb, pot, to_call, cur, can_raise, legal)
+        return self._postflop(state, eq, live, hist, bb, pot, to_call, cur, can_raise, legal, hole, board)
 
     # ------------------------------------------------------------ preflop
     def _preflop(self, state, hole, live, hist, budget, bb, pot, to_call, cur, can_raise, legal):
@@ -630,7 +708,17 @@ class Agent:
         return {"action": "fold"}
 
     # ------------------------------------------------------------ postflop
-    def _postflop(self, state, eq, live, hist, bb, pot, to_call, cur, can_raise, legal):
+    def big_post(self, seat, reraise):
+        st = self._st(seat)
+        if st.hands >= 25 and st.r_vpip() > 0.38:
+            pri = LOOSE_PRIOR_RERAISE if reraise else LOOSE_PRIOR_BET
+        else:
+            pri = BIG_PRIOR_RERAISE if reraise else BIG_PRIOR_BET
+        c = [st.big[i] + pri[i] for i in range(4)]
+        t = sum(c)
+        return [x / t for x in c]
+
+    def _postflop(self, state, eq, live, hist, bb, pot, to_call, cur, can_raise, legal, hole, board):
         me = state["seat"]
         k = max(1, len(live))
         street = state["street"]
@@ -653,7 +741,7 @@ class Agent:
                 return {"action": "check"}
             hu_strength = eq ** (1.0 / k) if k > 1 else eq
             if eq >= vt:
-                frac = 0.6
+                frac = 0.6 if k == 1 else 0.45
                 if hu_strength > 0.82:
                     frac = 0.85
                 if station:
@@ -678,6 +766,37 @@ class Agent:
         rt = 0.74 / (k ** 0.5)
         if station:
             rt -= 0.05
+        bettor = None
+        n_raises = 0
+        for h in hist:
+            if h["street"] == street and h["action"] == "raise":
+                bettor = h["seat"]
+                n_raises += 1
+        # Big-pot guard: facing a big bet or a raise over a bet, a one-pair hand is worth
+        # what this opponent has actually shown down behind big bets, not its raw equity.
+        reraise = n_raises >= 2
+        if bettor is not None and bettor != me and (to_call >= BIG_CHIPS or (reraise and to_call >= BIG_CHIPS // 2)):
+            hc = hand_class(hole, board)
+            if hc != 4 and hc != 1:
+                pm, pt, pw, pa = self.big_post(bettor, reraise)
+                if hc == 3:
+                    e = pa + pw * 0.85 + pt * 0.5 + pm * 0.08
+                elif hc == 2:
+                    e = pa * 0.9 + pw * 0.45 + pt * 0.12 + pm * 0.04
+                else:
+                    e = pa * 0.45
+                if has_draw(hole, board):
+                    e += 0.17 if len(board) == 3 else 0.10
+                if k > 1:
+                    e *= 0.8 ** (k - 1)
+                if e >= po + (0.0 if hc == 3 else 0.04) + 0.03 * behind:
+                    return {"action": "call"}
+                return {"action": "fold"}
+        if bettor is not None and bettor != me:
+            bs = self._st(bettor)
+            if bs.r_agg() > 0.5 or bs.r_vpip() > 0.55:
+                rt += 0.08      # let the maniac keep bluffing; call down instead
+                margin -= 0.02
         if street == "river":
             rt += 0.03
         if can_raise and eq >= rt:
@@ -685,6 +804,15 @@ class Agent:
         if eq >= po + margin:
             return {"action": "call"}
         return {"action": "fold"}
+
+
+try:
+    import gc
+    gc.collect()
+    gc.freeze()          # lookup tables never need scanning again: no long GC pauses mid-decision
+    gc.set_threshold(50000, 50, 100)
+except Exception:
+    pass
 
 
 def board_street(n):
