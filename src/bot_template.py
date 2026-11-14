@@ -164,13 +164,13 @@ class Stats:
         self.allin = 0
 
     def r_vpip(self):
-        return (self.vpip + 0.35 * 12) / (self.hands + 12)
+        return (self.vpip + 0.24 * 12) / (self.hands + 12)
 
     def r_pfr(self):
-        return (self.pfr + 0.17 * 12) / (self.hands + 12)
+        return (self.pfr + 0.15 * 12) / (self.hands + 12)
 
     def r_ftb(self):
-        return (self.ftb_fold + 0.45 * 8) / (self.ftb_faced + 8)
+        return (self.ftb_fold + 0.42 * 8) / (self.ftb_faced + 8)
 
     def r_agg(self):
         return (self.pf_agg + 0.35 * 10) / (self.pf_agg + self.pf_pass + 10)
@@ -187,6 +187,25 @@ def _connects(a, b, branks, bsuit, bmask):
     if sa == sb and bsuit[sa] >= 2:
         return True
     if bsuit[sa] >= 3 or bsuit[sb] >= 3:
+        return True
+    if DRAW4[bmask | (1 << ra) | (1 << rb)] and not DRAW4[bmask]:
+        return True
+    return False
+
+
+def _strong(a, b, branks, bsuit, bmask, bpaired, bmax):
+    ra, rb = a >> 2, b >> 2
+    if ra == rb:
+        return ra in branks or ra > bmax
+    ina, inb = ra in branks, rb in branks
+    if ina and inb:
+        return True
+    if (ina and ra in bpaired) or (inb and rb in bpaired):
+        return True
+    sa, sb = a & 3, b & 3
+    if sa == sb and bsuit[sa] >= 2:
+        return True
+    if bsuit[sa] >= 4 or bsuit[sb] >= 4:
         return True
     if DRAW4[bmask | (1 << ra) | (1 << rb)] and not DRAW4[bmask]:
         return True
@@ -300,9 +319,15 @@ class Agent:
         post_agg = False
         post_agg_this = False
         post_called = False
+        post_reraise = False
         street = board_street(len(board))
+        st_cur = {}
         for h in hist:
             a = h["action"]
+            if h["street"] != "preflop" and a == "raise":
+                if h["seat"] == seat and st_cur.get(h["street"], 0) > 0:
+                    post_reraise = True
+                st_cur[h["street"]] = max(st_cur.get(h["street"], 0), h.get("amount") or 0)
             if h["street"] == "preflop":
                 if a == "raise":
                     if h["seat"] == seat:
@@ -339,14 +364,17 @@ class Agent:
         rng = COMBOS[:k]
         if not board or not (post_agg or post_called):
             return rng, None, 0.0
-        branks, bsuit, bmask = bctx
+        branks, bsuit, bmask, bpaired, bmax = bctx
         strong, weak = [], []
+        test = _strong if post_reraise else _connects
         for ab in rng:
-            if _connects(ab[0], ab[1], branks, bsuit, bmask):
+            if test(ab[0], ab[1], branks, bsuit, bmask) if test is _connects else test(ab[0], ab[1], branks, bsuit, bmask, bpaired, bmax):
                 strong.append(ab)
             else:
                 weak.append(ab)
-        if post_agg:
+        if post_reraise:
+            keep = st.r_bluff() * 0.5
+        elif post_agg:
             keep = st.r_bluff() * (0.6 if post_agg_this and street != "flop" else 1.0)
             keep = max(0.05, min(1.0, keep * 1.2))
         else:
@@ -373,7 +401,7 @@ class Agent:
             else:
                 pw = 0.0
             plans.append((strong, len(strong), weak, len(weak) if weak else 0, pw))
-        t_end = time.perf_counter() + budget
+        t_end = min(time.perf_counter() + budget, getattr(self, "t0", time.perf_counter()) + 0.0019)
         wins = 0.0
         n = 0
         while True:
@@ -456,6 +484,7 @@ class Agent:
     # ------------------------------------------------------------ act
     def act(self, state):
         t0 = time.perf_counter()
+        self.t0 = t0
         try:
             out = self._act(state)
         except Exception:
@@ -474,7 +503,9 @@ class Agent:
         left = 8.0 - self.used
         hands_left = max(1, self.total_hands - hand_no + 1) if hasattr(self, "total_hands") else 500
         b = left / (hands_left * 0.9)
-        return max(0.0006, min(0.0028, b))
+        b = max(0.0005, min(0.0017, b))
+        # absolute: thinking ends b after act() started, whatever range building cost
+        return max(0.0002, b - (time.perf_counter() - self.t0))
 
     def _raise(self, state, target):
         lo, hi = state["min_raise_to"], state["max_raise_to"]
@@ -516,7 +547,8 @@ class Agent:
             for c in board:
                 bsuit[c & 3] += 1
                 bmask |= 1 << (c >> 2)
-            bctx = (branks, bsuit, bmask)
+            bpaired = set(r for r in branks if sum(1 for c in board if c >> 2 == r) >= 2)
+            bctx = (branks, bsuit, bmask, bpaired, max(branks))
 
         if not board:
             return self._preflop(state, hole, live, hist, budget, bb, pot, to_call, cur, can_raise, legal)
