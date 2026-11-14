@@ -1,0 +1,14 @@
+timestamp,commit,bot,field,rounds,tables,hands,betting,raise_cap,bb100,se,ci95_lo,ci95_hi,timeouts,errors,bank_out,think_s_max,max_ms,seed,bots_at_table,vpip,pfr
+2026-11-14 14:06:29,834b5cc+dirty,bot.py,mixed,20,20,1000,no_limit,0,612.49,79.88,445.53,779.44,0,0,0,0.91,5.7,104,bot.py,0.239,0.167
+2026-11-14 14:06:48,834b5cc+dirty,bot.py,house,20,20,1000,no_limit,0,1533.88,103.71,1317.13,1750.63,1,0,0,0.95,17.6,104,bot.py,0.349,0.295
+2026-11-14 14:07:10,834b5cc+dirty,bot.py,stations,20,20,1000,no_limit,0,1699.34,84.45,1522.84,1875.84,0,0,0,0.96,4.1,104,bot.py,0.412,0.405
+2026-11-14 14:07:20,834b5cc+dirty,bot.py,maniacs,20,20,1000,no_limit,0,474.28,55.59,358.10,590.47,0,0,0,0.89,2.2,104,bot.py,0.142,0.061
+2026-11-14 14:07:27,834b5cc+dirty,bot.py,nits,20,20,1000,no_limit,0,55.09,4.46,45.77,64.41,0,0,0,0.33,4.3,104,bot.py,0.488,0.482
+2026-11-14 14:07:46,834b5cc+dirty,bot.py,tight,20,20,1000,no_limit,0,525.07,29.71,462.96,587.17,0,0,0,0.74,1.6,104,bot.py,0.266,0.216
+2026-11-14 14:08:24,834b5cc+dirty,bot.py,mixed,20,40,1000,no_limit,0,579.38,45.81,489.60,669.16,0,0,0,0.87,5.0,105,bot.py;versions/v0_starter.py,0.243,0.167
+2026-11-14 14:08:24,834b5cc+dirty,versions/v0_starter.py,mixed,20,40,1000,no_limit,0,604.62,62.05,483.00,726.25,0,0,0,0.27,2.6,105,bot.py;versions/v0_starter.py,0.657,0.247
+2026-11-14 14:09:07,834b5cc+dirty,bot.py,tight,20,40,1000,no_limit,0,492.34,21.08,451.03,533.65,0,0,0,0.62,7.4,106,bot.py;versions/v1.py,0.251,0.198
+2026-11-14 14:09:07,834b5cc+dirty,versions/v1.py,tight,20,40,1000,no_limit,0,446.85,19.23,409.15,484.55,0,0,0,1.25,3.5,106,bot.py;versions/v1.py,0.201,0.162
+2026-11-14 14:09:52,834b5cc+dirty,bot.py,house,20,20,1000,no_limit,0,1322.59,88.16,1138.32,1506.85,0,0,0,0.96,2.3,107,bot.py,0.347,0.295
+2026-11-14 14:10:34,834b5cc+dirty,bot.py,tight,20,40,1000,no_limit,0,397.57,18.88,360.57,434.58,0,0,0,0.66,4.7,108,bot.py;versions/v0_starter.py,0.262,0.207
+2026-11-14 14:10:34,834b5cc+dirty,versions/v0_starter.py,tight,20,40,1000,no_limit,0,557.19,28.54,501.25,613.12,0,0,0,0.19,1.7,108,bot.py;versions/v0_starter.py,0.690,0.322
