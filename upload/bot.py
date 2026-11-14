@@ -18,6 +18,7 @@ DEBUG = False
 BIG_CALL = 300          # chips to call from which a decision counts as big
 BIG_BUDGET = 0.0035    # seconds of simulation for a big decision (about 400 samples on the server)
 WEAK_PAIR_BET = 0.5     # bet size (share of the pot before it) from which the weak-pair rule applies
+RAISE_SMALL = True      # V21: raise small bets heads up when the bettor's folds pay for it
 WEAK_PAIR_MARGIN = 0.10 # extra equity a pair below top pair needs on flop and turn against such bets
 _now = time.perf_counter
 
@@ -230,7 +231,7 @@ for _c in _SH_TOP + _rest:
 class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
-                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb")
+                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "sr_o", "sr_f")
 
     def __init__(self):
         for k in self.__slots__:
@@ -278,6 +279,11 @@ class St:
     def r_cb(self):
         """How often he bets the flop after raising preflop (field: about 70%)."""
         return (self.cb + 0.70 * 6) / (self.cb_o + 6)
+
+    def r_smallraise(self, river):
+        """How often he gives up when his own small bet (under 40% of the pot) is raised.
+        Field: 71% on the flop, 72% on the turn, 63% on the river (279 real cases)."""
+        return (self.sr_f + 5 * (0.63 if river else 0.70)) / (self.sr_o + 5)
 
     def r_bx(self):
         """His usual bet size, in pots."""
@@ -420,6 +426,8 @@ class Agent:
         agg_by = {}            # street -> seat that made its last bet or raise
         callers_by = {}        # street -> seats that called on it
         checked = set()        # seats that checked on the current street
+        first_bet = None       # (seat, size in pots) of the first bet of the current street
+        small_raised = -1      # seat whose small bet has just been raised
         for h in hist:
             s = h["seat"]
             a = h["action"]
@@ -434,6 +442,8 @@ class Agent:
                 bets = {}
                 cur = 0
                 checked = set()
+                first_bet = None
+                small_raised = -1
             if a == "small_blind" or a == "big_blind":
                 bets[s] = amt
                 if amt > cur:
@@ -484,6 +494,11 @@ class Agent:
                 elif a == "call":
                     vp.add(s)
             else:
+                if s == small_raised:
+                    small_raised = -1
+                    S.sr_o += 1
+                    if a == "fold":
+                        S.sr_f += 1
                 if cur > mine:
                     S.fb_o += 1
                     if a == "fold":
@@ -517,6 +532,11 @@ class Agent:
                 if street != "preflop":
                     last_raise = cur > 0
                     last_x = (amt - cur) / float(pot + cur - mine) if cur > 0 else amt / float(pot or 1)
+                    if cur == 0:
+                        first_bet = (s, last_x)
+                    elif first_bet is not None and first_bet[1] < 0.4 and s != first_bet[0]:
+                        small_raised = first_bet[0]
+                        first_bet = None
                 pot += amt - mine
                 bets[s] = amt
                 cur = amt
@@ -1228,6 +1248,21 @@ class Agent:
             if bets[s] < cur and stacks[s] > 0:
                 behind += 1
         ev_call = eq * (pot + c) - c
+        # V21, only change from V20: heads up, raise a bet under 40% of the pot to 3 times its
+        # size when the bettor's measured folds pay for it. Field: authors of such bets give up
+        # about 7 times in 10 when raised; each seat's own rate takes over as it is observed.
+        if RAISE_SMALL and can_raise and hi is not None and len(live) == 1 and behind == 0 and not allin and not nofold:
+            v = live[0]
+            xb0 = L[6][v]
+            if 0 < xb0 < 0.4 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
+                r_to = max(lo, 3 * cur)
+                if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
+                    pfr_ = self.st[v].r_smallraise(river)
+                    a_ = r_to - mybet
+                    eqc_ = max(floor * eq, (eq - pfr_) / (1.0 - pfr_)) if pfr_ < 0.999 else eq
+                    ev_r = pfr_ * pot + (1.0 - pfr_) * (eqc_ * (pot + a_ + (r_to - cur)) - a_)
+                    if ev_r > max(ev_call, 0.0) + 0.05 * pot:
+                        return {"action": "raise", "amount": int(r_to)}
         if can_raise and eq >= (0.52 if nofold else 0.62) and hi is not None:
             r_to = hi if nofold else cur + 0.9 * (pot + c)
             if r_to >= 0.62 * hi:
