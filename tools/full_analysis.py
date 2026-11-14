@@ -26,7 +26,7 @@ def equity(hands,board,n=3000):
             if x==m:w[i]+=1.0/k
         cnt+=1
     return [x/cnt for x in w]
-VER={1:'v5',2:'v5'};[VER.__setitem__(r,'v6') for r in range(3,12)];[VER.__setitem__(r,'v7') for r in range(12,22)];[VER.__setitem__(r,'v8') for r in range(22,60)]
+VER={1:'v5',2:'v5'};[VER.__setitem__(r,'v6') for r in range(3,12)];[VER.__setitem__(r,'v7') for r in range(12,22)];[VER.__setitem__(r,'v8') for r in range(22,30)];[VER.__setitem__(r,'v11') for r in range(30,60)]
 def pos(rel,n):
     if rel==0:return 'BTN'
     if rel==1:return 'SB'
@@ -114,7 +114,7 @@ for f in sorted(glob.glob(__import__('os').path.join(__import__('os').environ.ge
 bb=lambda xs:sum(xs)/20.0
 out=[]
 out.append("## rounds");[out.append("R%02d %s %+7.1f to=%d think=%s table=%d vs %s"%(r[0],r[1],r[2],r[3],r[4],r[5],', '.join(r[6]))) for r in rounds]
-for v in ('v5','v6','v7','v8'):
+for v in [x for x in ('v5','v6','v7','v8','v11') if A[x]['all']]:
     al=A[v]['all'];N=len(al);out.append("\n## %s hands=%d bb/100=%+.1f sd_per_hand_bb=%.1f se_bb100=%.1f"%(v,N,bb(al)/N*100,S.pstdev(al)/20,S.pstdev(al)/20/N**.5*100))
     for p in ('EP','HJ','CO','BTN','SB','BB'):
         x=A[v]['pos_'+p]
@@ -132,7 +132,7 @@ for v in ('v5','v6','v7','v8'):
     out.append("  lost most to: "+', '.join("%s %+.0f"%(k,x/20) for k,x in o[:6]))
     out.append("  won most from: "+', '.join("%s %+.0f"%(k,x/20) for k,x in o[::-1][:6]))
 out.append("\n## postflop calls/folds facing bets (final hand result, bb)")
-for v in ('v6','v7'):
+for v in [x for x in ('v6','v7') if A[x]['all']]:
     for st in ('flop','turn','river'):
         for b in ('<.5','.5-1','>=1'):
             cl=calls[(v,st,b,'call')];fd=calls[(v,st,b,'fold')]
@@ -145,7 +145,7 @@ out.append("\n## per-round luck (bb/100) and luck-adjusted")
 for r in rounds:
     lk=rluck[r[0]]/20/10.0
     out.append("R%02d %s actual %+7.1f luck %+7.1f adjusted %+7.1f%s"%(r[0],r[1],r[2],lk,r[2]-lk,' (ediz table)' if 'ediz_slow' in r[6] else ''))
-for v in ('v6','v7'):
+for v in [x for x in ('v6','v7') if A[x]['all']]:
     rr=[r for r in rounds if r[1]==v];adj=[r[2]-rluck[r[0]]/200.0 for r in rr];adjn=[r[2]-rluck[r[0]]/200.0 for r in rr if 'ediz_slow' not in r[6]]
     out.append("%s mean actual %+.1f  luck-adjusted %+.1f  luck-adjusted without ediz tables %+.1f (n=%d rounds)"%(v,S.mean([r[2] for r in rr]),S.mean(adj),S.mean(adjn),len(adjn)))
 print('\n'.join(out))

@@ -17,6 +17,8 @@ import time
 DEBUG = False
 BIG_CALL = 300          # chips to call from which a decision counts as big
 BIG_BUDGET = 0.0035    # seconds of simulation for a big decision (about 400 samples on the server)
+WEAK_PAIR_BET = 0.5     # bet size (share of the pot before it) from which the weak-pair rule applies
+WEAK_PAIR_MARGIN = 0.10 # extra equity a pair below top pair needs on flop and turn against such bets
 _now = time.perf_counter
 
 # ----------------------------------------------------------------- evaluator
@@ -1244,6 +1246,39 @@ class Agent:
             if eqc >= 0.5 and ev_raise > ev_call + 0.02 * pot:
                 return {"action": "raise", "amount": int(r_to)}
         margin = 0.03 * behind
+        # V20, only change from v14p: on the flop and turn, a pair below top pair (no draw)
+        # facing a bet of half the pot or more needs more equity. On 35 real rounds these calls
+        # lost 1,957 big blinds (flop and turn, 244 calls) while the same calls against smaller
+        # bets won 3,833. Not applied against seats that bet with anything (kit-like, VPIP 50%+).
+        if not river and not mydraw and c >= WEAK_PAIR_BET * (pot - c):
+            r0 = h0 >> 2
+            r1 = h1 >> 2
+            top = 0
+            for x in board:
+                if (x >> 2) > top:
+                    top = x >> 2
+            hit0 = False
+            hit1 = False
+            for x in board:
+                if (x >> 2) == r0:
+                    hit0 = True
+                if (x >> 2) == r1:
+                    hit1 = True
+            pr = -1
+            if r0 == r1 and not hit0:
+                pr = r0                                  # pocket pair
+            elif hit0 != hit1:
+                pr = r0 if hit0 else r1                  # one hole card pairs the board
+            cat_ok = (myv >> 20) == 1 or ((myv >> 20) == 2 and paired)
+            if cat_ok and 0 <= pr < top:
+                loose = False
+                for s in live:
+                    if bets[s] == cur:
+                        S = self.st[s]
+                        if S.starter() or S.r_vpip() >= 0.5:
+                            loose = True
+                if not loose:
+                    margin += WEAK_PAIR_MARGIN
         if not river and c < mystack:
             margin += 0.03
             if mydraw and c <= 0.25 * mystack:

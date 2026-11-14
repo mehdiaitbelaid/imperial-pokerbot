@@ -58,7 +58,7 @@ for f in sys.argv[1:]:
                     size = "under half pot" if amt < 0.34 * pot else ("half to pot" if amt < 0.49 * pot else "pot or more")
                     gain = r + inv
                     cls = hand_class(h["hole"][str(me)], board)
-                    for key in ((street, "ALL", ""), (street, cls, ""), ("any street", "ALL", size), ("any street", cls, size)):
+                    for key in ((street, "ALL", ""), (street, cls, ""), ("any street", "ALL", size), ("any street", cls, size), (street, cls, size)):
                         g = G[key]; g[0] += 1; g[1] += r > 0; g[2] += gain
                 if a == "raise":
                     add = amt - bets[s]; pot += add; bets[s] = amt
