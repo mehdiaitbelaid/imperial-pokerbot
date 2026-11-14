@@ -3,16 +3,23 @@
 import json, sys
 from collections import defaultdict
 worst_n = 12
+focus = None
 files = []
 _it = iter(sys.argv[1:])
 for _a in _it:
     if _a == "--worst":
         worst_n = int(next(_it))
+    elif _a == "--focus":
+        focus = next(_it)
     elif not _a.startswith("--"):
         files.append(_a)
 B = defaultdict(lambda: [0, 0.0]); N = 0; worst = []
 for f in files:
     d = json.load(open(f)); P = d["players"]; me = d["seat"]
+    if focus:
+        if focus not in P:
+            continue
+        me = P.index(focus)
     for h in d["hands"]:
         N += 1; r = h["results"][me]; ev = h["events"]
         street = "preflop"; mine = []; cur = 0; mybet = 0; line = []
@@ -55,7 +62,7 @@ for f in files:
             elif calledp: k = "called the flop, folded the turn"
             else: k = ("raised" if raised else "called") + " preflop, check-folded flop or turn"
         B[k][0] += 1; B[k][1] += r
-        if r <= -400: worst.append((r, f.split("_")[-1][:4], h["n"], "".join(h["hole"][str(me)]), k, "; ".join(line),
+        if r <= -400: worst.append((r, f.split("_")[-1][:4], h["n"], "".join(h["hole"].get(str(me), ["??"])), k, "; ".join(line),
                                     {P[int(s)][:10]: "".join(c) for s, c in h["hole"].items() if int(s) != me}))
 print("%d hands, total %+.1f bb/100" % (N, sum(v[1] for v in B.values()) / 20 / N * 100))
 for k, v in sorted(B.items(), key=lambda kv: kv[1][1]):

@@ -8,6 +8,8 @@ import base64, sys, zlib
 
 pre, post, out = sys.argv[1:4]
 veto = int(sys.argv[sys.argv.index("--veto") + 1]) if "--veto" in sys.argv else 0   # chips; 0 = no veto
+hybrid = "--hybrid" in sys.argv   # our engine bets when nothing is to call and may raise; partner handles calls
+exploit = "--exploit" in sys.argv # partner plays postflop; our engine only adds two field-measured overrides
 def pack(path):
     raw = open(path, "rb").read()
     b = base64.b64encode(zlib.compress(raw, 9)).decode()
@@ -38,6 +40,8 @@ del _PRE_SRC, _POST_SRC
 # postflop partner wants to call this many chips or more and that engine would fold, we fold:
 # on the real rounds such calls won about one time in seven.
 VETO_MIN = %d
+HYBRID = %s
+EXPLOIT = %s
 
 
 class Agent:
@@ -70,7 +74,38 @@ class Agent:
     def act(self, state):
         legal = state.get("legal_actions") or ()
         try:
-            out = (self.pre if state.get("street") == "preflop" else self.post).act(state)
+            if state.get("street") == "preflop":
+                out = self.pre.act(state)
+            elif EXPLOIT:
+                out = self.post.act(state)
+                tc = state.get("to_call") or 0
+                if tc > 0:
+                    mine = self.pre.act(state)
+                    if getattr(self.pre, "small_raise", False):
+                        out = mine                         # raise a bet under 40 percent of the pot: its author folds 7 in 10
+                    elif (out.get("action") == "call" and mine.get("action") == "fold"
+                          and state.get("street") == "river" and getattr(self.pre, "last_cat", 9) <= 1):
+                        raises = 0
+                        for h in state.get("history") or ():
+                            if h["street"] == "river" and h["action"] == "raise":
+                                raises += 1
+                        if raises >= 2 or tc >= 0.45 * (state.get("pot") or 1):
+                            out = mine                     # one pair against a river raise or a pot-size river bet
+            elif HYBRID:
+                tc = state.get("to_call") or 0
+                if tc <= 0:
+                    out = self.pre.act(state)              # our own betting: small bets, stabs, value
+                else:
+                    mine = self.pre.act(state)
+                    if mine.get("action") == "raise":
+                        out = mine                         # value raise, or a raise of a small bet
+                    else:
+                        out = self.post.act(state)
+                        if (out.get("action") == "call" and mine.get("action") == "fold"
+                                and state.get("street") == "river" and tc >= 0.45 * (state.get("pot") or 1)):
+                            out = mine                     # pot-size river bet that our engine will not pay
+            else:
+                out = self.post.act(state)
         except Exception:
             out = None
         a = out.get("action") if isinstance(out, dict) else None
@@ -89,6 +124,7 @@ class Agent:
         if a == "fold" and "check" not in legal:
             return {"action": "fold"}
         return {"action": "check"} if "check" in legal else {"action": "fold"}
-''' % (pre.split("/")[-1], post.split("/")[-1], pack(pre), pack(post), veto)
+''' % (pre.split("/")[-1], post.split("/")[-1], pack(pre), pack(post), veto,
+       "True" if hybrid else "False", "True" if exploit else "False")
 open(out, "w").write(src)
 print("wrote", out, len(src.encode()), "bytes")

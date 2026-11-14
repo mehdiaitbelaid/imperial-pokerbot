@@ -200,6 +200,19 @@ def _q(u):
     return 1.0
 
 
+def _size_tell(score, is_air):
+    """Real bots size up with strong hands: bets of a pot or more shown down were two pair or
+    better 69% of the time, and callers of a bigger-than-usual river bet won about 15%."""
+    if is_air:
+        return 1.4 if random.random() < 0.15 else 0.8
+    if score >= 0.80:
+        return 1.35
+    if score >= 0.66:
+        return 1.15
+    return 0.85
+
+
+
 class ProfileAgent:
     P = {}
     DEFAULTS = dict(vpip=0.25, pfr=0.18, limp=0.0, three_bet=0.05, fold_to_3bet=0.60, open_size_bb=2.5,
@@ -417,7 +430,7 @@ class ProfileAgent:
             if not do:
                 return self._passive(la)
             self._adj("ka", P["air"] - (1 if is_air else 0), self.G_AIR, 0.0, 3.0)
-            return self._raise(st, la, P["bet_size"] * pot * random.uniform(0.85, 1.15), commit=0.8)
+            return self._raise(st, la, P["bet_size"] * pot * random.uniform(0.85, 1.15) * _size_tell(score, is_air), commit=0.8)
 
         # facing a bet or raise: fold the weakest, raise the strongest
         frac = to_call / float(max(1, pot - to_call))
@@ -431,7 +444,7 @@ class ProfileAgent:
         fold = rais = 0
         if can_raise and nr < 4 and prio > c["tr"]:
             cur = max(st["bets"])
-            out = self._raise(st, la, cur + P["bet_size"] * (pot + to_call) * random.uniform(0.85, 1.15), commit=0.6)
+            out = self._raise(st, la, cur + P["bet_size"] * (pot + to_call) * random.uniform(0.85, 1.15) * _size_tell(score, is_air), commit=0.6)
             rais = 1 if out["action"] == "raise" else 0
             if rais:
                 self._adj("ka", P["air"] - (1 if is_air else 0), self.G_AIR, 0.0, 3.0)
