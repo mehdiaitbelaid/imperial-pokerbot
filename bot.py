@@ -8,6 +8,8 @@ preflop action, postflop line and the stats we keep on that seat this round.
 Everything a teammate may want to tune sits in the PARAMETERS block below.
 Standard library only, no file or network access.
 """
+import bisect
+import gc
 import random
 import time
 
@@ -24,9 +26,13 @@ ISO_TIGHTEN = 0.75         # open threshold multiplier when limpers are in
 OVERLIMP_Q = 0.30          # call behind limpers in late position with q under this
 SB_COMPLETE_Q = 0.45       # small blind completes a limped pot under this
 STEAL_WIDEN = 1.3          # widen opens when players behind fold a lot
+STEAL_ALL_FOLD = (0.65, 0.60, 0.50, 0.42)  # if P(all behind fold) >= a open top b, else if >= c open top d
+LOOSE_VPIP = 0.45          # players behind looser than this on average: open wider for value
+LOOSE_OPEN_Q = 0.28        # open threshold at LOOSE_VPIP, rising 0.3 per unit of extra looseness
+SPAMMER_OPEN_CAP = 0.22    # with an all in spammer behind only open hands that can call a shove
 THREEBET_Q = 0.035         # always 3 bet for value under this
-THREEBET_VS_WIDE = 0.30    # also 3 bet hands in the top share of a wide opener's range
-CALL_RAISE_BASE = 0.65     # call a raise with q under raiser_range * this (scaled by size)
+THREEBET_VS_WIDE = 0.40    # also 3 bet hands in the top share of a wide opener's range
+CALL_RAISE_BASE = 0.85     # call a raise with q under raiser_range * this (scaled by size)
 BB_DEFEND_BONUS = 0.10     # extra q the big blind defends against small raises
 FOURBET_Q = 0.020          # 4 bet or jam under this
 CALL_3BET_Q = 0.050        # call a 3 bet under this when we opened
@@ -50,17 +56,24 @@ CBET_SIZE = 0.50
 SEMI_BLUFF_FREQ = 0.40
 BARREL_FREQ = 0.25         # turn bluff as aggressor against folders
 RIVER_BLUFF_FREQ = 0.30    # river bluff against players who overfold
+AIR_FOLD_BET = 0.5         # heads up on flop or turn, fold air with no draw to bets this big (pot share)
+WEAK_PAIR_MARGIN = 0.04    # extra equity a weak pair needs against big bets from non maniacs
 TRAP_FREQ = 0.50           # slow play strong hands against maniacs before the river
 
 # Opponent model
-PRIOR_N = 12               # pseudo hands used to smooth every stat
-PRIOR = {"vpip": 0.35, "pfr": 0.15, "tb": 0.06, "shv": 0.02, "agg": 0.30,
-         "fbet": 0.40, "frv": 0.40}
+PRIOR_N = 10               # pseudo hands used to smooth every stat
+# Population priors from the live practice field: mostly tight, fairly passive bots.
+PRIOR = {"vpip": 0.24, "pfr": 0.15, "tb": 0.06, "shv": 0.02, "agg": 0.30,
+         "fbet": 0.45, "frv": 0.45}
+BLUFF_BASE = 0.25          # share of air an average bettor keeps betting
+RANGE_BLUR = 0.35          # postflop share of samples drawn from a wider range than our read
+RANGE_BLUR_MULT = 3.0      # how much wider; guards against reads that are too tight
+BARREL_DECAY = 0.7         # air and weak pair weights shrink by this per extra street bet
 MIN_HANDS_CLASSIFY = 25
 
 # Time control (seconds). The round bank is 10 s; we aim well under it.
-ROUND_TARGET = 3.5         # total think time we allow ourselves per round
-MC_MAX = 0.0022            # max Monte Carlo time per decision
+ROUND_TARGET = 1.3         # total think time we allow ourselves per round
+MC_MAX = 0.0009            # max Monte Carlo time per decision
 MC_TRIALS_MAX = 600
 TRANSPORT_EST = 0.0002     # transport cost per decision we do not see but the bank does
 # ========================================================================
@@ -225,6 +238,20 @@ for _a in range(52):
             PCT[_a * 52 + _b] = CLASS_PCT[hand_class(_a, _b)]
 
 
+COMBOS = []
+for _a in range(52):
+    for _b in range(_a + 1, 52):
+        COMBOS.append((PCT[_a * 52 + _b], _a, _b))
+COMBOS.sort()
+COMBO_PCT = [c[0] for c in COMBOS]
+COMBOS = [(c[1], c[2]) for c in COMBOS]
+
+
+def range_size(width):
+    """Number of combos in the top `width` share of hands."""
+    return max(6, min(1326, bisect.bisect_right(COMBO_PCT, width + 1e-9)))
+
+
 def board_info(board):
     cnt = [0] * 13
     suit = [0, 0, 0, 0]
@@ -274,49 +301,61 @@ def cat_of(a, b, bi):
     return 0
 
 
-def equity(hole, board, opps, deadline, rng):
+def equity(hole, board, opps, deadline, rng, blur=0.0):
     """Monte Carlo share of the pot against opponents described by
     (range_width, weights or None). Returns (equity, trials)."""
-    dead = set(hole) | set(board)
-    deck = [c for c in range(52) if c not in dead]
+    dead = [False] * 52
+    for c in hole:
+        dead[c] = True
+    for c in board:
+        dead[c] = True
+    deck = [c for c in range(52) if not dead[c]]
     n = len(deck)
     need = 5 - len(board)
     bi = board_info(board)
     rnd = rng.random
     clock = time.perf_counter
+    sizes = [range_size(rw) for rw, _ in opps]
+    wide = [range_size(min(1.0, rw * RANGE_BLUR_MULT)) for rw, _ in opps]
     mine_fixed = ev(hole + board) if need == 0 else 0
     won = 0.0
     trials = 0
     while trials < MC_TRIALS_MAX:
-        if (trials & 7) == 0 and clock() > deadline:
+        if (trials & 3) == 0 and clock() > deadline:
             break
-        pos = 0
+        used = list(dead)
         hands = []
-        for rw, w in opps:
-            a = b = 0
-            for _ in range(10):
-                i = pos + int(rnd() * (n - pos))
-                deck[pos], deck[i] = deck[i], deck[pos]
-                j = pos + 1 + int(rnd() * (n - pos - 1))
-                deck[pos + 1], deck[j] = deck[j], deck[pos + 1]
-                a, b = deck[pos], deck[pos + 1]
-                if PCT[a * 52 + b] > rw:
+        for (rw, w), k, kw in zip(opps, sizes, wide):
+            if blur and rnd() < blur:
+                k = kw
+            pick = None
+            for _ in range(24):
+                a, b = COMBOS[int(rnd() * k)]
+                if used[a] or used[b]:
                     continue
+                pick = (a, b)
                 if w is not None and rnd() > w[cat_of(a, b, bi)]:
                     continue
                 break
-            hands.append((a, b))
-            pos += 2
-        full = board
+            if pick is None:
+                while True:
+                    a = deck[int(rnd() * n)]
+                    b = deck[int(rnd() * n)]
+                    if a != b and not used[a] and not used[b]:
+                        pick = (a, b)
+                        break
+            used[pick[0]] = used[pick[1]] = True
+            hands.append(pick)
         if need:
             full = list(board)
-            for _ in range(need):
-                i = pos + int(rnd() * (n - pos))
-                deck[pos], deck[i] = deck[i], deck[pos]
-                full.append(deck[pos])
-                pos += 1
+            while len(full) < 5:
+                c = deck[int(rnd() * n)]
+                if not used[c]:
+                    used[c] = True
+                    full.append(c)
             mine = ev(hole + full)
         else:
+            full = board
             mine = mine_fixed
         best = True
         ties = 0
@@ -359,7 +398,7 @@ def _new_stats():
     return {"h": 0, "vpip": 0, "pfr": 0, "tb": 0, "tb_opp": 0, "shv": 0,
             "rn": 0, "minr": 0, "rsz": 0.0, "agg": 0, "pas": 0, "chk": 0,
             "fbet": 0, "fbet_opp": 0, "frv": 0, "frv_opp": 0, "sd": 0,
-            "sd_raise": [], "sd_call": []}
+            "sd_raise": [], "sd_call": [], "sd_shove": []}
 
 
 class Agent:
@@ -386,6 +425,10 @@ class Agent:
         except Exception:
             pass
         self.cache = {}
+        self._ends = getattr(self, "_ends", 0) + 1
+        if self._ends % 100 == 0:
+            # collection is switched off during play; sweep here, outside any decision
+            gc.collect()
 
     def act(self, state):
         t0 = time.perf_counter()
@@ -458,6 +501,7 @@ class Agent:
         nraise = 0
         last_inc = bb
         pre_role = {}
+        shovers = set()
         for h in hist:
             seat = h.get("seat")
             act = h.get("action")
@@ -501,6 +545,7 @@ class Agent:
                     s["rsz"] += amt / float(bb)
                     if allin:
                         s["shv"] += 1
+                        shovers.add(seat)
                 else:
                     s["agg"] += 1
                     if facing:
@@ -550,6 +595,8 @@ class Agent:
             s = self._st(seat)
             s["sd"] += 1
             role = pre_role.get(seat)
+            if seat in shovers:
+                s["sd_shove"].append(PCT[a * 52 + b])
             if role == "r":
                 s["sd_raise"].append(PCT[a * 52 + b])
             elif role == "c":
@@ -608,6 +655,8 @@ class Agent:
         r = PRIOR["shv"]
         if s and s["h"]:
             r = (s["shv"] + PRIOR["shv"] * PRIOR_N) / (s["h"] + PRIOR_N)
+            if len(s["sd_shove"]) >= 2:
+                r = max(r, min(1.0, 2.0 * sum(s["sd_shove"]) / len(s["sd_shove"])))
             if len(s["sd_raise"]) >= 3 and self._type(seat) == "spammer":
                 r = max(r, min(1.0, 2.0 * sum(s["sd_raise"]) / len(s["sd_raise"])))
         return min(1.0, max(0.03, r))
@@ -622,7 +671,7 @@ class Agent:
             acts = s["agg"] + s["pas"] + s["chk"]
             aggf = (s["agg"] + 0.3 * PRIOR_N) / (acts + PRIOR_N)
             vpip = self._rate(seat, "vpip", "h", "vpip")
-        b = 0.25 + 0.6 * (aggf - 0.3) + 0.4 * (vpip - 0.35)
+        b = BLUFF_BASE + 0.6 * (aggf - 0.3) + 0.4 * (vpip - 0.30)
         if t == "maniac":
             b = max(b, 0.70)
         elif t == "nit":
@@ -676,6 +725,7 @@ class Agent:
         cur = 0
         sbet = {}
         last_aggr = None
+        barrels = {}
         for h in hist:
             seat = h.get("seat")
             act = h.get("action")
@@ -698,6 +748,7 @@ class Agent:
                 else:
                     kind = "raise" if cur > sbet.get(seat, 0) and cur > 0 else "bet"
                     _mark(line, seat, stt, kind)
+                    barrels.setdefault(seat, set()).add(stt)
                     last_aggr = seat
                 cur = max(cur, amt)
                 sbet[seat] = amt
@@ -718,7 +769,7 @@ class Agent:
                 allin[i] = True
         line = dict((k, v[1]) for k, v in line.items())
         return {"pre_raises": pre_raises, "limpers": limpers, "callers_after": callers_after,
-                "line": line, "level": level, "allin": allin, "last_aggr": last_aggr}
+                "line": line, "barrels": barrels, "level": level, "allin": allin, "last_aggr": last_aggr}
 
     def _pre_range(self, seat, ctx):
         """Range width implied by a seat's preflop action this hand."""
@@ -730,17 +781,20 @@ class Agent:
                     r = min(r, 0.45)
                 return r
             return 1.0
-        if self._type(seat) == "spammer":
-            return self._shove_range(seat)
+        t = self._type(seat)
         if lv == 1:
             r = self._open_range(seat)
         elif lv == 2:
             r = self._threebet_range(seat)
         else:
-            r = 0.025
-        if ctx["allin"].get(seat) and lv == 1:
-            r = min(r, max(self._shove_range(seat), 0.05))
-        return r
+            r = max(0.025, 0.4 * self._threebet_range(seat))
+        wild = t in ("maniac", "spammer")
+        if wild:
+            r = max(r, 0.8 * self._open_range(seat))
+        if ctx["allin"].get(seat):
+            sr = self._shove_range(seat)
+            r = max(sr, 0.8 * self._open_range(seat)) if wild else max(min(r, sr), 0.03)
+        return min(1.0, r)
 
     def _budget(self, hand_no):
         left = ROUND_TARGET - self.used
@@ -757,7 +811,7 @@ class Agent:
         b = self._budget(self._hand_no)
         eq = None
         if b > 0.0002 and opps:
-            eq, n = equity(hole, board, opps, ctx["t0"] + b, self.rng)
+            eq, n = equity(hole, board, opps, ctx["t0"] + b, self.rng, RANGE_BLUR if board else 0.0)
             if n < 12:
                 eq = None
         if eq is None:
@@ -819,12 +873,27 @@ class Agent:
                 thr = OPEN_Q[1]
             if nbehind <= 2 and behind and loose_behind < 0.25:
                 thr *= STEAL_WIDEN
-            if nbehind <= 2 and loose_behind > 0.55:
-                thr = min(thr, 0.22)
             if limpers:
                 thr *= ISO_TIGHTEN
             if is_bb:
                 thr = 0.14 if limpers else 0.0
+            pool = behind + [s for s in limpers if s != me]
+            if pool:
+                vp = [self._rate(s, "vpip", "h", "vpip") for s in pool]
+                loose = sum(vp) / len(vp)
+                if loose >= LOOSE_VPIP:
+                    thr = max(thr, LOOSE_OPEN_Q + 0.3 * (loose - LOOSE_VPIP))
+            if behind and not limpers:
+                p_fold = 1.0
+                for s in behind:
+                    p_fold *= 1.0 - self._rate(s, "vpip", "h", "vpip")
+                a, b, c, d = STEAL_ALL_FOLD
+                if p_fold >= a:
+                    thr = max(thr, b)
+                elif p_fold >= c:
+                    thr = max(thr, d)
+            if any(t == "spammer" for t in types_behind):
+                thr = min(thr, SPAMMER_OPEN_CAP)
             if q <= thr:
                 size = OPEN_BTN_BB if rel in (0, 1) else OPEN_BB
                 size += OPEN_LIMPER_BB * len(limpers)
@@ -936,6 +1005,12 @@ class Agent:
             if pot and vb >= 0.5 * pot:
                 w[0] *= 0.7
                 w[2] *= 0.7
+            extra = len(ctx["barrels"].get(seat, ())) - 1
+            if extra > 0:
+                f = BARREL_DECAY ** extra
+                w[0] *= f
+                w[1] *= f
+                w[2] *= f
         return w
 
     def _postflop(self, ctx):
@@ -1009,6 +1084,11 @@ class Agent:
             need -= DRAW_IMPLIED
         if nopp >= 2:
             need += 0.02
+        if nopp == 1 and street != "river" and not maniac_in and to_call >= AIR_FOLD_BET * (pot - to_call):
+            if mycat == 0 and eq < RAISE_EQ[1]:
+                return {"action": "fold"}
+            if mycat == 2:
+                need += WEAK_PAIR_MARGIN
         raise_thr = RAISE_EQ[k]
         if eq >= raise_thr and ctx["can_raise"]:
             if maniac_in and street != "river" and rng() < TRAP_FREQ and eq < 0.95:
@@ -1036,3 +1116,36 @@ class Agent:
     @property
     def _hand_no(self):
         return getattr(self, "_hn", 0)
+
+
+def _warm_up():
+    """Run one decision of each kind at import so the first real ones are not slow."""
+    base = {"hand_number": 1, "seat": 3, "button": 0, "small_blind": 10, "big_blind": 20,
+            "stacks": [2000, 1990, 1980, 2000, 2000, 2000, 2000, 2000],
+            "bets": [0, 10, 20, 0, 0, 0, 0, 0], "folded": [False] * 8, "pot": 30,
+            "to_call": 20, "min_raise_to": 40, "max_raise_to": 2000,
+            "legal_actions": ["fold", "call", "raise"], "betting": "no_limit",
+            "raise_cap": None, "raises_this_street": 0, "street": "preflop", "board": [],
+            "hole_cards": ["As", "Kd"],
+            "history": [{"seat": 1, "street": "preflop", "action": "small_blind", "amount": 10},
+                        {"seat": 2, "street": "preflop", "action": "big_blind", "amount": 20}]}
+    flop = dict(base, street="flop", board=["Ah", "7c", "2d"], to_call=0, pot=130,
+                bets=[0] * 8, legal_actions=["check", "raise"], min_raise_to=20,
+                history=base["history"] + [{"seat": 3, "street": "preflop", "action": "raise", "amount": 60},
+                                           {"seat": 2, "street": "preflop", "action": "call", "amount": 40}],
+                folded=[True, True, False, False, True, True, True, True])
+    shove = dict(base, history=base["history"] + [{"seat": 4, "street": "preflop", "action": "raise", "amount": 2000}])
+    try:
+        a = Agent()
+        a.used = -1.0
+        for st in (base, flop, shove, base, flop):
+            a.act(st)
+            a.cache = {}
+    except Exception:
+        pass
+
+
+_warm_up()
+gc.collect()
+gc.freeze()
+gc.disable()

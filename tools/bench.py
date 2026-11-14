@@ -29,6 +29,11 @@ from engine import FixedHandsTable  # noqa: E402
 from engine.players import SubprocessPlayer  # noqa: E402
 
 BIG_BLIND = 20
+# Fields that always seat these bots before drawing the rest from the pool.
+FIXED = {"tight": ["sparring/maniac.py"]}
+# Behaviour bands a release candidate should sit in (from docs/x-findings.md).
+VPIP_BAND = (0.22, 0.35)
+PFR_BAND = (0.17, 0.27)
 
 
 def _glob(pattern):
@@ -39,6 +44,7 @@ def fields():
     sp = lambda name: os.path.join(HERE, "sparring", name + ".py")  # noqa: E731
     ex = lambda name: os.path.join(HERE, "examples", name + ".py")  # noqa: E731
     return {
+        "tight": [sp("nit"), sp("tag_basic"), sp("pot_odds_bot"), ex("tight_aggressive"), sp("tag_basic")],
         "house": _glob("examples/*.py"),
         "mixed": _glob("sparring/*.py") + _glob("examples/*.py"),
         "stations": [sp("calling_station_plus"), ex("calling_station")],
@@ -71,16 +77,32 @@ def play_table(job):
     players = [SubprocessPlayer(p, timeout_ms=timeout_ms, bank_ms=bank_s * 1000) for p in seats]
     t0 = time.time()
     try:
-        res = FixedHandsTable(players, hands=hands, config=config, seed=seed).play()
+        res = FixedHandsTable(players, hands=hands, config=config, seed=seed, record=True).play()
     finally:
         for p in players:
             p.close()
+    vpip = [0] * len(seats)
+    pfr = [0] * len(seats)
+    for rec in res["log"] or []:
+        v, r = set(), set()
+        for ev in rec["events"]:
+            if ev[0] == "board":
+                break
+            if ev[0] == "act" and ev[2] in ("call", "raise"):
+                v.add(ev[1])
+                if ev[2] == "raise":
+                    r.add(ev[1])
+        for i in v:
+            vpip[i] += 1
+        for i in r:
+            pfr[i] += 1
     out = []
     for i, p in enumerate(players):
         st = p.stats
         out.append({"path": seats[i], "chips": res["chips"][i], "hands": res["hands"],
                     "timeouts": st.timeouts, "errors": st.errors, "bank_out": st.bank_out,
                     "think_s": st.total_ms / 1000.0, "max_ms": st.max_ms,
+                    "vpip": vpip[i], "pfr": pfr[i],
                     "error": st.error_samples[0] if st.error_samples else None})
     return {"seed": seed, "seats": out, "wall": time.time() - t0}
 
@@ -127,8 +149,8 @@ def main():
     ap.add_argument("--field", default="mixed", help="filler pool: " + ", ".join(sorted(fields())))
     ap.add_argument("--rounds", type=int, default=20, help="seeds to play (two tables each when comparing bots)")
     ap.add_argument("--hands", type=int, default=1000)
-    ap.add_argument("--seats", type=int, default=8)
-    ap.add_argument("--jobs", type=int, default=0, help="parallel tables (default and cap: half the cores)")
+    ap.add_argument("--seats", type=int, default=8, help="seats per table; 0 draws 6 to 8 each table")
+    ap.add_argument("--jobs", type=int, default=0, help="parallel tables (default a third of the cores, capped at half)")
     ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--betting", choices=["no_limit", "pot_limit", "fixed_limit"], default="no_limit")
     ap.add_argument("--raise-cap", type=int, default=0)
@@ -141,18 +163,19 @@ def main():
     bots = [resolve(b) for b in args.bots]
     if len(set(bots)) != len(bots):
         sys.exit("Name each bot once.")
-    if len(bots) > args.seats:
+    if len(bots) > (args.seats or 6):
         sys.exit("Too many bots for %d seats." % args.seats)
     pool_map = fields()
     if args.field not in pool_map:
         sys.exit("Unknown field %s. Pick one of: %s" % (args.field, ", ".join(sorted(pool_map))))
     pool = [p for p in pool_map[args.field] if p not in bots and os.path.isfile(p)]
+    fixed = [os.path.join(HERE, p) for p in FIXED.get(args.field, [])]
     if not pool:
         sys.exit("Field %s has no filler bots left." % args.field)
 
     cores = os.cpu_count() or 2
     cap = max(1, cores // 2)
-    jobs = args.jobs or cap
+    jobs = args.jobs or max(1, cores // 3)
     if jobs > cap:
         print("jobs capped at %d (half of %d cores) so timing stays honest" % (cap, cores))
         jobs = cap
@@ -163,7 +186,9 @@ def main():
     mirror = len(bots) >= 2 and not args.no_mirror
     tables = []
     for r in range(args.rounds):
-        seats = list(bots) + [rng.choice(pool) for _ in range(args.seats - len(bots))]
+        nseat = args.seats or rng.choice([6, 7, 8])
+        seats = list(bots) + fixed[:max(0, nseat - len(bots))]
+        seats += [rng.choice(pool) for _ in range(nseat - len(seats))]
         rng.shuffle(seats)
         tseed = rng.random()
         tables.append((r, seats, tseed))
@@ -185,7 +210,8 @@ def main():
             print("\rtable %d/%d" % (k + 1, len(work)), end="", flush=True)
     print()
 
-    per = {b: {"bb": [], "to": 0, "er": 0, "bo": 0, "think": 0.0, "maxms": 0.0, "err": None} for b in bots}
+    per = {b: {"bb": [], "to": 0, "er": 0, "bo": 0, "think": 0.0, "maxms": 0.0, "err": None,
+               "hands": 0, "vpip": 0, "pfr": 0} for b in bots}
     per_seed = {}
     for (r, _, _), res in zip(tables, results):
         for s in res["seats"]:
@@ -200,6 +226,9 @@ def main():
             d["bo"] += s["bank_out"]
             d["think"] = max(d["think"], s["think_s"])
             d["maxms"] = max(d["maxms"], s["max_ms"])
+            d["hands"] += s["hands"]
+            d["vpip"] += s["vpip"]
+            d["pfr"] += s["pfr"]
             if s["error"] and not d["err"]:
                 d["err"] = s["error"]
             per_seed.setdefault(r, {}).setdefault(b, []).append(bb100)
@@ -216,6 +245,19 @@ def main():
         rows.append((b, m, se, m - h, m + h, d))
         if d["err"]:
             print("  first error from %s:\n%s" % (label(b), d["err"]))
+    print("\nbehaviour (bands: VPIP %.0f to %.0f%%, PFR %.0f to %.0f%%)" % (
+        VPIP_BAND[0] * 100, VPIP_BAND[1] * 100, PFR_BAND[0] * 100, PFR_BAND[1] * 100))
+    for b in bots:
+        d = per[b]
+        v = d["vpip"] / float(max(1, d["hands"]))
+        r = d["pfr"] / float(max(1, d["hands"]))
+        flag = []
+        if not VPIP_BAND[0] <= v <= VPIP_BAND[1]:
+            flag.append("VPIP OUT OF BAND")
+        if not PFR_BAND[0] <= r <= PFR_BAND[1]:
+            flag.append("PFR OUT OF BAND")
+        d["vp"], d["pf"] = v, r
+        print("%-30s VPIP %5.1f%%  PFR %5.1f%%  %s" % (label(b), v * 100, r * 100, ", ".join(flag)))
     if len(bots) >= 2:
         a, b = bots[0], bots[1]
         diffs = []
@@ -241,11 +283,12 @@ def main():
             if new:
                 w.writerow(["timestamp", "commit", "bot", "field", "rounds", "tables", "hands", "betting",
                             "raise_cap", "bb100", "se", "ci95_lo", "ci95_hi", "timeouts", "errors",
-                            "bank_out", "think_s_max", "max_ms", "seed", "bots_at_table"])
+                            "bank_out", "think_s_max", "max_ms", "seed", "bots_at_table", "vpip", "pfr"])
             for b, m, se, lo, hi, d in rows:
                 w.writerow([stamp, commit, label(b), args.field, args.rounds, len(d["bb"]), args.hands,
                             args.betting, args.raise_cap, "%.2f" % m, "%.2f" % se, "%.2f" % lo, "%.2f" % hi,
-                            d["to"], d["er"], d["bo"], "%.2f" % d["think"], "%.1f" % d["maxms"], seed, others])
+                            d["to"], d["er"], d["bo"], "%.2f" % d["think"], "%.1f" % d["maxms"], seed, others,
+                            "%.3f" % d["vp"], "%.3f" % d["pf"]])
         print("appended %d row(s) to %s" % (len(rows), label(path)))
 
 
