@@ -25,7 +25,7 @@ import urllib.request
 
 
 def get(site, path, token):
-    req = urllib.request.Request(site.rstrip("/") + path, headers={"Authorization": "Bearer " + token})
+    req = urllib.request.Request(site.rstrip("/") + path, headers={"Authorization": "Bearer " + token, "User-Agent": "Mozilla/5.0"})
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             return json.loads(r.read())
