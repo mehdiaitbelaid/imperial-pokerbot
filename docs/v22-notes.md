@@ -83,3 +83,14 @@ The hand files are not in the repo; fetch them with `fetch_hands.py` and the tea
 | Four replicas changed against V22's expectations (`tabled/x_*.py`) | 360,000 per bot | +1.8 ± 2.5 |
 
 The replicas are too weak to give an absolute chance of a top-2 finish (both bots finish first in every simulated 36-round tournament). For that, `tools/top2_projection.py` redraws the 36 rounds from each team's real Saturday rounds 31-54 (Anker Batteries +21.5, Anton +15.3, us +11.5, Chinese people can fly +7.2, GamesGone +0.1, Poke -2.1, WBot -2.4, YSL_TWIZZY -29.3): our chance of a top-2 finish is about 30% at our late-Saturday level, 55% with +5 bb/100, 78% with +10 and 92% with +15.
+
+## V23 tested and not adopted, Sun 15 Nov 05:30
+
+`bots/v23.py` = V22 plus two additions: wider raises over limpers who fold to a raise about 3 times in 4 (Poke folded 75% of 822 limps, 84% of our 94 raises), and the recognised calling stations (YSL_TWIZZY, GamesGone) starting with their real fold rates to our bets.
+
+| Test, same cards | Hands per bot | V23 minus V22, bb/100 |
+|---|---|---|
+| Simulated Table D, opponents as on Saturday | 720,000 | +0.7 ± 1.7 |
+| Four opponents changed against our expectations | 240,000 | +0.9 ± 2.9 |
+
+No measurable gain and no harm. V22 stays the build for Sunday 09:05; V23 is kept as a file only.
