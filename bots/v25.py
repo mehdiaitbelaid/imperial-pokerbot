@@ -35,7 +35,7 @@ SIZE_LEARN = True
 # during the round, then starts from what that team did on Saturday (per size bucket: times its bet
 # was raised / folded, hands shown / strong). At most 12 pseudo-observations, so live play corrects it.
 FINGERPRINTS = True
-NO_RIVER_BLUFF_CPF = True  # V25
+NO_THIRD_BARREL = True   # V25
 BIGPAIR_CALL = 500       # V24: chips to call on the turn or river from which one pair or less needs more equity
 BIGPAIR_MARGIN = 0.15
 THREEBET_ANY = True     # 3-bet any two cards against an opener who folds to 3-bets 4 times in 5 (8+ cases)
@@ -69,8 +69,8 @@ def seat_label(S):
         if S.o28 >= 0.55 * op and bn >= 3 and S.b15 == 0 and S.bov == 0 and folds3:
             return "YSL"                       # opens 2.8bb, never bets tiny or over the pot
         if S.o25 >= 0.85 * op and nolimp and bn >= 5:
-            if S.b33 >= 2 and S.b33 >= 0.3 * bn and S.b15 == 0 and S.bov == 0 and S.b50 <= 0.1 * bn:
-                return "CPF"                   # V25: also its Sunday bot (0.65-pot bets, folds less to 3-bets)                   # opens 2.5bb, bets a third of the pot or the pot
+            if S.b33 >= 2 and S.b33 + S.b100 >= 0.8 * bn and S.bov == 0 and folds3:
+                return "CPF"                   # opens 2.5bb, bets a third of the pot or the pot
             if S.o25 >= 0.95 * op and S.b33 == 0 and S.bov >= 0.25 * bn:
                 return "ANKER"                 # opens 2.5bb, overbets, never bets a third
     return 0
@@ -685,7 +685,7 @@ class Agent:
                     code = seat_label(S)
                     if code:
                         S.lab = code
-                        if code == "YSL":
+                        if code == "CPF" or code == "YSL":
                             S.f3_o += 12            # Saturday: folded 84% and 85% of 337 and 184 of our 3-bets
                             S.f3 += 10
                         elif code == "ANTON":
@@ -1409,8 +1409,9 @@ class Agent:
         if c == 0:
             if not can_raise:
                 return CHECK
-            if NO_RIVER_BLUFF_CPF and river and len(live) == 1 and self.st[live[0]].lab == "CPF" and (mycat < 2 or (mycat == 2 and paired)):
-                return CHECK
+            if (NO_THIRD_BARREL and river and len(live) == 1 and self.st[live[0]].lab == "ANKER" and L[5][live[0]] >= 2
+                    and (mycat < 2 or (mycat == 2 and paired))):
+                return CHECK                    # V25: he called the flop and the turn; he folded the river 4 times in 16
             best = None
             best_ev = eq * pot * (1.0 if river else 0.9) + 0.03 * pot
             cands = [mybet + x * pot for x in (0.5, 0.8, 1.1, 1.6)]
