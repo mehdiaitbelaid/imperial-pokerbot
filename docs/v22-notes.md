@@ -73,3 +73,13 @@ The hand files are not in the repo; fetch them with `fetch_hands.py` and the tea
 - Stress test, 200,000 paired hands: four of the seven replicas changed against everything V22 expects (`tabled/x_cpf.py` and `x_ysl.py` defend against 3-bets, `x_cpf.py` and `x_gg.py` swap their bluff and value sizes, `x_anton.py` stops folding to 4-bets and raises) while keeping the same fingerprints. **V22 +0.7 ± 3.5 over V21**: no loss in the worst case we could build. Before the live stop the same test gave -4.0 ± 3.3.
 - Fingerprints unchanged: right label in 58 of 62 real seat-rounds, none wrong among the seven.
 - New SHA-256 of `upload/bot_v22.py`: see the commit message.
+
+## Final battery, Sun 15 Nov 05:15 (V22 = `upload/bot_v22.py`, SHA-256 `9a5d1af5…`, against V21)
+
+| Test | Hands | V22 minus V21, bb/100 |
+|---|---|---|
+| Simulated Table D, each bot alone in our seat, same cards (`tools/bucket_sim.py`) | 1,080,000 per bot | **+10.3 ± 1.4** (V22 +65.1, V21 +54.8) |
+| Both bots at the same table with six of the seven replicas, each replica left out in turn, seats swapped (`tools/duplicate.py`) | 420,000 | **+13.3 ± 2.1** (positive in all seven line-ups: +8.5 to +19.3) |
+| Four replicas changed against V22's expectations (`tabled/x_*.py`) | 360,000 per bot | +1.8 ± 2.5 |
+
+The replicas are too weak to give an absolute chance of a top-2 finish (both bots finish first in every simulated 36-round tournament). For that, `tools/top2_projection.py` redraws the 36 rounds from each team's real Saturday rounds 31-54 (Anker Batteries +21.5, Anton +15.3, us +11.5, Chinese people can fly +7.2, GamesGone +0.1, Poke -2.1, WBot -2.4, YSL_TWIZZY -29.3): our chance of a top-2 finish is about 30% at our late-Saturday level, 55% with +5 bb/100, 78% with +10 and 92% with +15.
