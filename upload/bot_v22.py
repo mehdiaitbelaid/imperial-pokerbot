@@ -293,7 +293,7 @@ class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
                  "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "sr_o", "sr_f",
-                 "zo", "zf", "zn", "zs", "opn", "o22", "o25", "o28", "bn", "b15", "b33", "b50", "b100", "bov", "lab")
+                 "zo", "zf", "zn", "zs", "opn", "o22", "o25", "o28", "bn", "b15", "b33", "b50", "b100", "bov", "lab", "f4_o", "f4")
 
     def __init__(self):
         for k in self.__slots__:
@@ -500,6 +500,8 @@ class Agent:
         small_raised = -1      # seat whose small bet has just been raised
         zraised = None         # (seat, size bucket) of a first bet that has just been raised
         bbv = 20
+        tb_seat = -1           # seat that made the 3-bet
+        faced4 = False
         betlog = []            # (seat, street, size bucket) of every first bet of a street
         for h in hist:
             s = h["seat"]
@@ -568,11 +570,18 @@ class Agent:
                     S.f3_o += 1
                     if a == "fold":
                         S.f3 += 1
+                elif s == tb_seat and raises == 3 and not faced4:
+                    faced4 = True              # he 3-bet and now faces a 4-bet
+                    S.f4_o += 1
+                    if a == "fold":
+                        S.f4 += 1
                 if a == "raise":
                     pr.add(s)
                     vp.add(s)
                     if raises == 0:
                         first_raiser = s
+                    elif raises == 1:
+                        tb_seat = s
                     raises += 1
                     if amt >= 800:
                         S.shove += 1
@@ -676,6 +685,9 @@ class Agent:
                         if code == "CPF" or code == "YSL":
                             S.f3_o += 12            # Saturday: folded 84% and 85% of 337 and 184 of our 3-bets
                             S.f3 += 10
+                        elif code == "ANTON":
+                            S.f4_o += 6             # Saturday: folded 59 to 66% of 4-bets after 3-betting
+                            S.f4 += 3.7
                         zo, zf, zn, zs = SEED[code]
                         for b in range(6):
                             S.zo[b] += zo[b]
@@ -1034,7 +1046,8 @@ class Agent:
                         return {"action": "all_in"}
                     return self._raise_to(state, R * (2.3 if ip else 2.6), commit=0.45)
                 return call_or_check()
-            maniac = MANIAC_RULES and S.lab == "ANTON" and can_raise and R <= 13 * bb
+            maniac = (MANIAC_RULES and S.lab == "ANTON" and can_raise and R <= 13 * bb
+                      and S.f4 >= 0.45 * S.f4_o)            # stops once he no longer folds to 4-bets
             if e >= (0.40 if ip else 0.43) and price <= 10:
                 return self._raise_to(state, R * 2.3, commit=0.45) if maniac else CALL
             if pair and price <= 6:

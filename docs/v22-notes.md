@@ -1,6 +1,6 @@
 # V22 candidate: notes for the team
 
-Status, Sat 14 Nov 23:00 UK time: **candidate, tested, not live.** The live bot is V21 (`upload/bot_v21.py`, SHA-256 `60320d2a…`). Riad approves every upload.
+Status, Sun 15 Nov 04:15 UK time: **candidate, tested, not live.** The live bot is V21 (`upload/bot_v21.py`, SHA-256 `60320d2a…`). Riad approves every upload.
 
 - File to upload if we go: `upload/bot_v22.py` (same as `bots/v22.py`), 84 KB, stdlib only.
 - Built for Sunday's bucket table (Table D). Opponent profiles: `docs/table-d-dossier.md`.
@@ -65,3 +65,11 @@ python3 tools/sizelearn_eval.py upload/bot_v21.py upload/bot_v22.py hands/saturd
 ```
 
 The hand files are not in the repo; fetch them with `fetch_hands.py` and the team token.
+
+## Update, Sun 15 Nov 04:15: live stop on the 4-bet rule, and a "they changed overnight" test
+
+- The 4-bet rule against the maniac profile now stops once that seat has folded fewer than 45% of the 4-bets it faced after 3-betting (new counters `f4_o`, `f4`, seeded with Saturday's 62%).
+- Simulated Table D, opponents as on Saturday, 200,000 paired hands: **V22 +11.4 ± 3.1 bb/100 over V21** (the earlier build measured +9.3 ± 3.0).
+- Stress test, 200,000 paired hands: four of the seven replicas changed against everything V22 expects (`tabled/x_cpf.py` and `x_ysl.py` defend against 3-bets, `x_cpf.py` and `x_gg.py` swap their bluff and value sizes, `x_anton.py` stops folding to 4-bets and raises) while keeping the same fingerprints. **V22 +0.7 ± 3.5 over V21**: no loss in the worst case we could build. Before the live stop the same test gave -4.0 ± 3.3.
+- Fingerprints unchanged: right label in 58 of 62 real seat-rounds, none wrong among the seven.
+- New SHA-256 of `upload/bot_v22.py`: see the commit message.
