@@ -1,0 +1,95 @@
+ROUND r045 | our bot: platform v11 | result +57.6 bb/100 | timeouts 0 | errors 0 | think 1.99s | table 4 seat 3
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Resonance Qt              1000   +57.6    24    17     0    10    64   0.1   2.6    84    53  0.80    41     8   1.3    19    54    20
+Gherkers                  1000   +34.1    20    15     0     9    42   0.1   3.5    64    52  0.70    44    33   4.0    18    48    33
+Lehman Brothers           1000   +14.4    23    17     0     6    67   0.3   2.5    64    66  0.60    48     8   2.2    21    57    24
+Poké Bot                  1000   -14.0    19    16     0     2    68   0.0   3.0    79    60  0.40    40     5   1.3    29    63    13
+SARS                      1000   -20.0    20    11     0     4    23   0.8   2.5    90    76  0.50    70    12   9.1    24    50    27
+Anker Batteries           1000   -21.6    17    13     0     6    53   0.0   2.5    88    72  1.10    43     0   1.6    20    52     8
+Equity Engine             1000   -23.1    27    19     0     5    73   0.0   3.5    79    47  0.80    56    10   2.0    12    44    30
+pokermon                  1000   -27.4    23    13     0     3    18   0.7   2.8    69    60  0.50    63    13   3.4    21    34    26
+
+Our chips by how the hand ended:
+  preflop      864 hands      +442 chips  (+2.2 bb/100 of all hands)
+  postflop     110 hands     +4449 chips  (+22.2 bb/100 of all hands)
+  showdown      26 hands     +6630 chips  (+33.1 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r045.json #327 we=['Ad', 'Kd'] board=['9c', 'Td', 'Qc', 'As', '7h'] shown={'Lehman Brothers': ['Ts', '9h']}
+   -2000 saturday_r045.json #577 we=['Tc', 'Th'] board=['3c', '8h', 'Jc', '5h', '5d'] shown={'Gherkers': ['Js', 'Jd']}
+   -2000 saturday_r045.json #745 we=['Jd', '9d'] board=['2d', 'Js', '5c', 'Qh', '8c'] shown={'pokermon': ['Jc', 'Kd']}
+   -2000 saturday_r045.json #960 we=['Jc', 'Kc'] board=['Jh', '4s', '5c', '8h', '6d'] shown={'Equity Engine': ['Jd', 'Ac']}
+   -1126 saturday_r045.json #345 we=['8s', '8c'] board=['6d', '9s', 'Js', '9c', '4c'] shown={'SARS': ['Ad', '9d']}
+    -959 saturday_r045.json #974 we=['Qc', '9h'] board=['Kh', '9d', '7s', '3s', 'Ks'] shown={'SARS': ['Kd', 'Jh']}
+    -873 saturday_r045.json #818 we=['Kh', 'Qh'] board=['Ad', '5s', 'Kc', 'Ts', '6c'] shown={'SARS': ['Jc', 'Qd']}
+    -846 saturday_r045.json #19 we=['Qh', 'Ks'] board=['5c', '2d', 'Jc', '3c', 'Kh'] shown={'Anker Batteries': ['Kc', 'As']}
+    -731 saturday_r045.json #640 we=['Ts', 'As'] board=['Js', '4c', 'Kc', '8h', '4s'] shown={'Lehman Brothers': ['Td', 'Jc']}
+    -639 saturday_r045.json #777 we=['5s', '5h'] board=['9h', '2s', 'Tc', 'Ks'] shown={}
+    +616 saturday_r045.json #511 we=['Kc', 'Kh'] board=[] shown={}
+    +765 saturday_r045.json #609 we=['7s', '8s'] board=['7d', '6h', 'Js', '3s', '6s'] shown={'Gherkers': ['Jh', 'Kc']}
+   +2010 saturday_r045.json #525 we=['Kc', 'Kd'] board=['4s', '3c', 'Qs', '5d', '5c'] shown={'Equity Engine': ['Qh', 'Ad']}
+   +2020 saturday_r045.json #175 we=['Ks', 'Kh'] board=['2s', 'Ts', 'Jh', '4s', '5h'] shown={'SARS': ['Qh', 'Qs']}
+   +2020 saturday_r045.json #399 we=['Ks', 'Kh'] board=['Kd', '3s', 'Js', 'Jd', '8d'] shown={'SARS': ['9d', '9h']}
+   +2030 saturday_r045.json #476 we=['Jd', 'Jh'] board=['Jc', '8d', 'Qh', '3h', '2c'] shown={'Lehman Brothers': ['Kd', 'Ad']}
+   +2030 saturday_r045.json #595 we=['Ad', 'Ac'] board=['2c', '3h', 'Td', '5c', '9d'] shown={'Gherkers': ['Qd', 'Qs']}
+   +2030 saturday_r045.json #876 we=['Qh', 'Qd'] board=['7c', '4s', 'Qs', '2d', '5c'] shown={'SARS': ['Ks', 'Kd']}
+   +2060 saturday_r045.json #406 we=['4d', '4s'] board=['4h', 'Tc', '3c', '2d', 'Kh'] shown={'SARS': ['Ah', 'Ts']}
+   +2216 saturday_r045.json #220 we=['8s', '8c'] board=['4d', '3s', '4s', '9d', '8h'] shown={'Anker Batteries': ['Th', 'Td']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -639 saturday_r045.json #777 we=['5s', '5h'] board=['9h', '2s', 'Tc', 'Ks'] last=(street=turn act=fold facing=True to_call=1361 pot=2669)
+    -533 saturday_r045.json #275 we=['8d', 'Kd'] board=['2d', '3s', '3h', '3c'] last=(street=turn act=fold facing=True to_call=548 pot=1644)
+     -10 saturday_r045.json #263 we=['Ah', 'Qc'] board=[] last=(street=preflop act=fold facing=True to_call=40 pot=80)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +57.6 bb/100
+  showdown lost, other lines                     n=    8    -42.9 bb/100   (-53.6 bb each)
+  showdown lost after our river call             n=    4    -24.8 bb/100   (-62.0 bb each)
+  blinds / folded preflop                        n=  764    -12.8 bb/100   (-0.2 bb each)
+  called preflop, check-folded flop or turn      n=   31     -8.8 bb/100   (-2.8 bb each)
+  raised preflop then folded to a re-raise       n=   17     -6.4 bb/100   (-3.8 bb each)
+  bet the flop or turn, then folded              n=    5     -5.8 bb/100   (-11.5 bb each)
+  raised preflop, check-folded flop or turn      n=   12     -5.3 bb/100   (-4.4 bb each)
+  called the flop, folded the turn               n=    3     -4.6 bb/100   (-15.2 bb each)
+  called preflop then folded preflop             n=    5     -1.7 bb/100   (-3.4 bb each)
+  folded the river after calling                 n=    1     -1.4 bb/100   (-14.1 bb each)
+  folded the river after betting                 n=    1     -1.1 bb/100   (-10.6 bb each)
+  won postflop without showdown                  n=   57    +49.2 bb/100   (+8.6 bb each)
+  won preflop uncontested                        n=   81    +53.5 bb/100   (+6.6 bb each)
+  showdown won                                   n=   11    +70.5 bb/100   (+64.1 bb each)
+
+Worst hands:
+   -2000 r045#327  AdKd [showdown lost after our river call]
+         US raise 50; Lehman B call 30; | 9c Td Qc; US raise 80; Lehman B raise 288; US call 208; | As; US check; Lehman B raise 557; US call 557; | 7h; US check; Lehman B raise 1105; US call 1105
+         shown: {'Lehman Bro': 'Ts9h'}
+   -2000 r045#577  TcTh [showdown lost, other lines]
+         US raise 44; Gherkers raise 167; US call 123; | 3c 8h Jc; Gherkers raise 378; US call 378; | 5h; Gherkers raise 1455; US call 1455; | 5d
+         shown: {'Gherkers': 'JsJd'}
+   -2000 r045#745  Jd9d [showdown lost, other lines]
+         pokermon raise 60; US call 60; | 2d Js 5c; pokermon raise 1940; US call 1940; | Qh; | 8c
+         shown: {'pokermon': 'JcKd'}
+   -2000 r045#960  JcKc [showdown lost, other lines]
+         Equity E raise 70; US raise 196; Equity E call 126; | Jh 4s 5c; Equity E raise 443; US call 443; | 8h; Equity E raise 1361; US call 1361; | 6d
+         shown: {'Equity Eng': 'JdAc'}
+   -1126 r045#345  8s8c [showdown lost after our river call]
+         SARS raise 50; US call 50; | 6d 9s Js; SARS raise 104; US call 104; | 9c; SARS raise 270; US call 270; | 4c; SARS raise 702; US call 702
+         shown: {'SARS': 'Ad9d'}
+    -959 r045#974  Qc9h [showdown lost after our river call]
+         SARS raise 50; US call 30; | Kh 9d 7s; US check; SARS raise 88; US call 88; | 3s; US check; SARS raise 228; US call 228; | Ks; US check; SARS raise 593; US call 593
+         shown: {'SARS': 'KdJh'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r045.json: 1295 decisions {'preflop': 1026, 'flop': 166, 'turn': 69, 'river': 34} | platform says 0 timeouts, think 1.99s | replay finds 1 passive plays the bot would not make
+   hand  614 flop    we=8hKh board=[Ks 4d 6h] played check, bot says raise (to call 0, pot 130) -> hand result +496
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Anker Batteries             -21.6      +6.9 | -                                  | f3b 8/15, steal-fold 45/57, cbet 29/33, lines 8/18 1/2 6/19 5/5 14/25
+pokermon                    -27.4      -5.1 | -                                  | f3b 2/11, steal-fold 48/58, cbet 25/36, lines 6/19 8/8 8/15 15/16 33/48
+Equity Engine               -23.1     +21.9 | -                                  | f3b 47/64, steal-fold 47/75, cbet 23/29, lines 8/25 12/14 10/18 9/9 27/45
+Lehman Brothers             +14.4      -0.6 | -                                  | f3b 22/33, steal-fold 51/89, cbet 28/44, lines 10/27 10/14 5/18 8/9 11/22
+Poké Bot                    -14.0      +0.8 | -                                  | f3b 23/34, steal-fold 82/89, cbet 26/33, lines 9/25 5/7 11/26 2/6 6/19
+Gherkers                    +34.1      +5.2 | -                                  | f3b 5/12, steal-fold 53/80, cbet 21/33, lines 13/31 5/12 5/9 2/2 17/36
+SARS                        -20.0     +28.6 | -                                  | f3b 3/13, steal-fold 48/83, cbet 27/30, lines 8/20 9/9 8/9 5/5 12/18

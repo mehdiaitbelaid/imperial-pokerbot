@@ -1,0 +1,99 @@
+ROUND r009 | our bot: platform v6 | result +12.9 bb/100 | timeouts 1 | errors 0 | think 2.3s | table 2 seat 5
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Poké Bot                  1000   +26.1    24    18     0     2    49   0.1   3.0    74    44  0.50    47     7   1.4    24    56    50
+Durahim 1453              1000   +25.7    18    11     0     3    23   0.4   2.5    61    43  1.00    53    15   2.2    15    53     0
+Resonance Qt              1000   +12.9    20    12     0     7    44   0.1   2.8    86    50  0.80    51     5   1.5    20    62    22
+Attention Is All In       1000    +1.9    23    16     0     9    71   0.7   2.7    59    51  0.66    73    14   7.5    17    48    31
+aydine                    1000    -6.9    22    13     0     3    40   0.0   3.5    82    47  0.80    41    11   2.4    26    35    19
+Gherkers                  1000    -6.9    21    16     0     9    25   0.0   3.5    77    53  0.70    55    16   2.8    17    44    10
+SARS                      1000   -18.4    13     9     1     2    70   0.4   3.0    90    68  0.60    45    17   3.7    28    47    10
+pokermon                  1000   -34.4    32    17     0     6    57   0.5   2.8    65    64  0.50    72    11   4.7    15    47    19
+
+Our chips by how the hand ended:
+  preflop      878 hands     -2788 chips  (-13.9 bb/100 of all hands)
+  postflop      98 hands     +1627 chips  (+8.1 bb/100 of all hands)
+  showdown      24 hands     +3736 chips  (+18.7 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r009.json #466 we=['2d', '2c'] board=['Td', '2s', 'Th', 'Ac', 'Ts'] shown={'aydine': ['9h', 'Ah']}
+   -2000 saturday_r009.json #532 we=['Kh', 'Kd'] board=['7d', '3s', 'Td', 'Ah', '6d'] shown={'Poké Bot': ['Ac', 'Ad']}
+   -2000 saturday_r009.json #754 we=['As', '2s'] board=['8s', '4c', 'Qs', '4h', '9d'] shown={'Gherkers': ['Kd', 'Ks']}
+   -1956 saturday_r009.json #978 we=['Kh', 'Jh'] board=['Jc', '7c', '3h', '7d', '9h'] shown={'Attention Is All In': ['Qs', 'Qc']}
+   -1270 saturday_r009.json #638 we=['4d', 'Ad'] board=['8h', 'Qd', '6d', '8s', 'Qh'] shown={'SARS': ['Qc', 'Jd']}
+    +633 saturday_r009.json #450 we=['Qd', 'Kc'] board=['Kd', 'Ks', 'Ah', '2s'] shown={}
+    +841 saturday_r009.json #667 we=['Qs', 'As'] board=['6c', 'Kc', '8s', 'Ac', '3d'] shown={'Attention Is All In': ['Kd', 'Td']}
+    +940 saturday_r009.json #483 we=['Ad', '5d'] board=['3h', '5s', '4h', '9s', 'Ah'] shown={}
+   +2020 saturday_r009.json #31 we=['As', 'Ac'] board=['8h', '4c', '9c', '7h', 'Qs'] shown={'SARS': ['Kd', 'Ad']}
+   +2020 saturday_r009.json #194 we=['Td', '9d'] board=['Ts', '9h', 'Jc', '2h', '4h'] shown={'aydine': ['Ah', 'Ac']}
+   +2030 saturday_r009.json #109 we=['Ad', 'Jd'] board=['Js', '7h', '4s', '6d', 'As'] shown={'aydine': ['Kc', 'Ah']}
+   +2080 saturday_r009.json #414 we=['Ah', 'As'] board=['Ts', '6d', '4h', 'Qh', 'Qd'] shown={'aydine': ['Jh', 'Jd']}
+    +633 saturday_r009.json #450 we=['Qd', 'Kc'] board=['Kd', 'Ks', 'Ah', '2s'] shown={}
+    +841 saturday_r009.json #667 we=['Qs', 'As'] board=['6c', 'Kc', '8s', 'Ac', '3d'] shown={'Attention Is All In': ['Kd', 'Td']}
+    +940 saturday_r009.json #483 we=['Ad', '5d'] board=['3h', '5s', '4h', '9s', 'Ah'] shown={}
+   +2020 saturday_r009.json #31 we=['As', 'Ac'] board=['8h', '4c', '9c', '7h', 'Qs'] shown={'SARS': ['Kd', 'Ad']}
+   +2020 saturday_r009.json #194 we=['Td', '9d'] board=['Ts', '9h', 'Jc', '2h', '4h'] shown={'aydine': ['Ah', 'Ac']}
+   +2030 saturday_r009.json #109 we=['Ad', 'Jd'] board=['Js', '7h', '4s', '6d', 'As'] shown={'aydine': ['Kc', 'Ah']}
+   +2080 saturday_r009.json #414 we=['Ah', 'As'] board=['Ts', '6d', '4h', 'Qh', 'Qd'] shown={'aydine': ['Jh', 'Jd']}
+   +2503 saturday_r009.json #873 we=['8h', 'Th'] board=['7d', '6h', 'Tc', '2s', '9s'] shown={'SARS': ['9d', '9c']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -458 saturday_r009.json #423 we=['Th', 'Ks'] board=['3d', 'Ad', '2d'] last=(street=flop act=fold facing=True to_call=1542 pot=2478)
+    -411 saturday_r009.json #303 we=['4s', '4d'] board=['Ad', '3d', '6d', 'Tc'] last=(street=turn act=fold facing=True to_call=555 pot=1397)
+    -322 saturday_r009.json #375 we=['7c', '7h'] board=['4c', '5h', '9h', 'Jc', 'Kc'] last=(street=river act=fold facing=True to_call=398 pot=1062)
+     -20 saturday_r009.json #30 we=['Ks', 'Ah'] board=['4d', '3h', '6s', '8s'] last=(street=preflop act=fold facing=True to_call=172 pot=282)
+     -10 saturday_r009.json #279 we=['Qs', 'Ah'] board=[] last=(street=preflop act=fold facing=True to_call=40 pot=80)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +12.9 bb/100
+  showdown lost, other lines                     n=    6    -24.4 bb/100   (-40.7 bb each)
+  showdown lost after our river call             n=    2    -16.1 bb/100   (-80.7 bb each)
+  blinds / folded preflop                        n=  802    -13.7 bb/100   (-0.2 bb each)
+  bet the flop or turn, then folded              n=   10    -11.4 bb/100   (-11.4 bb each)
+  all-in preflop lost                            n=    1    -10.0 bb/100   (-100.0 bb each)
+  raised preflop then folded to a re-raise       n=   11     -8.4 bb/100   (-7.7 bb each)
+  called preflop, check-folded flop or turn      n=   22     -7.1 bb/100   (-3.2 bb each)
+  raised preflop, check-folded flop or turn      n=   12     -6.6 bb/100   (-5.5 bb each)
+  called the flop, folded the turn               n=    8     -5.6 bb/100   (-7.0 bb each)
+  folded the river after calling                 n=    2     -3.1 bb/100   (-15.3 bb each)
+  called preflop then folded preflop             n=    7     -2.1 bb/100   (-3.1 bb each)
+  folded the river after checking                n=    2     -0.6 bb/100   (-3.0 bb each)
+  won preflop uncontested                        n=   59    +20.4 bb/100   (+3.5 bb each)
+  won postflop without showdown                  n=   42    +42.5 bb/100   (+10.1 bb each)
+  showdown won                                   n=   14    +59.1 bb/100   (+42.2 bb each)
+
+Worst hands:
+   -2000 r009#466  2d2c [showdown lost, other lines]
+         US raise 60; Durahim  call 60; aydine call 50; | Td 2s Th; aydine check; US raise 320; aydine call 320; | Ac; aydine raise 672; US raise 1620; aydine call 948; | Ts
+         shown: {'aydine': '9hAh'}
+   -2000 r009#532  KhKd [all-in preflop lost]
+         Poké Bot raise 60; US raise 180; pokermon call 180; Poké Bot raise 810; US raise 2000; Poké Bot call 1190; | 7d 3s Td; | Ah; | 6d
+         shown: {'Poké Bot': 'AcAd'}
+   -2000 r009#754  As2s [showdown lost, other lines]
+         Gherkers raise 70; Poké Bot call 70; US call 70; pokermon call 70; aydine call 60; | 8s 4c Qs; aydine check; Gherkers raise 407; US call 407; | 4h; Gherkers check; US raise 592; Gherkers call 592; | 9d; Gherkers check; US raise 931; Gherkers call 931
+         shown: {'Gherkers': 'KdKs'}
+   -1956 r009#978  KhJh [showdown lost after our river call]
+         Attentio raise 80; US raise 224; Attentio call 144; | Jc 7c 3h; Attentio raise 157; US call 157; | 7d; Attentio raise 261; US call 261; | 9h; Attentio raise 1314; US call 1314
+         shown: {'Attention ': 'QsQc'}
+   -1270 r009#638  4dAd [showdown lost after our river call]
+         SARS raise 60; Attentio call 60; US call 40; | 8h Qd 6d; US check; SARS raise 114; US call 114; | 8s; US check; SARS raise 313; US call 313; | Qh; US check; SARS raise 783; US call 783
+         shown: {'SARS': 'QcJd'}
+    -511 r009#582  AhJd [showdown lost, other lines]
+         Gherkers raise 70; Poké Bot call 60; US call 50; | 9d 8h 5d; Poké Bot check; US check; Gherkers check; | Qd; Poké Bot check; US raise 168; Poké Bot call 168; | Kh; Poké Bot check; US raise 273; Poké Bot call 273
+         shown: {'Poké Bot': 'AdQh'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r009.json: 1273 decisions {'preflop': 1025, 'flop': 148, 'turn': 70, 'river': 30} | platform says 1 timeouts, think 2.3s | replay finds 2 passive plays the bot would not make
+   hand  109 turn    we=AdJd board=[Js 7h 4s 6d] played check, bot says raise (to call 0, pot 390) -> hand result +2030
+   hand  406 flop    we=KcJc board=[Tc 3d Ah] played fold , bot says call  (to call 78, pot 208) -> hand result -60
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+aydine                       -6.9     +21.3 | -                                  | f3b 8/20, steal-fold 54/90, cbet 32/39, lines 2/7 4/4 3/8 5/8 18/39
+SARS                        -18.4     +10.1 | -                                  | f3b 16/23, steal-fold 62/73, cbet 19/21, lines 2/6 1/3 1/2 1/2 7/13
+Attention Is All In          +1.9     -12.5 | -                                  | f3b 29/41, steal-fold 33/50, cbet 26/44, lines 9/20 4/5 4/5 15/15 29/39
+Gherkers                     -6.9      -8.3 | -                                  | f3b 2/8, steal-fold 40/67, cbet 27/35, lines 8/18 1/5 5/9 4/5 21/27
+Poké Bot                    +26.1      -6.3 | -                                  | f3b 19/39, steal-fold 67/86, cbet 52/70, lines 14/35 9/15 13/30 3/12 16/27
+pokermon                    -34.4      +4.7 | -                                  | f3b 12/21, steal-fold 52/94, cbet 32/49, lines 24/40 10/10 14/20 10/11 49/70
+Durahim 1453                +25.7      +3.9 | -                                  | f3b 3/13, steal-fold 53/86, cbet 11/18, lines 4/9 7/10 14/19 5/6 14/30

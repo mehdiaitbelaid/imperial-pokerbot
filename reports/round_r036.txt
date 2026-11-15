@@ -1,0 +1,100 @@
+ROUND r036 | our bot: platform v11 | result -24.7 bb/100 | timeouts 0 | errors 0 | think 2.78s | table 0 seat 7
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Lehman Brothers           1000   +48.1    23    18     0     6    62   0.6   2.7    55    57  0.60    39    12   1.4    20    68    13
+Gherkers                  1000   +20.1    22    16     4     8    50   0.0   3.8    81    59  0.84    37    30   2.8    22    54    33
+gamblerlove               1000    +1.9    15    13     0     8    69   0.4   3.2    67    59  1.00    38    10   1.2    20    50     0
+AAST                      1000    -1.0    22    19     0    12    31   0.1   3.2    46    50  0.70    55    14   2.3    15    56     0
+matcha mille crêpes cake  1000    -2.0    16     9     1     5    50   0.1   2.6    78    71  0.70    49     9   2.0    16    53    12
+Poke                      1000   -16.2    43    16    31     2    66   0.6   2.5    89    67  0.33    59    12   3.6    20    49    20
+Resonance Qt              1000   -24.7    19    13     0     5    72   0.0   3.0    84    55  0.80    37     9   1.3    19    50    27
+GamesGone                 1000   -26.1    26    17     1     2    71   0.4   2.6    80    73  0.50    50    11   3.8    24    42    36
+
+Our chips by how the hand ended:
+  preflop      893 hands     -2035 chips  (-10.2 bb/100 of all hands)
+  postflop      87 hands     +1928 chips  (+9.6 bb/100 of all hands)
+  showdown      20 hands     -4838 chips  (-24.2 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r036.json #133 we=['9s', '9h'] board=['9d', 'Ah', 'Ad', 'Qh', 'Kc'] shown={'gamblerlove': ['As', 'Qc']}
+   -2000 saturday_r036.json #638 we=['5d', '4d'] board=['4s', '6d', '8d', 'Th', '9c'] shown={'matcha mille crêpes cake': ['Jd', 'Jc']}
+   -2000 saturday_r036.json #999 we=['Jc', 'Ac'] board=['Qc', '9c', 'Ad', '4h', '9h'] shown={'AAST': ['Kd', 'As']}
+   -1419 saturday_r036.json #452 we=['Qd', '3d'] board=['6d', '9h', 'Ac', 'Qh', '8h'] shown={'Poke': ['Td', 'Ah']}
+   -1125 saturday_r036.json #661 we=['Js', 'Qs'] board=['Qc', '3d', '9h', 'Kc', 'Ks'] shown={'Lehman Brothers': ['Ac', 'Qh']}
+    -999 saturday_r036.json #437 we=['Js', 'As'] board=['7c', 'Jc', '8d', 'Td', '4c'] shown={'Gherkers': ['5d', '6c']}
+    -932 saturday_r036.json #692 we=['2d', '2c'] board=['3c', 'Kc', 'Td', '9h', '6h'] shown={'Poke': ['Ac', 'Kd']}
+    -716 saturday_r036.json #147 we=['Ad', '9s'] board=['5s', '9d', 'Ks', '2c', '4c'] shown={}
+    +629 saturday_r036.json #522 we=['9s', '9d'] board=['4d', '7s', '8c', '7c', '7d'] shown={'AAST': ['Ad', '4c']}
+    +723 saturday_r036.json #541 we=['9h', '9d'] board=['Qc', '2h', 'Qh', '7c', '6s'] shown={'GamesGone': ['As', 'Kc']}
+   +1119 saturday_r036.json #246 we=['Ac', 'Th'] board=['4h', '8s', 'Jd', '3d', '5c'] shown={'GamesGone': ['Kd', 'Qh']}
+   +1137 saturday_r036.json #83 we=['Ad', '6h'] board=['5h', '7c', '9h', '9c', '3d'] shown={'GamesGone': ['Kc', 'Jh']}
+    -999 saturday_r036.json #437 we=['Js', 'As'] board=['7c', 'Jc', '8d', 'Td', '4c'] shown={'Gherkers': ['5d', '6c']}
+    -932 saturday_r036.json #692 we=['2d', '2c'] board=['3c', 'Kc', 'Td', '9h', '6h'] shown={'Poke': ['Ac', 'Kd']}
+    -716 saturday_r036.json #147 we=['Ad', '9s'] board=['5s', '9d', 'Ks', '2c', '4c'] shown={}
+    +629 saturday_r036.json #522 we=['9s', '9d'] board=['4d', '7s', '8c', '7c', '7d'] shown={'AAST': ['Ad', '4c']}
+    +723 saturday_r036.json #541 we=['9h', '9d'] board=['Qc', '2h', 'Qh', '7c', '6s'] shown={'GamesGone': ['As', 'Kc']}
+   +1119 saturday_r036.json #246 we=['Ac', 'Th'] board=['4h', '8s', 'Jd', '3d', '5c'] shown={'GamesGone': ['Kd', 'Qh']}
+   +1137 saturday_r036.json #83 we=['Ad', '6h'] board=['5h', '7c', '9h', '9c', '3d'] shown={'GamesGone': ['Kc', 'Jh']}
+   +2030 saturday_r036.json #310 we=['Jh', 'Ad'] board=['7d', '4h', 'Jc', 'Ac', '7c'] shown={'GamesGone': ['Th', 'Td']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -716 saturday_r036.json #147 we=['Ad', '9s'] board=['5s', '9d', 'Ks', '2c', '4c'] last=(street=river act=fold facing=True to_call=1284 pot=2716)
+    -573 saturday_r036.json #813 we=['Ks', 'Kc'] board=['4c', '3d', 'Ah', 'Td', 'Jh'] last=(street=river act=fold facing=True to_call=1176 pot=2352)
+    -521 saturday_r036.json #957 we=['Jc', 'Jh'] board=['Td', '5c', '8d', '8s', '9c'] last=(street=river act=fold facing=True to_call=1479 pot=2551)
+    -434 saturday_r036.json #46 we=['4s', 'Ah'] board=['3h', 'Jc', 'Qd', '8s'] last=(street=turn act=fold facing=True to_call=505 pot=1516)
+    -410 saturday_r036.json #552 we=['6c', '6d'] board=['As', '3c', '5c', '4d', '3d'] last=(street=river act=fold facing=True to_call=840 pot=1680)
+    -359 saturday_r036.json #440 we=['8s', 'Ts'] board=['Kh', '9d', 'Js', '9s', '6c'] last=(street=river act=fold facing=True to_call=523 pot=1271)
+    -358 saturday_r036.json #475 we=['3c', 'Ah'] board=['9s', '2h', '5c', '8d', 'Th'] last=(street=river act=fold facing=True to_call=726 pot=1452)
+     -60 saturday_r036.json #433 we=['Ah', 'Qd'] board=[] last=(street=preflop act=fold facing=True to_call=180 pot=390)
+     -10 saturday_r036.json #76 we=['Qh', 'Ad'] board=['Qd', '9d', 'Jh'] last=(street=preflop act=fold facing=True to_call=42 pot=82)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total -24.7 bb/100
+  showdown lost after our river call             n=    6    -37.6 bb/100   (-62.7 bb each)
+  showdown lost, other lines                     n=    4    -21.8 bb/100   (-54.5 bb each)
+  folded the river after calling                 n=    8    -16.7 bb/100   (-20.9 bb each)
+  blinds / folded preflop                        n=  805    -14.0 bb/100   (-0.2 bb each)
+  raised preflop then folded to a re-raise       n=   29     -8.6 bb/100   (-2.9 bb each)
+  called preflop, check-folded flop or turn      n=   19     -5.3 bb/100   (-2.8 bb each)
+  called the flop, folded the turn               n=    6     -5.0 bb/100   (-8.4 bb each)
+  raised preflop, check-folded flop or turn      n=    6     -4.5 bb/100   (-7.5 bb each)
+  bet the flop or turn, then folded              n=    1     -2.2 bb/100   (-21.7 bb each)
+  folded the river after betting                 n=    1     -1.2 bb/100   (-12.1 bb each)
+  called preflop then folded preflop             n=    3     -0.7 bb/100   (-2.5 bb each)
+  won preflop uncontested                        n=   56    +13.1 bb/100   (+2.3 bb each)
+  showdown won                                   n=   10    +35.2 bb/100   (+35.2 bb each)
+  won postflop without showdown                  n=   46    +44.5 bb/100   (+9.7 bb each)
+
+Worst hands:
+   -2000 r036#133  9s9h [showdown lost, other lines]
+         gamblerl raise 50; US call 50; | 9d Ah Ad; gamblerl raise 195; US raise 663; gamblerl raise 1950; US call 1287; | Qh; | Kc
+         shown: {'gamblerlov': 'AsQc'}
+   -2000 r036#638  5d4d [showdown lost after our river call]
+         matcha m raise 50; US call 50; gamblerl call 30; | 4s 6d 8d; gamblerl check; matcha m raise 112; US raise 457; matcha m call 345; | Th; matcha m raise 751; US call 751; | 9c; matcha m raise 742; US call 742
+         shown: {'matcha mil': 'JdJc'}
+   -2000 r036#999  JcAc [showdown lost after our river call]
+         AAST raise 60; US call 60; GamesGon call 40; | Qc 9c Ad; GamesGon check; AAST raise 133; US call 133; | 4h; AAST raise 501; US call 501; | 9h; AAST raise 1306; US call 1306
+         shown: {'AAST': 'KdAs'}
+   -1419 r036#452  Qd3d [showdown lost, other lines]
+         US raise 50; Poke call 30; | 6d 9h Ac; US raise 160; Poke call 160; | Qh; US raise 336; Poke call 336; | 8h; US raise 873; Poke call 873
+         shown: {'Poke': 'TdAh'}
+   -1125 r036#661  JsQs [showdown lost after our river call]
+         Lehman B raise 52; US call 52; | Qc 3d 9h; Lehman B raise 116; US call 116; | Kc; Lehman B check; US raise 292; Lehman B call 292; | Ks; Lehman B raise 665; US call 665
+         shown: {'Lehman Bro': 'AcQh'}
+    -999 r036#437  JsAs [showdown lost after our river call]
+         US raise 65; Gherkers raise 247; US call 182; | 7c Jc 8d; Gherkers check; US check; | Td; Gherkers raise 353; US call 353; | 4c; Gherkers raise 399; US call 399
+         shown: {'Gherkers': '5d6c'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r036.json: 1275 decisions {'preflop': 1039, 'flop': 129, 'turn': 66, 'river': 41} | platform says 0 timeouts, think 2.78s | replay finds 0 passive plays the bot would not make
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Poke                        -16.2      -9.5 | -                                  | f3b 25/38, steal-fold 51/77, cbet 24/27, lines 14/38 26/36 22/36 4/7 31/41
+Gherkers                    +20.1      -6.7 | limp-folder                        | f3b 6/12, steal-fold 65/87, cbet 17/21, lines 13/30 3/5 3/10 1/2 9/18
+gamblerlove                  +1.9      -2.9 | -                                  | f3b 11/16, steal-fold 66/89, cbet 16/24, lines 2/12 2/4 12/20 5/6 5/12
+GamesGone                   -26.1     +20.5 | -                                  | f3b 42/59, steal-fold 50/69, cbet 20/25, lines 7/17 0/2 4/6 8/8 12/23
+Lehman Brothers             +48.1      -1.2 | -                                  | f3b 26/42, steal-fold 33/58, cbet 16/29, lines 11/38 3/5 9/22 7/7 12/20
+matcha mille crêpes cake     -2.0     -13.4 | limp-folder                        | f3b 2/4, steal-fold 33/39, cbet 14/18, lines 4/16 0/1 9/15 2/5 21/34
+AAST                         -1.0     -11.7 | -                                  | f3b 5/16, steal-fold 13/35, cbet 23/50, lines 10/24 19/21 6/11 7/9 5/11

@@ -1,0 +1,201 @@
+ROUND r002 | our bot: platform v5 | result -18.9 bb/100 | timeouts 1 | errors 0 | think 2.01s | table 1 seat 1
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+matcha mille crêpes cake  1000   +63.6    18    10     1     5    53   1.3   2.7    40    46  0.60    29     6   1.0    39    68     0
+WBot                      1000   +42.8    28    21     0     3    63   0.5   3.9   100    90  0.33    39    35   8.5    36    52    31
+bigRoddy                  1000   +33.2    26    15    30    11    38   5.4  30.7    56    36  1.51    46    16   1.5    38    54    17
+pokermon                  1000    +2.5    27    18     3     4    27   1.6   3.2    68    58  0.33    64     7   2.4    28    50    21
+SmartBGerBot              1000   -14.5    13     9     0     3    78   0.1   3.5    54    34  0.65    46     1   0.9    27    67    20
+Resonance Qt              1000   -18.9    16    10     2     4    21   1.0   3.3    71    36  0.70    41    10   1.4    40    44    17
+AIl IN                    1000   -25.3    20    12     1    10    48   0.5   3.4    65    48  0.58    31     6   1.4    44    38    28
+Durahim 1453              1000   -83.5    41    27    28    19    19   2.4   3.5    59    53  1.00    56    18   3.2    27    49    20
+
+Our chips by how the hand ended:
+  preflop      897 hands     -1612 chips  (-8.1 bb/100 of all hands)
+  postflop      62 hands     +1185 chips  (+5.9 bb/100 of all hands)
+  showdown      41 hands     -3346 chips  (-16.7 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r002.json #71 we=['As', '9c'] board=['7h', '8d', 'Qs', 'Jh', '8c'] shown={'Durahim 1453': ['2c', '2h']}
+   -2000 saturday_r002.json #184 we=['Kd', 'Qc'] board=['Td', '5c', 'Kc', '8c', '2c'] shown={'matcha mille crêpes cake': ['Js', 'Ac']}
+   -2000 saturday_r002.json #205 we=['6s', '6h'] board=['Ts', 'Ks', 'Qs', '7c', '3h'] shown={'Durahim 1453': ['7s', '9s']}
+   -2000 saturday_r002.json #266 we=['8d', '8s'] board=['Ac', 'Jd', '5h', '7c', '2d'] shown={'WBot': ['Jh', 'Ah']}
+   -2000 saturday_r002.json #280 we=['6c', '6s'] board=['6h', '7c', '4c', '9s', '8d'] shown={'WBot': ['4d', '5d']}
+   -2000 saturday_r002.json #435 we=['Qc', 'Qs'] board=['5d', '4c', '4d', '3s', '2h'] shown={'AIl IN': ['Kh', 'Ac']}
+   -2000 saturday_r002.json #491 we=['Tc', 'Kh'] board=['9h', 'Ts', '9d', '3s', 'Qc'] shown={'bigRoddy': ['9s', 'Td']}
+   -2000 saturday_r002.json #747 we=['Qs', 'Ks'] board=['4d', '4h', '3c', '2h', 'Js'] shown={'bigRoddy': ['Jh', 'Qd']}
+   -2000 saturday_r002.json #768 we=['Qd', 'Qs'] board=['7s', '9d', '4h', '3c', '5s'] shown={'SmartBGerBot': ['Ah', 'Ac']}
+   -2000 saturday_r002.json #794 we=['Ac', 'As'] board=['6d', '5c', 'Qd', 'Jd', '8s'] shown={'bigRoddy': ['Td', '9d']}
+   -2000 saturday_r002.json #812 we=['Qs', 'Jh'] board=['Ts', '7h', '2s', 'Qd', '2c'] shown={'Durahim 1453': ['Qc', 'Ac']}
+   -2000 saturday_r002.json #839 we=['Js', 'Kd'] board=['9h', '3s', 'Ks', '8h', 'Ts'] shown={'bigRoddy': ['3h', 'Kh']}
+   +2030 saturday_r002.json #377 we=['Td', 'Tc'] board=['6s', '4s', '2h', 'Ts', '3h'] shown={'bigRoddy': ['8h', 'Ks']}
+   +2030 saturday_r002.json #543 we=['Qc', 'Qd'] board=['4h', 'Ad', '5s', 'Ts', '9s'] shown={'bigRoddy': ['3c', '3d']}
+   +2030 saturday_r002.json #695 we=['3s', '3c'] board=['Jc', '3d', '2s', '2c', 'Ts'] shown={'matcha mille crêpes cake': ['Kc', 'Kh']}
+   +2030 saturday_r002.json #810 we=['Jd', 'Kd'] board=['Jh', 'Td', '7d', 'Ad', 'Th'] shown={'AIl IN': ['Qh', 'Qs']}
+   +2036 saturday_r002.json #36 we=['Kd', 'Td'] board=['Ks', 'Kc', '9d'] shown={}
+   +2040 saturday_r002.json #236 we=['Qd', 'Ac'] board=['Kh', '2h', '8s', 'As', '2d'] shown={'bigRoddy': ['3s', '3h']}
+   +2110 saturday_r002.json #569 we=['As', 'Qh'] board=['3d', '9s', 'Ts', 'Jd', 'Ac'] shown={'bigRoddy': ['9c', 'Qc']}
+   +2765 saturday_r002.json #588 we=['As', 'Ad'] board=['3d', '5d', 'Tc', 'Jh', 'Td'] shown={'WBot': ['Jc', 'Ah']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+   -1296 saturday_r002.json #58 we=['Kh', 'Th'] board=['Ad', '2d', '4h'] last=(street=flop act=fold facing=True to_call=704 pot=3306)
+    -646 saturday_r002.json #795 we=['Tc', 'Ks'] board=['Kd', '5s', '4d', 'Ad'] last=(street=turn act=fold facing=True to_call=1029 pot=2401)
+    -576 saturday_r002.json #904 we=['Ks', 'Qs'] board=[] last=(street=preflop act=fold facing=True to_call=1152 pot=2334)
+    -453 saturday_r002.json #591 we=['Ah', 'Kd'] board=['8d', '6c', 'Th', '3h'] last=(street=turn act=fold facing=True to_call=730 pot=1666)
+    -394 saturday_r002.json #427 we=['Ks', 'Ts'] board=['Th', '3h', '3c', 'Jd', '9h'] last=(street=river act=fold facing=True to_call=622 pot=1420)
+     -10 saturday_r002.json #500 we=['Ah', 'Qc'] board=['4d', 'Kd', '9d', '3d', '8h'] last=(street=preflop act=fold facing=True to_call=200 pot=310)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total -18.9 bb/100
+  showdown lost, other lines                     n=   16    -76.0 bb/100   (-47.5 bb each)
+  all-in preflop lost                            n=    5    -50.0 bb/100   (-100.0 bb each)
+  blinds / folded preflop                        n=  833    -14.0 bb/100   (-0.2 bb each)
+  showdown lost after our river call             n=    2    -10.4 bb/100   (-51.8 bb each)
+  raised preflop, check-folded flop or turn      n=    4     -7.9 bb/100   (-19.8 bb each)
+  bet the flop or turn, then folded              n=    4     -7.5 bb/100   (-18.7 bb each)
+  raised preflop then folded to a re-raise       n=    7     -5.1 bb/100   (-7.3 bb each)
+  called preflop, check-folded flop or turn      n=   17     -4.2 bb/100   (-2.5 bb each)
+  folded the river after calling                 n=    3     -3.2 bb/100   (-10.7 bb each)
+  called the flop, folded the turn               n=    4     -3.0 bb/100   (-7.6 bb each)
+  called preflop then folded preflop             n=    9     -1.7 bb/100   (-1.9 bb each)
+  folded the river after checking                n=    2     -1.6 bb/100   (-8.0 bb each)
+  showdown won                                   n=    9    +24.6 bb/100   (+27.3 bb each)
+  won postflop without showdown                  n=   28    +33.4 bb/100   (+11.9 bb each)
+  won preflop uncontested                        n=   57   +107.8 bb/100   (+18.9 bb each)
+
+Worst hands:
+   -2000 r002#71   As9c [showdown lost, other lines]
+         WBot raise 70; US call 70; Durahim  raise 280; pokermon call 270; US raise 672; Durahim  call 392; | 7h 8d Qs; US check; Durahim  raise 565; US call 565; | Jh; US check; Durahim  raise 763; US call 763; | 8c
+         shown: {'Durahim 14': '2c2h'}
+   -2000 r002#184  KdQc [showdown lost, other lines]
+         matcha m raise 50; US call 50; | Td 5c Kc; matcha m check; US raise 91; matcha m call 91; | 8c; matcha m check; US raise 296; matcha m call 296; | 2c; matcha m raise 678; US raise 1563; matcha m call 885
+         shown: {'matcha mil': 'JsAc'}
+   -2000 r002#205  6s6h [showdown lost, other lines]
+         SmartBGe raise 60; US call 60; Durahim  raise 276; US raise 662; Durahim  call 386; | Ts Ks Qs; Durahim  raise 1338; US call 1338; | 7c; | 3h
+         shown: {'Durahim 14': '7s9s'}
+   -2000 r002#266  8d8s [showdown lost, other lines]
+         US raise 60; WBot call 60; | Ac Jd 5h; US raise 75; WBot raise 675; US call 600; | 7c; US check; WBot raise 1265; US call 1265; | 2d
+         shown: {'WBot': 'JhAh'}
+   -2000 r002#280  6c6s [showdown lost after our river call]
+         US raise 60; WBot call 40; | 6h 7c 4c; WBot raise 42; US raise 223; WBot call 181; | 9s; WBot raise 86; US raise 721; WBot call 635; | 8d; WBot raise 996; US call 996
+         shown: {'WBot': '4d5d'}
+   -2000 r002#435  QcQs [all-in preflop lost]
+         AIl IN raise 56; US raise 168; AIl IN raise 420; US raise 1008; AIl IN raise 2000; US call 992; | 5d 4c 4d; | 3s; | 2h
+         shown: {'AIl IN': 'KhAc'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r002.json: 1261 decisions {'preflop': 1052, 'flop': 114, 'turn': 65, 'river': 30} | platform says 1 timeouts, think 2.01s | replay finds 103 passive plays the bot would not make
+   hand    5 flop    we=8dAh board=[Ts 3s 9h] played fold , bot says call  (to call 94, pot 214) -> hand result -50
+   hand   15 preflop we=JhTd board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand   18 preflop we=KcQh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand   19 flop    we=Ad8s board=[Kc 7c 4s] played check, bot says raise (to call 0, pot 60) -> hand result -20
+   hand   30 preflop we=Ts8s board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand   47 preflop we=Ks7s board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand   75 turn    we=JdQh board=[2h Js 2s Ks] played check, bot says raise (to call 0, pot 264) -> hand result -311
+   hand   79 preflop we=5h5d board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand   92 preflop we=3sAc board=[] played fold , bot says raise (to call 40, pot 80) -> hand result -10
+   hand   95 preflop we=4sKs board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  101 preflop we=Kd9h board=[] played fold , bot says raise (to call 80, pot 110) -> hand result +0
+   hand  108 preflop we=Ac2s board=[] played fold , bot says raise (to call 40, pot 80) -> hand result -10
+   hand  117 preflop we=7dQd board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  123 preflop we=5h9h board=[] played fold , bot says raise (to call 60, pot 130) -> hand result -20
+   hand  133 flop    we=KcJs board=[7h 8h 2s] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  133 turn    we=KcJs board=[7h 8h 2s Ad] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  133 river   we=KcJs board=[7h 8h 2s Ad Td] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  141 preflop we=TsJh board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  155 preflop we=8h9h board=[] played fold , bot says raise (to call 70, pot 140) -> hand result -20
+   hand  166 flop    we=Ad9c board=[6d Td 3c] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  192 preflop we=9cQc board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  195 preflop we=Qs4s board=[] played fold , bot says raise (to call 70, pot 140) -> hand result -20
+   hand  199 preflop we=7dKd board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  207 preflop we=TdJh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  209 flop    we=TsAd board=[Th Kd Ks] played check, bot says raise (to call 0, pot 150) -> hand result +90
+   hand  211 flop    we=7dKc board=[9c 3c Ac] played check, bot says raise (to call 0, pot 130) -> hand result +90
+   hand  223 preflop we=9s7s board=[] played fold , bot says call  (to call 70, pot 170) -> hand result +0
+   hand  243 flop    we=2h4d board=[7c 5h Jd] played check, bot says raise (to call 0, pot 60) -> hand result -20
+   hand  248 preflop we=5h5c board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  252 preflop we=7d4d board=[] played fold , bot says call  (to call 10, pot 70) -> hand result -10
+   hand  270 preflop we=2cAc board=[] played fold , bot says raise (to call 60, pot 90) -> hand result +0
+   hand  274 preflop we=ThQh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  294 preflop we=5c5h board=[] played fold , bot says call  (to call 80, pot 160) -> hand result -20
+   hand  317 preflop we=7d9s board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  332 preflop we=9sKs board=[] played fold , bot says raise (to call 70, pot 130) -> hand result -10
+   hand  349 preflop we=8c7s board=[] played fold , bot says raise (to call 60, pot 90) -> hand result +0
+   hand  350 flop    we=7sAc board=[3h 9c Qd] played check, bot says raise (to call 0, pot 80) -> hand result +112
+   hand  350 turn    we=7sAc board=[3h 9c Qd 8s] played check, bot says raise (to call 0, pot 80) -> hand result +112
+   hand  371 flop    we=TsJh board=[Kd 7s Qd] played check, bot says raise (to call 0, pot 110) -> hand result +96
+   hand  383 preflop we=8s9s board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  384 flop    we=2d2s board=[5h 5c Qd] played check, bot says raise (to call 0, pot 230) -> hand result -90
+   hand  397 preflop we=QsJd board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  412 flop    we=9sKs board=[5d Qd 7c] played check, bot says raise (to call 0, pot 120) -> hand result -50
+   hand  420 preflop we=5s8s board=[] played fold , bot says call  (to call 10, pot 70) -> hand result -10
+   hand  424 preflop we=4cAc board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  427 flop    we=KsTs board=[Th 3h 3c] played check, bot says raise (to call 0, pot 122) -> hand result -394
+   hand  427 river   we=KsTs board=[Th 3h 3c Jd 9h] played fold , bot says call  (to call 622, pot 1420) -> hand result -394
+   hand  429 preflop we=As5c board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  455 preflop we=KdTs board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  457 preflop we=9c8c board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  463 preflop we=7d8d board=[] played fold , bot says call  (to call 50, pot 80) -> hand result +0
+   hand  479 preflop we=9c8c board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  480 preflop we=7d6d board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  487 preflop we=Ah5c board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  490 preflop we=KsQd board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  495 preflop we=JdTh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  517 preflop we=6s5s board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  523 preflop we=KhTs board=[] played fold , bot says raise (to call 40, pot 90) -> hand result -20
+   hand  545 preflop we=9c8c board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  556 preflop we=7hAs board=[] played fold , bot says raise (to call 70, pot 130) -> hand result -10
+   hand  562 preflop we=Ac4c board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  567 preflop we=4c4s board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  573 preflop we=Ks3s board=[] played fold , bot says raise (to call 70, pot 100) -> hand result +0
+   hand  574 turn    we=JcTc board=[3d 5d 2d 7s] played check, bot says raise (to call 0, pot 170) -> hand result -80
+   hand  591 turn    we=AhKd board=[8d 6c Th 3h] played fold , bot says call  (to call 730, pot 1666) -> hand result -453
+   hand  592 preflop we=KsQc board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  617 preflop we=6s6d board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  619 flop    we=Ad5s board=[4d 6c 4s] played fold , bot says call  (to call 72, pot 182) -> hand result -50
+   hand  620 flop    we=Kc7d board=[4c Tc Qd] played check, bot says raise (to call 0, pot 60) -> hand result -20
+   hand  625 preflop we=5h5d board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  646 preflop we=8cTc board=[] played fold , bot says call  (to call 70, pot 100) -> hand result +0
+   hand  653 preflop we=Jc9c board=[] played fold , bot says call  (to call 60, pot 90) -> hand result +0
+   hand  658 preflop we=QcTc board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  670 preflop we=5s5c board=[] played fold , bot says call  (to call 80, pot 160) -> hand result -20
+   hand  673 preflop we=5cAc board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  691 turn    we=6sTs board=[Kd 5c 6c Qd] played check, bot says raise (to call 0, pot 60) -> hand result -73
+   hand  734 flop    we=AhTd board=[9d 3c 5h] played check, bot says raise (to call 0, pot 190) -> hand result -159
+   hand  734 turn    we=AhTd board=[9d 3c 5h Js] played fold , bot says call  (to call 252, pot 640) -> hand result -159
+   hand  757 preflop we=Tc7c board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  763 preflop we=Qc5c board=[] played fold , bot says raise (to call 60, pot 130) -> hand result -20
+   hand  784 preflop we=8d7d board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  787 river   we=Ad5c board=[7h Qd Kd 5h 7s] played check, bot says raise (to call 0, pot 274) -> hand result +142
+   hand  789 flop    we=As7c board=[Kh Qs 9d] played check, bot says raise (to call 0, pot 120) -> hand result -50
+   hand  797 preflop we=9dJh board=[] played fold , bot says raise (to call 60, pot 90) -> hand result +0
+   hand  798 preflop we=9cJc board=[] played fold , bot says call  (to call 50, pot 80) -> hand result +0
+   hand  819 preflop we=Kc2c board=[] played fold , bot says call  (to call 30, pot 70) -> hand result -20
+   hand  847 turn    we=JsAh board=[9d 3h 6d 3d] played check, bot says raise (to call 0, pot 170) -> hand result -50
+   hand  854 turn    we=Ad4d board=[3d Qh 6c 2h] played fold , bot says call  (to call 52, pot 400) -> hand result -106
+   hand  859 preflop we=Ac4s board=[] played fold , bot says raise (to call 60, pot 130) -> hand result -20
+   hand  864 preflop we=As2s board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  894 preflop we=Kd5s board=[] played fold , bot says raise (to call 60, pot 90) -> hand result +0
+   hand  904 preflop we=KsQs board=[] played fold , bot says raise (to call 1152, pot 2334) -> hand result -576
+   hand  909 preflop we=Js9c board=[] played fold , bot says raise (to call 60, pot 90) -> hand result +0
+   hand  915 preflop we=7s9s board=[] played fold , bot says call  (to call 40, pot 150) -> hand result -20
+   hand  918 turn    we=2c2h board=[6s Qd Ah 8d] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  918 river   we=2c2h board=[6s Qd Ah 8d Ks] played check, bot says raise (to call 0, pot 130) -> hand result -50
+   hand  940 river   we=JcKh board=[Ah 4s 3h Js Qs] played fold , bot says call  (to call 232, pot 812) -> hand result -270
+   hand  951 preflop we=TdQh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  953 preflop we=ThJh board=[] played fold , bot says raise (to call 20, pot 30) -> hand result +0
+   hand  968 preflop we=Td9d board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  971 flop    we=As5s board=[Js 9d Kc] played check, bot says raise (to call 0, pot 130) -> hand result -60
+   hand  979 turn    we=KhAd board=[Th 7s 5d Jc] played check, bot says raise (to call 0, pot 190) -> hand result +130
+   hand  979 river   we=KhAd board=[Th 7s 5d Jc Td] played check, bot says raise (to call 0, pot 190) -> hand result +130
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+bigRoddy                    +33.2      +7.0 | -                                  | f3b 3/8, steal-fold 16/27, cbet 19/34, lines 3/9 4/6 6/8 10/11 13/39
+AIl IN                      -25.3      +4.1 | -                                  | f3b 19/40, steal-fold 20/40, cbet 11/17, lines 0/5 0/2 4/16 3/8 19/37
+Durahim 1453                -83.5     -22.7 | -                                  | f3b 6/32, steal-fold 29/43, cbet 49/83, lines 16/37 21/22 9/9 8/9 22/36
+pokermon                     +2.5     +14.2 | -                                  | f3b 12/44, steal-fold 36/53, cbet 26/38, lines 15/23 14/14 6/7 7/7 39/52
+SmartBGerBot                -14.5      -7.0 | -                                  | f3b 31/40, steal-fold 55/67, cbet 7/13, lines 0/0 4/6 2/7 6/7 9/18
+WBot                        +42.8      -6.1 | -                                  | f3b 62/98, steal-fold 16/41, cbet 39/39, lines 7/24 6/6 1/4 2/2 6/16
+matcha mille crêpes cake    +63.6      -8.3 | limp-folder                        | f3b 10/19, steal-fold 16/22, cbet 12/30, lines 2/7 2/6 5/17 5/9 16/25

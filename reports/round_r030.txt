@@ -1,0 +1,105 @@
+ROUND r030 | our bot: platform v11 | result +22.6 bb/100 | timeouts 1 | errors 0 | think 2.24s | table 1 seat 5
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+JoCal                     1000   +31.4    19    14     0     4    88   0.0   3.0    71    37  0.66    50    10   1.6    23    67    25
+Equity Engine             1000   +29.2    28    18     0     3    68   0.1   3.5    78    45  0.80    55     6   2.1    19    65    22
+Resonance Qt              1000   +22.6    25    21     0    17    89   0.2   2.6    88    69  0.80    40     9   1.5    21    48    25
+Chinese people can fly    1000    -8.7    36    24     0     5    89   0.4   2.5    81    80  0.33    57     5   3.3    19    49    25
+kaiserbot                 1000   -10.8    20     9     0     3    71   0.0   2.5    94    49  0.90    47    10   1.5    16    48    10
+AIl IN                    1000   -24.3    21    12     1     5    67   0.0   2.4    91    39  0.55    37     8   1.0    26    44    29
+Astra La Vista            1000   -39.4    20    15     0     5    89   0.1   2.8    71    73  0.33    58     5   4.1    23    31    27
+
+Our chips by how the hand ended:
+  preflop      872 hands      -367 chips  (-1.8 bb/100 of all hands)
+  postflop     101 hands     +1312 chips  (+6.6 bb/100 of all hands)
+  showdown      27 hands     +3572 chips  (+17.9 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r030.json #438 we=['2h', '2c'] board=['7h', 'Tc', '2s', '3h', 'Js'] shown={'Equity Engine': ['Td', 'Th']}
+   -2000 saturday_r030.json #512 we=['Qs', 'Qh'] board=['9d', '4d', '4h', 'Th', 'As'] shown={'Astra La Vista': ['Td', 'Ts']}
+   -2000 saturday_r030.json #728 we=['As', '9c'] board=['Ah', '7d', '2s', '8c', '2d'] shown={'JoCal': ['Kc', 'Ac']}
+   -2000 saturday_r030.json #779 we=['Jc', 'Ad'] board=['6s', '5h', 'Jd', '9h', '7h'] shown={'AIl IN': ['5s', '5d']}
+   -1409 saturday_r030.json #303 we=['Ac', '5d'] board=['Td', 'Ah', 'Kc', 'Qh', '3h'] shown={'Equity Engine': ['Ks', 'Th']}
+   -1104 saturday_r030.json #790 we=['4h', '4s'] board=['Kc', 'Qd', '5c', '2d', '3s'] shown={'Equity Engine': ['Qc', '9s']}
+    -878 saturday_r030.json #684 we=['As', '9s'] board=['Jd', 'Qh', '5c', '6h', '2c'] shown={}
+    -853 saturday_r030.json #602 we=['Kc', 'Td'] board=['5c', '9s', 'Jh', '4d', '7h'] shown={'JoCal': ['Kh', 'Js']}
+    +833 saturday_r030.json #160 we=['5s', 'Ks'] board=['8s', '5h', '3d', '2d', 'Td'] shown={'Astra La Vista': ['Qc', 'Ah']}
+    +859 saturday_r030.json #188 we=['As', '5d'] board=['Ad', 'Kh', '6d', 'Th', 'Ks'] shown={}
+    +866 saturday_r030.json #875 we=['6h', '8h'] board=['5c', '7d', '4d', '3h', 'Jh'] shown={}
+   +1111 saturday_r030.json #778 we=['9h', 'Jh'] board=['9c', '4c', 'Th', '7d', '8d'] shown={'Equity Engine': ['8s', 'As']}
+   +1412 saturday_r030.json #419 we=['Qc', 'Qh'] board=['9s', 'Ks', '4d', '6c', '9c'] shown={}
+   +2010 saturday_r030.json #706 we=['Js', 'Kd'] board=['Jh', 'Ks', 'Td', 'Ad', 'Jd'] shown={'Chinese people can fly': ['7c', 'Qs']}
+   +2030 saturday_r030.json #56 we=['Kd', 'Ks'] board=['5d', 'Qh', '4s', '7s', '6c'] shown={'Astra La Vista': ['Ah', 'Qc']}
+   +2030 saturday_r030.json #190 we=['Qh', 'Td'] board=['Tc', '5h', '3s', '7h', '6h'] shown={'Equity Engine': ['3c', 'Ac']}
+   +2030 saturday_r030.json #246 we=['6d', '9d'] board=['5d', 'Jd', '8c', '2c', '4d'] shown={'Equity Engine': ['Qh', 'As']}
+   +2030 saturday_r030.json #380 we=['7h', 'Ah'] board=['9s', 'Qd', '5h', '8c', '6s'] shown={'Chinese people can fly': ['Kd', '9h']}
+   +2050 saturday_r030.json #208 we=['Kc', 'Kd'] board=['4c', '9h', '7h', '6h', '8h'] shown={'Astra La Vista': ['Qs', 'Qd']}
+   +2070 saturday_r030.json #551 we=['Kh', 'Kd'] board=['8h', 'Qs', '6d', '2d', 'Th'] shown={'Astra La Vista': ['Ad', 'Ks']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -878 saturday_r030.json #684 we=['As', '9s'] board=['Jd', 'Qh', '5c', '6h', '2c'] last=(street=river act=fold facing=True to_call=1122 pot=2878)
+    -533 saturday_r030.json #317 we=['Qd', 'Js'] board=['5d', '2h', '3h', '8c'] last=(street=turn act=fold facing=True to_call=876 pot=1972)
+    -533 saturday_r030.json #393 we=['Ts', 'Ks'] board=['8s', 'Qs', '8h', '5h'] last=(street=turn act=fold facing=True to_call=876 pot=1972)
+    -533 saturday_r030.json #982 we=['Ah', 'Td'] board=['6d', '2d', 'Js', '6c'] last=(street=turn act=fold facing=True to_call=876 pot=1972)
+    -491 saturday_r030.json #938 we=['8s', 'Ts'] board=['Tc', '2s', 'Jh', 'Jd', 'Qc'] last=(street=river act=fold facing=True to_call=1026 pot=2052)
+    -460 saturday_r030.json #258 we=['5d', 'As'] board=['2d', '8c', '8d', 'Qh', 'Kd'] last=(street=river act=fold facing=True to_call=950 pot=1900)
+    -458 saturday_r030.json #929 we=['Js', '8d'] board=['2d', '2h', 'Th', '2c'] last=(street=turn act=fold facing=True to_call=308 pot=1244)
+    -436 saturday_r030.json #916 we=['Ah', '7h'] board=['7s', '4s', 'Kh', '8c', '9h'] last=(street=river act=fold facing=True to_call=882 pot=1764)
+    -434 saturday_r030.json #402 we=['8h', '9h'] board=['Tc', '4s', '9s', '6s', 'Ah'] last=(street=river act=fold facing=True to_call=702 pot=1580)
+    -357 saturday_r030.json #118 we=['Kc', 'Qc'] board=['Tc', '6c', '5d', 'Ad', 'As'] last=(street=river act=fold facing=True to_call=372 pot=1116)
+    -308 saturday_r030.json #388 we=['Th', 'Ts'] board=['7c', '5s', 'As'] last=(street=flop act=fold facing=True to_call=725 pot=1531)
+     -20 saturday_r030.json #144 we=['Qd', 'Ad'] board=['Jc', '5c', '3h', '2s', '8s'] last=(street=preflop act=fold facing=True to_call=170 pot=270)
+     -10 saturday_r030.json #341 we=['Ah', 'Qc'] board=[] last=(street=preflop act=fold facing=True to_call=60 pot=100)
+     -10 saturday_r030.json #425 we=['Kc', 'As'] board=[] last=(street=preflop act=fold facing=True to_call=140 pot=230)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +22.6 bb/100
+  showdown lost, other lines                     n=   10    -50.4 bb/100   (-50.4 bb each)
+  showdown lost after our river call             n=    4    -18.6 bb/100   (-46.5 bb each)
+  bet the flop or turn, then folded              n=   11    -14.1 bb/100   (-12.8 bb each)
+  blinds / folded preflop                        n=  753    -12.6 bb/100   (-0.2 bb each)
+  raised preflop then folded to a re-raise       n=   25    -12.3 bb/100   (-4.9 bb each)
+  folded the river after calling                 n=    7     -9.3 bb/100   (-13.2 bb each)
+  folded the river after betting                 n=    3     -9.1 bb/100   (-30.5 bb each)
+  called the flop, folded the turn               n=    6     -7.5 bb/100   (-12.5 bb each)
+  called preflop, check-folded flop or turn      n=   16     -4.3 bb/100   (-2.7 bb each)
+  raised preflop, check-folded flop or turn      n=   10     -4.2 bb/100   (-4.2 bb each)
+  called preflop then folded preflop             n=    2     -0.7 bb/100   (-3.5 bb each)
+  won preflop uncontested                        n=   94    +44.4 bb/100   (+4.7 bb each)
+  won postflop without showdown                  n=   48    +55.0 bb/100   (+11.5 bb each)
+  showdown won                                   n=   11    +66.3 bb/100   (+60.2 bb each)
+
+Worst hands:
+   -2000 r030#438  2h2c [showdown lost, other lines]
+         Chinese  raise 50; kaiserbo call 50; AIl IN call 50; Equity E call 40; US call 30; | 7h Tc 2s; Equity E raise 200; US raise 785; Equity E raise 1950; US call 1165; | 3h; | Js
+         shown: {'Equity Eng': 'TdTh'}
+   -2000 r030#512  QsQh [showdown lost after our river call]
+         US raise 60; Astra La raise 216; US call 156; | 9d 4d 4h; US check; Astra La raise 277; US call 277; | Th; US check; Astra La raise 762; US call 762; | As; US check; Astra La raise 745; US call 745
+         shown: {'Astra La V': 'TdTs'}
+   -2000 r030#728  As9c [showdown lost, other lines]
+         US raise 44; Chinese  call 34; JoCal call 24; | Ah 7d 2s; Chinese  check; JoCal check; US raise 105; JoCal raise 361; US call 256; | 8c; JoCal check; US raise 683; JoCal raise 1595; US call 912; | 2d
+         shown: {'JoCal': 'KcAc'}
+   -2000 r030#779  JcAd [showdown lost, other lines]
+         US raise 60; AIl IN call 40; | 6s 5h Jd; AIl IN raise 94; US call 94; | 9h; AIl IN raise 229; US raise 927; AIl IN raise 1846; US call 919; | 7h
+         shown: {'AIl IN': '5s5d'}
+   -1409 r030#303  Ac5d [showdown lost, other lines]
+         Equity E raise 70; US raise 196; Equity E call 126; | Td Ah Kc; Equity E raise 337; US call 337; | Qh; Equity E check; US raise 876; Equity E call 876; | 3h; Equity E check; US check
+         shown: {'Equity Eng': 'KsTh'}
+   -1104 r030#790  4h4s [showdown lost after our river call]
+         Equity E raise 70; US call 70; Chinese  call 50; | Kc Qd 5c; Chinese  check; Equity E check; US raise 176; Equity E call 176; | 2d; Equity E raise 286; US call 286; | 3s; Equity E raise 572; US call 572
+         shown: {'Equity Eng': 'Qc9s'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r030.json: 1281 decisions {'preflop': 1018, 'flop': 141, 'turn': 80, 'river': 42} | platform says 1 timeouts, think 2.24s | replay finds 2 passive plays the bot would not make
+   hand  274 turn    we=7d7s board=[Qc Kc 6h 2h] played fold , bot says call  (to call 200, pot 564) -> hand result -177
+   hand  676 flop    we=8cAd board=[4d 3h 4c] played fold , bot says call  (to call 200, pot 400) -> hand result -50
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Chinese people can fly       -8.7     +19.3 | -                                  | f3b 40/45, steal-fold 54/94, cbet 50/62, lines 30/48 1/1 10/27 9/11 28/44
+JoCal                       +31.4     -13.1 | -                                  | f3b 28/32, steal-fold 74/109, cbet 20/28, lines 5/8 1/4 6/9 6/7 17/27
+kaiserbot                   -10.8      -0.9 | -                                  | f3b 10/14, steal-fold 70/105, cbet 15/16, lines 0/5 4/6 5/14 6/7 30/43
+AIl IN                      -24.3     -13.8 | limp-folder                        | f3b 8/12, steal-fold 69/88, cbet 20/22, lines 5/10 1/4 9/24 14/18 11/32
+Equity Engine               +29.2     +12.2 | -                                  | f3b 26/38, steal-fold 45/65, cbet 25/32, lines 3/9 8/14 4/7 12/14 21/30
+Astra La Vista              -39.4     +18.9 | -                                  | f3b 17/19, steal-fold 86/107, cbet 39/55, lines 5/14 2/3 3/14 7/8 10/15

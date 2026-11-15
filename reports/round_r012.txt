@@ -1,0 +1,115 @@
+ROUND r012 | our bot: platform v7 | result +21.0 bb/100 | timeouts 1 | errors 0 | think 2.21s | table 3 seat 5
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+FisherMen                 1000   +44.6    29    24     2    13    30   4.3   3.6    54    48  1.00    58    10   3.3    34    48    14
+Anton                     1000   +22.3    28    23     5    22    33   0.7   5.0    46    31  0.60    41     9   1.2    53    55     6
+Resonance Qt              1000   +21.0    24    20     0    17    56   0.6   2.7    72    44  0.70    46     2   1.2    27    66    27
+Peanut Cookies            1000   +13.8    17    14     0     3    29   0.3   2.5    45    44  0.70    37     0   1.3    38    62     6
+ND                        1000    -6.9    20    10     1     6    31   0.2   3.0    46    30  0.75    33    17   1.3    39    34     0
+Poké Bot                  1000   -23.8    22    18     0     5    70   0.7   3.0    59    30  0.50    34     5   0.7    44    62     6
+Chinese people can fly    1000   -71.0    40    22     1     5    84   1.8   2.6    72    70  0.33    60     5   5.3    28    37    39
+
+Our chips by how the hand ended:
+  preflop      883 hands     -2588 chips  (-12.9 bb/100 of all hands)
+  postflop      85 hands     -1993 chips  (-10.0 bb/100 of all hands)
+  showdown      32 hands     +8776 chips  (+43.9 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r012.json #117 we=['Kd', 'Kh'] board=['Jc', '3c', '3s', 'Ad', 'Ac'] shown={'ND': ['Kc', 'As']}
+   -2000 saturday_r012.json #131 we=['Jh', 'Jc'] board=['5d', '2h', 'Ks', '4h', '9d'] shown={'Anton': ['As', 'Kd']}
+   -2000 saturday_r012.json #600 we=['Jc', 'Ad'] board=['As', '4s', '5h', '2h', 'Kc'] shown={'FisherMen': ['4d', '4h']}
+   -2000 saturday_r012.json #960 we=['Jh', 'Qh'] board=['8s', 'Jc', '6h', '3d', '3c'] shown={'Peanut Cookies': ['Kd', 'Jd'], 'FisherMen': ['6d', '6s']}
+   -1744 saturday_r012.json #347 we=['Qd', 'Ah'] board=['7s', 'Td', 'Jc', 'Jd', 'As'] shown={'Peanut Cookies': ['Jh', 'Js']}
+    -980 saturday_r012.json #94 we=['Ah', 'Js'] board=['4h', 'Td', 'Tc', 'As', '7s'] shown={'FisherMen': ['9s', 'Ts']}
+    -620 saturday_r012.json #321 we=['Qc', 'Kc'] board=['7h', '9s', '5c', '4c', '6s'] shown={}
+    -606 saturday_r012.json #112 we=['Ks', 'Qs'] board=['8s', '4d', '7d', '6c'] shown={}
+    +691 saturday_r012.json #415 we=['Ac', 'Ah'] board=[] shown={}
+    +920 saturday_r012.json #771 we=['8d', 'Qd'] board=['Td', '6d', '5h', '5d', '9c'] shown={'Poké Bot': ['8h', '8c']}
+    +932 saturday_r012.json #984 we=['8d', '8h'] board=['2d', '3h', '4h', '6d', '6s'] shown={}
+    +980 saturday_r012.json #455 we=['Td', 'Ts'] board=['7c', '2c', '4c', '5d', '5h'] shown={'ND': ['4h', 'Ks']}
+   +1117 saturday_r012.json #348 we=['Qs', 'Kh'] board=['7h', 'Kd', 'Jh', '9s', '5d'] shown={'Poké Bot': ['Qd', 'Qc']}
+   +2010 saturday_r012.json #262 we=['Ks', 'Kh'] board=['Ts', '3s', '2s', 'Qd', '8s'] shown={'Anton': ['5h', 'Ac']}
+   +2010 saturday_r012.json #855 we=['Jh', 'Js'] board=['9c', '8s', 'Th', '8h', '2h'] shown={'Anton': ['Ah', 'Qs']}
+   +2020 saturday_r012.json #340 we=['4s', '4c'] board=['4d', '9d', '5c', 'Ad', '2h'] shown={'Anton': ['6h', '5d']}
+   +2020 saturday_r012.json #842 we=['Kc', 'Ks'] board=['7c', 'Ac', '3s', 'Ah', '8c'] shown={'FisherMen': ['Kd', 'Td']}
+   +2030 saturday_r012.json #140 we=['Ks', 'Ad'] board=['Td', '8h', '2s', 'Kc', 'Qs'] shown={'Anton': ['9c', '9h']}
+   +2030 saturday_r012.json #413 we=['Kc', 'Ks'] board=['Th', '7d', '5d', 'Js', '2c'] shown={'Poké Bot': ['Qc', 'Qh']}
+   +2030 saturday_r012.json #733 we=['Qh', 'Qd'] board=['Ks', '4c', 'Ad', 'Jc', 'Qs'] shown={'Chinese people can fly': ['Kc', 'Ac']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -620 saturday_r012.json #321 we=['Qc', 'Kc'] board=['7h', '9s', '5c', '4c', '6s'] last=(street=river act=fold facing=True to_call=1380 pot=2640)
+    -606 saturday_r012.json #112 we=['Ks', 'Qs'] board=['8s', '4d', '7d', '6c'] last=(street=turn act=fold facing=True to_call=1394 pot=2636)
+    -550 saturday_r012.json #132 we=['9c', 'Tc'] board=['3s', 'Qc', 'Jd', '7d'] last=(street=turn act=fold facing=True to_call=1110 pot=2220)
+    -509 saturday_r012.json #78 we=['4c', 'As'] board=['Ac', 'Kd', '3d', '8c', 'Jc'] last=(street=river act=fold facing=True to_call=1075 pot=2612)
+    -430 saturday_r012.json #110 we=['Kd', 'Qd'] board=['9h', '8c', '8s', '8h', '3c'] last=(street=river act=fold facing=True to_call=616 pot=1496)
+    -400 saturday_r012.json #946 we=['Ah', 'Kc'] board=['7h', '5h', 'Qh', '8c', 'Qs'] last=(street=river act=fold facing=True to_call=607 pot=1417)
+    -369 saturday_r012.json #239 we=['5h', '5s'] board=['Kc', 'Ts', 'Qc', '6h'] last=(street=turn act=fold facing=True to_call=522 pot=1392)
+    -335 saturday_r012.json #114 we=['7c', '7h'] board=['8c', '9c', '3s', '3h', '5h'] last=(street=river act=fold facing=True to_call=482 pot=1172)
+     -60 saturday_r012.json #191 we=['Kd', 'Ad'] board=[] last=(street=preflop act=fold facing=True to_call=200 pot=380)
+     -20 saturday_r012.json #736 we=['Jc', 'Jh'] board=[] last=(street=preflop act=fold facing=True to_call=40 pot=90)
+     -10 saturday_r012.json #422 we=['Ac', 'Qh'] board=['2c', '3d', 'Jd', '5s', '2d'] last=(street=preflop act=fold facing=True to_call=55 pot=160)
+     -10 saturday_r012.json #814 we=['As', 'Qd'] board=[] last=(street=preflop act=fold facing=True to_call=55 pot=95)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +21.0 bb/100
+  showdown lost after our river call             n=    3    -23.6 bb/100   (-78.7 bb each)
+  raised preflop then folded to a re-raise       n=   46    -22.7 bb/100   (-4.9 bb each)
+  all-in preflop lost                            n=    2    -20.0 bb/100   (-100.0 bb each)
+  called the flop, folded the turn               n=   15    -16.9 bb/100   (-11.3 bb each)
+  blinds / folded preflop                        n=  752    -12.7 bb/100   (-0.2 bb each)
+  showdown lost, other lines                     n=    6    -12.5 bb/100   (-20.8 bb each)
+  folded the river after calling                 n=    7    -10.6 bb/100   (-15.1 bb each)
+  folded the river after betting                 n=    5     -5.9 bb/100   (-11.9 bb each)
+  raised preflop, check-folded flop or turn      n=   10     -4.9 bb/100   (-4.9 bb each)
+  called preflop, check-folded flop or turn      n=   11     -2.6 bb/100   (-2.4 bb each)
+  called preflop then folded preflop             n=    5     -2.2 bb/100   (-4.4 bb each)
+  folded the river after checking                n=    2     -0.6 bb/100   (-3.0 bb each)
+  bet the flop or turn, then folded              n=    1     -0.6 bb/100   (-5.6 bb each)
+  won postflop without showdown                  n=   34    +32.1 bb/100   (+9.4 bb each)
+  showdown won                                   n=   15    +39.3 bb/100   (+26.2 bb each)
+  won preflop uncontested                        n=   86    +85.3 bb/100   (+9.9 bb each)
+
+Worst hands:
+   -2000 r012#117  KdKh [all-in preflop lost]
+         ND raise 60; US raise 228; ND raise 684; US raise 2000; ND call 1316; | Jc 3c 3s; | Ad; | Ac
+         shown: {'ND': 'KcAs'}
+   -2000 r012#131  JhJc [all-in preflop lost]
+         Chinese  raise 50; US raise 150; Anton raise 345; Chinese  call 295; US raise 2000; Anton call 1655; | 5d 2h Ks; | 4h; | 9d
+         shown: {'Anton': 'AsKd'}
+   -2000 r012#600  JcAd [showdown lost after our river call]
+         US raise 60; FisherMe call 40; | As 4s 5h; FisherMe raise 130; US call 130; | 2h; FisherMe raise 390; US call 390; | Kc; FisherMe raise 1420; US call 1420
+         shown: {'FisherMen': '4d4h'}
+   -2000 r012#960  JhQh [showdown lost, other lines]
+         Peanut C raise 50; FisherMe call 50; Chinese  call 50; US call 30; | 8s Jc 6h; US raise 126; Peanut C call 126; FisherMe raise 378; Chinese  call 378; US call 252; Peanut C call 252; | 3d; US raise 1119; Peanut C call 1119; FisherMe raise 1572; US call 453; Peanut C call 453; | 3c
+         shown: {'Peanut Coo': 'KdJd', 'FisherMen': '6d6s'}
+   -1744 r012#347  QdAh [showdown lost after our river call]
+         Chinese  raise 50; ND call 50; US call 50; Peanut C call 30; | 7s Td Jc; Peanut C raise 147; ND call 147; US call 147; | Jd; Peanut C raise 455; US call 455; | As; Peanut C raise 1092; US call 1092
+         shown: {'Peanut Coo': 'JhJs'}
+    -980 r012#94   AhJs [showdown lost after our river call]
+         FisherMe raise 65; US call 65; | 4h Td Tc; FisherMe raise 105; US call 105; | As; FisherMe raise 244; US call 244; | 7s; FisherMe raise 566; US call 566
+         shown: {'FisherMen': '9sTs'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r012.json: 1327 decisions {'preflop': 1064, 'flop': 129, 'turn': 83, 'river': 51} | platform says 1 timeouts, think 2.21s | replay finds 12 passive plays the bot would not make
+   hand   61 turn    we=3c3h board=[Jh 7h 4h 5h] played check, bot says raise (to call 0, pot 210) -> hand result +160
+   hand   85 flop    we=As8c board=[Kh 3s 2s] played fold , bot says call  (to call 36, pot 146) -> hand result -50
+   hand  145 turn    we=TdJs board=[7s Tc 4h Ac] played fold , bot says call  (to call 514, pot 1028) -> hand result -242
+   hand  208 flop    we=7c7s board=[4s 3c Kd] played fold , bot says call  (to call 336, pot 896) -> hand result -180
+   hand  348 river   we=QsKh board=[7h Kd Jh 9s 5d] played check, bot says raise (to call 0, pot 2154) -> hand result +1117
+   hand  356 turn    we=JsKh board=[2c Ts 4d 7d] played fold , bot says call  (to call 70, pot 284) -> hand result -102
+   hand  370 turn    we=8cAc board=[9h 3c 5s 4s] played fold , bot says call  (to call 70, pot 284) -> hand result -102
+   hand  503 flop    we=Kh9h board=[8h 2s 7s] played fold , bot says call  (to call 140, pot 280) -> hand result -60
+   hand  736 preflop we=JcJh board=[] played fold , bot says call  (to call 40, pot 90) -> hand result -20
+   hand  784 flop    we=JsAs board=[6c Qc Kd] played fold , bot says call  (to call 140, pot 280) -> hand result -60
+   hand  829 turn    we=AhJh board=[9h 2h 3c 9c] played check, bot says raise (to call 0, pot 1954) -> hand result +982
+   hand  941 river   we=8c5c board=[Js Kh 4c 2h 5d] played fold , bot says call  (to call 117, pot 313) -> hand result -93
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Anton                       +22.3     +27.6 | -                                  | f3b 9/27, steal-fold 34/71, cbet 19/41, lines 3/11 6/13 8/18 12/21 10/24
+Peanut Cookies              +13.8     -18.0 | -                                  | f3b 11/38, steal-fold 83/94, cbet 22/49, lines 4/7 2/5 4/13 5/8 8/18
+FisherMen                   +44.6     -18.6 | limp-folder                        | f3b 13/43, steal-fold 51/86, cbet 45/84, lines 8/16 13/13 8/11 11/14 12/21
+Chinese people can fly      -71.0     +10.4 | -                                  | f3b 84/100, steal-fold 38/74, cbet 29/40, lines 5/9 1/2 8/17 13/14 37/55
+ND                           -6.9      -2.8 | -                                  | f3b 4/13, steal-fold 61/98, cbet 13/28, lines 0/8 1/3 8/25 13/20 17/30
+Poké Bot                    -23.8     +22.3 | -                                  | f3b 19/27, steal-fold 54/66, cbet 22/37, lines 3/13 2/4 13/28 13/19 9/21

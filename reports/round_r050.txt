@@ -1,0 +1,98 @@
+ROUND r050 | our bot: platform v12 | result -40.3 bb/100 | timeouts 0 | errors 0 | think 2.48s | table 2 seat 7
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Anton                     1000   +47.7    30    26     7    34    44   0.1   4.1    81    59  0.55    59    15   4.6    23    63    33
+Kojack                    1000   +39.6    20    16     0     6    50   0.0   2.5    65    48  0.55    48     4   1.2    27    69     7
+Attention Is All In       1000   +12.4    22    16     1    12    68   0.6   2.8    69    69  0.33    56    10   3.2    24    41    36
+YSL_TWIZZY                1000   +11.4    19    15     1     3    87   0.1   2.7    56    20  0.48    21     4   0.4    57    62     0
+Lehman Brothers           1000    -5.6    32    30     0    40    54   1.3   2.9    98    81  1.30    52    22   7.3    21    41    29
+Astra La Vista            1000   -15.0    20    14     1     6    41   1.7   2.9    93    66  0.55    58     4   3.0    30    53    11
+Resonance Qt              1000   -40.3    21    16     0     8    43   0.9   2.8    70    43  0.80    33    10   1.1    30    36     0
+Joca                      1000   -50.2    16    12     0     4    80   1.4   7.6     0    36  0.86    47     0   0.9    30    38     0
+
+Our chips by how the hand ended:
+  preflop      889 hands      +734 chips  (+3.7 bb/100 of all hands)
+  postflop      78 hands     +7427 chips  (+37.1 bb/100 of all hands)
+  showdown      33 hands    -16215 chips  (-81.1 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r050.json #61 we=['Ks', 'As'] board=['2d', 'Kd', '5h', 'Ac', '7s'] shown={'YSL_TWIZZY': ['5d', '5s']}
+   -2000 saturday_r050.json #204 we=['Qh', 'Ks'] board=['9s', '9c', 'Js', '8s', 'Kd'] shown={'Kojack': ['Qs', 'Ts']}
+   -2000 saturday_r050.json #267 we=['Jd', 'Jc'] board=['6s', '8c', '7d', '6d', '4h'] shown={'Lehman Brothers': ['Qh', 'Qd']}
+   -2000 saturday_r050.json #334 we=['Ac', '8h'] board=['6h', 'Ts', '9d', '4h', 'Th'] shown={'Anton': ['Td', 'Ah']}
+   -2000 saturday_r050.json #534 we=['9s', 'Ah'] board=['2c', '8d', '7d', 'Ks', 'Ad'] shown={'Anton': ['Ac', '8c']}
+   -2000 saturday_r050.json #840 we=['3s', 'As'] board=['8s', '9s', 'Qc', '4h', '3d'] shown={'Anton': ['Js', 'Jc']}
+   -2000 saturday_r050.json #927 we=['Kd', 'As'] board=['Th', 'Qh', '6s', 'Jh', '8c'] shown={'Kojack': ['7h', '6h']}
+   -2000 saturday_r050.json #958 we=['Kd', 'Qh'] board=['Ah', '9s', '4d', '4s', 'Td'] shown={'Anton': ['As', '6c']}
+   -1510 saturday_r050.json #200 we=['Ad', '7s'] board=['8h', '3d', '6h', '9s', '2c'] shown={'Attention Is All In': ['Jd', 'Js']}
+   -1485 saturday_r050.json #329 we=['Qs', 'Ad'] board=['Ks', '2c', '6d', '9s', '4h'] shown={'Anton': ['Tc', 'Ts']}
+   -1200 saturday_r050.json #578 we=['7s', '7d'] board=['Jd', '8c', 'Ts', '4d', '4c'] shown={'Astra La Vista': ['Ac', 'Jc']}
+   -1050 saturday_r050.json #708 we=['Ks', 'Th'] board=['4c', '7d', 'Td', 'Jh', '8s'] shown={'Astra La Vista': ['Kh', 'Kd']}
+    -678 saturday_r050.json #468 we=['9c', '7c'] board=['2d', '4c', '6s', '8s', '7h'] shown={'Kojack': ['Ad', '8d']}
+    +632 saturday_r050.json #413 we=['Kd', 'As'] board=['Jh', '5s', '5c', '9h', '8d'] shown={'Astra La Vista': ['Kh', 'Th']}
+   +1060 saturday_r050.json #390 we=['5h', '5s'] board=['2h', '6d', '5d', '4c'] shown={}
+   +1359 saturday_r050.json #217 we=['Qh', 'Qs'] board=['Tc', 'Ts', '6d', '5d'] shown={}
+   +1440 saturday_r050.json #956 we=['Jh', 'Ks'] board=['Jd', '3d', '6h', '2d', '5c'] shown={}
+   +2020 saturday_r050.json #383 we=['3c', '3d'] board=['7s', '9d', '3h', 'Ac', '9s'] shown={'Anton': ['Jh', 'Jc']}
+   +2030 saturday_r050.json #235 we=['Ts', 'Td'] board=['Tc', '2s', 'Ac', 'Jh', '6s'] shown={'YSL_TWIZZY': ['As', 'Qs']}
+   +2090 saturday_r050.json #878 we=['Kd', 'Kc'] board=['Jc', '6d', 'Ks', 'Ad', '9h'] shown={'Lehman Brothers': ['Ah', 'Td']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -688 saturday_r050.json #761 we=['Qc', '9c'] board=['Qh', '8d', '6c', 'Kc', '7s'] last=(street=river act=fold facing=True to_call=1312 pot=2748)
+    -520 saturday_r050.json #469 we=['Kd', 'Td'] board=['Ah', 'Js', '9s', '4d'] last=(street=turn act=fold facing=True to_call=1480 pot=2590)
+    -368 saturday_r050.json #298 we=['Jh', 'Qh'] board=['Ad', 'Th', '5s', '6s'] last=(street=turn act=fold facing=True to_call=383 pot=1149)
+     -60 saturday_r050.json #274 we=['Ac', 'Qd'] board=[] last=(street=preflop act=fold facing=True to_call=117 pot=267)
+     -60 saturday_r050.json #675 we=['Qh', 'Ah'] board=[] last=(street=preflop act=fold facing=True to_call=120 pot=260)
+     -10 saturday_r050.json #373 we=['As', 'Qh'] board=[] last=(street=preflop act=fold facing=True to_call=40 pot=80)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total -40.3 bb/100
+  showdown lost after our river call             n=   11    -79.6 bb/100   (-72.4 bb each)
+  showdown lost, other lines                     n=    9    -36.1 bb/100   (-40.1 bb each)
+  blinds / folded preflop                        n=  789    -14.4 bb/100   (-0.2 bb each)
+  all-in preflop lost                            n=    1    -10.0 bb/100   (-100.0 bb each)
+  called preflop, check-folded flop or turn      n=   20     -8.1 bb/100   (-4.0 bb each)
+  raised preflop, check-folded flop or turn      n=   10     -6.6 bb/100   (-6.6 bb each)
+  raised preflop then folded to a re-raise       n=   20     -6.5 bb/100   (-3.2 bb each)
+  called the flop, folded the turn               n=    3     -4.8 bb/100   (-16.1 bb each)
+  folded the river after calling                 n=    1     -3.4 bb/100   (-34.4 bb each)
+  called preflop then folded preflop             n=    4     -3.2 bb/100   (-8.1 bb each)
+  folded the river after betting                 n=    1     -1.1 bb/100   (-10.6 bb each)
+  showdown won                                   n=   11    +34.2 bb/100   (+31.1 bb each)
+  won preflop uncontested                        n=   77    +38.2 bb/100   (+5.0 bb each)
+  won postflop without showdown                  n=   43    +61.2 bb/100   (+14.2 bb each)
+
+Worst hands:
+   -2000 r050#61   KsAs [showdown lost, other lines]
+         Kojack raise 50; US call 40; YSL_TWIZ call 30; | 2d Kd 5h; US raise 240; YSL_TWIZ raise 668; US raise 1950; YSL_TWIZ call 1282; | Ac; | 7s
+         shown: {'YSL_TWIZZY': '5d5s'}
+   -2000 r050#204  QhKs [showdown lost after our river call]
+         Kojack raise 50; US call 30; | 9s 9c Js; US check; Kojack raise 60; US call 60; | 8s; US check; Kojack raise 165; US call 165; | Kd; US raise 896; Kojack raise 1725; US call 829
+         shown: {'Kojack': 'QsTs'}
+   -2000 r050#267  JdJc [all-in preflop lost]
+         US raise 60; Attentio call 60; Lehman B raise 200; US raise 2000; Lehman B call 1800; | 6s 8c 7d; | 6d; | 4h
+         shown: {'Lehman Bro': 'QhQd'}
+   -2000 r050#334  Ac8h [showdown lost after our river call]
+         US raise 44; Anton raise 158; US call 114; | 6h Ts 9d; Anton raise 260; US call 260; | 4h; Anton raise 676; US call 676; | Th; Anton raise 906; US call 906
+         shown: {'Anton': 'TdAh'}
+   -2000 r050#534  9sAh [showdown lost after our river call]
+         US raise 44; Anton raise 158; US call 114; | 2c 8d 7d; Anton raise 244; US call 244; | Ks; Anton check; US check; | Ad; Anton raise 1598; US call 1598
+         shown: {'Anton': 'Ac8c'}
+   -2000 r050#840  3sAs [showdown lost, other lines]
+         US raise 60; Anton raise 180; US call 120; | 8s 9s Qc; US check; Anton raise 663; US call 663; | 4h; US check; Anton raise 1157; US call 1157; | 3d
+         shown: {'Anton': 'JsJc'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r050.json: 1291 decisions {'preflop': 1052, 'flop': 124, 'turn': 71, 'river': 44} | platform says 0 timeouts, think 2.48s | replay finds 1 passive plays the bot would not make
+   hand  247 flop    we=9cQc board=[Th Jh 3c] played fold , bot says call  (to call 118, pot 226) -> hand result -44
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+YSL_TWIZZY                  +11.4      -5.2 | limp-folder                        | f3b 85/98, steal-fold 69/80, cbet 5/9, lines 0/11 0/1 7/11 2/5 2/12
+Anton                       +47.7     -39.9 | -                                  | f3b 7/16, steal-fold 21/87, cbet 46/57, lines 5/10 7/11 5/6 2/3 17/19
+Kojack                      +39.6     -17.0 | -                                  | f3b 15/30, steal-fold 56/76, cbet 24/37, lines 7/22 5/6 10/20 8/9 15/31
+Astra La Vista              -15.0      -0.1 | -                                  | f3b 13/32, steal-fold 53/75, cbet 26/28, lines 8/14 2/2 2/3 5/6 14/26
+Attention Is All In         +12.4      +3.0 | -                                  | f3b 50/74, steal-fold 58/80, cbet 9/13, lines 2/4 2/5 6/10 5/6 19/36
+Joca                        -50.2      +4.5 | -                                  | f3b 68/85, steal-fold 70/81, cbet 0/1, lines 0/0 0/0 0/2 4/5 14/24
+Lehman Brothers              -5.6     +14.4 | -                                  | f3b 20/37, steal-fold 7/73, cbet 55/56, lines 11/20 8/11 3/7 0/0 1/7

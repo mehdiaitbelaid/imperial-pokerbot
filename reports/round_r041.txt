@@ -1,0 +1,106 @@
+ROUND r041 | our bot: platform v11 | result +77.5 bb/100 | timeouts 0 | errors 0 | think 2.67s | table 3 seat 2
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Resonance Qt              1000   +77.5    24    19     0    15    60   0.0   3.1    79    49  0.80    48     7   2.3    25    75     0
+Jump Street               1000   +61.6    22    14     0     9    64   0.1   2.6    77    38  0.60    57     6   1.8    20    57    25
+GamesGone                 1000   +19.6    29    19     1     3    59   0.8   2.4    92    69  0.50    58     5   4.9    23    43    18
+pokermon                  1000   +10.3    17    11     0     5    46   0.3   2.9    43    30  0.50    82     7   4.5    17    44    17
+clanker                   1000    -9.7    21     5    17     3    75   0.0   3.0    50    32  0.58    37     5   1.2    40    52     6
+Joca                      1000   -40.1    15    10     0     3    85   0.6   8.4    67    28  0.66    34     5   1.4    47    29     0
+FisherMen                 1000   -59.5    33    28     1    19    73   1.7   3.7    51    47  0.66    64     1   1.6    21    47    22
+Chinese people can fly    1000   -59.8    30    19     0     5    86   0.3   2.5    41    39  0.33    55     5   1.5    20    44    23
+
+Our chips by how the hand ended:
+  preflop      870 hands     -1580 chips  (-7.9 bb/100 of all hands)
+  postflop      98 hands     +4320 chips  (+21.6 bb/100 of all hands)
+  showdown      32 hands    +12758 chips  (+63.8 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r041.json #134 we=['Ad', 'Jd'] board=['As', '8h', '9c', '6d', '2c'] shown={'FisherMen': ['Ac', '9d']}
+   -2000 saturday_r041.json #682 we=['Kd', 'Kh'] board=['5c', '5d', '8c', '7c', '9c'] shown={'Jump Street': ['Kc', 'Ks']}
+   -2000 saturday_r041.json #918 we=['As', 'Jc'] board=['Ts', 'Qc', 'Kd', 'Th', 'Ks'] shown={'Joca': ['Qd', 'Kc']}
+    +645 saturday_r041.json #836 we=['9c', '9s'] board=['8c', 'Qh', '4h', '9h'] shown={}
+    +713 saturday_r041.json #521 we=['Tc', 'Th'] board=['Td', '8h', '7d'] shown={}
+    +763 saturday_r041.json #761 we=['7h', '7c'] board=['3c', '5s', 'Jc', '8d', '8s'] shown={'GamesGone': ['4d', 'Ac']}
+    +810 saturday_r041.json #862 we=['7h', 'Kh'] board=['9h', '4h', '7s', '5s', '6d'] shown={}
+    +903 saturday_r041.json #70 we=['As', '5h'] board=['2c', '3s', 'Jh', '3h', '4s'] shown={'Joca': ['6s', '6h']}
+   +1119 saturday_r041.json #299 we=['As', '4s'] board=['Td', '8c', '2s', '7c', '4c'] shown={'GamesGone': ['Ad', '5d']}
+   +1401 saturday_r041.json #987 we=['Ks', 'Ac'] board=['5c', '8d', '3d', '5h', 'Qs'] shown={'Jump Street': ['Js', 'As']}
+   +2030 saturday_r041.json #482 we=['As', 'Kc'] board=['7d', '5c', 'Kh', 'Qh', '5h'] shown={'FisherMen': ['Js', 'Jh']}
+   +2030 saturday_r041.json #683 we=['Ks', 'Qd'] board=['3d', 'Kh', '5h', '9s', '7c'] shown={'GamesGone': ['Tc', 'Th']}
+   +1119 saturday_r041.json #299 we=['As', '4s'] board=['Td', '8c', '2s', '7c', '4c'] shown={'GamesGone': ['Ad', '5d']}
+   +1401 saturday_r041.json #987 we=['Ks', 'Ac'] board=['5c', '8d', '3d', '5h', 'Qs'] shown={'Jump Street': ['Js', 'As']}
+   +2030 saturday_r041.json #482 we=['As', 'Kc'] board=['7d', '5c', 'Kh', 'Qh', '5h'] shown={'FisherMen': ['Js', 'Jh']}
+   +2030 saturday_r041.json #683 we=['Ks', 'Qd'] board=['3d', 'Kh', '5h', '9s', '7c'] shown={'GamesGone': ['Tc', 'Th']}
+   +2044 saturday_r041.json #823 we=['Th', 'Ts'] board=['4s', '2d', '5h', '4d', 'Tc'] shown={'FisherMen': ['Ah', 'Qd']}
+   +2065 saturday_r041.json #126 we=['Qc', 'Qd'] board=['5s', '4d', 'Jd', 'Js', '7c'] shown={'FisherMen': ['Ah', 'Td']}
+   +2075 saturday_r041.json #806 we=['As', 'Kh'] board=['7c', '7d', '8c', '3h', 'Ac'] shown={'FisherMen': ['5s', 'Ad']}
+   +2195 saturday_r041.json #462 we=['Kc', 'Ks'] board=['2d', '3d', '8h', '6h', '6c'] shown={'FisherMen': ['Ah', 'Jh']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -546 saturday_r041.json #679 we=['Jd', '9s'] board=['Td', '6d', '7d', '4c'] last=(street=turn act=fold facing=True to_call=733 pot=1845)
+    -492 saturday_r041.json #774 we=['Tc', 'Ah'] board=['3d', '7s', '6d', 'Kh', 'Ac'] last=(street=river act=fold facing=True to_call=984 pot=1968)
+    -447 saturday_r041.json #146 we=['Jc', 'Jh'] board=['6d', 'As', 'Ah', '4d'] last=(street=turn act=fold facing=True to_call=1553 pot=2477)
+    -426 saturday_r041.json #136 we=['Kd', 'As'] board=['9d', '8h', 'Qd', '8s'] last=(street=turn act=fold facing=True to_call=882 pot=1764)
+    -403 saturday_r041.json #175 we=['Ks', 'Qh'] board=['Ad', '3s', '9c', '4h'] last=(street=turn act=fold facing=True to_call=826 pot=1652)
+    -371 saturday_r041.json #607 we=['Kd', 'Qc'] board=['Ks', 'Jh', 'Ad', '2h'] last=(street=turn act=fold facing=True to_call=489 pot=1231)
+    -330 saturday_r041.json #212 we=['3s', 'As'] board=['Td', '9c', '3d', '6s', '6d'] last=(street=river act=fold facing=True to_call=360 pot=1040)
+     -65 saturday_r041.json #949 we=['Ah', 'Kd'] board=[] last=(street=preflop act=fold facing=True to_call=85 pot=245)
+     -60 saturday_r041.json #68 we=['Ad', 'Qc'] board=[] last=(street=preflop act=fold facing=True to_call=120 pot=270)
+     -20 saturday_r041.json #550 we=['Th', 'Tc'] board=['Ad', '3s', 'Qd', 'Qc', '7h'] last=(street=preflop act=fold facing=True to_call=155 pot=255)
+     -10 saturday_r041.json #199 we=['As', 'Qh'] board=['7h', '4d', '3h'] last=(street=preflop act=fold facing=True to_call=40 pot=130)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +77.5 bb/100
+  raised preflop then folded to a re-raise       n=   38    -16.6 bb/100   (-4.4 bb each)
+  showdown lost, other lines                     n=    6    -13.8 bb/100   (-23.0 bb each)
+  blinds / folded preflop                        n=  758    -12.7 bb/100   (-0.2 bb each)
+  showdown lost after our river call             n=    1    -10.0 bb/100   (-100.0 bb each)
+  all-in preflop lost                            n=    1    -10.0 bb/100   (-100.0 bb each)
+  called the flop, folded the turn               n=    6     -8.7 bb/100   (-14.5 bb each)
+  bet the flop or turn, then folded              n=    6     -8.2 bb/100   (-13.6 bb each)
+  raised preflop, check-folded flop or turn      n=   13     -7.1 bb/100   (-5.5 bb each)
+  folded the river after calling                 n=    2     -4.1 bb/100   (-20.6 bb each)
+  called preflop, check-folded flop or turn      n=   12     -3.2 bb/100   (-2.7 bb each)
+  folded the river after betting                 n=    3     -3.0 bb/100   (-10.0 bb each)
+  called preflop then folded preflop             n=    4     -0.8 bb/100   (-2.1 bb each)
+  folded the river after checking                n=    1     -0.7 bb/100   (-7.0 bb each)
+  showdown won                                   n=   20    +55.7 bb/100   (+27.9 bb each)
+  won postflop without showdown                  n=   55    +56.6 bb/100   (+10.3 bb each)
+  won preflop uncontested                        n=   74    +64.1 bb/100   (+8.7 bb each)
+
+Worst hands:
+   -2000 r041#134  AdJd [showdown lost after our river call]
+         FisherMe raise 65; US call 45; | As 8h 9c; US raise 70; FisherMe raise 210; US call 140; | 6d; US check; FisherMe raise 369; US call 369; | 2c; US check; FisherMe raise 1356; US call 1356
+         shown: {'FisherMen': 'Ac9d'}
+   -2000 r041#682  KdKh [all-in preflop lost]
+         US raise 60; Jump Str raise 195; US raise 507; Jump Str raise 2000; US call 1493; | 5c 5d 8c; | 7c; | 9c
+         shown: {'Jump Stree': 'KcKs'}
+   -2000 r041#918  AsJc [showdown lost, other lines]
+         FisherMe raise 65; Joca call 65; GamesGon call 55; US call 45; | Ts Qc Kd; GamesGon check; US raise 416; FisherMe call 416; Joca call 416; | Th; US check; FisherMe check; Joca raise 1519; US call 1519; | Ks
+         shown: {'Joca': 'QdKc'}
+    -546 r041#679  Jd9s [bet the flop or turn, then folded]
+         Joca raise 60; US raise 204; Joca call 144; | Td 6d 7d; US raise 342; Joca call 342; | 4c; US check; Joca raise 733; US fold
+         shown: {}
+    -492 r041#774  TcAh [folded the river after calling]
+         GamesGon raise 44; US raise 123; GamesGon call 79; | 3d 7s 6d; GamesGon raise 123; US call 123; | Kh; GamesGon raise 246; US call 246; | Ac; GamesGon raise 984; US fold
+         shown: {}
+    -447 r041#146  JcJh [called the flop, folded the turn]
+         US raise 60; Jump Str raise 195; US call 135; | 6d As Ah; US check; Jump Str raise 252; US call 252; | 4d; US check; Jump Str raise 1553; US fold
+         shown: {}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r041.json: 1326 decisions {'preflop': 1063, 'flop': 145, 'turn': 79, 'river': 39} | platform says 0 timeouts, think 2.67s | replay finds 2 passive plays the bot would not make
+   hand  180 turn    we=2d2h board=[5s Kc 5h Tc] played fold , bot says call  (to call 118, pot 354) -> hand result -103
+   hand  412 turn    we=4cAc board=[5c Kh 7c 7s] played fold , bot says call  (to call 324, pot 648) -> hand result -125
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Joca                        -40.1      +4.2 | -                                  | f3b 55/65, steal-fold 33/35, cbet 4/6, lines 0/3 0/2 2/9 6/11 6/15
+GamesGone                   +19.6     +17.7 | limp-folder                        | f3b 24/41, steal-fold 19/20, cbet 66/72, lines 9/24 3/6 3/10 14/16 16/22
+FisherMen                   -59.5     +48.3 | -                                  | f3b 35/48, steal-fold 23/58, cbet 31/61, lines 14/34 5/8 20/30 13/13 28/39
+Jump Street                 +61.6      +0.2 | -                                  | f3b 9/14, steal-fold 27/50, cbet 36/47, lines 8/11 3/4 12/24 12/14 26/48
+Chinese people can fly      -59.8      +6.8 | -                                  | f3b 44/51, steal-fold 41/74, cbet 22/54, lines 7/19 2/4 20/36 18/25 35/59
+pokermon                    +10.3      +3.9 | -                                  | f3b 6/13, steal-fold 59/73, cbet 9/21, lines 6/9 5/7 3/6 13/13 26/30
+clanker                      -9.7      -3.7 | -                                  | f3b 3/4, steal-fold 51/68, cbet 8/16, lines 0/1 1/4 1/15 6/15 28/43

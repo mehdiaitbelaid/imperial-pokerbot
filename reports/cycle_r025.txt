@@ -1,0 +1,153 @@
+## ROUND 025  11:01:35
+{'ref': 'sunday/s1/r025', 'version': 16, 'bb100': 55.165, 'chips': 11033, 'timeouts': 0, 'errors': 0, 'bank_out': 0, 'think_s': 2.54} violations 0
+rounds_played 25 of 36 | api now 2026-11-15T11:01:36
+  1. Resonance Qt              +152202 chips   +30.4 bb/100
+  2. Anker Batteries           +107494 chips   +21.5 bb/100
+  3. Chinese people can fly     +49667 chips    +9.9 bb/100
+  4. Poke                        +2638 chips    +0.5 bb/100
+  5. Anton                      -43294 chips    -8.7 bb/100
+  6. GamesGone                  -55485 chips   -11.1 bb/100
+  7. WBot                       -79700 chips   -15.9 bb/100
+  8. YSL_TWIZZY                -133522 chips   -26.7 bb/100
+US rank 1, chips +152202, gap to 2nd +44708, gap to 3rd +102535, gap to 1st +0
+  platform v13: 1 rounds, avg +3.8 bb/100, chips +758, timeouts 0, max think 2.61 | +4
+  platform v14: 6 rounds, avg +22.1 bb/100, chips +26569, timeouts 1, max think 2.61 | +43 +10 +23 -32 +50 +39
+  platform v15: 13 rounds, avg +22.4 bb/100, chips +58139, timeouts 3, max think 2.90 | +43 +20 -42 +103 +34 +123 +83 -49 +6 -53 -19 -11 +54
+  platform v16: 5 rounds, avg +66.7 bb/100, chips +66736, timeouts 2, max think 2.54 | +69 +86 +82 +41 +55
+## LABELS
+sunday_s1_r025.json right 2 of 7 | Anker =ANKER@h53 [tb 18/346 f4 2/3]; Chines=none [tb 20/341 f4 2/4]; WBot=none [tb 28/394 f4 2/5]; GamesG=none [tb 47/501 f4 2/5]; Poke=GG@h78 WRONG [tb 25/508 f4 1/4]; Anton=ANTON@h50 [tb 92/486 f4 53/68]; YSL_TW=none [tb 8/419 f4 0/1]
+## TRACK
+1 round(s), 1000 hands, our total +11033 chips = +55.2 bb/100
+OUR PREFLOP 3-BETS by opener (light = not TT+, AK, AQ, AJs, KQs):
+  YSL  n= 59 of  85 opps, light= 54 | opener folded 47/57 (82%), called 2, 4-bet 8 | ended: won preflop 41, we folded to a 4-bet 9, flop 9 | net +1272 chips (light -1138)
+  ANT  n=  4 of  55 opps, light=  1 | opener folded 2/4 (50%), called 1, 4-bet 1 | ended: won preflop 3, we folded to a 4-bet 0, flop 1 | net +2583 chips (light +2020)
+  CPF  n=  2 of  32 opps, light=  1 | opener folded 1/2 (50%), called 1, 4-bet 0 | ended: won preflop 1, we folded to a 4-bet 0, flop 1 | net -1930 chips (light -2000)
+  GG   n=  1 of  82 opps, light=  0 | opener folded 0/1 (0%), called 1, 4-bet 0 | ended: won preflop 0, we folded to a 4-bet 0, flop 1 | net -167 chips (light +0)
+  POK  n=  1 of  68 opps, light=  0 | opener folded 0/1 (0%), called 0, 4-bet 1 | ended: won preflop 1, we folded to a 4-bet 0, flop 0 | net +320 chips (light +0)
+  WB   n=  1 of  79 opps, light=  0 | opener folded 0/1 (0%), called 0, 4-bet 1 | ended: won preflop 0, we folded to a 4-bet 0, flop 1 | net +2020 chips (light +0)
+  ALL  n=68 light=56 folded 50/66 (75%) net +4098 (light -1118)
+  who 4-bet our 3-bets: YSL(opener) 8, ANT(opener) 1, WB(opener) 1, GG(cold) 1, POK(opener) 1, CPF(cold) 1
+OUR 4-BETS by 3-bettor:
+  ANT  n=  9 | he folded 9/9 (100%), called 0, 5-bet 0 | net +2218 chips
+  WB   n=  1 | he folded 0/1 (0%), called 1, 5-bet 0 | net +537 chips
+  ANK  n=  1 | he folded 0/1 (0%), called 1, 5-bet 0 | net +2050 chips
+THEIR 3-BETS OF OUR OPENS (our reply):
+  ANT  n=  9 | we folded 1, called 0, 4-bet 8 | net +1808 chips
+  WB   n=  6 | we folded 2, called 2, 4-bet 1 | net -17 chips
+  CPF  n=  5 | we folded 5, called 0, 4-bet 0 | net -268 chips
+  ANK  n=  4 | we folded 3, called 0, 4-bet 1 | net +1902 chips
+  GG   n=  4 | we folded 3, called 1, 4-bet 0 | net -360 chips
+  POK  n=  2 | we folded 2, called 0, 4-bet 0 | net -120 chips
+OUR POSTFLOP RAISES OF A BET (bettor, bet size bucket -> his reply):
+  ANK  0.24-0.42  n=  2 | folded 1/2 (50%), called 1, re-raised 0 | net +300 chips
+  ANT  0.24-0.42  n=  1 | folded 1/1 (100%), called 0, re-raised 0 | net +96 chips
+  ANT  0.42-0.65  n=  1 | folded 1/1 (100%), called 0, re-raised 0 | net +120 chips
+  CPF  0.24-0.42  n=  3 | folded 2/3 (66%), called 1, re-raised 0 | net -60 chips
+  POK  0.42-0.65  n=  2 | folded 1/2 (50%), called 1, re-raised 0 | net +178 chips
+  WB   0.24-0.42  n=  4 | folded 2/4 (50%), called 2, re-raised 0 | net +1184 chips
+  total under 0.42 pot: n=10, folded 6/10 (60%), net +1520 chips
+  total 0.42-0.90 pot: n=3, folded 2/3 (66%), net +298 chips
+CHIPS FROM EACH OPPONENT (our result split among the other side in proportion):
+  WB +7541  ANT +5372  CPF +1760  YSL +924  ANK +89  POK -1112  GG -3541
+OPPONENTS (this sample | dossier):
+  ANK   +30.6 bb/100 VPIP 20 PFR 11 limp 0% | opens(n=91) 2.5:100% | 3bet 18/346 (5%) | f3b 8/23 (34%), to ours 0/0 | f4b 2/3 (66%)
+       bets(n=96) 0.40:43% 1.10:18% 0.70:16% 2.00:12% 0.60:3% | folds when raised: 0.24-0.42:6/11 0.65-0.90:2/2 0.90-1.30:1/2 1.30+:0/1
+  CPF   +35.3 bb/100 VPIP 25 PFR 18 limp 0% | opens(n=160) 2.5:91% 3.0:8% | 3bet 20/341 (5%) | f3b 31/61 (50%), to ours 1/2 (50%) | f4b 2/4 (50%)
+       bets(n=102) 0.65:36% 0.35:31% 1.00:19% 0.30:5% 1.40:1% | folds when raised: 0.24-0.42:5/7 0.65-0.90:7/7 0.90-1.30:0/3
+  WB    -35.3 bb/100 VPIP 32 PFR 24 limp 0% | opens(n=208) 3.5:96% 4.0:3% | 3bet 28/394 (7%) | f3b 17/63 (26%), to ours 0/1 (0%) | f4b 2/5 (40%)
+       bets(n=134) 0.60:46% 1.00:24% 0.35:23% 0.55:1% 3.95:0% | folds when raised: 0.24-0.42:6/8 0.42-0.65:11/14 0.90-1.30:1/2
+  GG    +50.5 bb/100 VPIP 27 PFR 18 limp 0% | opens(n=136) 2.2:97% 3.0:2% | 3bet 47/501 (9%) | f3b 12/29 (41%), to ours 0/1 (0%) | f4b 2/5 (40%)
+       bets(n=115) 2.00:76% 0.50:10% 1.00:6% 1.55:3% 0.55:0% | folds when raised: 0.42-0.65:4/7 0.90-1.30:2/2 1.30+:8/12
+  POK    +0.9 bb/100 VPIP 16 PFR 11 limp 0% | opens(n=91) 2.2:97% 3.0:2% | 3bet 25/508 (4%) | f3b 4/13 (30%), to ours 0/1 (0%) | f4b 1/4 (25%)
+       bets(n=51) 1.00:54% 0.50:29% 1.50:5% 0.75:3% 1.05:1% | folds when raised: 0.42-0.65:2/3 0.90-1.30:1/1
+  ANT  -129.7 bb/100 VPIP 20 PFR 17 limp 2% | opens(n=69) 3.0:33% 2.5:30% 4.5:13% 6.6:11% | 3bet 99/494 (20%) | f3b 3/8 (37%), to ours 2/4 (50%) | f4b 49/62 (79%)
+       bets(n=46) 0.55:28% 0.75:15% 0.35:13% 1.10:8% 0.50:6% | folds when raised: 0.24-0.42:1/1 0.42-0.65:1/2
+  YSL    -7.4 bb/100 VPIP 10 PFR 9 limp 0% | opens(n=82) 2.6:84% 2.4:15% | 3bet 8/419 (1%) | f3b 60/73 (82%), to ours 47/57 (82%) | f4b 0/1 (0%)
+       bets(n=11) 0.50:81% 0.35:9% 0.80:9% | folds when raised: -
+BIGGEST LOSSES:
+   -2000 r025#44 9cAd :: CPF r50 US r170 CPF c120 | Td 6c Ah US r576 CPF c576 | 2c CPF r1254 US c1254 | Jc :: shown {'CPF': 'ThAs=Two Pair'}
+   -2000 r025#256 6h6c :: US r60 WB c60 POK c40 | 6d Qd 4d WB r114 POK r532 US c532 | Ks POK r1408 US c1408 | 3h :: shown {'POK': '2dAd=Flush'}
+   -2000 r025#367 3h6h :: YSL r52 US r145 ANK c145 | Ah Qs 6c US r595 ANK c595 | 4s US r1260 ANK c1260 | 7c :: shown {'ANK': 'KdAc=Pair'}
+   -2000 r025#662 Ts9s :: GG r44 US c44 CPF c34 | Th Td As GG r304 US c304 CPF c304 | Kc GG r1652 US c1652 CPF c1652 | 7d :: shown {'CPF': 'Ah8h=Two Pair', 'GG': 'AcAd=Full House'}
+   -2000 r025#859 As5c :: GG r44 US c24 | 2c 4c 8d GG r196 US c196 | Ac US r245 GG c245 | 5h US r1515 GG c1515 :: shown {'GG': '8sAh=Two Pair'}
+   -2000 r025#860 7hKh :: YSL r48 US r163 ANK c143 | Qh Ks 5h US r598 ANK c598 | 4d US r1239 ANK c1239 | 6s :: shown {'ANK': 'AhKd=Pair'}
+BIGGEST WINS:
+   +2082 r025#985 AhAc :: YSL r52 US r156 CPF r358 US r2000 CPF c1642 | Jc 3h 8s | 8d | Ad :: shown {'CPF': 'KdKc=Two Pair'}
+   +2050 r025#918 AcAh :: ANT c20 US r100 ANK r320 US r2000 ANK c1680 | 9d 7s Jh | 4c | 3c :: shown {'ANK': 'KhKc=Pair'}
+   +2030 r025#520 KcKh :: US r60 WB c60 | 4h 4d 7d US r240 WB r870 US c630 | 6d WB r1070 US c1070 | Qs :: shown {'WB': '6sAd=Two Pair'}
+   +2020 r025#228 QdQc :: WB r70 US r259 WB r2000 US c1741 | 4s 4h 7h | 2d | Ks :: shown {'WB': 'Ad9h=Pair'}
+   +2020 r025#68 9d9h :: ANT r90 US r405 ANT c315 | 2h Ah Qd US r664 ANT r1595 US c931 | 5h | 3h :: shown {'ANT': 'JcAs=Pair'}
+   +1760 r025#688 7h6h :: US r60 GG c50 | Qh 6d 3h GG r280 US c280 | Ts GG r1400 US c1400 | Qd :: shown {'GG': '4d4s=Two Pair'}
+## ENDED / LEAKS
+  preflop      875 hands     +1938 chips  (+9.7 bb/100 of all hands)
+  postflop     103 hands     +3281 chips  (+16.4 bb/100 of all hands)
+  showdown      22 hands     +5814 chips  (+29.1 bb/100 of all hands)
+  showdown lost, other lines                     n=    8    -65.1 bb/100   (-81.4 bb each)
+  bet the flop or turn, then folded              n=    9    -17.6 bb/100   (-19.5 bb each)
+  blinds / folded preflop                        n=  774    -14.1 bb/100   (-0.2 bb each)
+  raised preflop then folded to a re-raise       n=   26    -11.5 bb/100   (-4.4 bb each)
+## BIGCALLS this round (one pair or less)
+    r025#44 turn 9cAd on Td6cAh2c pair called 1254 vs CPF bet 0.83 pot -> -2000
+    r025#891 flop ThTs on 2h5s7d pair called 630 vs WB bet 2.23 pot -> -940
+    r025#955 flop QcJc on 4c9cTh nopair+fd called 630 vs WB bet 2.23 pot -> +950
+    r025#757 river QdQs on Tc9s6c5c4d pair called 500 vs CPF bet 0.33 pot -> +1264
+    r025#405 river QdAh on Kd6h8c4cAc pair called 617 vs WB bet 0.33 pot -> +1603
+    r025#688 turn 7h6h on Qh6d3hTs pair+fd called 1400 vs GG bet 2.00 pot -> +1760
+    r025#68 flop 9d9h on 2hAhQd pair called 931 vs ANT bet 1.07 pot -> +2020
+    r025#520 flop KcKh on 4h4d7d pair called 630 vs WB bet 2.23 pot -> +2030
+    r025#520 turn KcKh on 4h4d7d6d pair called 1070 vs WB bet 0.57 pot -> +2030
+## BIGFOLDS this round
+OUR TURN/RIVER FOLDS FACING 500+ WITH ONE PAIR OR LESS: n=10, opponent cards known in 1, would have won 0
+    r025#70 turn KhAh on 4h5cTd6h nopair folded to WB facing 1815 -> -185 (no showdown)
+    r025#216 turn 7sAs on AdKdTd8d pair folded to GG facing 1040 -> -220 (no showdown)
+    r025#318 turn 8d9d on 8c7s3c5h pair folded to GG facing 794 -> -129 (no showdown)
+    r025#339 river AhTd on Ts3sJd3h4d pair folded to ANT facing 988 -> -436 (no showdown)
+    r025#343 river KsKd on Qd9hAdJd4s pair folded to WB facing 1442 -> -558 (no showdown)
+    r025#376 turn QcKd on 6h7hKh2d pair folded to GG facing 1700 -> -300 (would have lost vs CPF QhKc,GG 5h8h)
+    r025#407 turn TsQh on 2h4c8hJh nopair folded to GG facing 676 -> -164 (no showdown)
+    r025#686 turn JhKh on 5sTsQhQd nopair folded to GG facing 1180 -> -280 (no showdown)
+    r025#813 turn 4cAc on Ah8dQh9s pair folded to GG facing 1180 -> -280 (no showdown)
+    r025#891 turn ThTs on 2h5s7dQc pair folded to WB facing 1060 -> -940 (no showdown)
+## SINCE V25 (r021 on)
+5 round(s)
+OUR RIVER BETS OF 300+ WITHOUT TWO PAIR OR BETTER, by opponent facing them: n / he folded / net chips of those hands / of which three barrels
+  GG   n= 5 folded  3 net   -952 three-barrels 3
+  POK  n= 2 folded  1 net   -793 three-barrels 1
+  ANT  n= 6 folded  4 net   +544 three-barrels 6
+  YSL  n= 2 folded  2 net   +903 three-barrels 1
+  ANK  n= 2 folded  2 net   +910 three-barrels 0
+  CPF  n= 7 folded  4 net  +1524 three-barrels 2
+  WB   n= 4 folded  4 net  +1710 three-barrels 1
+OUR TURN/RIVER CALLS OF 500+ WITH ONE PAIR OR LESS (first per hand): n=13 won 6 | actual -4019 chips | if folded instead -10308 | folding gains -6289 chips
+  vs POK  n= 1 won 0 actual -2000 if folded -265 gain +1735
+  vs ANK  n= 1 won 0 actual -2000 if folded -1076 gain +924
+  vs ANT  n= 1 won 0 actual -2000 if folded -1374 gain +626
+  vs CPF  n= 3 won 1 actual -2316 if folded -2446 gain -130
+  vs GG   n= 3 won 2 actual +610 if folded -1224 gain -1834
+  vs WB   n= 4 won 3 actual +3687 if folded -3923 gain -7610
+OUR TURN/RIVER FOLDS FACING 500+ WITH ONE PAIR OR LESS: n=32, opponent cards known in 1, would have won 0
+5 round(s): we raised a small bet 81 times -> bettor folded 27 (33%), called 49, re-raised 5 | net result of those hands +444 bb
+   WBot                     raised 55, folded 21, net +395 bb
+   Chinese people can fly   raised 14, folded  3, net -108 bb
+## ANKER flop+turn called, river (build upload/bot_v25.py) this round
+  r025#164 4sQs on 8sAsKd9d8c nopair | check, Anker bet 270 | Anker no showdown | -338
+  r025#513 KcAh on Td7h9h6sAd pair | check, - | Anker ThJh | +522
+TOTAL (1 round(s)): spot / hands / won / chips
+  river check, less than two pair, labelled (rule spot)          n= 2 won  1 net +184
+## ANKER since V25
+TOTAL (5 round(s)): spot / hands / won / chips
+  river check, less than two pair, labelled (rule spot)          n= 5 won  2 net +545
+  river check, two pair or better                                n= 1 won  0 net -2000
+  three-street bet, two pair or better                           n= 1 won  1 net +260
+5 round(s), 5000 hands, our total +66736 chips = +66.7 bb/100
+CHIPS FROM EACH OPPONENT (our result split among the other side in proportion):
+  WB +17957  ANT +17639  YSL +15975  CPF +9938  GG +4780  POK +3811  ANK -3364
+## ANKER CHANGE CHECK
+ANKER CHECK (1 round(s)): VPIP 21% (n=1000; base 22%); PFR 11% (n=1000; base 13%); 3-bet 5% (n=346; base 9%); open 2.52bb (n=93; base 2.58); overbets 33% (n=96; base 37%); fold to our flop bet 50% (n=20; base 61%); fold to our turn bet 67% (n=12; base 50%); fold to our river bet nan% (n=0; base 48%); bets river after our check 50% (n=2; base 61%); river bets after our check shown: 0, one pair or less 0, no pair 0 (base shown 10, one pair or less 4, no pair 1)
+ANKER FLAGS (moves over 8 points, n>=8): fold to our flop bet -11, fold to our turn bet +17
+since V25:
+ANKER CHECK (5 round(s)): VPIP 21% (n=5000; base 22%); PFR 12% (n=5000; base 13%); 3-bet 9% (n=1640; base 9%); open 2.59bb (n=460; base 2.58); overbets 35% (n=393; base 37%); fold to our flop bet 48% (n=81; base 61%); fold to our turn bet 68% (n=40; base 50%); fold to our river bet 100% (n=5; base 48%); bets river after our check 70% (n=10; base 61%); river bets after our check shown: 4, one pair or less 1, no pair 0 (base shown 10, one pair or less 4, no pair 1)
+ANKER FLAGS (moves over 8 points, n>=8): fold to our flop bet -13, fold to our turn bet +18, bets river after our check +9
+## WHATIF
+sunday_s1_r025.json: 19 postflop calls of 300+ chips; the build would have folded 0 of them: saves 0 bb, gives up 0 bb -> net +0.0 bb/100
+END

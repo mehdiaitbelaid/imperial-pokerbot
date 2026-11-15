@@ -1,0 +1,95 @@
+ROUND r026 | our bot: platform v10 | result +95.8 bb/100 | timeouts 0 | errors 0 | think 1.92s | table 5 seat 0
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Resonance Qt              1000   +95.8    19    14     0     7    19   2.2   3.1    73    49  0.80    37    13   1.6    41    59     9
+Joca                      1000   +87.7    18    14     0     6   100   4.6  30.6    50    37  0.66    36    11   1.2    46    55    25
+The Market Makers         1000   +80.0    19    12     3     6    15   2.1   2.9    92    69  0.68    52     4   3.1    32    54    21
+Kojack                    1000   +75.1    23    19     2     8    66   1.9   4.1    77    50  0.55    35     3   1.9    41    60    23
+gamblerlove               1000   +40.7    25    20     0     4    67   3.1   4.0    84    52  0.60    55    15   3.4    40    57     7
+Poké Bot                  1000   -64.5    19    17     0     3    25   0.3   3.0    97    66  0.40    56     3   1.9    20    77    31
+ediz_slow                 1000  -314.8    76    30    70    32     0   1.3   2.8   100    45  0.56    62    17   3.9    41    40    19
+
+Our chips by how the hand ended:
+  preflop      901 hands     -2925 chips  (-14.6 bb/100 of all hands)
+  postflop      58 hands     +5148 chips  (+25.7 bb/100 of all hands)
+  showdown      41 hands    +16941 chips  (+84.7 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r026.json #125 we=['Jh', 'Ah'] board=['4h', '6c', 'Js', 'Kc', '7c'] shown={'ediz_slow': ['3d', 'Kh']}
+   -2000 saturday_r026.json #395 we=['9d', '9s'] board=['Ac', 'Td', 'Qh', '7h', 'Js'] shown={'ediz_slow': ['Ad', '7d']}
+   -2000 saturday_r026.json #492 we=['Th', 'Ts'] board=['7s', '9h', '9d', 'Kc', 'Ad'] shown={'ediz_slow': ['2c', 'Ks']}
+   -2000 saturday_r026.json #576 we=['Js', 'Jc'] board=['8h', '8d', '4d', '5s', '7d'] shown={'The Market Makers': ['Qd', 'Jd']}
+   -2000 saturday_r026.json #585 we=['9c', '9s'] board=['8s', '4s', 'Js', 'Td', '9d'] shown={'ediz_slow': ['7s', '7c']}
+   -2000 saturday_r026.json #639 we=['6d', '6c'] board=['6h', '4d', 'As', 'Jh', 'Qd'] shown={'Kojack': ['Jc', 'Jd']}
+   -2000 saturday_r026.json #650 we=['Ah', 'Qc'] board=['2c', '2s', '7h', '3s', '7c'] shown={'ediz_slow': ['Qs', 'Qd']}
+   -2000 saturday_r026.json #732 we=['Ah', 'Kd'] board=['5c', '2s', '8s', 'Ks', 'Js'] shown={'ediz_slow': ['Kh', '2d']}
+   -2000 saturday_r026.json #964 we=['As', '8s'] board=['5s', '6c', '4c', '2h', 'Qh'] shown={'ediz_slow': ['Ac', '9d']}
+    -920 saturday_r026.json #781 we=['Qc', 'Kd'] board=['3s', '3d', 'Ac', 'Jh', 'Js'] shown={}
+    -762 saturday_r026.json #142 we=['4c', '4d'] board=['8h', 'Jh', 'Js', 'Qd', 'Kh'] shown={'Kojack': ['Ts', 'Ac']}
+    -718 saturday_r026.json #564 we=['2c', 'Ac'] board=['3s', '6d', '7c', '5d', 'Qc'] shown={}
+   +2060 saturday_r026.json #654 we=['Ah', 'Kc'] board=['Ad', '9c', '7h', '6d', '3d'] shown={'ediz_slow': ['2d', '2s']}
+   +2065 saturday_r026.json #289 we=['8s', '8d'] board=['2h', 'Th', 'As', 'Qd', '4c'] shown={'ediz_slow': ['3d', 'Kc']}
+   +2065 saturday_r026.json #590 we=['Tc', 'Ah'] board=['3h', '4c', 'Ad', 'Td', '6c'] shown={'ediz_slow': ['Ac', 'Qc']}
+   +2090 saturday_r026.json #383 we=['Kc', 'Ad'] board=['5s', '5h', '2s', '9s', '2d'] shown={'ediz_slow': ['4h', 'Ks']}
+   +2120 saturday_r026.json #191 we=['9c', 'Ah'] board=['8h', '2d', 'Js', 'Qh', 'Kc'] shown={'ediz_slow': ['7h', 'As']}
+   +2165 saturday_r026.json #592 we=['Ts', 'Td'] board=['3s', '7h', '6c', '3d', '4h'] shown={'ediz_slow': ['2s', '2h']}
+   +2385 saturday_r026.json #921 we=['As', 'Kc'] board=['9s', 'Ad', '8d', 'Tc', '9c'] shown={'ediz_slow': ['Ks', '5c']}
+   +4070 saturday_r026.json #692 we=['Qd', 'Qc'] board=['Qs', 'Ks', '4s', 'Th', 'Kc'] shown={'ediz_slow': ['2s', 'Ac'], 'The Market Makers': ['Ah', 'Jh']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -920 saturday_r026.json #781 we=['Qc', 'Kd'] board=['3s', '3d', 'Ac', 'Jh', 'Js'] last=(street=river act=fold facing=True to_call=1000 pot=2960)
+    -718 saturday_r026.json #564 we=['2c', 'Ac'] board=['3s', '6d', '7c', '5d', 'Qc'] last=(street=river act=fold facing=True to_call=748 pot=2204)
+    -415 saturday_r026.json #559 we=['Qh', 'Kc'] board=['Ts', '2s', '4d', '7d'] last=(street=turn act=fold facing=True to_call=480 pot=1400)
+    -349 saturday_r026.json #532 we=['Qc', 'Js'] board=['Td', '8h', '3d', '8s'] last=(street=turn act=fold facing=True to_call=384 pot=1112)
+     -10 saturday_r026.json #3 we=['Kd', 'Ad'] board=[] last=(street=preflop act=fold facing=True to_call=188 pot=288)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +95.8 bb/100
+  all-in preflop lost                            n=    7    -70.0 bb/100   (-100.0 bb each)
+  showdown lost, other lines                     n=    8    -37.3 bb/100   (-46.6 bb each)
+  blinds / folded preflop                        n=  813    -17.7 bb/100   (-0.2 bb each)
+  folded the river after calling                 n=    2     -8.2 bb/100   (-41.0 bb each)
+  raised preflop then folded to a re-raise       n=   20     -7.9 bb/100   (-4.0 bb each)
+  raised preflop, check-folded flop or turn      n=    9     -5.0 bb/100   (-5.5 bb each)
+  showdown lost after our river call             n=    2     -4.9 bb/100   (-24.7 bb each)
+  called preflop, check-folded flop or turn      n=   12     -3.9 bb/100   (-3.2 bb each)
+  called the flop, folded the turn               n=    2     -3.8 bb/100   (-19.1 bb each)
+  called preflop then folded preflop             n=    9     -2.6 bb/100   (-2.9 bb each)
+  showdown won                                   n=    8    +40.8 bb/100   (+50.9 bb each)
+  won postflop without showdown                  n=   33    +46.6 bb/100   (+14.1 bb each)
+  won preflop uncontested                        n=   75   +169.8 bb/100   (+22.6 bb each)
+
+Worst hands:
+   -2000 r026#125  JhAh [all-in preflop lost]
+         US raise 60; ediz_slo raise 145; US raise 2000; ediz_slo call 1855; | 4h 6c Js; | Kc; | 7c
+         shown: {'ediz_slow': '3dKh'}
+   -2000 r026#395  9d9s [all-in preflop lost]
+         US raise 65; ediz_slo raise 152; US raise 2000; ediz_slo call 1848; | Ac Td Qh; | 7h; | Js
+         shown: {'ediz_slow': 'Ad7d'}
+   -2000 r026#492  ThTs [all-in preflop lost]
+         ediz_slo raise 55; gamblerl call 55; US raise 220; ediz_slo raise 555; US raise 2000; ediz_slo call 1445; | 7s 9h 9d; | Kc; | Ad
+         shown: {'ediz_slow': '2cKs'}
+   -2000 r026#576  JsJc [showdown lost, other lines]
+         ediz_slo call 20; The Mark raise 80; US raise 360; The Mark call 280; | 8h 8d 4d; US raise 375; The Mark call 375; | 5s; US check; The Mark raise 750; US raise 1265; The Mark call 515; | 7d
+         shown: {'The Market': 'QdJd'}
+   -2000 r026#585  9c9s [all-in preflop lost]
+         US raise 65; ediz_slo raise 157; US raise 2000; ediz_slo call 1843; | 8s 4s Js; | Td; | 9d
+         shown: {'ediz_slow': '7s7c'}
+   -2000 r026#639  6d6c [showdown lost, other lines]
+         ediz_slo call 20; Kojack raise 100; US call 80; | 6h 4d As; US raise 368; Kojack call 368; | Jh; US raise 1532; Kojack call 1532; | Qd
+         shown: {'Kojack': 'JcJd'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r026.json: 1236 decisions {'preflop': 1076, 'flop': 95, 'turn': 43, 'river': 22} | platform says 0 timeouts, think 1.92s | replay finds 2 passive plays the bot would not make
+   hand  553 turn    we=4h4d board=[Jd 2d 5s 3c] played check, bot says raise (to call 0, pot 320) -> hand result +175
+   hand  576 turn    we=JsJc board=[8h 8d 4d 5s] played check, bot says raise (to call 0, pot 1500) -> hand result -2000
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+ediz_slow                  -314.8     +81.2 | KIT preflop only                   | f3b 0/58, steal-fold 37/100, cbet 96/96, lines 21/52 0/0 18/18 8/16 92/109
+Joca                        +87.7      -0.2 | -                                  | f3b 10/10, steal-fold 46/58, cbet 8/16, lines 3/10 2/6 9/20 1/4 10/28
+Kojack                      +75.1     -14.0 | -                                  | f3b 19/29, steal-fold 21/41, cbet 33/43, lines 3/5 3/3 5/13 2/6 8/30
+The Market Makers           +80.0     +17.6 | limp-folder                        | f3b 4/26, steal-fold 7/17, cbet 35/38, lines 2/3 4/6 6/17 4/5 14/32
+gamblerlove                 +40.7      +8.8 | -                                  | f3b 28/42, steal-fold 0/0, cbet 27/32, lines 8/14 2/2 4/12 3/4 23/37
+Poké Bot                    -64.5      +2.4 | -                                  | f3b 13/52, steal-fold 0/0, cbet 35/36, lines 6/16 1/1 14/24 1/3 11/24

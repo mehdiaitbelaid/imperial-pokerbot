@@ -35,44 +35,61 @@ SIZE_LEARN = True
 # during the round, then starts from what that team did on Saturday (per size bucket: times its bet
 # was raised / folded, hands shown / strong). At most 12 pseudo-observations, so live play corrects it.
 FINGERPRINTS = True
-NO_THIRD_BARREL = True   # V25
 BIGPAIR_CALL = 500       # V24: chips to call on the turn or river from which one pair or less needs more equity
 BIGPAIR_MARGIN = 0.15
 THREEBET_ANY = True     # 3-bet any two cards against an opener who folds to 3-bets 4 times in 5 (8+ cases)
 MANIAC_RULES = True     # against the recognised 3-bet maniac: 4-bet instead of calling, raise his bets instead of calling
 SEED = {
-    "ANKER": ([0, 12, 12, 10, 12, 8], [0, 5.76, 0.86, 5, 8.64, 3], [0, 12, 12, 12, 12, 12], [0, 10.24, 11.17, 9.26, 8.21, 9]),
-    "CPF": ([0, 12, 0, 0, 12, 0], [0, 9.62, 0, 0, 2.4, 0], [10, 12, 0, 12, 12, 0], [8, 4.12, 0, 10, 11.22, 0]),
-    "WBOT": ([12, 12, 12, 12, 12, 0], [9.65, 5.51, 4, 1.85, 3.82, 0], [12, 12, 12, 12, 12, 12], [4.68, 6.1, 5.8, 9.76, 8.38, 11.56]),
-    "GG": ([0, 0, 12, 0, 12, 0], [0, 0, 8.93, 0, 3.69, 0], [0, 12, 12, 0, 12, 0], [0, 7, 4.43, 0, 10.55, 0]),
-    "POKE": ([0, 12, 12, 12, 12, 12], [0, 7.1, 6.62, 8.5, 9, 3.6], [0, 12, 12, 12, 12, 12], [0, 7.84, 7.38, 5.35, 9, 11.02]),
+    "ANKER": ([0, 12, 9, 12, 12, 1], [0, 1.5, 1.0, 8.8, 9.23, 0.0], [4, 12, 10, 12, 12, 4], [4.0, 10.32, 9.0, 8.0, 9.23, 4.0]),
     "ANTON": ([0, 12, 12, 12, 0, 0], [0, 11, 10.29, 10.11, 0, 0], [0, 12, 12, 12, 0, 12], [0, 8.7, 6.46, 6.4, 0, 11.48]),
-    "YSL": ([0, 0, 12, 9, 0, 0], [0, 0, 0, 0, 0, 0], [0, 12, 12, 12, 0, 0], [0, 6.5, 12, 12, 0, 0]),
+    "ASTRA": ([0, 12, 12, 6, 1, 0], [0, 9.79, 4.24, 1.0, 0.0, 0], [2, 12, 12, 12, 2, 2], [2.0, 4.69, 8.07, 10.22, 1.0, 2.0]),
+    "ATT": ([0, 12, 3, 12, 12, 0], [0, 9.69, 3.0, 8.0, 7.0, 0], [2, 12, 11, 12, 12, 3], [2.0, 6.93, 5.0, 8.51, 11.33, 3.0]),
+    "GHERK": ([0, 12, 0, 6, 7, 0], [0, 5.68, 0, 3.0, 3.0, 0], [1, 12, 3, 12, 12, 3], [1.0, 9.16, 3.0, 7.71, 9.29, 2.0]),
+    "EE": ([0, 0, 12, 12, 4, 0], [0, 0, 11.14, 7.03, 0.0, 0], [5, 3, 12, 12, 6, 0], [4.0, 3.0, 4.63, 10.76, 6.0, 0]),
+    "PHIL": ([0, 0, 12, 2, 2, 0], [0, 0, 8.73, 0.0, 0.0, 0], [1, 2, 12, 11, 1, 1], [1.0, 2.0, 9.45, 11.0, 1.0, 1.0]),
+    "FISH": ([0, 12, 0, 11, 12, 0], [0, 11.48, 0, 10.0, 6.46, 0], [1, 12, 2, 12, 12, 1], [1.0, 7.7, 2.0, 7.58, 10.67, 1.0]),
+    "JOCAL": ([0, 5, 0, 5, 11, 1], [0, 4.0, 0, 1.0, 6.0, 0.0], [0, 12, 3, 6, 12, 7], [0, 7.58, 2.0, 5.0, 10.08, 7.0]),
+    "SARS": ([0, 0, 12, 12, 1, 0], [0, 0, 12.0, 9.75, 1.0, 0], [1, 7, 12, 12, 1, 0], [1.0, 5.0, 6.57, 11.08, 1.0, 0]),
+    "TMM": ([0, 0, 12, 12, 4, 2], [0, 0, 9.77, 3.31, 2.0, 0.0], [1, 2, 12, 12, 12, 9], [0.0, 2.0, 3.09, 8.4, 11.08, 9.0]),
 }
+# folds per 12 of our own light 3-bets, real hands of both days: Attention 61/116, Astra 23/37, FisherMen 12/51,
+# Gherkers 4/15, Anker 4/20, Phil AIvey 2/6, JoCal 37/52, SARS 22/46
+F3SEED = {"ATT": 6.3, "ASTRA": 7.4, "FISH": 2.9, "GHERK": 3.2, "ANKER": 2.4, "PHIL": 4.0, "JOCAL": 8.5, "SARS": 5.8}
+F4SEED = {"ATT": (8, 7.3), "FISH": (8, 7.0), "PHIL": (6, 5.5), "ANKER": (8, 6.2), "ANTON": (6, 3.7), "GHERK": (6, 4.1)}   # 4-bets faced after 3-betting / folded
 
 
 def seat_label(S):
-    """Which of the known profiles this seat's own actions match, or 0."""
+    """Which known finalist profile this seat's own actions match, or 0 (v3.2: final table)."""
     op = S.opn
-    if S.tb_o >= 25 and S.tb >= 0.18 * S.tb_o and not (op >= 6 and S.o25 >= 0.9 * op):
-        return "ANTON"                         # 3-bets one hand in five or more, with mixed open sizes
-    if S.rfi_o >= 25 and S.limp >= 0.15 * S.rfi_o and op >= 4 and S.o25 >= 0.7 * op:
-        return "POKE"                          # limps, and opens 2.5bb
     bn = S.bn
-    if bn >= 8 and S.b15 >= 0.35 * bn:
-        return "WBOT"                          # bets a sixth of the pot again and again
-    if op >= 6:
-        nolimp = S.limp <= 0.02 * S.rfi_o
-        folds3 = S.f3_o < 4 or S.f3 >= 0.6 * S.f3_o      # the profiles below fold to 3-bets
-        if S.o22 >= 0.8 * op and (bn < 5 or S.b50 + S.b100 >= 0.7 * bn):
-            return "GG"                        # opens 2.2bb, bets half pot or pot
-        if S.o28 >= 0.55 * op and bn >= 3 and S.b15 == 0 and S.bov == 0 and folds3:
-            return "YSL"                       # opens 2.8bb, never bets tiny or over the pot
-        if S.o25 >= 0.85 * op and nolimp and bn >= 5:
-            if S.b33 >= 2 and S.b33 + S.b100 >= 0.8 * bn and S.bov == 0 and folds3:
-                return "CPF"                   # opens 2.5bb, bets a third of the pot or the pot
-            if S.o25 >= 0.95 * op and S.b33 == 0 and S.bov >= 0.25 * bn:
+    if op >= 6 and bn >= 5:
+        oth = op - S.o22 - S.o25 - S.o28
+        if oth >= 0.9 * op:                    # opens 3.5bb or another size of its own
+            if S.b33 == 0 and S.bov == 0 and S.b50 >= 2 and S.b50 >= 0.15 * bn:
+                return "EE"                    # bets half pot (often air) or 0.8 pot (value)
+            if S.b50 == 0 and S.b33 >= 1 and S.bov >= 0.2 * bn:
+                return "GHERK"                 # a third of the pot or an overbet
+            if S.b33 >= 1 and S.b100 >= 2 and S.bov <= 0.1 * bn and S.b50 <= 0.1 * bn:
+                # a third of the pot or the pot: FisherMen 3-bets one hand in six, JoCal one in thirty
+                if S.tb_o < 40:
+                    return 0                   # v3.8: stay undecided until the two can be told apart
+                return "FISH" if S.tb >= 0.10 * S.tb_o else "JOCAL"
+        elif S.o22 == 0 and S.o28 == 0:
+            if S.o25 >= 0.95 * op and S.b33 == 0 and S.b50 == 0 and S.bov >= 0.25 * bn:
                 return "ANKER"                 # opens 2.5bb, overbets, never bets a third
+            if S.o25 >= 0.95 * op and S.b33 == 0 and S.b50 >= 0.25 * bn:
+                return "TMM"
+            if S.o25 >= 0.9 * op and bn >= 7 and S.b15 == 0 and S.b33 == 0 and S.b50 == 0 and S.b100 == 0 and S.bov == 0:
+                return "SARS"                  # opens 2.5bb, bets 0.55 to 0.8 pot only; gave up 37 of 40 raised bets                   # opens 2.5bb, half-pot bets are mostly air
+            if S.o25 >= 0.8 * op and S.b50 == 0 and S.b33 >= 0.3 * bn:
+                return "ATT"                   # opens 2.5bb (4bb when strong), bets a third of the pot
+            if 0.25 * op <= S.o25 <= 0.7 * op:
+                if S.b33 == 0 and S.b50 >= 0.4 * bn:
+                    return "PHIL"
+                if S.b33 >= 0.2 * bn and S.b100 == 0 and S.bov == 0:
+                    return "ASTRA"
+    if S.tb_o >= 25 and S.tb >= 0.18 * S.tb_o and not (op >= 6 and S.o25 >= 0.9 * op):
+        return "ANTON"                         # 3-bets one hand in five or more
     return 0
 
 
@@ -296,7 +313,7 @@ class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
                  "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "sr_o", "sr_f",
-                 "zo", "zf", "zn", "zs", "opn", "o22", "o25", "o28", "bn", "b15", "b33", "b50", "b100", "bov", "lab", "f4_o", "f4")
+                 "zo", "zf", "zn", "zs", "opn", "o22", "o25", "o28", "bn", "b15", "b33", "b50", "b100", "bov", "lab", "f4_o", "f4", "c4_o", "c4", "m3_o", "m3")
 
     def __init__(self):
         for k in self.__slots__:
@@ -555,6 +572,10 @@ class Agent:
                                 S.o25 += 1
                             elif 2.74 < ob < 2.86:
                                 S.o28 += 1
+                    if raises == 2 and tb_seat == self.me_seat:
+                        # V26: his first action faces OUR 3-bet cold; recent cases weigh more
+                        S.c4_o = 0.85 * S.c4_o + 1.0
+                        S.c4 = 0.85 * S.c4 + (1.0 if a == "raise" else 0.0)
                     if raises == 1:
                         S.tb_o += 1
                         if a == "raise":
@@ -573,6 +594,10 @@ class Agent:
                     S.f3_o += 1
                     if a == "fold":
                         S.f3 += 1
+                    if tb_seat == self.me_seat:    # v3.7: how he answers OUR 3-bets (strong bots adapt to the 3-bettor)
+                        S.m3_o += 1
+                        if a == "fold":
+                            S.m3 += 1
                 elif s == tb_seat and raises == 3 and not faced4:
                     faced4 = True              # he 3-bet and now faces a 4-bet
                     S.f4_o += 1
@@ -685,12 +710,12 @@ class Agent:
                     code = seat_label(S)
                     if code:
                         S.lab = code
-                        if code == "CPF" or code == "YSL":
-                            S.f3_o += 12            # Saturday: folded 84% and 85% of 337 and 184 of our 3-bets
-                            S.f3 += 10
-                        elif code == "ANTON":
-                            S.f4_o += 6             # Saturday: folded 59 to 66% of 4-bets after 3-betting
-                            S.f4 += 3.7
+                        if code in F3SEED:           # v3.6: how each finalist really answered OUR light 3-bets
+                            S.f3_o += 12
+                            S.f3 += F3SEED[code]
+                        if code in F4SEED:
+                            S.f4_o += F4SEED[code][0]
+                            S.f4 += F4SEED[code][1]
                         zo, zf, zn, zs = SEED[code]
                         for b in range(6):
                             S.zo[b] += zo[b]
@@ -991,9 +1016,14 @@ class Agent:
                 return self._raise_to(state, R * mult + R * callers)
             # bluff 3-bet the openers who give up to 3-bets
             f3 = S.r_f3()
+            own_ok = True
+            if S.m3_o >= 4:
+                f3 = min(f3, (S.m3 + 0.58 * 2) / (S.m3_o + 2.0))
+                own_ok = S.m3 >= 0.7 * S.m3_o
             if can_raise and callers == 0 and R <= 4.5 * bb:
                 n3 = S.f3_o
                 hot = False                      # a frequent 3-bettor still to act behind us
+                hot4 = False
                 left = 0                         # players still to act behind us
                 for i in range(1, n):
                     t = (me + i) % n
@@ -1004,7 +1034,9 @@ class Agent:
                         left += 1
                         if T.tb_o >= 20 and T.tb >= 0.18 * T.tb_o:
                             hot = True
-                if THREEBET_ANY and n3 >= 8 and S.f3 >= 0.80 * n3 and not hot and left <= 3:
+                        if T.c4_o >= 3.0 and T.c4 >= 0.3 * T.c4_o:
+                            hot4 = True          # V26: he has been cold 4-betting our 3-bets
+                if THREEBET_ANY and n3 >= 8 and S.f3 >= 0.80 * n3 and not hot and left <= 3 and own_ok:
                     bluff = True                 # V22: any two cards
                 elif n3 >= 3 and f3 >= 0.78:
                     bluff = lvl <= 6
@@ -1014,7 +1046,7 @@ class Agent:
                     bluff = cls in BLUFF3      # most of the field folds: try, then learn
                 else:
                     bluff = False
-                if bluff:
+                if bluff and not hot4:
                     return self._raise_to(state, R * (2.8 if ip else 3.4))
             if pair and price <= 6.5:
                 return CALL
@@ -1049,8 +1081,9 @@ class Agent:
                         return {"action": "all_in"}
                     return self._raise_to(state, R * (2.3 if ip else 2.6), commit=0.45)
                 return call_or_check()
-            maniac = (MANIAC_RULES and S.lab == "ANTON" and can_raise and R <= 13 * bb
-                      and S.f4 >= 0.45 * S.f4_o)            # stops once he no longer folds to 4-bets
+            maniac = (MANIAC_RULES and can_raise and R <= 13 * bb
+                      and ((S.lab == "ANTON" and S.f4 >= 0.45 * S.f4_o)
+                           or (S.f4_o >= 6 and S.f4 >= 0.70 * S.f4_o)))   # v3.2: any seat that gives up its 3-bets to 4-bets            # stops once he no longer folds to 4-bets
             if e >= (0.40 if ip else 0.43) and price <= 10:
                 return self._raise_to(state, R * 2.3, commit=0.45) if maniac else CALL
             if pair and price <= 6:
@@ -1409,7 +1442,7 @@ class Agent:
         if c == 0:
             if not can_raise:
                 return CHECK
-            if (NO_THIRD_BARREL and river and len(live) == 1 and self.st[live[0]].lab == "ANKER" and L[5][live[0]] >= 2
+            if (river and len(live) == 1 and self.st[live[0]].lab == "ANKER" and L[5][live[0]] >= 2
                     and (mycat < 2 or (mycat == 2 and paired))):
                 return CHECK                    # V25: he called the flop and the turn; he folded the river 4 times in 16
             best = None
@@ -1544,11 +1577,11 @@ class Agent:
         if SIZE_LEARN and can_raise and hi is not None and len(live) == 1 and behind == 0 and not allin and not nofold:
             v = live[0]
             xb0 = L[6][v]
-            if 0.4 <= xb0 < 0.9 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
+            if 0.4 <= xb0 < 1.3 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
                 Sv = self.st[v]
                 zb = zbucket(xb0)
-                if Sv.zo[zb] >= ZR_MIN:
-                    r_to = max(lo, (3.0 if zb <= 2 else 2.6) * cur)
+                if Sv.zo[zb] >= ZR_MIN and (zb <= 3 or (Sv.zo[zb] >= 8 and Sv.zf[zb] >= 0.72 * Sv.zo[zb])):
+                    r_to = max(lo, (3.0 if zb <= 2 else (2.6 if zb == 3 else 2.4)) * cur)
                     if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
                         pfr_ = (Sv.zf[zb] + ZR_PRIOR * ZR_FIELD[zb]) / (Sv.zo[zb] + ZR_PRIOR)
                         a_ = r_to - mybet

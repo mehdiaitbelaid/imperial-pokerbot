@@ -1,0 +1,100 @@
+ROUND r024 | our bot: platform v8 | result +37.1 bb/100 | timeouts 0 | errors 0 | think 2.48s | table 0 seat 0
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Resonance Qt              1000   +37.1    28    22     0    12    75   0.3   2.6    82    52  0.80    48    10   1.8    17    77    17
+supernut                  1000   +32.4    19    16     0     8    48   0.0   2.5    78    54  0.55    43     7   1.9    24    57     8
+Poké Bot                  1000   +30.6    21    19     0     4    63   0.0   3.0    97    59  0.40    45     7   2.2    30    54    29
+bigRoddy                  1000   +14.3    16    11     0     6    71   0.3   2.5    46    49  0.59    52     0   2.0    30    54    14
+Kojack                    1000    +4.8    20    17     0     6    67   0.0   2.6    76    38  0.55    48     3   1.0    25    83    17
+The Market Makers         1000   -33.8    21    14     0     6    50   0.3   2.5    79    72  0.70    44     1   3.8    33    29    29
+Vlad                      1000   -85.5    24    15     0     4    71   0.1   3.5    47    24  0.80    41    15   1.4    30    33     8
+
+Our chips by how the hand ended:
+  preflop      867 hands      +845 chips  (+4.2 bb/100 of all hands)
+  postflop     111 hands     -2321 chips  (-11.6 bb/100 of all hands)
+  showdown      22 hands     +8905 chips  (+44.5 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r024.json #269 we=['Ah', 'Kd'] board=['3s', '4c', 'Kc', '5d', '6h'] shown={'bigRoddy': ['7h', '7d']}
+   -2000 saturday_r024.json #435 we=['5h', '4h'] board=['5s', '8d', '2s', '4s', 'Qc'] shown={'supernut': ['Js', 'Ks']}
+   -1050 saturday_r024.json #411 we=['Jc', 'Kh'] board=['Ac', '4d', 'Kc', '2c', 'Td'] shown={}
+    -865 saturday_r024.json #530 we=['Qd', 'Tc'] board=['Ts', '3d', '8s', '9s'] shown={}
+    -792 saturday_r024.json #723 we=['As', 'Qd'] board=['9d', '9s', '3s', '3h', '7d'] shown={'Poké Bot': ['6c', '6h']}
+    -753 saturday_r024.json #225 we=['9s', '9h'] board=['Qs', '3h', 'Ts', '2d', '2c'] shown={'Kojack': ['Qh', '7h']}
+    -607 saturday_r024.json #520 we=['7d', '7c'] board=['6d', '3d', '9h', '5s', '9c'] shown={}
+    +794 saturday_r024.json #792 we=['Ac', 'As'] board=[] shown={}
+    +996 saturday_r024.json #668 we=['Jc', 'Qh'] board=['Ts', 'Ks', 'Jh', '9c', 'Tc'] shown={'supernut': ['7s', '8s']}
+   +2010 saturday_r024.json #991 we=['8h', '8c'] board=['9d', '7h', '6c', '7c', '8d'] shown={'The Market Makers': ['Tc', '9s']}
+   +2020 saturday_r024.json #62 we=['Ac', 'Ad'] board=['4s', '4c', '9c', '6h', 'Jd'] shown={'The Market Makers': ['9d', 'Kd']}
+   +2020 saturday_r024.json #343 we=['As', 'Ac'] board=['9d', 'Tc', '2s', '9c', '4d'] shown={'bigRoddy': ['Ah', 'Td']}
+    -607 saturday_r024.json #520 we=['7d', '7c'] board=['6d', '3d', '9h', '5s', '9c'] shown={}
+    +794 saturday_r024.json #792 we=['Ac', 'As'] board=[] shown={}
+    +996 saturday_r024.json #668 we=['Jc', 'Qh'] board=['Ts', 'Ks', 'Jh', '9c', 'Tc'] shown={'supernut': ['7s', '8s']}
+   +2010 saturday_r024.json #991 we=['8h', '8c'] board=['9d', '7h', '6c', '7c', '8d'] shown={'The Market Makers': ['Tc', '9s']}
+   +2020 saturday_r024.json #62 we=['Ac', 'Ad'] board=['4s', '4c', '9c', '6h', 'Jd'] shown={'The Market Makers': ['9d', 'Kd']}
+   +2020 saturday_r024.json #343 we=['As', 'Ac'] board=['9d', 'Tc', '2s', '9c', '4d'] shown={'bigRoddy': ['Ah', 'Td']}
+   +2080 saturday_r024.json #458 we=['9s', '9c'] board=['9h', 'Ts', '4c', 'Qd', '7c'] shown={'Vlad': ['9d', 'Ac']}
+   +2080 saturday_r024.json #484 we=['Qs', 'Qc'] board=['2h', '3h', '6c', 'Tc', '4s'] shown={'bigRoddy': ['7h', '7s']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+   -1050 saturday_r024.json #411 we=['Jc', 'Kh'] board=['Ac', '4d', 'Kc', '2c', 'Td'] last=(street=river act=fold facing=True to_call=950 pot=3060)
+    -865 saturday_r024.json #530 we=['Qd', 'Tc'] board=['Ts', '3d', '8s', '9s'] last=(street=turn act=fold facing=True to_call=1135 pot=2875)
+    -607 saturday_r024.json #520 we=['7d', '7c'] board=['6d', '3d', '9h', '5s', '9c'] last=(street=river act=fold facing=True to_call=1027 pot=2311)
+    -450 saturday_r024.json #257 we=['9h', 'Jh'] board=['6s', 'Ah', '5s', 'Kc'] last=(street=turn act=fold facing=True to_call=409 pot=1319)
+    -424 saturday_r024.json #891 we=['Jc', 'Td'] board=['Th', 'As', '5s', '8h', '9h'] last=(street=river act=fold facing=True to_call=550 pot=1468)
+    -350 saturday_r024.json #825 we=['3h', '3s'] board=['2d', '5s', '8d', 'Qc', 'Ah'] last=(street=river act=fold facing=True to_call=432 pot=1152)
+    -320 saturday_r024.json #957 we=['Qc', 'Ac'] board=['3h', 'Kd', '4h', '7h', '9d'] last=(street=river act=fold facing=True to_call=650 pot=1300)
+    -315 saturday_r024.json #357 we=['Qc', 'Qd'] board=['9h', 'Kc', '4d', 'Tc'] last=(street=turn act=fold facing=True to_call=660 pot=1320)
+    -307 saturday_r024.json #158 we=['Ad', 'Qc'] board=['Ts', '5d', '8d', 'Ah', '9h'] last=(street=river act=fold facing=True to_call=374 pot=998)
+     -60 saturday_r024.json #711 we=['Ac', 'Kh'] board=[] last=(street=preflop act=fold facing=True to_call=150 pot=300)
+     -20 saturday_r024.json #124 we=['Kd', 'Ac'] board=[] last=(street=preflop act=fold facing=True to_call=160 pot=250)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +37.1 bb/100
+  showdown lost, other lines                     n=    4    -25.3 bb/100   (-63.3 bb each)
+  blinds / folded preflop                        n=  725    -14.5 bb/100   (-0.2 bb each)
+  folded the river after betting                 n=    7    -13.5 bb/100   (-19.3 bb each)
+  folded the river after calling                 n=    9    -12.3 bb/100   (-13.6 bb each)
+  bet the flop or turn, then folded              n=    8    -11.9 bb/100   (-14.9 bb each)
+  raised preflop then folded to a re-raise       n=   26    -10.4 bb/100   (-4.0 bb each)
+  raised preflop, check-folded flop or turn      n=   12     -5.8 bb/100   (-4.9 bb each)
+  called preflop, check-folded flop or turn      n=   19     -5.1 bb/100   (-2.7 bb each)
+  showdown lost after our river call             n=    1     -4.0 bb/100   (-39.6 bb each)
+  called the flop, folded the turn               n=    4     -3.4 bb/100   (-8.5 bb each)
+  called preflop then folded preflop             n=    5     -1.2 bb/100   (-2.5 bb each)
+  won preflop uncontested                        n=  112    +30.5 bb/100   (+2.7 bb each)
+  won postflop without showdown                  n=   52    +40.4 bb/100   (+7.8 bb each)
+  showdown won                                   n=   16    +73.7 bb/100   (+46.1 bb each)
+
+Worst hands:
+   -2000 r024#269  AhKd [showdown lost, other lines]
+         US raise 60; bigRoddy raise 216; US call 156; | 3s 4c Kc; US raise 739; bigRoddy call 739; | 5d; US raise 1045; bigRoddy call 1045; | 6h
+         shown: {'bigRoddy': '7h7d'}
+   -2000 r024#435  5h4h [showdown lost, other lines]
+         Vlad raise 70; supernut call 70; US call 70; | 5s 8d 2s; Vlad check; supernut check; US check; | 4s; Vlad check; supernut raise 172; US call 172; | Qc; supernut raise 420; US raise 1758; supernut call 1338
+         shown: {'supernut': 'JsKs'}
+   -1050 r024#411  JcKh [folded the river after betting]
+         supernut raise 50; US raise 170; supernut call 120; | Ac 4d Kc; US raise 280; supernut call 280; | 2c; US check; supernut raise 600; US call 600; | Td; US check; supernut raise 950; US fold
+         shown: {}
+    -865 r024#530  QdTc [bet the flop or turn, then folded]
+         Vlad raise 70; US call 50; | Ts 3d 8s; US raise 240; Vlad raise 795; US call 555; | 9s; US check; Vlad raise 1135; US fold
+         shown: {}
+    -792 r024#723  AsQd [showdown lost after our river call]
+         US raise 60; Poké Bot call 60; | 9d 9s 3s; US raise 120; Poké Bot call 120; | 3h; US check; Poké Bot raise 128; US call 128; | 7d; US check; Poké Bot raise 484; US call 484
+         shown: {'Poké Bot': '6c6h'}
+    -753 r024#225  9s9h [showdown lost, other lines]
+         US raise 44; Kojack raise 167; US call 123; | Qs 3h Ts; Kojack raise 189; US call 189; | 2d; Kojack raise 397; US call 397; | 2c; Kojack check; US check
+         shown: {'Kojack': 'Qh7h'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r024.json: 1317 decisions {'preflop': 1035, 'flop': 150, 'turn': 87, 'river': 45} | platform says 0 timeouts, think 2.48s | replay finds 0 passive plays the bot would not make
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+bigRoddy                    +14.3      +3.0 | -                                  | f3b 5/7, steal-fold 80/104, cbet 11/24, lines 5/11 1/3 4/12 15/16 11/21
+Poké Bot                    +30.6      -1.9 | -                                  | f3b 26/41, steal-fold 85/98, cbet 37/38, lines 5/18 3/5 5/19 4/6 11/20
+Kojack                       +4.8      +8.6 | -                                  | f3b 30/45, steal-fold 63/93, cbet 22/29, lines 7/24 2/3 16/29 12/13 11/30
+Vlad                        -85.5      +5.6 | -                                  | f3b 29/41, steal-fold 82/104, cbet 9/19, lines 1/6 1/6 8/24 7/13 27/58
+supernut                    +32.4      -5.0 | -                                  | f3b 10/21, steal-fold 94/121, cbet 31/40, lines 3/12 2/5 6/17 4/7 14/25
+The Market Makers           -33.8     +26.9 | -                                  | f3b 7/14, steal-fold 71/100, cbet 37/47, lines 5/14 3/4 6/16 4/5 9/22

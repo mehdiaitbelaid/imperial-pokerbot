@@ -1,0 +1,105 @@
+ROUND r046 | our bot: platform v11 | result -63.8 bb/100 | timeouts 0 | errors 0 | think 2.24s | table 3 seat 0
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+85p                       1000   +68.5    14    10     0     5    71   0.0   2.5    62    56  0.66    46    14   2.1    20    64    25
+Mohil'sPokerBot           1000   +67.2    17    12     0     3    62   0.5   2.5    83    75  0.50    57    14   5.2    20    74     0
+supernut                  1000    +9.1    18    14     0    10    73   0.0   2.5    55    38  0.55    47     3   1.2    20    47    29
+The Market Makers         1000    -8.8    19    12     0     4    42   0.2   2.5    75    65  0.60    50     7   3.2    25    42    39
+Phil AIvey                1000   -12.3    19    15     0     7    67   0.3   2.9    57    51  0.50    57    11   2.0    18    56     0
+Chinese people can fly    1000   -24.8    35    27     0     6    84   0.3   2.5    54    50  0.33    58     4   1.9    21    43    32
+YSL_TWIZZY                1000   -35.2    18    13     0     6    68   0.1   2.8    42    27  0.48    28     6   0.9    45    44     0
+Resonance Qt              1000   -63.8    21    15     0    11    80   0.0   2.7    91    60  0.80    42     7   2.1    19    30    25
+
+Our chips by how the hand ended:
+  preflop      894 hands     -1553 chips  (-7.8 bb/100 of all hands)
+  postflop      86 hands     +1556 chips  (+7.8 bb/100 of all hands)
+  showdown      20 hands    -12754 chips  (-63.8 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r046.json #102 we=['Ad', 'Ks'] board=['5s', '3d', '3s', '6d', 'Kc'] shown={"Mohil'sPokerBot": ['6c', '6s']}
+   -2000 saturday_r046.json #180 we=['As', 'Jh'] board=['8d', '7d', '4d', '6d', 'Td'] shown={'85p': ['Jd', 'Jc']}
+   -2000 saturday_r046.json #192 we=['Jh', '9h'] board=['7c', 'Js', '9d', 'Tc', '7h'] shown={'85p': ['Qd', 'Qs']}
+   -2000 saturday_r046.json #308 we=['Jh', 'Js'] board=['6s', '8c', 'Ks', 'Kh', '7d'] shown={'The Market Makers': ['Ad', 'Kc']}
+   -2000 saturday_r046.json #670 we=['Ah', '3h'] board=['7d', 'Jc', 'As', '7s', '3s'] shown={'85p': ['Ac', 'Kd']}
+   -2000 saturday_r046.json #835 we=['7d', '7s'] board=['Jh', '7c', 'Ks', 'Td', '6s'] shown={'YSL_TWIZZY': ['Ac', 'Qc']}
+   -1152 saturday_r046.json #269 we=['7c', '7s'] board=['8h', '3h', '2s', '6c', 'Th'] shown={'Phil AIvey': ['Qc', 'Qh']}
+   -1077 saturday_r046.json #37 we=['9s', 'As'] board=['Qd', '9c', 'Ad', 'Jc', 'Tc'] shown={}
+    -999 saturday_r046.json #415 we=['Js', 'Th'] board=['5d', 'As', '9c', 'Kd', '7s'] shown={'YSL_TWIZZY': ['Ks', 'Ts']}
+    -804 saturday_r046.json #103 we=['Ah', 'Kc'] board=['9h', '7d', 'Jc', 'Ad', 'Js'] shown={}
+    +600 saturday_r046.json #469 we=['Jh', 'Th'] board=['7c', '9h', '5h', '2c', 'Ad'] shown={}
+    +635 saturday_r046.json #199 we=['Ah', 'Ts'] board=['8c', '5s', '4h', '2s', '2c'] shown={}
+   -1152 saturday_r046.json #269 we=['7c', '7s'] board=['8h', '3h', '2s', '6c', 'Th'] shown={'Phil AIvey': ['Qc', 'Qh']}
+   -1077 saturday_r046.json #37 we=['9s', 'As'] board=['Qd', '9c', 'Ad', 'Jc', 'Tc'] shown={}
+    -999 saturday_r046.json #415 we=['Js', 'Th'] board=['5d', 'As', '9c', 'Kd', '7s'] shown={'YSL_TWIZZY': ['Ks', 'Ts']}
+    -804 saturday_r046.json #103 we=['Ah', 'Kc'] board=['9h', '7d', 'Jc', 'Ad', 'Js'] shown={}
+    +600 saturday_r046.json #469 we=['Jh', 'Th'] board=['7c', '9h', '5h', '2c', 'Ad'] shown={}
+    +635 saturday_r046.json #199 we=['Ah', 'Ts'] board=['8c', '5s', '4h', '2s', '2c'] shown={}
+    +657 saturday_r046.json #482 we=['8d', '8s'] board=['7s', '9s', 'Th', '6s'] shown={}
+   +2010 saturday_r046.json #904 we=['Jc', 'Js'] board=['7s', 'Jd', 'Ks', '7h', 'Th'] shown={'85p': ['Tc', 'Kc']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+   -1077 saturday_r046.json #37 we=['9s', 'As'] board=['Qd', '9c', 'Ad', 'Jc', 'Tc'] last=(street=river act=fold facing=True to_call=923 pot=3107)
+    -804 saturday_r046.json #103 we=['Ah', 'Kc'] board=['9h', '7d', 'Jc', 'Ad', 'Js'] last=(street=river act=fold facing=True to_call=1196 pot=2834)
+    -430 saturday_r046.json #1 we=['Kd', 'Ac'] board=['Qd', '4d', '3d', '3h', '2s'] last=(street=river act=fold facing=True to_call=644 pot=1564)
+    -424 saturday_r046.json #239 we=['Td', 'Ts'] board=['7s', '4s', 'Qs', '2c', '9h'] last=(street=river act=fold facing=True to_call=702 pot=1580)
+    -336 saturday_r046.json #829 we=['As', '5s'] board=['Js', '3s', 'Qc', '4c'] last=(street=turn act=fold facing=True to_call=1029 pot=1821)
+    -304 saturday_r046.json #230 we=['Qs', 'Qh'] board=['Ks', '5d', '8s', '7h', '4d'] last=(street=river act=fold facing=True to_call=339 pot=957)
+     -60 saturday_r046.json #913 we=['Tc', 'Td'] board=[] last=(street=preflop act=fold facing=True to_call=156 pot=286)
+     -50 saturday_r046.json #213 we=['Ad', 'Qh'] board=['6d', '6h', 'Td'] last=(street=preflop act=fold facing=True to_call=100 pot=370)
+     -50 saturday_r046.json #381 we=['Ad', 'Qs'] board=['8c', '3s', 'Qd', '6c', '5s'] last=(street=preflop act=fold facing=True to_call=100 pot=420)
+     -20 saturday_r046.json #515 we=['Qd', 'As'] board=['5c', '5s', '3h'] last=(street=preflop act=fold facing=True to_call=148 pot=422)
+     -10 saturday_r046.json #268 we=['Ad', 'Qh'] board=[] last=(street=preflop act=fold facing=True to_call=40 pot=80)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total -63.8 bb/100
+  showdown lost after our river call             n=    6    -40.8 bb/100   (-68.0 bb each)
+  showdown lost, other lines                     n=    8    -39.8 bb/100   (-49.7 bb each)
+  raised preflop then folded to a re-raise       n=   29    -13.3 bb/100   (-4.6 bb each)
+  folded the river after betting                 n=    6    -13.1 bb/100   (-21.8 bb each)
+  blinds / folded preflop                        n=  791    -11.2 bb/100   (-0.1 bb each)
+  folded the river after calling                 n=    3     -5.5 bb/100   (-18.3 bb each)
+  raised preflop, check-folded flop or turn      n=    7     -4.1 bb/100   (-5.9 bb each)
+  bet the flop or turn, then folded              n=    4     -4.1 bb/100   (-10.2 bb each)
+  called the flop, folded the turn               n=    4     -3.3 bb/100   (-8.2 bb each)
+  called preflop, check-folded flop or turn      n=   10     -2.5 bb/100   (-2.5 bb each)
+  called preflop then folded preflop             n=    3     -0.8 bb/100   (-2.7 bb each)
+  folded the river after checking                n=    2     -0.6 bb/100   (-3.0 bb each)
+  showdown won                                   n=    6    +16.8 bb/100   (+28.0 bb each)
+  won preflop uncontested                        n=   71    +17.6 bb/100   (+2.5 bb each)
+  won postflop without showdown                  n=   50    +40.9 bb/100   (+8.2 bb each)
+
+Worst hands:
+   -2000 r046#102  AdKs [showdown lost after our river call]
+         Mohil'sP raise 50; US raise 150; Mohil'sP call 100; | 5s 3d 3s; Mohil'sP raise 330; US call 330; | 6d; Mohil'sP raise 990; US call 990; | Kc; Mohil'sP raise 530; US call 530
+         shown: {"Mohil'sPok": '6c6s'}
+   -2000 r046#180  AsJh [showdown lost after our river call]
+         85p raise 50; US raise 170; 85p call 120; | 8d 7d 4d; US raise 288; 85p call 288; | 6d; US raise 748; 85p call 748; | Td; US check; 85p raise 794; US call 794
+         shown: {'85p': 'JdJc'}
+   -2000 r046#192  Jh9h [showdown lost, other lines]
+         Mohil'sP raise 50; US raise 140; 85p call 120; Mohil'sP call 90; | 7c Js 9d; 85p raise 283; US raise 1860; 85p call 1577; | Tc; | 7h
+         shown: {'85p': 'QdQs'}
+   -2000 r046#308  JhJs [showdown lost, other lines]
+         The Mark raise 50; US call 40; Chinese  call 30; | 6s 8c Ks; US raise 120; The Mark raise 510; US call 390; | Kh; US check; The Mark raise 1440; US call 1440; | 7d
+         shown: {'The Market': 'AdKc'}
+   -2000 r046#670  Ah3h [showdown lost after our river call]
+         85p raise 50; US raise 140; 85p call 90; | 7d Jc As; 85p raise 248; US call 248; | 7s; 85p raise 644; US call 644; | 3s; 85p raise 968; US call 968
+         shown: {'85p': 'AcKd'}
+   -2000 r046#835  7d7s [showdown lost, other lines]
+         YSL_TWIZ raise 56; US call 36; | Jh 7c Ks; US raise 195; YSL_TWIZ call 195; | Td; US raise 819; YSL_TWIZ raise 1749; US call 930; | 6s
+         shown: {'YSL_TWIZZY': 'AcQc'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r046.json: 1248 decisions {'preflop': 1021, 'flop': 120, 'turn': 65, 'river': 42} | platform says 0 timeouts, think 2.24s | replay finds 2 passive plays the bot would not make
+   hand  107 flop    we=Ad9s board=[6h 8h 5d] played fold , bot says call  (to call 160, pot 320) -> hand result -50
+   hand  488 flop    we=9c9s board=[Qh Jc 5d] played fold , bot says call  (to call 65, pot 195) -> hand result -50
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Chinese people can fly      -24.8      -1.9 | -                                  | f3b 67/80, steal-fold 43/72, cbet 32/59, lines 17/31 5/9 13/33 9/12 40/61
+YSL_TWIZZY                  -35.2     -14.0 | -                                  | f3b 13/19, steal-fold 80/101, cbet 11/26, lines 2/8 1/3 6/24 8/14 6/22
+supernut                     +9.1      -7.9 | -                                  | f3b 16/22, steal-fold 62/101, cbet 16/29, lines 5/13 7/10 7/16 4/6 7/12
+Phil AIvey                  -12.3      -1.3 | -                                  | f3b 14/21, steal-fold 47/59, cbet 13/23, lines 15/28 5/7 9/18 6/6 11/18
+85p                         +68.5     -20.3 | -                                  | f3b 17/24, steal-fold 49/65, cbet 8/13, lines 6/15 2/3 4/9 6/6 9/17
+The Market Makers            -8.8      -8.3 | -                                  | f3b 5/12, steal-fold 53/80, cbet 27/36, lines 1/12 5/6 6/18 12/14 14/21
+Mohil'sPokerBot             +67.2     -10.1 | -                                  | f3b 18/29, steal-fold 42/67, cbet 20/24, lines 9/17 7/8 4/8 3/3 7/13

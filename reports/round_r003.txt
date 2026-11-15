@@ -1,0 +1,111 @@
+ROUND r003 | our bot: platform v6 | result +36.9 bb/100 | timeouts 10 | errors 0 | think 3.14s | table 3 seat 3
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Kojack                    1000  +164.4    23    20     2    10    32   2.3   4.4    65    39  0.55    59     1   2.0    42    61    14
+Vlad                      1000   +61.3    21    14     0     3     9   0.9   3.5    86    51  0.80    42    11   2.2    38    57    28
+ND                        1000   +48.6    20    10     6     7    13   1.2   3.4    68    35  0.75    50     8   1.5    37    54    19
+Equity Engine             1000   +45.4    21    16     0     2    30   0.2   4.0    82    54  0.80    46    19   2.7    32    49    33
+Resonance Qt              1000   +36.9    27    17     1     4    26   1.9   3.6    92    50  0.80    50     8   1.5    28    63    13
+gamblerlove               1000   +17.7    15    11     0     3    63   1.8   2.6    80    56  0.55    52    16   3.7    36    55     0
+Joca                      1000   -20.6     6     0     1     0   nan   0.3  34.7     0    19  0.50    39    12   1.0    49    37     0
+ediz_slow                 1000  -353.6    70    29    68    29     0   1.5   2.8    99    51  0.56    54    17   3.5    44    40    29
+
+Our chips by how the hand ended:
+  preflop      838 hands       -81 chips  (-0.4 bb/100 of all hands)
+  postflop     116 hands     -1811 chips  (-9.1 bb/100 of all hands)
+  showdown      46 hands     +9264 chips  (+46.3 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r003.json #24 we=['8c', '8d'] board=['6d', '4c', '3h', '4h', 'Tc'] shown={'ediz_slow': ['Th', 'Kh']}
+   -2000 saturday_r003.json #42 we=['7c', '7h'] board=['3s', 'Kh', '3c', '2s', 'Jh'] shown={'ediz_slow': ['Qh', 'Kc']}
+   -2000 saturday_r003.json #149 we=['Ac', 'Ks'] board=['Qh', '3d', '5c', '4h', 'Jc'] shown={'Equity Engine': ['7s', '7d']}
+   -2000 saturday_r003.json #151 we=['Kd', 'As'] board=['Ks', 'Td', 'Jd', 'Ah', '7d'] shown={'Equity Engine': ['7h', '7c'], 'ediz_slow': ['4s', '4h']}
+   -2000 saturday_r003.json #369 we=['Qh', 'Qd'] board=['3h', '9h', 'Ad', '3d', 'Kh'] shown={'ediz_slow': ['6h', 'Kc']}
+   -2000 saturday_r003.json #379 we=['3s', 'As'] board=['Ad', 'Jh', '2h', '2s', '4d'] shown={'Vlad': ['Jc', 'Ac']}
+   -2000 saturday_r003.json #408 we=['Ad', 'Qs'] board=['Qc', '4c', 'Kc', '3d', '6c'] shown={'ediz_slow': ['Ac', '2c']}
+   -2000 saturday_r003.json #436 we=['Qh', 'Qs'] board=['Td', 'Ad', '8d', 'Kh', '8h'] shown={'ediz_slow': ['5c', 'Ac']}
+   -2000 saturday_r003.json #443 we=['Th', '9h'] board=['7h', '7c', '9c', '6d', '4c'] shown={'Vlad': ['Js', 'Jh']}
+   -2000 saturday_r003.json #451 we=['6s', 'Ah'] board=['7h', '2h', '4c', '6h', '8d'] shown={'ediz_slow': ['7c', 'Kh']}
+   -2000 saturday_r003.json #536 we=['Kd', 'Jc'] board=['8c', 'As', 'Js', '3d', '7c'] shown={'ediz_slow': ['Qh', 'Qs']}
+   -2000 saturday_r003.json #702 we=['Ad', 'As'] board=['7s', '8s', 'Ac', '6c', '5d'] shown={'Kojack': ['Kd', 'Qd'], 'ediz_slow': ['4h', '4d']}
+   +2030 saturday_r003.json #954 we=['Qd', 'Kd'] board=['9s', 'Ah', 'Kh', '5c', 'Jh'] shown={'ediz_slow': ['Ks', '2h']}
+   +2040 saturday_r003.json #260 we=['Ad', 'Kh'] board=['Ah', '2d', '7c', '6h', 'Kc'] shown={'ND': ['9s', 'As']}
+   +2060 saturday_r003.json #838 we=['Js', 'Jd'] board=['9s', 'Qs', '3c', 'Ac', '9c'] shown={'ediz_slow': ['Jh', 'Kc']}
+   +2065 saturday_r003.json #661 we=['5h', '9h'] board=['Js', '7h', 'Th', 'Ad', 'Qh'] shown={'ediz_slow': ['Jd', 'Kc']}
+   +2085 saturday_r003.json #885 we=['Ad', '9h'] board=['8d', '9c', 'Qd', '7h', '3d'] shown={'ediz_slow': ['7d', 'Ks']}
+   +2090 saturday_r003.json #289 we=['Ks', 'Kh'] board=['7s', '5c', 'Td', '2c', 'Ad'] shown={'ediz_slow': ['6s', '6d']}
+   +2090 saturday_r003.json #538 we=['Ks', 'As'] board=['3s', 'Kh', 'Kc', '3d', '6c'] shown={'ediz_slow': ['8h', 'Ah']}
+   +2155 saturday_r003.json #506 we=['6d', '6h'] board=['9d', '3c', '5h', 'Jc', 'Qs'] shown={'ediz_slow': ['Ah', '3d']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -733 saturday_r003.json #489 we=['Kh', 'Jc'] board=['3h', '4c', '3c', 'Ts', '5s'] last=(street=river act=fold facing=True to_call=768 pot=2264)
+    -683 saturday_r003.json #415 we=['8d', '8h'] board=['7h', '6d', '2c', '7s', 'Ad'] last=(street=river act=fold facing=True to_call=1188 pot=2674)
+    -530 saturday_r003.json #996 we=['9c', 'Ts'] board=['Js', 'As', '8h', 'Jh'] last=(street=turn act=fold facing=True to_call=1470 pot=2550)
+    -492 saturday_r003.json #949 we=['3c', 'Qh'] board=['Qc', '5d', '8d', 'Ks', '5s'] last=(street=turn act=fold facing=True to_call=763 pot=2249)
+    -463 saturday_r003.json #714 we=['As', 'Kd'] board=['Qd', '9h', '7s', '3c', '4c'] last=(street=river act=fold facing=True to_call=756 pot=1702)
+    -449 saturday_r003.json #673 we=['As', 'Ts'] board=['8d', 'Jd', 'Qs', '2d'] last=(street=turn act=fold facing=True to_call=575 pot=1503)
+    -391 saturday_r003.json #396 we=['Th', 'Ks'] board=['9c', 'Qh', '9d', '6s', '4s'] last=(street=river act=fold facing=True to_call=448 pot=1305)
+    -349 saturday_r003.json #592 we=['9s', 'Ks'] board=['3s', '6h', '4d', '2h'] last=(street=turn act=fold facing=True to_call=384 pot=1112)
+    -310 saturday_r003.json #332 we=['6h', '8d'] board=['3d', '5c', '7h', '3s', '7d'] last=(street=river act=fold facing=True to_call=340 pot=980)
+    -307 saturday_r003.json #488 we=['Kh', 'Qs'] board=['Jc', '6c', '9s', '8s', 'Js'] last=(street=river act=fold facing=True to_call=515 pot=1159)
+     -65 saturday_r003.json #473 we=['Jh', 'Js'] board=[] last=(street=preflop act=fold facing=True to_call=130 pot=290)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +36.9 bb/100
+  all-in preflop lost                            n=    8    -80.0 bb/100   (-100.0 bb each)
+  showdown lost, other lines                     n=    7    -60.9 bb/100   (-87.0 bb each)
+  showdown lost after our river call             n=    2    -20.0 bb/100   (-100.0 bb each)
+  folded the river after calling                 n=    6    -12.5 bb/100   (-20.8 bb each)
+  called preflop, check-folded flop or turn      n=   43    -12.2 bb/100   (-2.8 bb each)
+  blinds / folded preflop                        n=  727    -11.8 bb/100   (-0.2 bb each)
+  bet the flop or turn, then folded              n=    9    -10.1 bb/100   (-11.3 bb each)
+  called the flop, folded the turn               n=    7     -7.9 bb/100   (-11.3 bb each)
+  called preflop then folded preflop             n=    9     -4.5 bb/100   (-4.9 bb each)
+  folded the river after betting                 n=    2     -4.2 bb/100   (-21.2 bb each)
+  raised preflop, check-folded flop or turn      n=    7     -4.2 bb/100   (-6.0 bb each)
+  raised preflop then folded to a re-raise       n=   10     -3.8 bb/100   (-3.8 bb each)
+  won postflop without showdown                  n=   42    +42.1 bb/100   (+10.0 bb each)
+  showdown won                                   n=   17    +93.9 bb/100   (+55.2 bb each)
+  won preflop uncontested                        n=  104   +132.9 bb/100   (+12.8 bb each)
+
+Worst hands:
+   -2000 r003#24   8c8d [all-in preflop lost]
+         US raise 60; ediz_slo raise 145; US raise 2000; ediz_slo call 1855; | 6d 4c 3h; | 4h; | Tc
+         shown: {'ediz_slow': 'ThKh'}
+   -2000 r003#42   7c7h [all-in preflop lost]
+         US raise 60; ediz_slo raise 145; US raise 2000; ediz_slo call 1855; | 3s Kh 3c; | 2s; | Jh
+         shown: {'ediz_slow': 'QhKc'}
+   -2000 r003#149  AcKs [showdown lost, other lines]
+         ediz_slo call 20; Equity E raise 90; US raise 270; Equity E call 180; | Qh 3d 5c; Equity E check; US raise 472; Equity E call 472; | 4h; Equity E raise 767; US call 767; | Jc; Equity E check; US raise 491; Equity E call 491
+         shown: {'Equity Eng': '7s7d'}
+   -2000 r003#151  KdAs [all-in preflop lost]
+         Equity E raise 70; US call 70; ediz_slo raise 205; Equity E call 135; US raise 2000; ediz_slo call 1795; Equity E call 1795; | Ks Td Jd; | Ah; | 7d
+         shown: {'Equity Eng': '7h7c', 'ediz_slow': '4s4h'}
+   -2000 r003#369  QhQd [all-in preflop lost]
+         US raise 60; ediz_slo raise 145; Equity E call 125; US raise 2000; ediz_slo call 1855; | 3h 9h Ad; | 3d; | Kh
+         shown: {'ediz_slow': '6hKc'}
+   -2000 r003#379  3sAs [showdown lost, other lines]
+         Vlad raise 70; US call 50; | Ad Jh 2h; US check; Vlad raise 120; US call 120; | 2s; US raise 624; Vlad raise 1810; US call 1186; | 4d
+         shown: {'Vlad': 'JcAc'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r003.json: 1360 decisions {'preflop': 1056, 'flop': 187, 'turn': 80, 'river': 37} | platform says 10 timeouts, think 3.14s | replay finds 8 passive plays the bot would not make
+   hand  244 turn    we=8dTc board=[Jc Qc 3c 2c] played check, bot says raise (to call 0, pot 130) -> hand result +75
+   hand  249 turn    we=KsQd board=[Ts Jd 6s Qc] played check, bot says raise (to call 0, pot 1440) -> hand result +2030
+   hand  275 preflop we=KsAd board=[] played check, bot says raise (to call 0, pot 50) -> hand result +70
+   hand  275 flop    we=KsAd board=[8h Ah 9h] played check, bot says raise (to call 0, pot 50) -> hand result +70
+   hand  383 flop    we=ThQc board=[4h 2s 2h] played check, bot says raise (to call 0, pot 140) -> hand result +187
+   hand  573 preflop we=Ah2d board=[] played fold , bot says raise (to call 20, pot 50) -> hand result +0
+   hand  612 preflop we=Ad4d board=[] played fold , bot says call  (to call 45, pot 85) -> hand result -10
+   hand  909 flop    we=5c6c board=[Jd Td 5h] played fold , bot says call  (to call 157, pot 367) -> hand result -80
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Kojack                     +164.4      -1.6 | limp-folder                        | f3b 6/19, steal-fold 32/46, cbet 20/31, lines 8/9 4/5 7/14 5/5 15/30
+Equity Engine               +45.4      -8.9 | -                                  | f3b 11/37, steal-fold 5/17, cbet 27/33, lines 2/11 3/6 7/14 1/2 20/40
+ND                          +48.6     +12.3 | -                                  | f3b 2/15, steal-fold 0/0, cbet 15/22, lines 1/5 3/4 7/19 6/9 32/54
+gamblerlove                 +17.7      +0.0 | -                                  | f3b 19/30, steal-fold 0/0, cbet 32/40, lines 3/6 2/2 6/12 3/3 14/27
+Vlad                        +61.3     -24.8 | -                                  | f3b 4/45, steal-fold 30/34, cbet 25/29, lines 1/5 1/4 4/14 3/4 30/49
+ediz_slow                  -353.6     +57.8 | KIT preflop only                   | f3b 0/52, steal-fold 33/80, cbet 116/117, lines 27/66 0/0 11/11 9/15 49/65
+Joca                        -20.6      +2.0 | -                                  | f3b 0/0, steal-fold 43/63, cbet 0/2, lines 0/0 1/3 4/11 1/6 17/35

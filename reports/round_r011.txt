@@ -1,0 +1,98 @@
+ROUND r011 | our bot: platform v6 | result +3.9 bb/100 | timeouts 0 | errors 0 | think 2.67s | table 0 seat 2
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+Attention Is All In       1000  +185.2    53    48     0    12    64   0.2   2.4    62    58  0.33    51     8   2.5    29    59     7
+Mohil'sPokerBot           1000  +118.8    27    10     7     8    17   1.6   3.2    92    43  0.50    44    16   2.3    32    43    23
+Durahim 1453              1000   +68.6    18    16     0    16    15   2.5   3.0    67    59  0.66    58     4   1.4    31    59    44
+matcha mille crêpes cake  1000   +28.2    22    15     1    13    54   4.3   3.4    53    33  0.60    35     7   0.8    50    52     0
+Resonance Qt              1000    +3.9    30    19     1     6    58   2.1   3.4    83    52  0.80    54    12   1.4    27    52    11
+GamesGone                 1000   -42.2    28     9     0     6     5   1.4   3.1    80    57  0.50    48     5   1.6    30    43    29
+ediz_slow                 1000  -362.6    79    31    65    28     0   0.6   2.8   100    50  0.56    50    13   2.2    42    41    26
+
+Our chips by how the hand ended:
+  preflop      828 hands     -2795 chips  (-14.0 bb/100 of all hands)
+  postflop     126 hands     -1601 chips  (-8.0 bb/100 of all hands)
+  showdown      46 hands     +5179 chips  (+25.9 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r011.json #150 we=['9h', '9c'] board=['Jc', '6h', 'Jd', '3s', '4h'] shown={"Mohil'sPokerBot": ['Qd', 'Qs']}
+   -2000 saturday_r011.json #239 we=['7h', 'Kh'] board=['4d', '7s', 'Qc', '6h', '6c'] shown={'ediz_slow': ['Kc', '6s']}
+   -2000 saturday_r011.json #265 we=['Ks', 'Kd'] board=['Ts', '3d', '6d', 'Ah', 'Ac'] shown={'ediz_slow': ['Ad', '8d']}
+   -2000 saturday_r011.json #276 we=['Js', 'Qh'] board=['Qs', '4c', '4d', '2h', '5c'] shown={'GamesGone': ['Qc', 'Ad']}
+   -2000 saturday_r011.json #320 we=['Ks', '8s'] board=['Tc', 'Qs', 'Ac', '2s', '2h'] shown={'Attention Is All In': ['Td', 'Ad']}
+   -2000 saturday_r011.json #364 we=['5d', '3c'] board=['4s', 'Tc', '3h', 'Ad', 'Qd'] shown={'GamesGone': ['Td', 'Th'], 'ediz_slow': ['Ks', 'Kc']}
+   -2000 saturday_r011.json #417 we=['Js', 'As'] board=['9s', '6s', '2d', '4c', '8c'] shown={"Mohil'sPokerBot": ['Ts', 'Th']}
+   -2000 saturday_r011.json #442 we=['Tc', 'Td'] board=['3h', 'Ks', 'Kc', '7d', 'As'] shown={'ediz_slow': ['8d', 'Ac']}
+   -2000 saturday_r011.json #447 we=['Ac', 'Ks'] board=['4h', '9d', 'Kc', '5d', 'Qc'] shown={'Attention Is All In': ['9s', 'Kh'], 'GamesGone': ['Ts', 'Kd']}
+   -2000 saturday_r011.json #651 we=['Qc', '5h'] board=['8s', 'Qh', '4s', '9h', 'Ac'] shown={'ediz_slow': ['As', 'Qs']}
+   -2000 saturday_r011.json #694 we=['Jh', 'Ah'] board=['2d', '4s', '5h', 'Th', '9c'] shown={'ediz_slow': ['Kd', '2h']}
+   -2000 saturday_r011.json #709 we=['Qh', 'Js'] board=['6s', 'Jh', '4s', '7s', 'Th'] shown={'ediz_slow': ['Jd', 'Kd']}
+   +2030 saturday_r011.json #848 we=['Ks', 'Kc'] board=['Tc', 'Qh', '4s', '9d', '7c'] shown={'ediz_slow': ['Jd', 'Ah']}
+   +2050 saturday_r011.json #593 we=['Qh', 'Qd'] board=['8s', 'Js', '5d', 'Qc', 'Jh'] shown={'ediz_slow': ['Td', 'As']}
+   +2050 saturday_r011.json #859 we=['Jd', 'Ac'] board=['7h', 'Jh', '4h', 'Js', '2c'] shown={'ediz_slow': ['Ks', '7s']}
+   +2050 saturday_r011.json #903 we=['As', '2s'] board=['Jd', '2d', 'Ac', '4s', '5c'] shown={"Mohil'sPokerBot": ['Ks', 'Ad']}
+   +2065 saturday_r011.json #266 we=['Ac', '7s'] board=['3c', '8d', '7c', '6d', 'Qh'] shown={'ediz_slow': ['Kc', '3h']}
+   +2170 saturday_r011.json #595 we=['Ks', 'Ad'] board=['6c', 'Kh', '2s', '7c', 'Ah'] shown={"Mohil'sPokerBot": ['Kc', '8c']}
+   +2187 saturday_r011.json #330 we=['Jh', '9c'] board=['4d', '9h', 'Th', '2c', '7s'] shown={'ediz_slow': ['Kh', '6c']}
+   +4030 saturday_r011.json #708 we=['Jd', 'Jc'] board=['9d', '6d', '7c', '9c', '6s'] shown={'matcha mille crêpes cake': ['Ac', 'Kd'], 'ediz_slow': ['Kh', '4d']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -703 saturday_r011.json #436 we=['8s', '9s'] board=['Kc', '7h', '6c', '3s', '2s'] last=(street=river act=fold facing=True to_call=728 pot=2144)
+    -502 saturday_r011.json #432 we=['Jc', 'Jd'] board=['5d', '7c', '6d', '9c', '6h'] last=(street=river act=fold facing=True to_call=1014 pot=2028)
+    -448 saturday_r011.json #117 we=['Ks', 'Qh'] board=['Js', 'Th', '8c', '6c'] last=(street=turn act=fold facing=True to_call=493 pot=1479)
+    -401 saturday_r011.json #786 we=['Ts', 'Td'] board=['5c', '4d', 'Qc', 'As', '7s'] last=(street=river act=fold facing=True to_call=416 pot=1248)
+    -367 saturday_r011.json #238 we=['Kd', '2s'] board=['3s', 'Jh', '3h', '8h', '7h'] last=(street=river act=fold facing=True to_call=510 pot=1284)
+    -340 saturday_r011.json #995 we=['9d', '5d'] board=['6d', '4h', '8s', '3h', 'Jd'] last=(street=river act=fold facing=True to_call=360 pot=1080)
+    -339 saturday_r011.json #779 we=['Tc', 'Qs'] board=['Ks', 'Jc', 'Kc', '7d'] last=(street=turn act=fold facing=True to_call=364 pot=1052)
+    -333 saturday_r011.json #269 we=['Ah', 'Qh'] board=['Th', '2d', '9c', '6h'] last=(street=turn act=fold facing=True to_call=1667 pot=2363)
+     -10 saturday_r011.json #6 we=['Qc', 'Ah'] board=['8d', 'Ts', '5d', '3d'] last=(street=preflop act=fold facing=True to_call=40 pot=80)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +3.9 bb/100
+  showdown lost, other lines                     n=   12   -105.6 bb/100   (-88.0 bb each)
+  all-in preflop lost                            n=    7    -70.0 bb/100   (-100.0 bb each)
+  showdown lost after our river call             n=    3    -27.0 bb/100   (-90.1 bb each)
+  called preflop, check-folded flop or turn      n=   55    -15.7 bb/100   (-2.9 bb each)
+  blinds / folded preflop                        n=  702    -15.4 bb/100   (-0.2 bb each)
+  raised preflop then folded to a re-raise       n=   37    -14.2 bb/100   (-3.8 bb each)
+  folded the river after betting                 n=    5     -8.4 bb/100   (-16.8 bb each)
+  bet the flop or turn, then folded              n=    6     -7.0 bb/100   (-11.6 bb each)
+  folded the river after calling                 n=    3     -6.3 bb/100   (-21.2 bb each)
+  called the flop, folded the turn               n=    5     -6.0 bb/100   (-12.0 bb each)
+  raised preflop, check-folded flop or turn      n=   11     -5.1 bb/100   (-4.6 bb each)
+  called preflop then folded preflop             n=   10     -2.9 bb/100   (-3.0 bb each)
+  won postflop without showdown                  n=   41    +40.5 bb/100   (+9.9 bb each)
+  showdown won                                   n=    9    +76.5 bb/100   (+85.0 bb each)
+  won preflop uncontested                        n=   94   +170.6 bb/100   (+18.1 bb each)
+
+Worst hands:
+   -2000 r011#150  9h9c [showdown lost after our river call]
+         US raise 65; Mohil'sP raise 234; US call 169; | Jc 6h Jd; Mohil'sP raise 478; US call 478; | 3s; Mohil'sP raise 717; US call 717; | 4h; Mohil'sP raise 571; US call 571
+         shown: {"Mohil'sPok": 'QdQs'}
+   -2000 r011#239  7hKh [showdown lost, other lines]
+         ediz_slo raise 55; Mohil'sP call 55; US call 55; GamesGon call 45; | 4d 7s Qc; GamesGon check; ediz_slo raise 140; US call 140; | 6h; ediz_slo raise 280; US raise 1805; ediz_slo call 1525; | 6c
+         shown: {'ediz_slow': 'Kc6s'}
+   -2000 r011#265  KsKd [all-in preflop lost]
+         Durahim  raise 60; ediz_slo raise 145; US raise 348; ediz_slo raise 837; US raise 2000; ediz_slo call 1163; | Ts 3d 6d; | Ah; | Ac
+         shown: {'ediz_slow': 'Ad8d'}
+   -2000 r011#276  JsQh [showdown lost, other lines]
+         US raise 65; GamesGon call 65; Mohil'sP call 45; | Qs 4c 4d; Mohil'sP check; US raise 164; GamesGon call 164; Mohil'sP call 164; | 2h; Mohil'sP check; US raise 1771; GamesGon call 1771; | 5c
+         shown: {'GamesGone': 'QcAd'}
+   -2000 r011#320  Ks8s [showdown lost, other lines]
+         Attentio raise 40; ediz_slo call 40; Mohil'sP call 40; US call 20; | Tc Qs Ac; US check; Attentio raise 160; US call 160; | 2s; US raise 392; Attentio raise 1800; US call 1408; | 2h
+         shown: {'Attention ': 'TdAd'}
+   -2000 r011#364  5d3c [showdown lost, other lines]
+         ediz_slo raise 55; US call 55; GamesGon call 35; | 4s Tc 3h; GamesGon raise 175; ediz_slo raise 525; US call 525; GamesGon raise 1945; ediz_slo call 1420; US call 1420; | Ad; | Qd
+         shown: {'GamesGone': 'TdTh', 'ediz_slow': 'KsKc'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+Mohil'sPokerBot            +118.8      +7.1 | -                                  | f3b 1/6, steal-fold 2/5, cbet 24/26, lines 2/9 1/1 5/20 16/22 32/55
+matcha mille crêpes cake    +28.2     +17.8 | limp-folder                        | f3b 20/37, steal-fold 6/7, cbet 9/17, lines 2/12 2/4 4/29 9/12 19/34
+Attention Is All In        +185.2     -51.2 | -                                  | f3b 127/197, steal-fold 0/0, cbet 105/169, lines 33/53 24/25 13/82 25/27 38/89
+GamesGone                   -42.2     -24.1 | -                                  | f3b 1/19, steal-fold 0/0, cbet 4/5, lines 2/4 0/1 4/22 11/11 45/77
+Durahim 1453                +68.6      +1.5 | -                                  | f3b 3/20, steal-fold 50/61, cbet 8/12, lines 7/26 2/3 17/22 1/1 15/20
+ediz_slow                  -362.6     +52.8 | KIT preflop only                   | f3b 0/58, steal-fold 2/55, cbet 156/156, lines 24/93 0/0 2/2 28/29 76/87

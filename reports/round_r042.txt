@@ -1,0 +1,98 @@
+ROUND r042 | our bot: platform v11 | result +32.1 bb/100 | timeouts 0 | errors 0 | think 2.49s | table 3 seat 0
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+munchlax                  1000   +32.1    18     8     1     2    17   0.5   3.4    54    28  0.75    56     2   1.0    19    48     0
+Resonance Qt              1000   +32.1    23    18     0    19    77   0.0   3.0    85    57  0.80    35     9   1.8    32    56    11
+Anker Batteries           1000   +22.2    20    15     0    14    60   0.0   2.7    78    54  0.70    44     3   1.4    30    69     0
+Astra La Vista            1000    +9.1    21    14     1     6    68   0.3   2.9    76    54  0.33    40     9   2.0    29    41    36
+Chinese people can fly    1000    +5.2    36    24     0     4    81   1.2   2.5    41    32  0.33    40     8   0.8    31    60    26
+clanker                   1000   -19.2    21     6    14     3    80   0.0   3.0    41    33  0.58    28    15   1.3    44    39     0
+Jump Street               1000   -26.9    16    12     1     4    56   0.0   2.6    58    40  1.00    42     5   1.2    21    62    12
+WBot                      1000   -54.6    33    23     0     5    33   0.2   2.9    99    94  0.15    62    13   7.6    26    34    38
+
+Our chips by how the hand ended:
+  preflop      899 hands      +885 chips  (+4.4 bb/100 of all hands)
+  postflop      69 hands     +3332 chips  (+16.7 bb/100 of all hands)
+  showdown      32 hands     +2199 chips  (+11.0 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r042.json #219 we=['Qc', 'Ah'] board=['5s', '7h', 'Td', 'As', 'Jd'] shown={'Anker Batteries': ['Js', 'Jc']}
+   -2000 saturday_r042.json #253 we=['Td', '8d'] board=['9h', 'Jd', 'Qh', '2s', '7h'] shown={'clanker': ['3h', 'Ah'], 'Jump Street': ['Kc', 'Qc'], 'WBot': ['8h', '6h']}
+   -2000 saturday_r042.json #298 we=['Ks', 'Kd'] board=['3c', '2h', '6d', '4c', '9s'] shown={'Jump Street': ['4h', '4d']}
+   -2000 saturday_r042.json #696 we=['Ad', 'As'] board=['4s', 'Jh', '9h', '7s', '8h'] shown={'munchlax': ['Js', 'Jc']}
+   -2000 saturday_r042.json #699 we=['Ac', 'Jc'] board=['5s', '6s', 'Jd', '8h', 'Ah'] shown={'WBot': ['7h', '9s']}
+   -1374 saturday_r042.json #72 we=['5h', '6h'] board=['4d', 'Kd', 'Kh', '8s', '9h'] shown={'Chinese people can fly': ['Qh', 'Qd']}
+   -1032 saturday_r042.json #603 we=['4h', '5h'] board=['2h', 'Tc', '9d', '5c', '6c'] shown={'Chinese people can fly': ['8c', '8h']}
+    -791 saturday_r042.json #690 we=['3d', '6d'] board=['6s', 'Qd', 'Tc', '9h', '8h'] shown={'Chinese people can fly': ['Qc', 'Ac']}
+    +759 saturday_r042.json #767 we=['Ts', 'Ks'] board=['Th', '7d', '7c', '4s', '5d'] shown={}
+    +833 saturday_r042.json #764 we=['Qs', 'Ah'] board=['Ac', '9s', '3d', '6c', '7d'] shown={'Chinese people can fly': ['9h', 'Jc']}
+    +870 saturday_r042.json #979 we=['Ks', 'Kc'] board=['9h', 'Ts', '2h', '9s'] shown={}
+   +1029 saturday_r042.json #954 we=['Kh', 'Js'] board=['8s', '8c', '3h', '7c', 'Jh'] shown={'Chinese people can fly': ['Qs', 'As']}
+    +870 saturday_r042.json #979 we=['Ks', 'Kc'] board=['9h', 'Ts', '2h', '9s'] shown={}
+   +1029 saturday_r042.json #954 we=['Kh', 'Js'] board=['8s', '8c', '3h', '7c', 'Jh'] shown={'Chinese people can fly': ['Qs', 'As']}
+   +2020 saturday_r042.json #982 we=['2c', '2s'] board=['5s', '5h', '2d', 'Ts', 'Jh'] shown={'Chinese people can fly': ['9d', '9c']}
+   +2030 saturday_r042.json #459 we=['As', 'Ks'] board=['5h', '2c', 'Kd', 'Jd', '7c'] shown={'Astra La Vista': ['Qs', 'Kc']}
+   +2060 saturday_r042.json #995 we=['9h', '9s'] board=['9d', '8d', 'Qs', '2c', '6c'] shown={'WBot': ['Kc', 'Qh']}
+   +2159 saturday_r042.json #13 we=['7d', 'Ah'] board=['2c', '5s', '4c', '8d', '6s'] shown={'Anker Batteries': ['As', 'Ac']}
+   +2221 saturday_r042.json #770 we=['8d', '8s'] board=['Qh', '8c', 'Qs', '8h', '2d'] shown={'Chinese people can fly': ['Qd', 'Jc']}
+   +2531 saturday_r042.json #59 we=['As', 'Ah'] board=['3c', '6h', '2d', '2s', '6c'] shown={'WBot': ['Js', 'Jh']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -546 saturday_r042.json #630 we=['Ks', 'Td'] board=['Jh', '8d', 'Jc'] last=(street=flop act=fold facing=True to_call=1454 pot=2566)
+    -450 saturday_r042.json #789 we=['Ah', '5h'] board=['Kc', '8c', '9s'] last=(street=flop act=fold facing=True to_call=546 pot=1456)
+    -150 saturday_r042.json #663 we=['Qc', 'Qs'] board=[] last=(street=preflop act=fold facing=True to_call=195 pot=525)
+     -20 saturday_r042.json #949 we=['Ks', 'Ah'] board=['7c', '3h', '7s'] last=(street=preflop act=fold facing=True to_call=148 pot=244)
+     -10 saturday_r042.json #190 we=['Ac', 'Qs'] board=[] last=(street=preflop act=fold facing=True to_call=46 pot=86)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total +32.1 bb/100
+  showdown lost, other lines                     n=    8    -47.2 bb/100   (-59.0 bb each)
+  showdown lost after our river call             n=    5    -15.3 bb/100   (-30.6 bb each)
+  raised preflop then folded to a re-raise       n=   26    -14.8 bb/100   (-5.7 bb each)
+  blinds / folded preflop                        n=  770    -12.6 bb/100   (-0.2 bb each)
+  all-in preflop lost                            n=    1    -10.0 bb/100   (-100.0 bb each)
+  bet the flop or turn, then folded              n=    6     -8.6 bb/100   (-14.3 bb each)
+  called preflop, check-folded flop or turn      n=   14     -3.9 bb/100   (-2.8 bb each)
+  called the flop, folded the turn               n=    4     -2.9 bb/100   (-7.3 bb each)
+  folded the river after calling                 n=    3     -2.0 bb/100   (-6.7 bb each)
+  raised preflop, check-folded flop or turn      n=    2     -1.4 bb/100   (-7.0 bb each)
+  called preflop then folded preflop             n=    3     -0.9 bb/100   (-3.1 bb each)
+  folded the river after checking                n=    1     -0.2 bb/100   (-2.2 bb each)
+  won preflop uncontested                        n=  100    +32.8 bb/100   (+3.3 bb each)
+  won postflop without showdown                  n=   39    +35.7 bb/100   (+9.2 bb each)
+  showdown won                                   n=   18    +83.5 bb/100   (+46.4 bb each)
+
+Worst hands:
+   -2000 r042#219  QcAh [showdown lost, other lines]
+         Chinese  raise 50; US raise 140; Anker Ba call 140; | 5s 7h Td; US raise 576; Anker Ba call 576; | As; US check; Anker Ba check; | Jd; US raise 1284; Anker Ba call 1284
+         shown: {'Anker Batt': 'JsJc'}
+   -2000 r042#253  Td8d [showdown lost, other lines]
+         clanker call 20; Jump Str raise 70; WBot call 70; US call 50; clanker call 50; | 9h Jd Qh; US raise 464; clanker call 464; Jump Str call 464; WBot raise 1930; US call 1466; clanker call 1466; Jump Str call 1466; | 2s; | 7h
+         shown: {'clanker': '3hAh', 'Jump Stree': 'KcQc', 'WBot': '8h6h'}
+   -2000 r042#298  KsKd [showdown lost, other lines]
+         US raise 60; Jump Str call 40; | 3c 2h 6d; Jump Str raise 130; US raise 481; Jump Str call 351; | 4c; Jump Str raise 1459; US call 1459; | 9s
+         shown: {'Jump Stree': '4h4d'}
+   -2000 r042#696  AdAs [all-in preflop lost]
+         Chinese  raise 50; US raise 150; munchlax raise 2000; US call 1850; | 4s Jh 9h; | 7s; | 8h
+         shown: {'munchlax': 'JsJc'}
+   -2000 r042#699  AcJc [showdown lost after our river call]
+         US raise 60; WBot call 40; | 5s 6s Jd; WBot raise 20; US call 20; | 8h; WBot raise 127; US call 127; | Ah; WBot raise 1793; US call 1793
+         shown: {'WBot': '7h9s'}
+   -1374 r042#72   5h6h [showdown lost, other lines]
+         Chinese  raise 50; US call 50; munchlax call 30; | 4d Kd Kh; munchlax check; Chinese  check; US raise 128; Chinese  call 128; | 8s; Chinese  check; US raise 332; Chinese  call 332; | 9h; Chinese  check; US raise 864; Chinese  call 864
+         shown: {'Chinese pe': 'QhQd'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r042.json: 1246 decisions {'preflop': 1028, 'flop': 121, 'turn': 60, 'river': 37} | platform says 0 timeouts, think 2.49s | replay finds 1 passive plays the bot would not make
+   hand  550 flop    we=6h6s board=[3d Ts 2c] played fold , bot says call  (to call 49, pot 199) -> hand result -50
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+clanker                     -19.2      -9.9 | -                                  | f3b 8/10, steal-fold 61/78, cbet 7/17, lines 1/7 0/3 8/16 3/11 14/33
+Astra La Vista               +9.1      +7.8 | -                                  | f3b 17/25, steal-fold 29/49, cbet 32/42, lines 6/14 0/2 4/9 6/8 12/21
+munchlax                    +32.1      -6.0 | -                                  | f3b 1/6, steal-fold 29/49, cbet 13/24, lines 2/6 5/5 12/17 8/11 29/37
+Anker Batteries             +22.2      +0.5 | -                                  | f3b 9/15, steal-fold 44/63, cbet 31/40, lines 6/19 2/3 7/13 6/9 15/21
+Jump Street                 -26.9      -3.6 | -                                  | f3b 5/9, steal-fold 41/57, cbet 31/53, lines 3/8 0/5 13/20 2/3 12/23
+WBot                        -54.6     +16.4 | -                                  | f3b 12/36, steal-fold 33/74, cbet 86/87, lines 16/30 5/5 10/18 2/3 32/45
+Chinese people can fly       +5.2     +26.9 | -                                  | f3b 102/126, steal-fold 48/92, cbet 24/59, lines 5/14 5/7 17/40 13/19 30/67

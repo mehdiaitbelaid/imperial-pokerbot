@@ -1,0 +1,90 @@
+ROUND r043 | our bot: platform v11 | result -5.6 bb/100 | timeouts 0 | errors 0 | think 1.62s | table 4 seat 5
+
+== TABLE STATS (analyze.py) ==
+team                     hands  bb/100  VPIP   PFR  limp  3bet   f3b shove  open  cbet  bet% bsize foldB raisB    AF  WTSD  W$SD   air
+GamesGone                 1000   +74.1    25    17     0     3    62   0.4   2.2    83    73  0.50    53     9   4.6    27    48    19
+FisherMen                 1000   +63.7    30    24     0    13    62   1.0   5.0    60    56  0.66    52     5   2.5    21    55    18
+Durahim 1453              1000   +21.6    20    16     0     5    75   0.4   2.5    63    46  0.66    56     8   2.2    20    65    20
+matcha mille crêpes cake  1000    -0.7    18    10     1     5    62   0.8   2.6    88    55  0.50    57     5   2.4    20    52    20
+Resonance Qt              1000    -5.6    20    17     0    15    58   0.0   2.7    77    55  0.80    42    12   1.9    19    58    15
+SmartBGerBot              1000   -33.0    15    10     0     3    87   0.0   3.0    44    25  0.69    60     6   1.5    24    33     0
+YSL_TWIZZY                1000   -53.1    20    14     1     4    86   0.1   2.7    26    31  0.48    30     3   0.6    46    66     0
+ND                        1000   -67.1    19     9     1     4    20   0.2   3.0    71    33  0.75    42     8   1.3    34    32    23
+
+Our chips by how the hand ended:
+  preflop      900 hands     -1685 chips  (-8.4 bb/100 of all hands)
+  postflop      81 hands     +4017 chips  (+20.1 bb/100 of all hands)
+  showdown      19 hands     -3454 chips  (-17.3 bb/100 of all hands)
+
+Biggest pots (|result| >= 600):
+   -2000 saturday_r043.json #66 we=['Ts', 'As'] board=['3d', 'Ah', '5d', 'Jc', '4c'] shown={'YSL_TWIZZY': ['Ac', 'Ad']}
+   -2000 saturday_r043.json #273 we=['Ad', 'Ac'] board=['4c', '3d', '9d', '7d', '7h'] shown={'FisherMen': ['8d', 'Jd']}
+   -2000 saturday_r043.json #970 we=['6c', '7c'] board=['3c', '8h', '9c', '4c', '9d'] shown={'GamesGone': ['9s', 'Ah'], 'ND': ['Jc', '2c']}
+   -2000 saturday_r043.json #973 we=['Kc', 'Qc'] board=['9c', '7h', 'Jc', '7c', '4h'] shown={'YSL_TWIZZY': ['9h', '9s']}
+    +680 saturday_r043.json #331 we=['Tc', '9c'] board=['Ac', '7h', '3c', 'Ts', '7s'] shown={}
+   +1175 saturday_r043.json #923 we=['Ks', 'As'] board=['5h', '3c', '9c', 'Kd', 'Qs'] shown={'ND': ['9d', 'Ad']}
+   +1236 saturday_r043.json #453 we=['4c', '4s'] board=['4h', 'Ad', '6h', 'Th'] shown={}
+   +2064 saturday_r043.json #89 we=['Ac', 'Ad'] board=['2c', 'Kd', '9c', '5h', 'Tc'] shown={'GamesGone': ['Jc', 'Js']}
+   -2000 saturday_r043.json #66 we=['Ts', 'As'] board=['3d', 'Ah', '5d', 'Jc', '4c'] shown={'YSL_TWIZZY': ['Ac', 'Ad']}
+   -2000 saturday_r043.json #273 we=['Ad', 'Ac'] board=['4c', '3d', '9d', '7d', '7h'] shown={'FisherMen': ['8d', 'Jd']}
+   -2000 saturday_r043.json #970 we=['6c', '7c'] board=['3c', '8h', '9c', '4c', '9d'] shown={'GamesGone': ['9s', 'Ah'], 'ND': ['Jc', '2c']}
+   -2000 saturday_r043.json #973 we=['Kc', 'Qc'] board=['9c', '7h', 'Jc', '7c', '4h'] shown={'YSL_TWIZZY': ['9h', '9s']}
+    +680 saturday_r043.json #331 we=['Tc', '9c'] board=['Ac', '7h', '3c', 'Ts', '7s'] shown={}
+   +1175 saturday_r043.json #923 we=['Ks', 'As'] board=['5h', '3c', '9c', 'Kd', 'Qs'] shown={'ND': ['9d', 'Ad']}
+   +1236 saturday_r043.json #453 we=['4c', '4s'] board=['4h', 'Ad', '6h', 'Th'] shown={}
+   +2064 saturday_r043.json #89 we=['Ac', 'Ad'] board=['2c', 'Kd', '9c', '5h', 'Tc'] shown={'GamesGone': ['Jc', 'Js']}
+
+Suspicious folds (premium preflop for cheap, or folding after investing >= 300):
+    -428 saturday_r043.json #333 we=['Kc', '7s'] board=['6h', '3d', '4s', '8h'] last=(street=turn act=fold facing=True to_call=936 pot=1872)
+    -421 saturday_r043.json #365 we=['Th', 'Ah'] board=['2d', '8h', '7c', 'Qc'] last=(street=turn act=fold facing=True to_call=562 pot=1414)
+     -60 saturday_r043.json #341 we=['Qs', 'Qc'] board=[] last=(street=preflop act=fold facing=True to_call=156 pot=306)
+     -20 saturday_r043.json #784 we=['Jh', 'Js'] board=['Ad', '8h', 'Jc', '5h', '4h'] last=(street=preflop act=fold facing=True to_call=110 pot=204)
+
+== WHERE OUR CHIPS WENT (leaks.py) ==
+1000 hands, total -5.6 bb/100
+  showdown lost, other lines                     n=    8    -46.4 bb/100   (-58.0 bb each)
+  raised preflop then folded to a re-raise       n=   29    -18.3 bb/100   (-6.3 bb each)
+  blinds / folded preflop                        n=  794    -11.6 bb/100   (-0.1 bb each)
+  raised preflop, check-folded flop or turn      n=   11     -5.8 bb/100   (-5.3 bb each)
+  bet the flop or turn, then folded              n=    5     -4.9 bb/100   (-9.8 bb each)
+  called the flop, folded the turn               n=    5     -4.8 bb/100   (-9.6 bb each)
+  folded the river after calling                 n=    4     -4.2 bb/100   (-10.4 bb each)
+  called preflop, check-folded flop or turn      n=   11     -2.7 bb/100   (-2.5 bb each)
+  folded the river after checking                n=    1     -0.9 bb/100   (-9.0 bb each)
+  folded the river after betting                 n=    1     -0.6 bb/100   (-6.1 bb each)
+  showdown won                                   n=   10    +18.8 bb/100   (+18.8 bb each)
+  won preflop uncontested                        n=   78    +31.8 bb/100   (+4.1 bb each)
+  won postflop without showdown                  n=   43    +44.0 bb/100   (+10.2 bb each)
+
+Worst hands:
+   -2000 r043#66   TsAs [showdown lost, other lines]
+         YSL_TWIZ raise 56; US call 56; ND call 36; | 3d Ah 5d; ND check; YSL_TWIZ raise 137; US call 137; | Jc; YSL_TWIZ raise 348; US call 348; | 4c; YSL_TWIZ raise 884; US raise 1459; YSL_TWIZ call 575
+         shown: {'YSL_TWIZZY': 'AcAd'}
+   -2000 r043#273  AdAc [showdown lost, other lines]
+         FisherMe raise 65; US raise 240; FisherMe call 175; | 4c 3d 9d; US raise 250; FisherMe call 250; | 7d; US raise 500; FisherMe call 500; | 7h; US raise 1010; FisherMe call 1010
+         shown: {'FisherMen': '8dJd'}
+   -2000 r043#970  6c7c [showdown lost, other lines]
+         GamesGon raise 44; FisherMe call 44; US call 44; ND call 24; | 3c 8h 9c; ND raise 139; GamesGon call 139; US call 139; | 4c; ND raise 603; GamesGon call 603; US raise 1817; ND call 1214; GamesGon call 1214; | 9d
+         shown: {'GamesGone': '9sAh', 'ND': 'Jc2c'}
+   -2000 r043#973  KcQc [showdown lost, other lines]
+         US raise 65; YSL_TWIZ call 55; | 9c 7h Jc; YSL_TWIZ raise 116; US call 116; | 7c; YSL_TWIZ raise 294; US raise 1819; YSL_TWIZ call 1525; | 4h
+         shown: {'YSL_TWIZZY': '9h9s'}
+    -554 r043#620  4c4h [showdown lost, other lines]
+         FisherMe raise 65; US call 65; | Tc Ts Kh; FisherMe raise 52; US call 52; | 2s; FisherMe raise 87; US call 87; | Qc; FisherMe check; US raise 350; FisherMe call 350
+         shown: {'FisherMen': '9hKc'}
+    -503 r043#832  8hQh [showdown lost, other lines]
+         GamesGon raise 44; US call 24; | 4c 7d Js; US raise 78; GamesGon call 78; | 4s; US raise 127; GamesGon call 127; | Th; US raise 254; GamesGon call 254
+         shown: {'GamesGone': 'JcAd'}
+
+== TIMEOUTS BY REPLAY (replay.py, live build) ==
+saturday_r043.json: 1234 decisions {'preflop': 1025, 'flop': 110, 'turn': 66, 'river': 33} | platform says 0 timeouts, think 1.62s | replay finds 0 passive plays the bot would not make
+
+== OPPONENTS: KIT-BOT CHECK, WHAT WE WON FROM EACH (bb/100), THEIR RESPONSES ==
+opponent                   bb/100    we won | looks like the kit bot             | fold to 3-bet, steal-fold, c-bet, fold by line [led-into, gave-up, called-last, checked-through, other]
+GamesGone                   +74.1      +7.4 | -                                  | f3b 13/21, steal-fold 29/59, cbet 54/65, lines 14/27 1/1 4/13 10/12 17/28
+YSL_TWIZZY                  -53.1     -16.6 | limp-folder                        | f3b 19/22, steal-fold 52/74, cbet 11/42, lines 3/17 1/4 18/46 9/18 8/32
+FisherMen                   +63.7      -4.9 | -                                  | f3b 21/34, steal-fold 49/86, cbet 27/45, lines 9/18 9/15 11/24 8/10 12/26
+SmartBGerBot                -33.0      +6.3 | -                                  | f3b 40/46, steal-fold 75/95, cbet 7/16, lines 0/1 3/5 8/10 8/9 9/19
+matcha mille crêpes cake     -0.7      +7.3 | -                                  | f3b 8/13, steal-fold 59/76, cbet 22/25, lines 8/17 2/2 14/20 11/13 13/25
+Durahim 1453                +21.6      +0.4 | -                                  | f3b 40/53, steal-fold 32/47, cbet 24/38, lines 5/20 9/11 15/24 2/3 9/18
+ND                          -67.1      -5.6 | -                                  | f3b 2/10, steal-fold 34/63, cbet 10/14, lines 1/6 1/3 5/19 11/12 21/45
