@@ -35,6 +35,8 @@ SIZE_LEARN = True
 # during the round, then starts from what that team did on Saturday (per size bucket: times its bet
 # was raised / folded, hands shown / strong). At most 12 pseudo-observations, so live play corrects it.
 FINGERPRINTS = True
+BIGPAIR_CALL = 500       # V24: chips to call on the turn or river from which one pair or less needs more equity
+BIGPAIR_MARGIN = 0.15
 THREEBET_ANY = True     # 3-bet any two cards against an opener who folds to 3-bets 4 times in 5 (8+ cases)
 MANIAC_RULES = True     # against the recognised 3-bet maniac: 4-bet instead of calling, raise his bets instead of calling
 SEED = {
@@ -53,8 +55,8 @@ def seat_label(S):
     op = S.opn
     if S.tb_o >= 25 and S.tb >= 0.18 * S.tb_o and not (op >= 6 and S.o25 >= 0.9 * op):
         return "ANTON"                         # 3-bets one hand in five or more, with mixed open sizes
-    if S.rfi_o >= 25 and S.limp >= 0.15 * S.rfi_o:
-        return "POKE"                          # limps
+    if S.rfi_o >= 25 and S.limp >= 0.15 * S.rfi_o and op >= 4 and S.o25 >= 0.7 * op:
+        return "POKE"                          # limps, and opens 2.5bb
     bn = S.bn
     if bn >= 8 and S.b15 >= 0.35 * bn:
         return "WBOT"                          # bets a sixth of the pot again and again
@@ -1529,6 +1531,8 @@ class Agent:
             margin += 0.03
             if mydraw and c <= 0.25 * mystack:
                 margin -= 0.05
+        if nb >= 4 and c >= BIGPAIR_CALL and (mycat <= 1 or (mycat == 2 and paired)) and not nofold:
+            margin += BIGPAIR_MARGIN
         if eq >= need + margin:
             return CALL
         # V22: about to fold. Heads up against a bet of 0.42-0.90 pot from a seat whose bets of that
