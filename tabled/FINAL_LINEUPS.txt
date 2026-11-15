@@ -1,0 +1,20 @@
+Plausible final tables: seven opponents each, to seat with our bot (8 agents, one game = 5,000 hands).
+Replicas: tabled/f_*.py (finalists, written by tabled/build_f.py) and tabled/anker.py (Table D build).
+
+(a) Top seeds
+    Attention Is All In, Gherkers, The Market Makers, Equity Engine, Kojack, FisherMen, Anker Batteries
+    tabled/f_attention.py tabled/f_gherkers.py tabled/f_tmm.py tabled/f_ee.py tabled/f_kojack.py tabled/f_fishermen.py tabled/anker.py
+
+(b) Kojack -> Mohil'sPokerBot, FisherMen -> Durahim 1453
+    Attention Is All In, Gherkers, The Market Makers, Equity Engine, Mohil'sPokerBot, Durahim 1453, Anker Batteries
+    tabled/f_attention.py tabled/f_gherkers.py tabled/f_tmm.py tabled/f_ee.py tabled/f_mohil.py tabled/f_durahim.py tabled/anker.py
+
+(c) Kojack -> Mohil'sPokerBot, FisherMen -> Durahim 1453, Equity Engine -> Phil AIvey
+    Attention Is All In, Gherkers, The Market Makers, Phil AIvey, Mohil'sPokerBot, Durahim 1453, Anker Batteries
+    tabled/f_attention.py tabled/f_gherkers.py tabled/f_tmm.py tabled/f_phil.py tabled/f_mohil.py tabled/f_durahim.py tabled/anker.py
+
+Run one line-up (8 games of 5,000 hands, hands saved for tabled/measure.py and tabled/calib_f.py):
+    python3 tools/selfplay.py YOUR_BOT.py <the seven files of the line-up> --hands 5000 --rounds 8 --out sim/final_a
+
+Rotate seven of the ten replicas each game instead:
+    python3 tools/selfplay.py YOUR_BOT.py --pool tabled/f_attention.py tabled/f_gherkers.py tabled/f_tmm.py tabled/f_ee.py tabled/f_kojack.py tabled/f_fishermen.py tabled/f_mohil.py tabled/f_phil.py tabled/f_durahim.py tabled/anker.py --hands 5000 --rounds 40 --out sim/final_pool
