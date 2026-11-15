@@ -839,12 +839,10 @@ class Agent:
         if len(others) < 2:
             return 0.0
         sd = 280.0 * (left + 1) ** 0.5            # one hand swings about 14 big blinds
-        if mine < others[1]:
-            z = (others[1] - mine) / sd
-            r = (z - 0.5) / 1.0
+        if mine < others[1]:                      # outside the top two: gamble to get back in
+            r = (others[1] - mine) / sd - 0.5
             return 0.0 if r < 0 else (1.0 if r > 1 else r)
-        z = (mine - others[1]) / sd
-        r = (z - 1.5) / 1.5
+        r = ((mine - others[1]) / sd - 1.5) / 1.5  # inside: protect once far ahead of third place
         return 0.0 if r < 0 else -(1.0 if r > 1 else r)
 
     def _act(self, state, t0):
