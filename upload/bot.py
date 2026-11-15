@@ -19,6 +19,67 @@ BIG_CALL = 300          # chips to call from which a decision counts as big
 BIG_BUDGET = 0.0035    # seconds of simulation for a big decision (about 400 samples on the server)
 WEAK_PAIR_BET = 0.5     # bet size (share of the pot before it) from which the weak-pair rule applies
 RAISE_SMALL = True      # V21: raise small bets heads up when the bettor's folds pay for it
+# V22: what each seat's bet sizes mean. Sizes are bucketed in pots; per seat and bucket we count
+# (a) how often he gives up when that bet is raised, (b) how strong the hands he showed down were.
+ZR_FIELD = (0.79, 0.69, 0.53, 0.41, 0.36, 0.31)   # field: folds when his own bet of that size is raised
+ZR_MIN = 4              # observations of this seat needed before raising a bet of 0.42-0.90 pot
+ZR_PRIOR = 4.0
+ZS_MIN = 3              # shown hands needed before a seat's own size record reshapes his range
+ZS_PRIOR = 3.0
+ZW_MIN = 6              # shown hands needed before a size is treated as weaker than the model says
+ZW_MAXB = 3             # ... and only for bets under 0.90 pot
+SIZE_LEARN = True
+
+
+# Seat fingerprints for Sunday's table: a seat is recognised from its own open sizes and bet sizes
+# during the round, then starts from what that team did on Saturday (per size bucket: times its bet
+# was raised / folded, hands shown / strong). At most 12 pseudo-observations, so live play corrects it.
+FINGERPRINTS = True
+THREEBET_ANY = True     # 3-bet any two cards against an opener who folds to 3-bets 4 times in 5 (8+ cases)
+MANIAC_RULES = True     # against the recognised 3-bet maniac: 4-bet instead of calling, raise his bets instead of calling
+SEED = {
+    "ANKER": ([0, 12, 12, 10, 12, 8], [0, 5.76, 0.86, 5, 8.64, 3], [0, 12, 12, 12, 12, 12], [0, 10.24, 11.17, 9.26, 8.21, 9]),
+    "CPF": ([0, 12, 0, 0, 12, 0], [0, 9.62, 0, 0, 2.4, 0], [10, 12, 0, 12, 12, 0], [8, 4.12, 0, 10, 11.22, 0]),
+    "WBOT": ([12, 12, 12, 12, 12, 0], [9.65, 5.51, 4, 1.85, 3.82, 0], [12, 12, 12, 12, 12, 12], [4.68, 6.1, 5.8, 9.76, 8.38, 11.56]),
+    "GG": ([0, 0, 12, 0, 12, 0], [0, 0, 8.93, 0, 3.69, 0], [0, 12, 12, 0, 12, 0], [0, 7, 4.43, 0, 10.55, 0]),
+    "POKE": ([0, 12, 12, 12, 12, 12], [0, 7.1, 6.62, 8.5, 9, 3.6], [0, 12, 12, 12, 12, 12], [0, 7.84, 7.38, 5.35, 9, 11.02]),
+    "ANTON": ([0, 12, 12, 12, 0, 0], [0, 11, 10.29, 10.11, 0, 0], [0, 12, 12, 12, 0, 12], [0, 8.7, 6.46, 6.4, 0, 11.48]),
+    "YSL": ([0, 0, 12, 9, 0, 0], [0, 0, 0, 0, 0, 0], [0, 12, 12, 12, 0, 0], [0, 6.5, 12, 12, 0, 0]),
+}
+
+
+def seat_label(S):
+    """Which of the known profiles this seat's own actions match, or 0."""
+    op = S.opn
+    if S.tb_o >= 25 and S.tb >= 0.18 * S.tb_o and not (op >= 6 and S.o25 >= 0.9 * op):
+        return "ANTON"                         # 3-bets one hand in five or more, with mixed open sizes
+    if S.rfi_o >= 25 and S.limp >= 0.15 * S.rfi_o:
+        return "POKE"                          # limps
+    bn = S.bn
+    if bn >= 8 and S.b15 >= 0.35 * bn:
+        return "WBOT"                          # bets a sixth of the pot again and again
+    if op >= 6:
+        nolimp = S.limp <= 0.02 * S.rfi_o
+        folds3 = S.f3_o < 4 or S.f3 >= 0.6 * S.f3_o      # the profiles below fold to 3-bets
+        if S.o22 >= 0.8 * op and (bn < 5 or S.b50 + S.b100 >= 0.7 * bn):
+            return "GG"                        # opens 2.2bb, bets half pot or pot
+        if S.o28 >= 0.55 * op and bn >= 3 and S.b15 == 0 and S.bov == 0 and folds3:
+            return "YSL"                       # opens 2.8bb, never bets tiny or over the pot
+        if S.o25 >= 0.85 * op and nolimp and bn >= 5:
+            if S.b33 >= 2 and S.b33 + S.b100 >= 0.8 * bn and S.bov == 0 and folds3:
+                return "CPF"                   # opens 2.5bb, bets a third of the pot or the pot
+            if S.o25 >= 0.95 * op and S.b33 == 0 and S.bov >= 0.25 * bn:
+                return "ANKER"                 # opens 2.5bb, overbets, never bets a third
+    return 0
+
+
+def zbucket(x):
+    if x < 0.42:
+        return 0 if x < 0.24 else 1
+    if x < 0.90:
+        return 2 if x < 0.65 else 3
+    return 4 if x < 1.30 else 5
+
 WEAK_PAIR_MARGIN = 0.10 # extra equity a pair below top pair needs on flop and turn against such bets
 _now = time.perf_counter
 
@@ -231,13 +292,18 @@ for _c in _SH_TOP + _rest:
 class St:
     __slots__ = ("hands", "vpip", "pfr", "tb_o", "tb", "f3_o", "f3", "shove",
                  "bet_o", "bet", "fb_o", "fb_f", "fb_r", "sd_agg", "sd_air", "st_o", "st_f", "fo", "ff", "ro", "rf",
-                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "sr_o", "sr_f")
+                 "limp", "rfi_o", "lf_o", "lf_f", "sd_r", "sd_ok", "bx_n", "bx_s", "cb_o", "cb", "sr_o", "sr_f",
+                 "zo", "zf", "zn", "zs", "opn", "o22", "o25", "o28", "bn", "b15", "b33", "b50", "b100", "bov", "lab", "f4_o", "f4")
 
     def __init__(self):
         for k in self.__slots__:
             setattr(self, k, 0)
         self.fo = [0, 0, 0, 0, 0]   # faced a bet of 35%+ of the pot, by line (see line_cat)
         self.ff = [0, 0, 0, 0, 0]   # ... and folded
+        self.zo = [0, 0, 0, 0, 0, 0]   # his bet of this size bucket was raised ...
+        self.zf = [0, 0, 0, 0, 0, 0]   # ... and he folded
+        self.zn = [0, 0, 0, 0, 0, 0]   # hands shown down after a bet of this size bucket ...
+        self.zs = [0, 0, 0, 0, 0, 0]   # ... that were top pair or better (or a strong draw) when he bet
 
     def limp_folder(self):
         """Limps, then gives up every time someone raises."""
@@ -384,9 +450,13 @@ class Agent:
         self.hands_seen = 0
         self.errors = 0
         self.cap = 200
+        self.zcur = ()
+        self.zweak = False
+        self.me_seat = -1
 
     def on_table_start(self, info):
         self.total_hands = info.get("hands", 1000) or 1000
+        self.me_seat = info.get("seat", -1)
 
     # ------------------------------------------------------------- learning
     def on_hand_end(self, summary):
@@ -428,6 +498,11 @@ class Agent:
         checked = set()        # seats that checked on the current street
         first_bet = None       # (seat, size in pots) of the first bet of the current street
         small_raised = -1      # seat whose small bet has just been raised
+        zraised = None         # (seat, size bucket) of a first bet that has just been raised
+        bbv = 20
+        tb_seat = -1           # seat that made the 3-bet
+        faced4 = False
+        betlog = []            # (seat, street, size bucket) of every first bet of a street
         for h in hist:
             s = h["seat"]
             a = h["action"]
@@ -437,6 +512,8 @@ class Agent:
                 sbs = s
             elif a == "big_blind":
                 bbs = s
+                if amt > 0:
+                    bbv = amt
             if h["street"] != street:
                 street = h["street"]
                 bets = {}
@@ -444,6 +521,7 @@ class Agent:
                 checked = set()
                 first_bet = None
                 small_raised = -1
+                zraised = None
             if a == "small_blind" or a == "big_blind":
                 bets[s] = amt
                 if amt > cur:
@@ -465,6 +543,15 @@ class Agent:
                         if a == "call":
                             S.limp += 1
                             limped.add(s)
+                        elif a == "raise" and not limped:
+                            S.opn += 1
+                            ob = amt / float(bbv)
+                            if 2.14 < ob < 2.26:
+                                S.o22 += 1
+                            elif 2.44 < ob < 2.56:
+                                S.o25 += 1
+                            elif 2.74 < ob < 2.86:
+                                S.o28 += 1
                     if raises == 1:
                         S.tb_o += 1
                         if a == "raise":
@@ -483,11 +570,18 @@ class Agent:
                     S.f3_o += 1
                     if a == "fold":
                         S.f3 += 1
+                elif s == tb_seat and raises == 3 and not faced4:
+                    faced4 = True              # he 3-bet and now faces a 4-bet
+                    S.f4_o += 1
+                    if a == "fold":
+                        S.f4 += 1
                 if a == "raise":
                     pr.add(s)
                     vp.add(s)
                     if raises == 0:
                         first_raiser = s
+                    elif raises == 1:
+                        tb_seat = s
                     raises += 1
                     if amt >= 800:
                         S.shove += 1
@@ -499,6 +593,11 @@ class Agent:
                     S.sr_o += 1
                     if a == "fold":
                         S.sr_f += 1
+                if zraised is not None and s == zraised[0]:
+                    S.zo[zraised[1]] += 1
+                    if a == "fold":
+                        S.zf[zraised[1]] += 1
+                    zraised = None
                 if cur > mine:
                     S.fb_o += 1
                     if a == "fold":
@@ -534,8 +633,22 @@ class Agent:
                     last_x = (amt - cur) / float(pot + cur - mine) if cur > 0 else amt / float(pot or 1)
                     if cur == 0:
                         first_bet = (s, last_x)
-                    elif first_bet is not None and first_bet[1] < 0.4 and s != first_bet[0]:
-                        small_raised = first_bet[0]
+                        betlog.append((s, street, zbucket(last_x)))
+                        S.bn += 1
+                        if last_x <= 0.20:
+                            S.b15 += 1
+                        elif 0.30 <= last_x <= 0.36:
+                            S.b33 += 1
+                        elif 0.46 <= last_x <= 0.53:
+                            S.b50 += 1
+                        elif 0.95 <= last_x <= 1.05:
+                            S.b100 += 1
+                        elif last_x >= 1.06:
+                            S.bov += 1
+                    elif first_bet is not None and s != first_bet[0]:
+                        if first_bet[1] < 0.4:
+                            small_raised = first_bet[0]
+                        zraised = (first_bet[0], zbucket(first_bet[1]))
                         first_bet = None
                 pot += amt - mine
                 bets[s] = amt
@@ -562,6 +675,38 @@ class Agent:
                     r1 = CARD[cards[1]] >> 2
                     if r0 == r1 or r0 >= 11 or r1 >= 11:
                         S.sd_ok += 1
+        if FINGERPRINTS:
+            for s in seats:
+                S = st[s]
+                if not S.lab and S.hands >= 20 and s != self.me_seat:
+                    code = seat_label(S)
+                    if code:
+                        S.lab = code
+                        if code == "CPF" or code == "YSL":
+                            S.f3_o += 12            # Saturday: folded 84% and 85% of 337 and 184 of our 3-bets
+                            S.f3 += 10
+                        elif code == "ANTON":
+                            S.f4_o += 6             # Saturday: folded 59 to 66% of 4-bets after 3-betting
+                            S.f4 += 3.7
+                        zo, zf, zn, zs = SEED[code]
+                        for b in range(6):
+                            S.zo[b] += zo[b]
+                            S.zf[b] += zf[b]
+                            S.zn[b] += zn[b]
+                            S.zs[b] += zs[b]
+        if shown and betlog:
+            bd_all = [CARD[c] for c in summary.get("board") or ()]
+            seen_cards = {}
+            for k, cards in shown.items():
+                seen_cards[int(k)] = cards
+            for s, stt, b in betlog:
+                cards = seen_cards.get(s)
+                nbd = 3 if stt == "flop" else (4 if stt == "turn" else 5)
+                if cards and len(bd_all) >= nbd:
+                    S = st[s]
+                    S.zn[b] += 1
+                    if self._zstrong(CARD[cards[0]], CARD[cards[1]], bd_all[:nbd]):
+                        S.zs[b] += 1
         if shown and agg_post:
             board = [CARD[c] for c in summary.get("board") or ()]
             if len(board) == 5:
@@ -578,6 +723,28 @@ class Agent:
                     cat = RANK[bp * CP[CARD[cards[0]]] * CP[CARD[cards[1]]]] >> 20
                     if cat <= bcat and cat <= 2 and not self._flushy(board, cards):
                         S.sd_air += 1
+
+    def _zstrong(self, a, b, bd):
+        """Was this hand top pair or better (or a draw with an overcard) on this board?
+        Same yardstick as the range model's `nge`."""
+        bp, sc, sm, bmask, thr, fs, scf, smf, d4b, paired, tb = self._board_ctx(bd)
+        v = RANK[bp * CP[a] * CP[b]]
+        sa = a & 3
+        sb = b & 3
+        if fs >= 0 and scf + (sa == fs) + (sb == fs) >= 5:
+            m = smf
+            if sa == fs:
+                m |= 1 << (a >> 2)
+            if sb == fs:
+                m |= 1 << (b >> 2)
+            f = FLUSH[m]
+            if f > v:
+                v = f
+        if len(bd) < 5 and v < TWO_PAIR:
+            c4 = sc[sa] + 2 if sa == sb else max(sc[sa], sc[sb]) + 1
+            if c4 == 4 or (not d4b and DRAW4[bmask | (1 << (a >> 2)) | (1 << (b >> 2))]):
+                v += DRAWB
+        return v >= thr
 
     @staticmethod
     def _flushy(board, cards):
@@ -823,7 +990,20 @@ class Agent:
             f3 = S.r_f3()
             if can_raise and callers == 0 and R <= 4.5 * bb:
                 n3 = S.f3_o
-                if n3 >= 3 and f3 >= 0.78:
+                hot = False                      # a frequent 3-bettor still to act behind us
+                left = 0                         # players still to act behind us
+                for i in range(1, n):
+                    t = (me + i) % n
+                    if t == last_raiser:
+                        break
+                    T = st[t]
+                    if not state["folded"][t]:
+                        left += 1
+                        if T.tb_o >= 20 and T.tb >= 0.18 * T.tb_o:
+                            hot = True
+                if THREEBET_ANY and n3 >= 8 and S.f3 >= 0.80 * n3 and not hot and left <= 3:
+                    bluff = True                 # V22: any two cards
+                elif n3 >= 3 and f3 >= 0.78:
                     bluff = lvl <= 6
                 elif n3 >= 2 and f3 >= 0.70:
                     bluff = lvl <= 5
@@ -866,12 +1046,14 @@ class Agent:
                         return {"action": "all_in"}
                     return self._raise_to(state, R * (2.3 if ip else 2.6), commit=0.45)
                 return call_or_check()
+            maniac = (MANIAC_RULES and S.lab == "ANTON" and can_raise and R <= 13 * bb
+                      and S.f4 >= 0.45 * S.f4_o)            # stops once he no longer folds to 4-bets
             if e >= (0.40 if ip else 0.43) and price <= 10:
-                return CALL
+                return self._raise_to(state, R * 2.3, commit=0.45) if maniac else CALL
             if pair and price <= 6:
-                return CALL
+                return self._raise_to(state, R * 2.3, commit=0.45) if maniac else CALL
             if cls in ("KQs", "AJs", "ATs", "JTs", "QJs", "T9s") and ip and price <= 6:
-                return CALL
+                return self._raise_to(state, R * 2.3, commit=0.45) if maniac else CALL
             return fold_or_check()
 
         # 4-bets and beyond, or a 3-bet in front of us before we acted
@@ -1052,6 +1234,18 @@ class Agent:
         if k > N:
             k = N
         sfrac = (min(k, nge) + keep * max(0, nge - k)) / (k + keep * (N - k))
+        if SIZE_LEARN and agg[s] and not rais[s] and s in self.zcur and 0 < nge < N:
+            zb = zbucket(lastx[s])
+            zn = S.zn[zb]
+            if zn >= ZS_MIN:
+                # share of top pair or better in what he showed after this size, shrunk to the model's
+                q = (S.zs[zb] + ZS_PRIOR * sfrac) / (zn + ZS_PRIOR)
+                q = max(0.03, min(0.97, q))
+                if q >= sfrac:
+                    return out[:nge], out[nge:], (1.0 - q) / q * nge / float(N - nge), q
+                if zb <= ZW_MAXB and zn >= ZW_MIN:
+                    self.zweak = True          # his bet of this size is weaker than the model thinks
+                    return out[:nge], out[nge:], (1.0 - q) / q * nge / float(N - nge), q
         return out[:k], out[k:], keep, sfrac
 
     @staticmethod
@@ -1134,6 +1328,8 @@ class Agent:
 
         k = len(live)
         self.cap = 200 if k <= 2 else (130 if k == 3 else 90)     # keep multiway decisions fast
+        self.zcur = set(s for s in live if cur > 0 and bets[s] == cur)     # seats whose bet we face now
+        self.zweak = False
         tiers = [self._tier(s, L, dead, bp, fs, scf, smf, sc, bmask, d4b, nb, thr) for s in live]
         if river:
             eq = 1.0
@@ -1257,13 +1453,28 @@ class Agent:
             if 0 < xb0 < 0.4 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
                 r_to = max(lo, 3 * cur)
                 if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
-                    pfr_ = self.st[v].r_smallraise(river)
+                    Sv = self.st[v]
+                    zb0 = zbucket(xb0)
+                    pfr_ = (Sv.zf[zb0] + 5.0 * ((0.68 if river else 0.75) if zb0 == 0 else (0.63 if river else 0.70))) / (Sv.zo[zb0] + 5.0)
                     a_ = r_to - mybet
                     eqc_ = max(floor * eq, (eq - pfr_) / (1.0 - pfr_)) if pfr_ < 0.999 else eq
                     ev_r = pfr_ * pot + (1.0 - pfr_) * (eqc_ * (pot + a_ + (r_to - cur)) - a_)
                     if ev_r > max(ev_call, 0.0) + 0.05 * pot:
                         return {"action": "raise", "amount": int(r_to)}
-        if can_raise and eq >= (0.52 if nofold else 0.62) and hi is not None:
+        if MANIAC_RULES and can_raise and hi is not None and len(live) == 1 and behind == 0 and not allin and not nofold:
+            v = live[0]
+            xb0 = L[6][v]
+            Sv = self.st[v]
+            if Sv.lab == "ANTON" and 0.4 <= xb0 < 0.9 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and mycat < 2:
+                zb = zbucket(xb0)
+                r_to = max(lo, (3.0 if zb <= 2 else 2.6) * cur)
+                if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
+                    pfr_ = (Sv.zf[zb] + ZR_PRIOR * ZR_FIELD[zb]) / (Sv.zo[zb] + ZR_PRIOR)
+                    a_ = r_to - mybet
+                    ev_r = pfr_ * pot + (1.0 - pfr_) * (floor * eq * (pot + a_ + (r_to - cur)) - a_)
+                    if pfr_ >= 0.7 and ev_r > max(ev_call, 0.0) + 0.05 * pot:
+                        return {"action": "raise", "amount": int(r_to)}
+        if can_raise and eq >= (0.52 if nofold else 0.62) and hi is not None and not (self.zweak and (mycat < 2 or (mycat == 2 and paired))):
             r_to = hi if nofold else cur + 0.9 * (pot + c)
             if r_to >= 0.62 * hi:
                 r_to = hi
@@ -1320,6 +1531,22 @@ class Agent:
                 margin -= 0.05
         if eq >= need + margin:
             return CALL
+        # V22: about to fold. Heads up against a bet of 0.42-0.90 pot from a seat whose bets of that
+        # size have been folding to raises (his own record only), raise as a bluff instead.
+        if SIZE_LEARN and can_raise and hi is not None and len(live) == 1 and behind == 0 and not allin and not nofold:
+            v = live[0]
+            xb0 = L[6][v]
+            if 0.4 <= xb0 < 0.9 and L[4][v] == 0 and L[3][v] >= 1 and bets[v] == cur and not self.st[v].starter():
+                Sv = self.st[v]
+                zb = zbucket(xb0)
+                if Sv.zo[zb] >= ZR_MIN:
+                    r_to = max(lo, (3.0 if zb <= 2 else 2.6) * cur)
+                    if r_to <= 0.35 * (mystack + mybet) and r_to < hi:
+                        pfr_ = (Sv.zf[zb] + ZR_PRIOR * ZR_FIELD[zb]) / (Sv.zo[zb] + ZR_PRIOR)
+                        a_ = r_to - mybet
+                        ev_r = pfr_ * pot + (1.0 - pfr_) * (floor * eq * (pot + a_ + (r_to - cur)) - a_)
+                        if ev_r > 0.08 * pot:
+                            return {"action": "raise", "amount": int(r_to)}
         return FOLD
 
     def _budget(self, state):
