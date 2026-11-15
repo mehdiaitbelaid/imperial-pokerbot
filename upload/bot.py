@@ -35,6 +35,7 @@ SIZE_LEARN = True
 # during the round, then starts from what that team did on Saturday (per size bucket: times its bet
 # was raised / folded, hands shown / strong). At most 12 pseudo-observations, so live play corrects it.
 FINGERPRINTS = True
+NO_THIRD_BARREL = True   # V25
 BIGPAIR_CALL = 500       # V24: chips to call on the turn or river from which one pair or less needs more equity
 BIGPAIR_MARGIN = 0.15
 THREEBET_ANY = True     # 3-bet any two cards against an opener who folds to 3-bets 4 times in 5 (8+ cases)
@@ -1408,6 +1409,9 @@ class Agent:
         if c == 0:
             if not can_raise:
                 return CHECK
+            if (NO_THIRD_BARREL and river and len(live) == 1 and self.st[live[0]].lab == "ANKER" and L[5][live[0]] >= 2
+                    and (mycat < 2 or (mycat == 2 and paired))):
+                return CHECK                    # V25: he called the flop and the turn; he folded the river 4 times in 16
             best = None
             best_ev = eq * pot * (1.0 if river else 0.9) + 0.03 * pot
             cands = [mybet + x * pot for x in (0.5, 0.8, 1.1, 1.6)]
