@@ -28,7 +28,7 @@ for f in sys.argv[2:]:
     for i in range(n):
         if i != me:
             res[P[i]].append(when.get(i, (0, None)))
-TD = {"Anker Batteries": "ANKER", "Attention Is All In": "ATT", "Gherkers": "GHERK", "Equity Engine": "EE", "Phil AIvey": "PHIL", "FisherMen": "FISH", "Astra La Vista": "ASTRA", "The Market Makers": "TMM", "matcha mille crêpes cake": "ATT", "Jump Street": "NONE"}
+TD = {"Anker Batteries": "ANKER", "Attention Is All In": "ATT", "Gherkers": "GHERK", "Phil AIvey": "PHIL", "FisherMen": "FISH", "Astra La Vista": "ASTRA", "JoCal": "JOCAL", "SARS": "SARS", "Jump Street": "NONE"}
 print("TABLE D TEAMS (right label / wrong label / none; hand at which the right label came)")
 for t, code in TD.items():
     r = res.get(t, [])
